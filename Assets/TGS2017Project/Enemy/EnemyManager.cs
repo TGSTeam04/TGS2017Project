@@ -19,10 +19,13 @@ public class EnemyManager : MonoBehaviour {
 	}
 	IEnumerator ReSpawn(GameObject m_Enemy)
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1f);
 		m_Enemy.transform.position = new Vector3(Random.Range(-15f, 15f), 0.5f, Random.Range(-15f, 15f));
 		m_Enemy.GetComponent<EnemyBase>().NextTarget();
 		m_Enemy.SetActive(true);
 		m_Enemy.GetComponent<EnemyBase>().m_IsDead = false;
+		m_Enemy.transform.localScale = Vector3.one * 
+			(GameManager.Instance.m_StageManger.m_StageLevel==0?1:
+			GameManager.Instance.m_StageManger.m_StageLevel==1?4:15);
 	}
 }

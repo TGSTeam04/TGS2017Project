@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public enum BreakType
@@ -32,6 +33,8 @@ public class EnemyBase : MonoBehaviour
 
 	public GameObject m_Fragment;
 
+	private NavMeshAgent m_NavMeshAgent;
+
 	public bool IsBreakable
 	{
 		get
@@ -58,7 +61,8 @@ public class EnemyBase : MonoBehaviour
 		m_RRobot = GameManager.Instance.m_RRobot;
 		m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
 		m_EnemyManager = GetComponentInParent<EnemyManager>();
-		NextTarget();
+		m_NavMeshAgent = GetComponent<NavMeshAgent>();
+		//NextTarget();
 	}
 
 	// Update is called once per frame
@@ -75,10 +79,10 @@ public class EnemyBase : MonoBehaviour
 			case PlayMode.NoPlay:
 				break;
 			case PlayMode.TwinRobot:
-				Move();
+				//Move();
 				break;
 			case PlayMode.HumanoidRobot:
-				Move();
+				//Move();
 				break;
 			case PlayMode.Combine:
 				break;
@@ -152,12 +156,13 @@ public class EnemyBase : MonoBehaviour
 	{
 		if (GameManager.Instance.m_PlayMode == PlayMode.TwinRobot && other.tag == "Guid")
 		{
-			m_Rigidbody.position += Vector3.Lerp(
+			//m_Rigidbody.position += Vector3.Lerp(
+			m_NavMeshAgent.Move(Vector3.Lerp(
 				m_LRobot.transform.position - m_LRobotPos,
 				m_RRobot.transform.position - m_RRobotPos,
-				Vector3.Distance(transform.position, m_LRobot.transform.position) /
+				Vector3.Distance(transform.position, m_LRobot.transform.position) /(
 				Vector3.Distance(transform.position, m_LRobot.transform.position) +
-				Vector3.Distance(transform.position, m_RRobot.transform.position)) * 0.6f;
+				Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.3f);
 		}
 	}
 	public void OnTriggerExit(Collider other)

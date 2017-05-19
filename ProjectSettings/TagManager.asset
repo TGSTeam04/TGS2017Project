@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Guid
+  - Enemy
+  - Bullet
+  - Panel
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - Player
   - Enemy
   - HitEnemy
-  - 
-  - 
+  - Wall
+  - Floor
   - 
   - 
   - 

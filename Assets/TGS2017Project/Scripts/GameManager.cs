@@ -18,14 +18,38 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	public GameObject m_LRobot;
 	public GameObject m_RRobot;
 	public GameObject m_HumanoidRobot;
+	[SerializeField]
+	private LevelParameterTable m_LevelParameterTable;
+	public int m_Level;
+	public PlayerController m_PlayerController;
+
+	public StageManager m_StageManger;
+
+	public LevelParameter m_LevelParameter;
+
+	public bool m_IsGameOver;
+
+	//	public LevelParameter LevelParameter { get { return m_LevelParameterTable.LPTable[m_Level]; } }
+	public LevelParameter LevelParameter { get { return m_LevelParameter; } }
 
 	// Use this for initialization
 	void Start () {
-		
+		Update();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (m_LRobot == null)
+		{
+			m_LRobot = GameObject.Find("LRobot");
+		}
+		if (m_RRobot == null)
+		{
+			m_RRobot = GameObject.Find("RRobot");
+		}
+		if (m_HumanoidRobot == null)
+		{
+			m_HumanoidRobot = GameObject.Find("HumanoidRobot");
+		}
 	}
 }

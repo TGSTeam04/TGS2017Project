@@ -108,7 +108,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 18d98293b2dc91d469001a93e871301b, type: 2}
 --- !u!1 &836631506
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1006babf2213ae448128fa1ac0817d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TopTransform: {fileID: 0}
+  m_TopTransform: []
   m_TPSTransform: {fileID: 0}
   m_TPSTarget: {fileID: 0}
   m_FOVCurve:
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   m_MAXFOV: 120
   m_RotateSpeed: 40
-  m_MoveSpeed: 20
+  m_MoveSpeed: 15
 --- !u!1 &1022911401
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,6 +369,16 @@ MonoBehaviour:
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
+  m_LevelParameterTable: {fileID: 11400000, guid: b4b3682a8e832bc40ad9a566a3456ecc,
+    type: 2}
+  m_Level: 0
+  m_PlayerController: {fileID: 0}
+  m_StageManger: {fileID: 0}
+  m_LevelParameter:
+    m_NextExp: 1
+    m_Scale: 1
+    m_Speed: 1
+  m_IsGameOver: 0
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0
