@@ -27,8 +27,6 @@ public class EnemyBase : MonoBehaviour
 
 	private Vector3 m_Target;
 
-	private EnemyManager m_EnemyManager;
-
 	public BreakType m_BreakType;
 
 	public GameObject m_Fragment;
@@ -60,7 +58,6 @@ public class EnemyBase : MonoBehaviour
 		m_LRobot = GameManager.Instance.m_LRobot;
 		m_RRobot = GameManager.Instance.m_RRobot;
 		m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
-		m_EnemyManager = GetComponentInParent<EnemyManager>();
 		m_NavMeshAgent = GetComponent<NavMeshAgent>();
 		//NextTarget();
 	}
@@ -133,7 +130,7 @@ public class EnemyBase : MonoBehaviour
 
 	public void SetBreak()
 	{
-		m_EnemyManager.ReSpawnEnemy(gameObject);
+		EnemyManager.Instance.ReSpawnEnemy(this);
 		m_IsDead = true;
 
 	}

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 製作者：大格
+/// 更新日：05/19
+/// ステージパネルの壁
+/// </summary>
+
 public class Wall : MonoBehaviour
 {
     private bool m_IsCanDestroy;
@@ -9,7 +15,7 @@ public class Wall : MonoBehaviour
     public int m_UseStageLevel;
     public void Start()
     {
-        print(name + " is " + LayerMask.LayerToName(gameObject.layer) + " layer");
+        //print(name + " is " + LayerMask.LayerToName(gameObject.layer) + " layer");
     }
 
     private void Update()

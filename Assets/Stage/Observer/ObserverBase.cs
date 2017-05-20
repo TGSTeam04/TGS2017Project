@@ -2,18 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 製作者：大格
+/// 更新日：05/19
+/// オブサーバーパターン
+/// </summary>
+
 public delegate void OnReceieveNotify_Del(string handle = "null", object param = null);
+
+//public enum DefultReceiveEnum
+//{
+//    Non
+//}
+
 
 public class ObserverBase
 {
     public OnReceieveNotify_Del m_Del_OnReceive;
     protected List<SubjectBase> m_Subjects;
-    private string m_observerName;
+    protected string m_observerName;
+
     public ObserverBase()
     {
         m_Subjects = new List<SubjectBase>();
     }
-    public string m_ObserverName
+    ~ObserverBase()
+    {
+        ClearSubject();
+    }
+    public string ObserverName
     {
         set { m_observerName = value; }
         get { return m_observerName; }
@@ -30,26 +47,33 @@ public class ObserverBase
         subject.ForObserver_AddObserver(this);
     }
 
-    public void RemoveSubject(SubjectBase subject)
+    public void ForSubject_RemoveSubject(SubjectBase subject)
     {
         for (int i = 0; i < m_Subjects.Count; i++)
         {
-            if (m_Subjects[i] == subject)
+            if (ReferenceEquals(m_Subjects[i], subject))
                 m_Subjects.RemoveAt(i);
         }
     }
 
-    public void RemoveSubject(string SubjectName)
+    public void UnBindSubject(SubjectBase subject)
     {
         for (int i = 0; i < m_Subjects.Count; i++)
         {
-            if (m_Subjects[i].m_SubjectName == SubjectName)
+            if (ReferenceEquals(m_Subjects[i], subject))
+            {
+                m_Subjects[i].ForObserver_RemoveObserver(this);
                 m_Subjects.RemoveAt(i);
+            }
         }
     }
 
     public void ClearSubject()
     {
+        for (int i = 0; i < m_Subjects.Count; i++)
+        {
+            m_Subjects[i].ForObserver_RemoveObserver(this);
+        }
         m_Subjects.Clear();
     }
 

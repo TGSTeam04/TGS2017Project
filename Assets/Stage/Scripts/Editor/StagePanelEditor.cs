@@ -3,6 +3,12 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// 製作者：大格
+/// 更新日：05/19
+/// ステージパネルエディタ拡張
+/// </summary>
+
 //ステージパネルクラスのエディタ拡張
 [CustomEditor(typeof(StagePanel))]
 [CanEditMultipleObjects]
@@ -29,25 +35,68 @@ public class StagePanelEditor : Editor
         new Vector3(-Mathf.Cos(Mathf.Deg2Rad * 60), 0f, -Mathf.Sin(Mathf.Deg2Rad *60)),
     };
 
-    int onlyActiveStageLevel;
+    private int m_OnlyActiveStageLevel;
+    private int m_WallHeight;
+
+    private void OnEnable()
+    {
+        StagePanel thisPanel = (StagePanel)target;
+        m_WallHeight = (int)(thisPanel.transform.localScale.y);
+        m_OnlyActiveStageLevel = thisPanel.m_UseStageLevel;
+    }
 
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
+        GameObject[] allPanels = GameObject.FindGameObjectsWithTag("Panel");
+
         EditorGUILayout.Separator();
 
+        //パネル生成
         LayoutCreatePanelButton();
 
         EditorGUILayout.Separator();
 
-        OnlyActiveByUseLevel();
+        //Activeパネル設定
+        OnlyActiveByUseLevel(allPanels);
 
         EditorGUILayout.Separator();
-        
-        LayoutCheckNeadWall();
+
+        //壁の高さ変更
+        ChangeHeight(allPanels);
+
+        EditorGUILayout.Separator();
+
+        //不必要な壁削除
+        LayoutCheckNeadWall(allPanels);
     }
 
+    //壁の高さを変更
+    private void ChangeHeight(GameObject[] allPanels)
+    {
+        EditorGUI.BeginChangeCheck();
+        m_WallHeight = EditorGUILayout.IntField("壁の高さ", m_WallHeight);
+        StagePanel thisPanelComp = (StagePanel)target;
+        if (EditorGUI.EndChangeCheck())
+        {
+
+            Vector3 baseScale = thisPanelComp.transform.localScale;
+            thisPanelComp.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+        }
+        if (GUILayout.Button("同じStageLevelのパネルに適用"))
+        {
+            foreach (var panel in allPanels)
+            {
+                StagePanel panelComp = panel.GetComponent<StagePanel>();
+                Vector3 baseScale = panel.transform.localScale;
+                if (panelComp.m_UseStageLevel == thisPanelComp.m_UseStageLevel)
+                {
+                    panel.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+                }
+            }
+        }
+    }
 
     private void LayoutCreatePanelButton()
     {
@@ -93,25 +142,25 @@ public class StagePanelEditor : Editor
 
             //位置を設定
             float worldScale = thisPanel.transform.lossyScale.x;
-            Vector3 modify = m_Dires[direInt] * 100 * worldScale;
+            Vector3 modify = m_Dires[direInt] * newPanel.m_InscribedR * worldScale;
             newPanel.transform.position += modify;
             Undo.RegisterCreatedObjectUndo(newObj, "Create StagePanel");
         }
     }
 
-    private void OnlyActiveByUseLevel()
+    private void OnlyActiveByUseLevel(GameObject[] panels)
     {
         EditorGUILayout.LabelField("対象のUseStageLevel以外を非アクティブに ");
 
-        onlyActiveStageLevel = EditorGUILayout.IntField("対象　UseStageLevel ", onlyActiveStageLevel);
+        m_OnlyActiveStageLevel = EditorGUILayout.IntField("対象　UseStageLevel ", m_OnlyActiveStageLevel);
         if (GUILayout.Button("Apply"))
         {
-            GameObject[] panels = GameObject.FindGameObjectsWithTag("Panel");
+
             //処理が可能か判定
             foreach (var panel in panels)
             {
                 StagePanel panelComp = panel.GetComponent<StagePanel>();
-                if (panelComp.m_UseStageLevel != onlyActiveStageLevel)
+                if (panelComp.m_UseStageLevel != m_OnlyActiveStageLevel)
                 {
                     panel.SetActive(false);
                 }
@@ -120,7 +169,7 @@ public class StagePanelEditor : Editor
         }
     }
 
-    private void LayoutCheckNeadWall()
+    private void LayoutCheckNeadWall(GameObject[] panels)
     {
         EditorGUILayout.LabelField("不必要な壁の削除");
 
@@ -128,33 +177,20 @@ public class StagePanelEditor : Editor
         GUI.backgroundColor = Color.red;
         if (GUILayout.Button("DELETE"))
         {
-            CheckNeadWall();
+            CheckNeadWall(panels);
         }
         GUI.backgroundColor = baseBackColor;
     }
-    public void CheckNeadWall()
+    public void CheckNeadWall(GameObject[] panels)
     {
-        GameObject[] panels = GameObject.FindGameObjectsWithTag("Panel");
-        
-        /*処理が可能か判定*/
-        //foreach (var panel in panels)
-        //{
-        //    StagePanel panelComp = panel.GetComponent<StagePanel>();
-        //    if (panelComp.m_UseStageLevel != 0)
-        //    {
-        //        Debug.Log("UseStageLevelが０以外のパネルは非アクティブにしてください。");
-        //        return;
-        //    }
-        //}
-
         LayerMask mask = LayerMask.GetMask(new string[] { "Wall" });
         //初期パネルの壁の選別
         foreach (var panel in panels)
         {
             StagePanel panelComp = panel.GetComponent<StagePanel>();
             Transform walls = panel.transform.FindChild("Walls");
-            if (panelComp.m_UseStageLevel != 0 || walls == null)
-                continue;
+            //if (panelComp.m_UseStageLevel != 0 || walls == null)
+            //    continue;
 
             for (int i = 0; i < walls.childCount; i++)
             {

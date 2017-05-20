@@ -36,8 +36,8 @@ public class PlayCameraController : MonoBehaviour
 			case PlayMode.NoPlay:
 				break;
 			case PlayMode.TwinRobot:
-				transform.position = m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].transform.position;
-				transform.rotation = m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].transform.rotation;
+				transform.position = m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].transform.position;
+				transform.rotation = m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].transform.rotation;
 				break;
 			case PlayMode.HumanoidRobot:
 				break;
@@ -82,8 +82,8 @@ public class PlayCameraController : MonoBehaviour
 		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
 		{
 			m_Camera.fieldOfView = Mathf.Lerp(60, m_MAXFOV, m_FOVCurve.Evaluate(f));
-			transform.position = Vector3.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].position, m_TPSTransform.position, m_CombinePositionCurve.Evaluate(f));
-			transform.rotation = Quaternion.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].rotation, m_TPSTransform.rotation, m_RotationCurve.Evaluate(f));
+			transform.position = Vector3.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].position, m_TPSTransform.position, m_CombinePositionCurve.Evaluate(f));
+			transform.rotation = Quaternion.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].rotation, m_TPSTransform.rotation, m_RotationCurve.Evaluate(f));
 			yield return null;
 		}
 		m_Camera.fieldOfView = 60;
@@ -101,13 +101,13 @@ public class PlayCameraController : MonoBehaviour
 		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
 		{
 			m_Camera.fieldOfView = Mathf.Lerp(60, 30 + m_MAXFOV / 2, m_FOVCurve.Evaluate(1 - f));
-			transform.position = Vector3.Lerp(m_TPSTransform.position, m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].position, m_ReleasePositionCurve.Evaluate(f));
-			transform.rotation = Quaternion.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].rotation, Quaternion.LookRotation(m_TPSTarget.position - transform.position), m_RotationCurve.Evaluate(1 - f));
+			transform.position = Vector3.Lerp(m_TPSTransform.position, m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].position, m_ReleasePositionCurve.Evaluate(f));
+			transform.rotation = Quaternion.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].rotation, Quaternion.LookRotation(m_TPSTarget.position - transform.position), m_RotationCurve.Evaluate(1 - f));
 			yield return null;
 		}
 		m_Camera.fieldOfView = 60;
-		transform.position = m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].position;
-		transform.rotation = m_TopTransform[GameManager.Instance.m_StageManger.m_StageLevel].rotation;
+		transform.position = m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].position;
+		transform.rotation = m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].rotation;
 
 		m_IsRunning = false;
 	}

@@ -189,8 +189,8 @@ public class PlayerController : MonoBehaviour
 		Vector3 LPos = m_LRobotRigidbody.position;
 		Vector3 RPos = m_RRobotRigidbody.position;
 		Vector3 HitPos = Vector3.Lerp(LPos, RPos, 0.5f);
-		float scale = (GameManager.Instance.m_StageManger.m_StageLevel == 0 ? 1 :
-			GameManager.Instance.m_StageManger.m_StageLevel == 1 ? 4 : 15);
+		float scale = (GameManager.Instance.m_StageManger.StageLevel == 0 ? 1 :
+			GameManager.Instance.m_StageManger.StageLevel == 1 ? 4 : 15);
 		Vector3 LFirstTarget = HitPos + Vector3.Normalize(LPos - HitPos) * (1.0f * scale + 0.5f * m_Scale);
 		Vector3 RFirstTarget = HitPos + Vector3.Normalize(RPos - HitPos) * (1.0f * scale + 0.5f * m_Scale);
 		Vector3 LSecondTarget = HitPos + Vector3.Normalize(LPos - HitPos) * 0.5f * m_Scale;
@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour
 			yield break;
 		}
 
-		GameManager.Instance.m_StageManger.m_KillNum += count;
+		GameManager.Instance.m_StageManger.KillNum += count;
 		m_LShield.Damage(-0.2f*count);
 		m_RShield.Damage(-0.2f*count);
 
