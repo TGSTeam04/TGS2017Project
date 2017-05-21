@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
 		bool breakable = true;
 		int count = 0;
-		Collider[] collider = Physics.OverlapBox(HitPos, new Vector3(1f*m_Scale, 1f, 1.5f * m_Scale), m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
+		Collider[] collider = Physics.OverlapBox(HitPos+Vector3.up*m_Scale/2, new Vector3(1f, 0.5f, 1.5f)*m_Scale, m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();

@@ -348,13 +348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneListTable:
+  - Scene: []
   - Scene:
     - TestStage
     - Player
     - GameUI
-  - Scene:
-    - Player
-    - TestStage
 --- !u!1 &1849378520
 GameObject:
   m_ObjectHideFlags: 0
