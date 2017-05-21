@@ -8,7 +8,8 @@ public class Boss : MonoBehaviour
     {
         Move,
         Attack,
-        Look
+        Look,
+        Paralysis
     }
 
     [SerializeField]
@@ -25,15 +26,20 @@ public class Boss : MonoBehaviour
 
     private bool m_SwingAttack = false;
 
+    public static  bool s_IsDead = false;
+
     public Transform m_LeftArm;
     public Transform m_RightArm;
+    public Transform m_Core;
     public GameObject m_SearchArea;
+    public GameObject m_Explosion;
 
     Transform m_Target;
     Vector3 m_TargetPosition;
 
     Animator m_Anim;
 
+	[SerializeField]
     BossState m_State = BossState.Move;
 
     // Use this for initialization
@@ -46,16 +52,39 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_LookCounter <= 0)
+        switch (GameManager.Instance.m_PlayMode)
+		{
+			case PlayMode.TwinRobot:
+				break;
+			case PlayMode.HumanoidRobot:
+				break;
+			case PlayMode.NoPlay:
+			case PlayMode.Combine:
+			case PlayMode.Release:
+			default:
+				return;
+				break;
+		}
+		if (GameManager.Instance.m_StageManger.m_StageLevel < 1)
+		{
+			return;
+		}
+		if (m_LookCounter <= 0)
         {
             StartCoroutine(Look());
         }
         m_TargetPosition = m_Target.position;
         m_TargetPosition.y = transform.position.y;
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_State = BossState.Paralysis;
+        }
+
         switch (m_State)
         {
             case BossState.Move:
-                if (Vector3.Distance(transform.position, m_TargetPosition) > 60)
+                m_Anim.speed = 1.0f;
+                if (Vector3.Distance(transform.position, m_TargetPosition) > 60 && GameManager.Instance.m_StageManger.m_StageLevel > 1)
                 {
                     transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
                 }
@@ -65,6 +94,7 @@ public class Boss : MonoBehaviour
                 }
                 break;
             case BossState.Attack:
+                m_Anim.speed = 1.0f;
                 Attack();
                 if (Vector3.Distance(transform.position, m_TargetPosition) > 60)
                 {
@@ -72,6 +102,7 @@ public class Boss : MonoBehaviour
                 }
                 break;
             case BossState.Look:
+                m_Anim.speed = 1.0f;
                 float angle = Vector3.Angle(transform.forward, m_TargetPosition - transform.position);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(m_TargetPosition - transform.position), m_RotateSpeed * Time.deltaTime);
                 if (angle < 15)
@@ -85,6 +116,9 @@ public class Boss : MonoBehaviour
                         m_State = BossState.Attack;
                     }
                 }
+                break;
+            case BossState.Paralysis:
+                m_Anim.speed = 0f;
                 break;
         }
     }
@@ -105,7 +139,7 @@ public class Boss : MonoBehaviour
             m_SwingAttack = true;
             StartCoroutine(AttackInterval());
         }
-        if (m_AttackCounter > 0 && m_AttackCounter < 8 && m_SwingAttack)
+        if (m_AttackCounter > 0 && m_AttackCounter < 8 && m_SwingAttack && GameManager.Instance.m_StageManger.m_StageLevel > 1)
         {
             if (Vector3.Distance(m_SearchArea.transform.position, m_Target.position) > 20)
             {
@@ -120,6 +154,11 @@ public class Boss : MonoBehaviour
                 }
             }
         }
+    }
+    void Dead()
+    {
+        Instantiate(m_Explosion, m_Core.position, transform.rotation);
+        Destroy(gameObject);
     }
     IEnumerator AttackInterval()
     {
@@ -139,6 +178,30 @@ public class Boss : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             m_LookCounter--;
         }
-        m_State = BossState.Look;
+        if (m_State != BossState.Paralysis && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+        {
+            m_State = BossState.Look;
+        }
+    }
+    IEnumerator Recovery()
+    {
+        yield return new WaitForSeconds(10.0f);
+		GetComponent<EnemyBase>().m_IsShock = false;
+		m_State = BossState.Look;
+        m_SearchArea.SetActive(true);
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Beam" && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+        {
+            m_SearchArea.SetActive(false);
+			GetComponent<EnemyBase>().m_IsShock = true;
+			m_State = BossState.Paralysis;
+            StartCoroutine(Recovery());
+        }
+        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && m_State == BossState.Paralysis && other.name == "Break" )
+        {
+            Dead();
+        }
     }
 }

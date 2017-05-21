@@ -852,6 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -2701,6 +2702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -4481,6 +4483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -8132,6 +8135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -8553,6 +8557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -9175,6 +9180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -10085,6 +10091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -11780,6 +11787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveSpeed: 5
   m_IsDead: 0
+  m_IsShock: 0
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
@@ -14483,6 +14491,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1949506328}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1951271850 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1630788147303050, guid: 11677a3bb5d62c948ad57dadea597b8b,
+    type: 2}
+  m_PrefabInternal: {fileID: 2078896949}
+--- !u!114 &1951271851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1951271850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759d18bba3d42f3498fd7adfcfb6b609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveSpeed: 0
+  m_IsDead: 0
+  m_IsShock: 0
+  m_LRobot: {fileID: 0}
+  m_RRobot: {fileID: 0}
+  m_HumanoidRobot: {fileID: 0}
+  m_BreakType: 1
+  m_Fragment: {fileID: 0}
 --- !u!1 &1978013732
 GameObject:
   m_ObjectHideFlags: 0
@@ -15092,6 +15124,10 @@ Prefab:
     - target: {fileID: 4016395800623154, guid: 11677a3bb5d62c948ad57dadea597b8b, type: 2}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4396513385643672, guid: 11677a3bb5d62c948ad57dadea597b8b, type: 2}
+      propertyPath: m_RootOrder
+      value: 44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11677a3bb5d62c948ad57dadea597b8b, type: 2}

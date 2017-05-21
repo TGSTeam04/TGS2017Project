@@ -15,7 +15,7 @@ public class EnemyBase : MonoBehaviour
 	public float m_MoveSpeed;
 	private float m_SpeedRate;
 	public bool m_IsDead;
-	private bool m_IsShock;
+	public bool m_IsShock;
 	private Rigidbody m_Rigidbody;
 
 	public GameObject m_LRobot;
