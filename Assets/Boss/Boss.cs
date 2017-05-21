@@ -34,7 +34,6 @@ public class Boss : MonoBehaviour
 
     Animator m_Anim;
 
-	[SerializeField]
     BossState m_State = BossState.Move;
 
     // Use this for initialization
@@ -47,24 +46,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		switch (GameManager.Instance.m_PlayMode)
-		{
-			case PlayMode.TwinRobot:
-				break;
-			case PlayMode.HumanoidRobot:
-				break;
-			case PlayMode.NoPlay:
-			case PlayMode.Combine:
-			case PlayMode.Release:
-			default:
-				return;
-				break;
-		}
-		if (GameManager.Instance.m_StageManger.m_StageLevel < 2)
-		{
-			return;
-		}
-		if (m_LookCounter <= 0)
+        if (m_LookCounter <= 0)
         {
             StartCoroutine(Look());
         }

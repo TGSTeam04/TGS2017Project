@@ -31,7 +31,7 @@ public class Shield : MonoBehaviour
 				{
 					case "Enemy":
 					case "Bullet":
-						Damage(0.1f);
+						//Damage(0.1f);
 						//Debug.Log("damege");
 						break;
 					default:
