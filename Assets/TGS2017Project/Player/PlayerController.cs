@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
 	private SubjectBase m_Subject;
 
+	public GameObject m_Boost;
+
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
@@ -209,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
 		bool breakable = true;
 		int count = 0;
-		Collider[] collider = Physics.OverlapBox(HitPos, new Vector3(1f, 1f, 1.5f * m_Scale), m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
+		Collider[] collider = Physics.OverlapBox(HitPos+Vector3.up*m_Scale/2, new Vector3(1f, 0.5f, 1.5f)*m_Scale, m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
@@ -225,7 +227,8 @@ public class PlayerController : MonoBehaviour
 			foreach (var item in collider)
 			{
 				EnemyBase enemy = item.GetComponent<EnemyBase>();
-				if (enemy == null) continue;
+				if (enemy == null)
+					continue;
 				enemy.SetBreak();
 			}
 		}
@@ -306,6 +309,7 @@ public class PlayerController : MonoBehaviour
 	public void Boost(bool boost)
 	{
 		m_BoostSpeed = boost ? m_BoostPower : 0;
+		m_Boost.SetActive(boost);
 	}
 
 	public IEnumerator Charge()
