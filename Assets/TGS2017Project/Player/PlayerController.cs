@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
+		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
 
 	// Use this for initialization

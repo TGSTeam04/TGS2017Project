@@ -348,11 +348,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneListTable:
-  - Scene: []
+  - Scene:
+    - Title
   - Scene:
     - TestStage
     - Player
     - GameUI
+  - Scene:
+    - Credit
+  - Scene:
+    - Option
 --- !u!1 &1849378520
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TimeRate: 1
-  m_PlayMode: 1
+  m_PlayMode: 0
   m_CombineTime: 1
   m_PlayCamera: {fileID: 836631506}
   m_LRobot: {fileID: 0}
@@ -397,6 +402,7 @@ MonoBehaviour:
     m_Scale: 1
     m_Speed: 1
   m_IsGameOver: 0
+  m_GameStarter: {fileID: 1022911404}
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0

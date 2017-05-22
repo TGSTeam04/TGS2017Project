@@ -39,8 +39,9 @@ public class GameStarter : MonoBehaviour {
 
 	}
 
-	void ChangeScenes(int i)
+	public void ChangeScenes(int i)
 	{
+//		SceneManager.LoadScene("Loading",LoadSceneMode.Additive);
 		foreach (var item in m_LoadedScenes)
 		{
 			SceneManager.UnloadSceneAsync(item);
@@ -51,6 +52,6 @@ public class GameStarter : MonoBehaviour {
 			SceneManager.LoadScene(item, LoadSceneMode.Additive);
 			m_LoadedScenes.Add(item);
 		}
-		
+//		SceneManager.UnloadSceneAsync("Loading");
 	}
 }

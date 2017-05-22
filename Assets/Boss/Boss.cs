@@ -65,7 +65,7 @@ public class Boss : MonoBehaviour
 				return;
 				break;
 		}
-		if (GameManager.Instance.m_StageManger.m_StageLevel < 1)
+		if (GameManager.Instance.m_StageManger.StageLevel < 1)
 		{
 			return;
 		}
@@ -84,7 +84,7 @@ public class Boss : MonoBehaviour
 		{
 			case BossState.Move:
 				m_Anim.speed = 1.0f;
-				if (Vector3.Distance(transform.position, m_TargetPosition) > 60 && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+				if (Vector3.Distance(transform.position, m_TargetPosition) > 60 && GameManager.Instance.m_StageManger.StageLevel > 1)
 				{
 					transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
 				}
@@ -139,7 +139,7 @@ public class Boss : MonoBehaviour
 			m_SwingAttack = true;
 			StartCoroutine(AttackInterval());
 		}
-		if (m_AttackCounter > 0 && m_AttackCounter < 8 && m_SwingAttack && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+		if (m_AttackCounter > 0 && m_AttackCounter < 8 && m_SwingAttack && GameManager.Instance.m_StageManger.StageLevel > 1)
 		{
 			if (Vector3.Distance(m_SearchArea.transform.position, m_Target.position) > 20)
 			{
@@ -178,7 +178,7 @@ public class Boss : MonoBehaviour
 			yield return new WaitForSeconds(1.0f);
 			m_LookCounter--;
 		}
-		if (m_State != BossState.Paralysis && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+		if (m_State != BossState.Paralysis && GameManager.Instance.m_StageManger.StageLevel > 1)
 		{
 			m_State = BossState.Look;
 		}
@@ -192,7 +192,7 @@ public class Boss : MonoBehaviour
 	}
 	public void OnTriggerEnter(Collider other)
 	{
-		if (other.name == "Beam" && GameManager.Instance.m_StageManger.m_StageLevel > 1)
+		if (other.name == "Beam" && GameManager.Instance.m_StageManger.StageLevel > 1)
 		{
 			m_SearchArea.SetActive(false);
 			GetComponent<EnemyBase>().m_IsShock = true;

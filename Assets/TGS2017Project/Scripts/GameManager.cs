@@ -29,6 +29,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 	public bool m_IsGameOver;
 
+	public GameStarter m_GameStarter;
+
 	//	public LevelParameter LevelParameter { get { return m_LevelParameterTable.LPTable[m_Level]; } }
 	public LevelParameter LevelParameter { get { return m_LevelParameter; } }
 
