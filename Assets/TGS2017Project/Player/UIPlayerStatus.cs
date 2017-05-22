@@ -9,6 +9,7 @@ public class UIPlayerStatus : MonoBehaviour {
 	public Image m_Energy;
 	public PlayerController m_Player;
 	public GameObject m_GameOver;
+	public GameObject m_GameClear;
 
 	// Use this for initialization
 	void Start () {
@@ -21,5 +22,6 @@ public class UIPlayerStatus : MonoBehaviour {
 		m_EXP.fillAmount = (float)m_Player.m_Exp / GameManager.Instance.LevelParameter.m_NextExp;
 		m_Energy.fillAmount = m_Player.m_Energy / 20;
 		m_GameOver.SetActive(GameManager.Instance.m_IsGameOver);
+		m_GameClear.SetActive(GameManager.Instance.m_IsGameClear);
 	}
 }

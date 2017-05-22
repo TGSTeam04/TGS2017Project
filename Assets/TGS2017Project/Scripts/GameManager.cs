@@ -28,8 +28,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	public LevelParameter m_LevelParameter;
 
 	public bool m_IsGameOver;
+	public bool m_IsGameClear;
 
 	public GameStarter m_GameStarter;
+
+	bool m_IsRun;
 
 	//	public LevelParameter LevelParameter { get { return m_LevelParameterTable.LPTable[m_Level]; } }
 	public LevelParameter LevelParameter { get { return m_LevelParameter; } }
@@ -41,6 +44,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	
 	// Update is called once per frame
 	void Update () {
+		if (m_IsGameClear || m_IsGameOver)
+		{
+			StartCoroutine(GameEnd());
+		}
 		if (m_LRobot == null)
 		{
 			m_LRobot = GameObject.Find("LRobot");
@@ -53,5 +60,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 		{
 			m_HumanoidRobot = GameObject.Find("HumanoidRobot");
 		}
+	}
+
+	IEnumerator GameEnd()
+	{
+		if (m_IsRun)
+		{
+			yield break;
+		}
+		m_IsRun = true;
+		yield return new WaitForSeconds(3);
+		m_GameStarter.ChangeScenes(0);
+		m_IsGameClear = false;
+		m_IsGameOver = false;
+		m_IsRun = false;
 	}
 }

@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
 	{
 		m_Subject = new SubjectBase();
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
+		GameManager.Instance.m_IsGameClear = false;
+		GameManager.Instance.m_IsGameOver = false;
 	}
 
 	// Use this for initialization
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			case PlayMode.HumanoidRobot:
-				m_Energy -= Time.deltaTime;
+				m_Energy -= Time.deltaTime * (m_IsBeamShooting?3:1);
 				if (Input.GetButtonDown("Jump")&&m_CharacterController.isGrounded)
 				{
 					m_MoveY = 1.5f;

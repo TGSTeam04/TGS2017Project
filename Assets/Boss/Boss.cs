@@ -157,6 +157,7 @@ public class Boss : MonoBehaviour
 	}
 	void Dead()
 	{
+		GameManager.Instance.m_IsGameClear = true;
 		Instantiate(m_Explosion, m_Core.position, transform.rotation);
 		Destroy(gameObject);
 	}
