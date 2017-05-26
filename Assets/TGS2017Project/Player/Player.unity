@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &127205741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +320,9 @@ MonoBehaviour:
   m_LShield: {fileID: 774350930}
   m_RShield: {fileID: 1890064367}
   m_Boost: {fileID: 1422175877}
+  m_ModeAA: {r: 0.5882353, g: 0, b: 0.5882353, a: 1}
+  m_ModeAB: {r: 0.5882353, g: 0.5882353, b: 0, a: 1}
+  m_ModeBB: {r: 0, g: 0.5882353, b: 0.5882353, a: 1}
 --- !u!4 &180186487
 Transform:
   m_ObjectHideFlags: 0
@@ -1588,7 +1591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1292169925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1889,7 +1892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1607399242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,6 +2098,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1641176575}
+  - component: {fileID: 1641176576}
   m_Layer: 0
   m_Name: Electric
   m_TagString: Untagged
@@ -2116,6 +2120,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1641176576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641176574}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectName: electric_3way_2
+  playOnStart: 1
+  loop: 1
 --- !u!1 &1658742218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1658742219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,6 +2440,63 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   m_Shield: {fileID: 610416827}
+--- !u!1 &2107199304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2107199307}
+  - component: {fileID: 2107199306}
+  - component: {fileID: 2107199305}
+  m_Layer: 0
+  m_Name: ElectricLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2107199305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2107199304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc6f7391a739f0469cb799f59d1abc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_L: {fileID: 774350929}
+  m_R: {fileID: 1890064366}
+--- !u!114 &2107199306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2107199304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectName: electric_3way_2
+  playOnStart: 1
+  loop: 1
+--- !u!4 &2107199307
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2107199304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2110527430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,7 +2513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2110527431
 MonoBehaviour:
   m_ObjectHideFlags: 0

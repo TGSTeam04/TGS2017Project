@@ -402,6 +402,7 @@ MonoBehaviour:
     m_Scale: 1
     m_Speed: 1
   m_IsGameOver: 0
+  m_IsGameClear: 0
   m_GameStarter: {fileID: 1022911404}
 --- !u!4 &1849378522
 Transform:

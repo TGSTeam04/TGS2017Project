@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TwinRoboMode
+{
+	A,
+	B
+}
+
 public class PlayerController : MonoBehaviour
 {
-
+	private Dictionary<TwinRoboMode, Quaternion> m_RotateTwinRoboMode = new Dictionary<TwinRoboMode, Quaternion>();
+	private TwinRoboMode m_LMode;
+	private TwinRoboMode m_RMode;
 	public GameObject m_HumanoidRobot;
 	public GameObject m_LRobot;
 	public GameObject m_RRobot;
@@ -50,6 +58,10 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject m_Boost;
 
+	public Color m_ModeAA;
+	public Color m_ModeAB;
+	public Color m_ModeBB;
+
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
@@ -74,7 +86,10 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_CombineTime = m_CombineTime;
 		GameManager.Instance.m_PlayerController = this;
 		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
-
+		m_RotateTwinRoboMode.Add(TwinRoboMode.A, Quaternion.Euler(0, 0, 0));
+		m_RotateTwinRoboMode.Add(TwinRoboMode.B, Quaternion.Euler(0, 90, 0));
+		m_RMode = TwinRoboMode.A;
+		m_LMode = TwinRoboMode.A;
 	}
 
 	// Update is called once per frame
@@ -89,15 +104,23 @@ public class PlayerController : MonoBehaviour
 				{
 					StartCoroutine(Combine());
 				}
+				if (Input.GetKeyDown(KeyCode.Slash))
+				{
+					m_LMode = m_LMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
+				}
+				if (Input.GetKeyDown(KeyCode.Backslash))
+				{
+					m_RMode = m_RMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
+				}
 				break;
 			case PlayMode.HumanoidRobot:
-				m_Energy -= Time.deltaTime * (m_IsBeamShooting?3:1);
-				if (Input.GetButtonDown("Jump")&&m_CharacterController.isGrounded)
+				m_Energy -= Time.deltaTime * (m_IsBeamShooting ? 3 : 1);
+				if (Input.GetButtonDown("Jump") && m_CharacterController.isGrounded)
 				{
 					m_MoveY = 1.5f;
 				}
 				Boost(Input.GetButton("Boost"));
-				if (/*Input.GetButtonDown("Combine")||*/m_Energy<=0)
+				if (Input.GetButtonDown("Combine")||m_Energy <= 0)
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());
@@ -136,15 +159,15 @@ public class PlayerController : MonoBehaviour
 
 				ElectricUpdate();
 
-				m_LRobotRigidbody.rotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
-				m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
+				m_LRobotRigidbody.rotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position) * m_RotateTwinRoboMode[m_LMode];
+				m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
 				Vector3 move_ = new Vector3(
 					Input.GetAxis("HorizontalL"), 0,
 					Input.GetAxis("VerticalL"));
 
-				if (m_MoveY<0&& m_CharacterController.isGrounded)
+				if (m_MoveY < 0 && m_CharacterController.isGrounded)
 				{
 					m_MoveY = 0;
 				}
@@ -167,7 +190,7 @@ public class PlayerController : MonoBehaviour
 				{
 					rotateSpeed = 0.2f;
 				}
-				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed*rotateSpeed * Time.fixedDeltaTime, 0);
+				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
 			case PlayMode.Release:
@@ -181,8 +204,9 @@ public class PlayerController : MonoBehaviour
 	private void ElectricUpdate()
 	{
 		m_Electric.transform.position = Vector3.Lerp(m_LRobotRigidbody.position, m_RRobotRigidbody.position, 0.5f);
-		m_Electric.transform.localScale = new Vector3(m_Scale, 1, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
+		m_Electric.transform.localScale = new Vector3(m_Scale,1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
 		m_Electric.transform.LookAt(m_LRobot.transform);
+//		m_Electric.transform.position += new Vector3(0f, 5f, 0f);
 	}
 
 	public IEnumerator Combine()
@@ -214,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
 		bool breakable = true;
 		int count = 0;
-		Collider[] collider = Physics.OverlapBox(HitPos+Vector3.up*m_Scale/2, new Vector3(1f, 0.5f, 1.5f)*m_Scale, m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
+		Collider[] collider = Physics.OverlapBox(HitPos + Vector3.up * m_Scale / 2, new Vector3(1f, 0.5f, 1.5f) * m_Scale, m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
@@ -251,18 +275,21 @@ public class PlayerController : MonoBehaviour
 		}
 
 		GameManager.Instance.m_StageManger.KillNum += count;
-		m_LShield.Damage(-0.2f*count);
-		m_RShield.Damage(-0.2f*count);
+		m_LShield.Damage(-0.2f * count);
+		m_RShield.Damage(-0.2f * count);
 
 		m_Energy += count * 5 + 10;
 		int nextexp = GameManager.Instance.LevelParameter.m_NextExp;
 		m_Exp += count;
 		GameManager.Instance.m_Level += m_Exp / nextexp;
 		m_Exp = m_Exp % nextexp;
-		m_Scale = GameManager.Instance.LevelParameter.m_Scale = GameManager.Instance.m_LevelParameter.m_Speed =m_Scale * (1.0f+count*0.1f);
+		m_Scale = GameManager.Instance.LevelParameter.m_Scale = GameManager.Instance.m_LevelParameter.m_Speed = m_Scale * (1.0f + count * 0.1f);
 		m_LRobot.transform.localScale = Vector3.one * m_Scale;
 		m_RRobot.transform.localScale = Vector3.one * m_Scale;
 		m_HumanoidRobot.transform.localScale = Vector3.one * m_Scale;
+
+		m_HumanoidRobot.transform.FindChild("Capsule").GetComponent<Renderer>().material.color = m_LMode != m_RMode ? m_ModeAB :
+																m_RMode == TwinRoboMode.A ? m_ModeAA : m_ModeBB;
 
 		m_LRobotRigidbody.MovePosition(LSecondTarget);
 		m_RRobotRigidbody.MovePosition(RSecondTarget);
@@ -317,7 +344,7 @@ public class PlayerController : MonoBehaviour
 
 	public IEnumerator Charge()
 	{
-		if (m_IsBeamShooting){ yield break; }
+		if (m_IsBeamShooting) { yield break; }
 		m_IsBeamShooting = true;
 		Vector3 position = m_TPSPosition.localPosition;
 		m_TPSPosition.localPosition = m_ChargePosition.localPosition;
