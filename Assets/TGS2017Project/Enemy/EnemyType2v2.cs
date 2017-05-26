@@ -181,8 +181,26 @@ public class EnemyType2v2 : MonoBehaviour
     // プレイヤーが射程圏内にいるか
     bool IsPlayerInRange()
     {
-        float distanceToPlayer = Vector3.Distance(m_EyePoint.position, m_Target.position);
-        return (distanceToPlayer < m_MaxRange && distanceToPlayer > m_MinRange);
+        // float distanceToPlayer = Vector3.Distance(m_EyePoint.position, m_Target.position);
+        // return (distanceToPlayer < m_MaxRange && distanceToPlayer > m_MinRange);
+        float distanceToPlayerX = m_EyePoint.position.x - m_Target.position.x;  // x軸距離
+        float distanceToPlayerZ = m_EyePoint.position.z - m_Target.position.z;  // z軸距離
+
+        return (distanceToPlayerX < m_MaxRange && distanceToPlayerX > m_MinRange
+            && distanceToPlayerZ < m_MaxRange && distanceToPlayerZ > m_MinRange);
+    }
+
+    // プレイヤーにRayを飛ばしたら当たるか
+    bool CanHitRayToPlayer()
+    {
+        // 自分からプレイヤーへの方向ベクトル
+        Vector3 directionToPlayer = m_Target.position - m_EyePoint.position;
+        // 壁の向こう側などにいる場合は見えない
+        RaycastHit hitInfo;
+        bool hit = Physics.Raycast(m_EyePoint.position, directionToPlayer, out hitInfo);
+
+        // プレイヤーにRayが当たったかどうかを返却
+        return (hit && hitInfo.collider.tag == "Player");
     }
 
     // 移動
@@ -217,7 +235,16 @@ public class EnemyType2v2 : MonoBehaviour
     // 位置を調整
     void AdjustPosition()
     {
+        float speed = 1.0f;
+        int setAxis = Random.Range(0, 2);
+        Vector3 axis;       // 回転軸
+        // ランダムで回り方向を決める
+        if (setAxis == 0)
+            axis = transform.TransformDirection(Vector3.up);    // 時計回り
+        else
+            axis = transform.TransformDirection(Vector3.down);  // 反時計回り
 
+        transform.RotateAround(m_Target.position, axis, speed * Time.deltaTime);
     }
 
     // 攻撃
@@ -231,7 +258,7 @@ public class EnemyType2v2 : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         // 電撃を受けると麻痺
-        if (other.name == "Beam")
+        if (other.name == "Cylinder")
         {
             m_IsParalysis = true;
             m_ParalysisCount = m_ParalysisTime;

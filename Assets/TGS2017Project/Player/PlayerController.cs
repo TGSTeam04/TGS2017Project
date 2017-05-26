@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 					m_MoveY = 1.5f;
 				}
 				Boost(Input.GetButton("Boost"));
-				if (Input.GetButtonDown("Combine")||m_Energy <= 0)
+				if (/*Input.GetButtonDown("Combine")||*/m_Energy <= 0)
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());
