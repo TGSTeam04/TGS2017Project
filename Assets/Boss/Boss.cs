@@ -63,7 +63,6 @@ public class Boss : MonoBehaviour
 			case PlayMode.Release:
 			default:
 				return;
-				break;
 		}
 		if (GameManager.Instance.m_StageManger.StageLevel < 1)
 		{
