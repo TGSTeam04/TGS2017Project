@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// 製作者：大格
-/// 更新日：05/19
+/// 更新日：05/23
 /// ステージパネルエディタ拡張
 /// </summary>
 
@@ -35,14 +35,14 @@ public class StagePanelEditor : Editor
         new Vector3(-Mathf.Cos(Mathf.Deg2Rad * 60), 0f, -Mathf.Sin(Mathf.Deg2Rad *60)),
     };
 
-    private int m_OnlyActiveStageLevel;
+    //private int m_OnlyActiveStageLevel;
     private int m_WallHeight;
 
     private void OnEnable()
     {
         StagePanel thisPanel = (StagePanel)target;
         m_WallHeight = (int)(thisPanel.transform.localScale.y);
-        m_OnlyActiveStageLevel = thisPanel.m_UseStageLevel;
+        //m_OnlyActiveStageLevel = thisPanel.m_UseStageLevel;
     }
 
     public override void OnInspectorGUI()
@@ -59,7 +59,7 @@ public class StagePanelEditor : Editor
         EditorGUILayout.Separator();
 
         //Activeパネル設定
-        OnlyActiveByUseLevel(allPanels);
+        //OnlyActiveByUseLevel(allPanels);
 
         EditorGUILayout.Separator();
 
@@ -84,16 +84,14 @@ public class StagePanelEditor : Editor
             Vector3 baseScale = thisPanelComp.transform.localScale;
             thisPanelComp.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
         }
-        if (GUILayout.Button("同じStageLevelのパネルに適用"))
+        if (GUILayout.Button("全てのパネルに適用"))
         {
             foreach (var panel in allPanels)
             {
-                StagePanel panelComp = panel.GetComponent<StagePanel>();
+                //StagePanel panelComp = panel.GetComponent<StagePanel>();
                 Vector3 baseScale = panel.transform.localScale;
-                if (panelComp.m_UseStageLevel == thisPanelComp.m_UseStageLevel)
-                {
-                    panel.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
-                }
+                //if (panelComp.m_UseStageLevel == thisPanelComp.m_UseStageLevel)
+                panel.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
             }
         }
     }
@@ -123,6 +121,8 @@ public class StagePanelEditor : Editor
                 CreateStagePanele(HexagonDirection.rightBottom);
         }
     }
+
+    //ステージパネル作成
     private void CreateStagePanele(object dire)
     {
         //複数選択対応
@@ -137,35 +137,15 @@ public class StagePanelEditor : Editor
                 (GameObject)Resources.Load("Prefub/Prefub_StagePanel")
                 , baseTrans.position
                 , baseTrans.rotation);
+            newObj.transform.localScale = baseTrans.localScale;
             StagePanel newPanel = newObj.GetComponent<StagePanel>();
-            newPanel.transform.localScale = baseTrans.localScale;
 
             //位置を設定
             float worldScale = thisPanel.transform.lossyScale.x;
-            Vector3 modify = m_Dires[direInt] * newPanel.m_InscribedR * worldScale;
+            Vector3 modify = m_Dires[direInt] * newPanel.m_InscribedR * 2 * worldScale;
+            Debug.Log(newPanel.m_InscribedR);
             newPanel.transform.position += modify;
             Undo.RegisterCreatedObjectUndo(newObj, "Create StagePanel");
-        }
-    }
-
-    private void OnlyActiveByUseLevel(GameObject[] panels)
-    {
-        EditorGUILayout.LabelField("対象のUseStageLevel以外を非アクティブに ");
-
-        m_OnlyActiveStageLevel = EditorGUILayout.IntField("対象　UseStageLevel ", m_OnlyActiveStageLevel);
-        if (GUILayout.Button("Apply"))
-        {
-
-            //処理が可能か判定
-            foreach (var panel in panels)
-            {
-                StagePanel panelComp = panel.GetComponent<StagePanel>();
-                if (panelComp.m_UseStageLevel != m_OnlyActiveStageLevel)
-                {
-                    panel.SetActive(false);
-                }
-            }
-
         }
     }
 
@@ -184,27 +164,43 @@ public class StagePanelEditor : Editor
     public void CheckNeadWall(GameObject[] panels)
     {
         LayerMask mask = LayerMask.GetMask(new string[] { "Wall" });
-        //初期パネルの壁の選別
+        //壁の選別
         foreach (var panel in panels)
         {
-            StagePanel panelComp = panel.GetComponent<StagePanel>();
             Transform walls = panel.transform.FindChild("Walls");
-            //if (panelComp.m_UseStageLevel != 0 || walls == null)
-            //    continue;
 
             for (int i = 0; i < walls.childCount; i++)
             {
                 Transform wall = walls.GetChild(i);
                 RaycastHit hitInfo1;
                 RaycastHit hitInfo2;
-                bool test = Physics.Raycast(wall.position, -wall.forward, out hitInfo2, Mathf.Infinity, mask);
-                if (Physics.Raycast(wall.position, wall.forward, out hitInfo1, Mathf.Infinity, mask)
-                && test)
+                Debug.DrawRay(wall.transform.position, wall.right * 10f,Color.red,5.0f);
+                if (Physics.Raycast(wall.position, wall.right, out hitInfo1, Mathf.Infinity, mask)
+                && Physics.Raycast(wall.position, -wall.right, out hitInfo2, Mathf.Infinity, mask))
                 {
-                    Undo.DestroyObjectImmediate(wall.gameObject);
+                    Debug.Log("test");
+                    Undo.DestroyObjectImmediate(wall.gameObject);                    
+                    //hitInfo1.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                     i--;
                 }
             }
         }
     }
+
+    //private void OnlyActiveByUseLevel(GameObject[] panels)
+    //{
+    //    EditorGUILayout.LabelField("対象のUseStageLevel以外を非アクティブに ");
+
+    //    m_OnlyActiveStageLevel = EditorGUILayout.IntField("対象　UseStageLevel ", m_OnlyActiveStageLevel);
+    //    if (GUILayout.Button("Apply"))
+    //    {
+    //        //処理が可能か判定
+    //        foreach (var panel in panels)
+    //        {
+    //            StagePanel panelComp = panel.GetComponent<StagePanel>();
+    //            if (panelComp.m_UseStageLevel != m_OnlyActiveStageLevel)
+    //            panel.SetActive(false);
+    //        }
+    //    }
+    //}
 }

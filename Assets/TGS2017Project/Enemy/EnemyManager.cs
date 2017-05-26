@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
 {
     private SubjectBase m_Subject;
-    [SerializeField]
-    private float[] m_ScaleByStageLeve = { 1, 2, 5, 8, 10 };
+    //[SerializeField]
+    //private float[] m_ScaleByStageLeve = { 1, 2, 5, 8, 10 };
     [SerializeField]
     private float m_ReSpawnWaitTime = 1.0f;
     protected override void Awake()
@@ -35,8 +35,8 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
     void ReSpawn(EnemyBase enemy)
     {
         StageManager stageManager = GameManager.Instance.m_StageManger;
-        int stageLevel = stageManager.StageLevel;
-        float scale = m_ScaleByStageLeve[stageLevel];
+        //int stageLevel = stageManager.StageLevel;
+        //float scale = m_ScaleByStageLeve[stageLevel];
 
         
         //アクティブなパネルのうちランダムなものを取得
@@ -51,7 +51,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         enemy.transform.position = resPos;
         enemy.GetComponent<EnemyBase>().NextTarget();
         enemy.GetComponent<EnemyBase>().m_IsDead = false;
-        enemy.transform.localScale = Vector3.one * scale;
+        enemy.transform.localScale = Vector3.one;// * scale;
         enemy.gameObject.SetActive(true);
     }
 }
