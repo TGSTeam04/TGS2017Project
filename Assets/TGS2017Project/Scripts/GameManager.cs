@@ -44,7 +44,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	
 	// Update is called once per frame
 	void Update () {
-		if (m_IsGameClear || m_IsGameOver)
+        if (Input.GetKeyDown(KeyCode.P))
+            Pauser.Pause();
+        if (Input.GetKeyDown(KeyCode.O))
+            Pauser.Resume();
+
+        if (m_IsGameClear || m_IsGameOver)
 		{
 			StartCoroutine(GameEnd());
 		}
