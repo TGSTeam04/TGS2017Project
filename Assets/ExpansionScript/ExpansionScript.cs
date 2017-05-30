@@ -6,6 +6,10 @@ using System.Collections.Generic;
 /// <summary>
 /// MonoBehaviorの拡張クラス
 /// </summary>
+
+
+public delegate bool BAction();//<T>(params T[] pram);
+
 public static class MonoBehaviorExtentsion
 {
     //Delay
@@ -34,5 +38,23 @@ public static class MonoBehaviorExtentsion
     {
         yield return yieldInstructtion;
         action();
+    }
+
+    //BActionがtureを返す限りparYield経つごとに繰り返しBActionを実行。
+    //参照されているGameObjectが消えても参照している側が生きている限り呼ばれ続けます。
+    public static IEnumerator UpdateWhileMethodBool(this MonoBehaviour mono, BAction action, YieldInstruction parYield = null)
+    {
+        while (action())
+        {
+            yield return parYield;
+        }
+    }
+    //BActionがture 且つ ターゲットが存在する限りparYield経つごとに繰り返しBActionを実行。
+    public static IEnumerator SafeUpdateWhileMethodBool(this MonoBehaviour mono, MonoBehaviour target, BAction action, YieldInstruction parYield = null)
+    {
+        while (target != null && action())
+        {
+            yield return parYield;
+        }
     }
 }

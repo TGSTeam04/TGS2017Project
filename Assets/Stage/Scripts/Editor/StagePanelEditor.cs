@@ -137,6 +137,7 @@ public class StagePanelEditor : Editor
                 (GameObject)Resources.Load("Prefub/Prefub_StagePanel")
                 , baseTrans.position
                 , baseTrans.rotation);
+            newObj.transform.parent = thisPanel.transform.parent;
             newObj.transform.localScale = baseTrans.localScale;
             StagePanel newPanel = newObj.GetComponent<StagePanel>();
 
