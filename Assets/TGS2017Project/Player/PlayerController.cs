@@ -40,9 +40,8 @@ public class PlayerController : MonoBehaviour
 
 	public int m_Level;
 	public int m_Exp;
-	public float m_Scale;
 
-	public GameObject m_Beam;
+	public GameObject m_Arm;
 
 	public Transform m_TPSPosition;
 	public Transform m_ChargePosition;
@@ -78,10 +77,8 @@ public class PlayerController : MonoBehaviour
 		m_CharacterController = m_HumanoidRobot.GetComponent<CharacterController>();
 		m_HumanoidRobot.SetActive(false);
 		m_ElectricGuid.SetActive(false);
-		m_Beam.SetActive(false);
 		m_Level = 1;
 		m_Exp = 0;
-		m_Scale = 1;
 		m_Energy = 0;
 		GameManager.Instance.m_CombineTime = m_CombineTime;
 		GameManager.Instance.m_PlayerController = this;
@@ -114,13 +111,13 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			case PlayMode.HumanoidRobot:
-				m_Energy -= Time.deltaTime * (m_IsBeamShooting ? 3 : 1);
+				m_Energy -= Time.deltaTime * (m_IsBeamShooting ? 1 : 1);
 				if (Input.GetButtonDown("Jump") && m_CharacterController.isGrounded)
 				{
 					m_MoveY = 1.5f;
 				}
 				Boost(Input.GetButton("Boost"));
-				if (/*Input.GetButtonDown("Combine")||*/m_Energy <= 0)
+				if (m_Arm.GetComponent<Arm>().m_ArmState== ArmState.Idle&&(Input.GetButtonDown("Combine")||m_Energy <= 0))
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());
@@ -204,7 +201,7 @@ public class PlayerController : MonoBehaviour
 	private void ElectricUpdate()
 	{
 		m_Electric.transform.position = Vector3.Lerp(m_LRobotRigidbody.position, m_RRobotRigidbody.position, 0.5f);
-		m_Electric.transform.localScale = new Vector3(m_Scale,1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
+		m_Electric.transform.localScale = new Vector3(1f,1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
 		m_Electric.transform.LookAt(m_LRobot.transform);
 //		m_Electric.transform.position += new Vector3(0f, 5f, 0f);
 	}
@@ -218,12 +215,10 @@ public class PlayerController : MonoBehaviour
 		Vector3 LPos = m_LRobotRigidbody.position;
 		Vector3 RPos = m_RRobotRigidbody.position;
 		Vector3 HitPos = Vector3.Lerp(LPos, RPos, 0.5f);
-		float scale = (GameManager.Instance.m_StageManger.StageLevel == 0 ? 1 :
-			GameManager.Instance.m_StageManger.StageLevel == 1 ? 4 : 15);
-		Vector3 LFirstTarget = HitPos + Vector3.Normalize(LPos - HitPos) * (1.0f * scale + 0.5f * m_Scale);
-		Vector3 RFirstTarget = HitPos + Vector3.Normalize(RPos - HitPos) * (1.0f * scale + 0.5f * m_Scale);
-		Vector3 LSecondTarget = HitPos + Vector3.Normalize(LPos - HitPos) * 0.5f * m_Scale;
-		Vector3 RSecondTarget = HitPos + Vector3.Normalize(RPos - HitPos) * 0.5f * m_Scale;
+		Vector3 LFirstTarget = HitPos + Vector3.Normalize(LPos - HitPos) * (1.0f + 0.5f);
+		Vector3 RFirstTarget = HitPos + Vector3.Normalize(RPos - HitPos) * (1.0f + 0.5f);
+		Vector3 LSecondTarget = HitPos + Vector3.Normalize(LPos - HitPos) * 0.5f;
+		Vector3 RSecondTarget = HitPos + Vector3.Normalize(RPos - HitPos) * 0.5f;
 		m_HumanoidRobot.transform.position = m_Electric.transform.position;
 		m_HumanoidRobot.transform.LookAt(m_Electric.transform.position + m_Electric.transform.right);
 
@@ -233,12 +228,12 @@ public class PlayerController : MonoBehaviour
 			m_RRobotRigidbody.MovePosition(Vector3.Lerp(RPos, RFirstTarget, m_CombineCurve.Evaluate(f / m_CombineTime)));
 			yield return new WaitForFixedUpdate();
 		}
-		LPos = HitPos + Vector3.Normalize(LPos - HitPos) * 8.0f * m_Scale;
-		RPos = HitPos + Vector3.Normalize(RPos - HitPos) * 8.0f * m_Scale;
+		LPos = HitPos + Vector3.Normalize(LPos - HitPos) * 8.0f;
+		RPos = HitPos + Vector3.Normalize(RPos - HitPos) * 8.0f;
 
 		bool breakable = true;
 		int count = 0;
-		Collider[] collider = Physics.OverlapBox(HitPos + Vector3.up * m_Scale / 2, new Vector3(1f, 0.5f, 1.5f) * m_Scale, m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
+		Collider[] collider = Physics.OverlapBox(HitPos + Vector3.up / 2, new Vector3(1f, 0.5f, (m_LMode==m_RMode)&&m_RMode==TwinRoboMode.A? 1.5f:0.5f), m_HumanoidRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
@@ -283,10 +278,6 @@ public class PlayerController : MonoBehaviour
 		m_Exp += count;
 		GameManager.Instance.m_Level += m_Exp / nextexp;
 		m_Exp = m_Exp % nextexp;
-		m_Scale = GameManager.Instance.LevelParameter.m_Scale = GameManager.Instance.m_LevelParameter.m_Speed = m_Scale * (1.0f + count * 0.1f);
-		m_LRobot.transform.localScale = Vector3.one * m_Scale;
-		m_RRobot.transform.localScale = Vector3.one * m_Scale;
-		m_HumanoidRobot.transform.localScale = Vector3.one * m_Scale;
 
 		m_HumanoidRobot.transform.FindChild("Capsule").GetComponent<Renderer>().material.color = m_LMode != m_RMode ? m_ModeAB :
 																m_RMode == TwinRoboMode.A ? m_ModeAA : m_ModeBB;
@@ -309,8 +300,8 @@ public class PlayerController : MonoBehaviour
 		m_RRobot.SetActive(true);
 		m_Electric.SetActive(true);
 		Vector3 vector = m_HumanoidRobot.transform.right;
-		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.5f * m_Scale);
-		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.5f * m_Scale);
+		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.5f);
+		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.5f);
 		Quaternion lRotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
 		Quaternion rRotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
 		float preMove = 0;
@@ -355,11 +346,10 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetButtonUp("Charge")) break;
 			yield return null;
 		}
-		m_Beam.transform.localScale = new Vector3(1, 1, 1 + time * 2);
-		m_Beam.SetActive(true);
-		yield return new WaitForSeconds(time / 2f);
+		m_Energy -= 6.25f;
+		m_Arm.SetActive(true);
+		m_Arm.GetComponent<Arm>().Fire();
 		m_TPSPosition.localPosition = position;
-		m_Beam.SetActive(false);
 		m_IsBeamShooting = false;
 	}
 
