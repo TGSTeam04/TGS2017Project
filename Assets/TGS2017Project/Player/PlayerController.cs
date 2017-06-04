@@ -63,6 +63,9 @@ public class PlayerController : MonoBehaviour
 	public Color m_ModeAB;
 	public Color m_ModeBB;
 
+	public GameObject m_ChargeEffect;
+	public GameObject m_CombineEffect;
+
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
@@ -224,6 +227,9 @@ public class PlayerController : MonoBehaviour
 		m_HumanoidRobot.transform.position = m_Electric.transform.position;
 		m_HumanoidRobot.transform.LookAt(m_Electric.transform.position + m_Electric.transform.right);
 
+		m_CombineEffect.transform.position = m_Electric.transform.position + new Vector3(0,0.5f,0);
+		StartCoroutine(CombineEffect());
+
 		for (float f = 0; f < m_CombineTime; f += Time.fixedDeltaTime)
 		{
 			m_LRobotRigidbody.MovePosition(Vector3.Lerp(LPos, LFirstTarget, m_CombineCurve.Evaluate(f / m_CombineTime)));
@@ -344,8 +350,10 @@ public class PlayerController : MonoBehaviour
 		if (m_IsBeamShooting || m_Energy < (6.25f+0.5f) || (m_ArmL.GetComponent<Arm>().m_ArmState != ArmState.Idle &&  m_ArmR.GetComponent<Arm>().m_ArmState != ArmState.Idle)) { yield break; }
 		m_IsBeamShooting = true;
 		m_Energy -= 6.25f;
-		yield return new WaitForSeconds(0.5f);
-		if(m_ArmL.GetComponent<Arm>().m_ArmState == ArmState.Idle)
+		m_ChargeEffect.SetActive(true);
+		yield return new WaitForSeconds(1.5f);
+		m_ChargeEffect.SetActive(false);
+		if (m_ArmL.GetComponent<Arm>().m_ArmState == ArmState.Idle)
 		{
 			m_ArmL.SetActive(true);
 			m_ArmL.GetComponent<Arm>().Fire();
@@ -356,6 +364,14 @@ public class PlayerController : MonoBehaviour
 			m_ArmR.GetComponent<Arm>().Fire();
 		}
 		m_IsBeamShooting = false;
+	}
+
+	private IEnumerator CombineEffect()
+	{
+		yield return new WaitForSeconds(2f);
+		m_CombineEffect.SetActive(true);
+		yield return new WaitForSeconds(1);
+		m_CombineEffect.SetActive(false);
 	}
 
 }
