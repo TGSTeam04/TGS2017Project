@@ -39,7 +39,8 @@ public class StagePanelEditor : Editor
     {
         StagePanel thisPanel = (StagePanel)target;
         Wall OneWall = thisPanel.GetComponentInChildren<Wall>();
-        m_WallHeight = (int)(OneWall.gameObject.transform.localScale.y);
+        if (OneWall != null)
+            m_WallHeight = (int)(OneWall.gameObject.transform.localScale.y);
         //m_OnlyActiveStageLevel = thisPanel.m_UseStageLevel;
     }
     public override void OnInspectorGUI()
@@ -178,16 +179,17 @@ public class StagePanelEditor : Editor
         {
             Transform walls = panel.transform.FindChild("Walls");
             for (int i = 0; i < walls.childCount; i++)
-            {
+            {                
                 Transform wall = walls.GetChild(i);
+                float modify = 50.0f * wall.lossyScale.x;
                 Vector3 pos = new Vector3(wall.position.x, wall.position.y + 30.0f, wall.position.z);
-                pos += -wall.forward * 50.0f;
+                pos += -wall.forward * modify;
                 RaycastHit hitInfo1;
                 Debug.DrawRay(pos, -wall.up * 50.0f, Color.red, 3.0f);
 
                 if (Physics.Raycast(pos, -wall.up, out hitInfo1, Mathf.Infinity, mask))
                 {
-                    Debug.Log("DestroyWall");
+                    //Debug.Log("DestroyWall");
                     Undo.DestroyObjectImmediate(wall.gameObject);
                     i--;
                 }
