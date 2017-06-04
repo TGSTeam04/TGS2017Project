@@ -24,7 +24,6 @@ public class StagePanelEditor : Editor
         rightBottom,
         leftBottom
     }
-
     //六方の向きベクトル
     private static Vector3[] m_Dires = {
         Vector3.left,
@@ -34,17 +33,15 @@ public class StagePanelEditor : Editor
         new Vector3(Mathf.Cos(Mathf.Deg2Rad * 60), 0f,-Mathf.Sin(Mathf.Deg2Rad *60)),
         new Vector3(-Mathf.Cos(Mathf.Deg2Rad * 60), 0f, -Mathf.Sin(Mathf.Deg2Rad *60)),
     };
-
     //private int m_OnlyActiveStageLevel;
     private int m_WallHeight;
-
     private void OnEnable()
     {
         StagePanel thisPanel = (StagePanel)target;
-        m_WallHeight = (int)(thisPanel.transform.localScale.y);
+        Wall OneWall = thisPanel.GetComponentInChildren<Wall>();
+        m_WallHeight = (int)(OneWall.gameObject.transform.localScale.y);
         //m_OnlyActiveStageLevel = thisPanel.m_UseStageLevel;
     }
-
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
@@ -77,21 +74,32 @@ public class StagePanelEditor : Editor
     {
         EditorGUI.BeginChangeCheck();
         m_WallHeight = EditorGUILayout.IntField("壁の高さ", m_WallHeight);
-        StagePanel thisPanelComp = (StagePanel)target;
+
         if (EditorGUI.EndChangeCheck())
         {
-
-            Vector3 baseScale = thisPanelComp.transform.localScale;
-            thisPanelComp.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+            StagePanel panel = (StagePanel)target;
+            var walls = panel.GetComponentsInChildren<Wall>();
+            foreach (var wall in walls)
+            {
+                Vector3 baseScale = wall.transform.localScale;
+                //wall.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+                Undo.RecordObject(wall.transform, "対象の壁の高さ変更");
+                wall.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+            }
         }
         if (GUILayout.Button("全てのパネルに適用"))
         {
             foreach (var panel in allPanels)
             {
+                var walls = panel.GetComponentsInChildren<Wall>();
+                foreach (var wall in walls)
+                {
+                    Undo.RecordObject(wall.transform, "壁の高さ変更");
+                    Vector3 baseScale = wall.transform.localScale;
+                    wall.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+                }
                 //StagePanel panelComp = panel.GetComponent<StagePanel>();
-                Vector3 baseScale = panel.transform.localScale;
-                //if (panelComp.m_UseStageLevel == thisPanelComp.m_UseStageLevel)
-                panel.transform.localScale = new Vector3(baseScale.x, m_WallHeight, baseScale.z);
+                //if (panelComp.m_UseStageLevel == thisPanelComp.m_UseStageLevel)                
             }
         }
     }
@@ -144,7 +152,7 @@ public class StagePanelEditor : Editor
             //位置を設定
             float worldScale = thisPanel.transform.lossyScale.x;
             Vector3 modify = m_Dires[direInt] * newPanel.m_InscribedR * 2 * worldScale;
-            Debug.Log(newPanel.m_InscribedR);
+            //Debug.Log(newPanel.m_InscribedR);
             newPanel.transform.position += modify;
             Undo.RegisterCreatedObjectUndo(newObj, "Create StagePanel");
         }
@@ -164,24 +172,23 @@ public class StagePanelEditor : Editor
     }
     public void CheckNeadWall(GameObject[] panels)
     {
-        LayerMask mask = LayerMask.GetMask(new string[] { "Wall" });
+        LayerMask mask = LayerMask.GetMask(new string[] { "Floor" });
         //壁の選別
         foreach (var panel in panels)
         {
             Transform walls = panel.transform.FindChild("Walls");
-
             for (int i = 0; i < walls.childCount; i++)
             {
                 Transform wall = walls.GetChild(i);
+                Vector3 pos = new Vector3(wall.position.x, wall.position.y + 30.0f, wall.position.z);
+                pos += -wall.forward * 50.0f;
                 RaycastHit hitInfo1;
-                RaycastHit hitInfo2;
-                Debug.DrawRay(wall.transform.position, wall.right * 10f,Color.red,5.0f);
-                if (Physics.Raycast(wall.position, wall.right, out hitInfo1, Mathf.Infinity, mask)
-                && Physics.Raycast(wall.position, -wall.right, out hitInfo2, Mathf.Infinity, mask))
+                Debug.DrawRay(pos, -wall.up * 50.0f, Color.red, 3.0f);
+
+                if (Physics.Raycast(pos, -wall.up, out hitInfo1, Mathf.Infinity, mask))
                 {
-                    Debug.Log("test");
-                    Undo.DestroyObjectImmediate(wall.gameObject);                    
-                    //hitInfo1.collider.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                    Debug.Log("DestroyWall");
+                    Undo.DestroyObjectImmediate(wall.gameObject);
                     i--;
                 }
             }
