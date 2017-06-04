@@ -79,7 +79,7 @@ public class PlayCameraController : MonoBehaviour
 		if (m_IsRunning) { yield break; }
 		m_IsRunning = true;
 
-		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
+		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime*2)
 		{
 			m_Camera.fieldOfView = Mathf.Lerp(60, m_MAXFOV, m_FOVCurve.Evaluate(f));
 			transform.position = Vector3.Lerp(m_TopTransform[GameManager.Instance.m_StageManger.StageLevel].position, m_TPSTransform.position, m_CombinePositionCurve.Evaluate(f));

@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 2c04ee7ccdcd8244ea3ab76591d6784e
-timeCreated: 1496379432
-=======
-guid: cfe3cc70fbcff654c9a31c75b312f245
-timeCreated: 1496362715
->>>>>>> 8d374588e9277af7748b45b4fe75cc6cbf8b7f83
+guid: 19b68d7070723414a98de9324186951c
+timeCreated: 1496451914
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -398,7 +393,6 @@ ModelImporter:
     4300086: poly_L_shoulder
     4300088: poly_body1
     4300090: poly_pole
-    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
