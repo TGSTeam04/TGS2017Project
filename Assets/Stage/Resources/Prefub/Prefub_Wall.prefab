@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23074670140283442}
   - component: {fileID: 114661713691253118}
   - component: {fileID: 54190431678667942}
-  - component: {fileID: 65926016803942958}
+  - component: {fileID: 65955078929361696}
   m_Layer: 12
   m_Name: Prefub_Wall
   m_TagString: Untagged
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: ab41adabb055f2743994070bf6ba4757, type: 2}
+  - {fileID: 2100000, guid: d6ae3c21c2abfdd44a70cd7df0bf7159, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812828711726720}
-  m_Mesh: {fileID: 4300000, guid: 533204de77743f84a89cbfd936ace5a1, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f5af230ea5aa2e5468d6125c2b6ce955, type: 3}
 --- !u!54 &54190431678667942
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -98,7 +98,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65926016803942958
+--- !u!65 &65955078929361696
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,8 +108,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.198082, y: 35.055603, z: 115.54599}
-  m_Center: {x: -95.45598, y: 16.495876, z: 0.018608093}
+  m_Size: {x: 57.772995, y: 17.527802, z: 4.599041}
+  m_Center: {x: 0, y: 0, z: -0.0000019073486}
 --- !u!114 &114661713691253118
 MonoBehaviour:
   m_ObjectHideFlags: 1
