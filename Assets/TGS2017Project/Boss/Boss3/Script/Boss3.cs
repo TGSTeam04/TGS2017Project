@@ -13,16 +13,23 @@ public class Boss3 : MonoBehaviour
     public float m_RPunchRange;
     public float m_RPunchInterval;
 
-    BehaviorTree<BB_Boss3> m_BTree;
-    BB_Boss3 m_Board;
+    BehaviorTree m_BTree;
+    BB_Boss3 m_BB;
 
     // Use this for initialization
     void Start()
     {
-        m_Board = GetComponent<BB_Boss3>(); //new BB_Boss3(gameObject,this, GetComponent<NavMeshAgent>());
-        m_BTree = new BehaviorTree<BB_Boss3>(m_Board);
-        m_BTree.SetRootNode(new BT_MoveTo(new Vector3(0, 0, 0), m_RPunchRange, m_Speed));
-
+        m_BB = GetComponent<BB_Boss3>(); //new BB_Boss3(gameObject,this, GetComponent<NavMeshAgent>());
+        m_BTree = new BehaviorTree(m_BB);
+        //BDecorator<BB_Boss3> BDNeedChase = new BDecorator<BB_Boss3>();
+        //BDNeedChase.m_Check_Del = () =>
+        //{
+        //    float distance = Vector3.Distance(transform.position, m_BB.target.transform.position);
+        //    return distance < StagePanel.m_InscribedR * 3;
+        //};
+        //射程まで近づく
+        m_BTree.SetRootNode(new BT_MoveTo(m_BB.target, m_RPunchRange, m_Speed));
+        
         //GetComponent<NavMeshAgent>().SetDestination(Vector3.zero);
     }
 

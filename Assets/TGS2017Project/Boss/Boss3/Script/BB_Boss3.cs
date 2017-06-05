@@ -9,7 +9,6 @@ public class BB_Boss3 : BBoard
     [HideInInspector]
     public NavMeshAgent nAgent;
     public GameObject target;
-
     private void Start()
     {
         nAgent = GetComponent<NavMeshAgent>();

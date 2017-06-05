@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BehaviorTree<T> where T : BBoard, new()
+public class BehaviorTree
 {
-    private BRoot<T> m_VirtualRoot;
-    public T m_Board;
+    private BRoot m_VirtualRoot;
+    public BBoard m_Board;
     public bool IsStop { get; set; }
     public BehaviorTree()
     {
-        m_VirtualRoot = new BRoot<T>();
+        m_VirtualRoot = new BRoot();
         m_VirtualRoot.m_BB = m_Board;
+        m_VirtualRoot.m_BT = this;
         IsStop = false;
     }
-    public BehaviorTree(T board)
+    public BehaviorTree(BBoard board)
     {
-        m_VirtualRoot = new BRoot<T>();
+        m_VirtualRoot = new BRoot();
         m_Board = board;
         m_VirtualRoot.m_BB = m_Board;
+        m_VirtualRoot.m_BT = this;
         IsStop = false;
     }
-    public void SetBoard(T board)
+    public void SetBoard(BBoard board)
     {
         m_Board = board;
     }
@@ -28,10 +30,10 @@ public class BehaviorTree<T> where T : BBoard, new()
     public void Update()
     {
         if (!IsStop)
-            m_VirtualRoot.Update();
+            m_VirtualRoot.Execute();
     }
 
-    public void SetRootNode(BNode<T> node)
+    public void SetRootNode(BNode node)
     {
         m_VirtualRoot.AddNode(node);
         node.SetParent(m_VirtualRoot);

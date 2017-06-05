@@ -44,7 +44,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         StagePanel panel = panels[Random.Range(0, panels.Count)];
         Transform panelTrans = panel.gameObject.transform;
         //パネルの中心から内接円の半径以下の距離の場所に移動
-        float distance = Random.Range(0, panelTrans.lossyScale.x * panel.m_InscribedR / 2f);
+        float distance = Random.Range(0, panelTrans.lossyScale.x * StagePanel.m_InscribedR / 2f);
         Vector3 randVec = new Vector3(Random.Range(0f, 1f), 0, Random.Range(0f, 1f));
         Vector3 resPos = panelTrans.position + (randVec.normalized * distance);
 

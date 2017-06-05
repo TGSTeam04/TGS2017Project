@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BSequence<T> : BComposite<T> where T : BBoard
+public class BSequence :BComposite
 {
     public BSequence()
     {

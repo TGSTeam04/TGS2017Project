@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BRoot<T> : BComposite<T> where T : BBoard
+public class BRoot : BComposite
 {
-    BNode<T> m_RealRoot;
+    BNode m_RealRoot;
     public BRoot() : base()
     {
-        m_RealRoot = new BTask<T>();
+        m_RealRoot = new BTask();
     }
-    protected override void OnUpdate()
+    protected override void OnExecute()
     {
-        m_RealRoot.Update();
+        m_RealRoot.Execute();
     }
-    public override void DeleteChild(BNode<T> node)
+    public override void DeleteChild(BNode node)
     {
-        m_RealRoot = new BTask<T>();
+        m_RealRoot = new BTask();
     }
-    public override void AddNode(BNode<T> node)
+    public override void AddNode(BNode node)
     {
         m_RealRoot = node;
     }

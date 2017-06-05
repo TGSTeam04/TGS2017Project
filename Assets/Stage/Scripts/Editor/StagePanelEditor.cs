@@ -148,13 +148,12 @@ public class StagePanelEditor : Editor
                 , baseTrans.rotation);
             newObj.transform.parent = thisPanel.transform.parent;
             newObj.transform.localScale = baseTrans.localScale;
-            StagePanel newPanel = newObj.GetComponent<StagePanel>();
-
+            StagePanel newPanel = newObj.GetComponent<StagePanel>();            
             //位置を設定
             float worldScale = thisPanel.transform.lossyScale.x;
-            Vector3 modify = m_Dires[direInt] * newPanel.m_InscribedR * 2 * worldScale;
-            //Debug.Log(newPanel.m_InscribedR);
+            Vector3 modify = thisPanel.transform.rotation * m_Dires[direInt] * StagePanel.m_InscribedR * 2 * worldScale;            
             newPanel.transform.position += modify;
+            newPanel.transform.rotation = thisPanel.transform.rotation;
             Undo.RegisterCreatedObjectUndo(newObj, "Create StagePanel");
         }
     }

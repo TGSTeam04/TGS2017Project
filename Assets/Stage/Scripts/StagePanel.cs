@@ -13,7 +13,7 @@ using System.Linq;
 public class StagePanel : MonoBehaviour
 {
     [HideInInspector]
-    public float m_InscribedR = 50;
+    public static float m_InscribedR = 50;
     //private SubjectBase m_Subject;
     [HideInInspector]
     public List<Wall> m_Walls;

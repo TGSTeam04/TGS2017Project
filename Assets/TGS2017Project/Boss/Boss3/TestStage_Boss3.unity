@@ -116,9 +116,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 186941053}
-  - component: {fileID: 186941054}
   - component: {fileID: 186941055}
   - component: {fileID: 186941056}
+  - component: {fileID: 186941054}
   - component: {fileID: 186941057}
   m_Layer: 0
   m_Name: Boss3
@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186941052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.37, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2049692286}
@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4290acb2159a7846a0ffd71b568ecf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Hp: 0
+  m_Hp: 100
   m_Speed: 10
   m_RPunchSpeed: 0
-  m_RPunchRange: 10
+  m_RPunchRange: 5.12
   m_RPunchInterval: 0
 --- !u!195 &186941055
 NavMeshAgent:
@@ -167,12 +167,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 10.3
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -453,7 +453,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030254894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.69, z: 0}
+  m_LocalPosition: {x: -20.5, y: 6.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
