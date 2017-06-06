@@ -28,8 +28,8 @@ public class Boss : MonoBehaviour
 
 	public static bool s_IsDead = false;
 
-	public Transform m_LeftArm;
-	public Transform m_RightArm;
+	public Transform m_LeftRocket;
+	public Transform m_RightRocket;
 	public Transform m_Core;
 	public GameObject m_SearchArea;
 	public GameObject m_Explosion;
@@ -126,7 +126,7 @@ public class Boss : MonoBehaviour
 		if (Searching.s_Find)
 		{
 			m_SearchArea.SetActive(false);
-			if (Vector3.Distance(m_LeftArm.position, m_Target.position) < Vector3.Distance(m_RightArm.position, m_Target.position))
+			if (Vector3.Distance(m_LeftRocket.position, m_Target.position) < Vector3.Distance(m_RightRocket.position, m_Target.position))
 			{
 				m_Anim.SetBool("LeftPunch", true);
 			}
