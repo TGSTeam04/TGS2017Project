@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
 	public float m_Speed;
 	public float m_RotateSpeed;
-	private CharacterController m_CharacterController;
 
 	public float m_BoostTime;
 	public float m_BoostPower;
@@ -79,7 +78,6 @@ public class PlayerController : MonoBehaviour
 	{
 		m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();
 		m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
-		m_CharacterController = m_HumanoidRobot.GetComponent<CharacterController>();
 		m_HumanoidRobot.SetActive(false);
 		m_ElectricGuid.SetActive(false);
 		m_Level = 1;
@@ -117,10 +115,7 @@ public class PlayerController : MonoBehaviour
 				break;
 			case PlayMode.HumanoidRobot:
 				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
-				if (Input.GetButtonDown("Jump") && m_CharacterController.isGrounded)
-				{
-					m_MoveY = 1.5f;
-				}
+				Jump(Input.GetButtonDown("Jump"));
 				Boost(Input.GetButton("Boost"));
 				if (m_ArmL.GetComponent<Arm>().m_ArmState== ArmState.Idle&& m_ArmR.GetComponent<Arm>().m_ArmState == ArmState.Idle&&(Input.GetButtonDown("Combine")||m_Energy <= 0))
 				{
@@ -177,13 +172,13 @@ public class PlayerController : MonoBehaviour
 				float rotateSpeed = 1;
 				if (!m_IsBeamShooting)
 				{
-					m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+					//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				}
 				else
 				{
 					rotateSpeed = 0.2f;
 				}
-				if (m_MoveY < 0 && m_CharacterController.isGrounded)
+				if (m_MoveY < 0)
 				{
 					m_MoveY = 0;
 				}
@@ -192,7 +187,7 @@ public class PlayerController : MonoBehaviour
 					m_MoveY -= 3 * Time.fixedDeltaTime;
 
 				}
-				m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+				//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
@@ -344,6 +339,11 @@ public class PlayerController : MonoBehaviour
 	{
 		m_BoostSpeed = boost ? m_BoostPower : 0;
 		m_Boost.SetActive(boost);
+	}
+
+	private void Jump(bool jump)
+	{
+
 	}
 
 	public IEnumerator Charge()
