@@ -11,10 +11,14 @@ public class BComposite : BNode
         m_Child = new List<BNode>();
         m_NowIndex = 0;
     }
-    public BComposite(BComposite pearent) : base(pearent)
+
+    public override void SetParent(BComposite parent)
     {
-        m_Child = new List<BNode>();
-        m_NowIndex = 0;
+        base.SetParent(parent);
+        foreach (var child in m_Child)
+        {
+            child.SetParent(parent);
+        }
     }
 
     public virtual void AddNode(BNode node)
@@ -35,12 +39,11 @@ public class BComposite : BNode
         {
             c.Reset();
         }
-        Initialize();
     }
 
-    protected override void OnExecute()
+    protected override void Execute()
     {
-        m_Child[m_NowIndex].Execute();
+        m_Child[m_NowIndex].TryExecute();
     }
 
     public override void Initialize()

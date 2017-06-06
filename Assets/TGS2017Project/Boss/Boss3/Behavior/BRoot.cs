@@ -9,9 +9,9 @@ public class BRoot : BComposite
     {
         m_RealRoot = new BTask();
     }
-    protected override void OnExecute()
+    protected override void Execute()
     {
-        m_RealRoot.Execute();
+        m_RealRoot.TryExecute();
     }
     public override void DeleteChild(BNode node)
     {

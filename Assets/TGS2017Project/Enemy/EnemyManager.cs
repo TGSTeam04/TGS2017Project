@@ -37,7 +37,6 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         StageManager stageManager = GameManager.Instance.m_StageManger;
         //int stageLevel = stageManager.StageLevel;
         //float scale = m_ScaleByStageLeve[stageLevel];
-
         
         //アクティブなパネルのうちランダムなものを取得
         List<StagePanel> panels = stageManager.m_ActivePanels;

@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BSequence :BComposite
+public class BSequence : BComposite
 {
     public BSequence()
     {
+        NodeName = "sequence";
     }
     public override void ChildSuccess()
     {
-        if (m_NowIndex >= m_Child.Count - 1)
+        m_NowIndex++;
+        if (m_NowIndex >= m_Child.Count)
         {
             Succes();
         }
-        else
-            m_NowIndex++;
     }
     public override void ChildFailure()
     {

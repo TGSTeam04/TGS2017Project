@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BDecorator : BNode
+public class BDecorator// : BNode
 {
-    public BAction m_Check_Del;
+    public BBoard m_BB;
+    public BehaviorTree m_BT;
+    public BAction m_Del_Check;
+    public BDecorator()
+    {
+        m_Del_Check = new BAction(() => { return true; });
+    }
+    public BDecorator(BAction check)
+    {
+        m_Del_Check = check;
+    }
     public virtual bool Check()
     {
-        foreach (var dec in m_Decorators)
-        {
-            if (!dec.Check())
-            {
-                m_Parent.ChildFailure();
-                return false;
-            }
-        }
-        return m_Check_Del();
+        return m_Del_Check();
     }
+
+    public virtual void Initialize() { }
+
+    public virtual void NodeSuccess() { }
+    public virtual void NodeFailure() { }
 }

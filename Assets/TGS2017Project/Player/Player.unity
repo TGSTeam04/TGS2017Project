@@ -883,11 +883,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21fad918a06088438f6b581a52c35fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ArmState: 0
-  m_FirePosition: {fileID: 1363677506}
+  m_State: 0
+  m_StandTrans: {fileID: 0}
   m_Speed: 20
   m_BackSpeed: 40
-  m_Time: 3
+  m_AdvanceTime: 0
+  m_Del_Returned:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!54 &663187565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2125,7 +2130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363677506}
   m_Layer: 9
-  m_Name: ArmFirePosition
+  m_Name: RocketStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2853,11 +2858,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21fad918a06088438f6b581a52c35fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ArmState: 0
-  m_FirePosition: {fileID: 1363677506}
+  m_State: 0
+  m_StandTrans: {fileID: 0}
   m_Speed: 20
   m_BackSpeed: 40
-  m_Time: 3
+  m_AdvanceTime: 0
+  m_Del_Returned:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!4 &1974843969
 Transform:
   m_ObjectHideFlags: 0
