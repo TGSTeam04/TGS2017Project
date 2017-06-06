@@ -13,6 +13,9 @@ public class TitleCursor : MonoBehaviour
     [SerializeField]
     private RectTransform m_Cursor;    // カーソル
 
+	[SerializeField]
+	private Vector2 m_Offset = new Vector2(-240, 0);
+
     void Awake()
     {
         m_Cursor = GetComponent<RectTransform>();
@@ -26,6 +29,6 @@ public class TitleCursor : MonoBehaviour
             return;
         }
         m_Cursor.anchoredPosition = selectedObject.GetComponent<RectTransform>().anchoredPosition
-            + new Vector2(-240.0f, 0.0f);
+            + m_Offset;
     }
 }

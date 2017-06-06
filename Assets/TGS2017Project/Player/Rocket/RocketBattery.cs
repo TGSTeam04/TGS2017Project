@@ -24,9 +24,9 @@ public class RocketBattery : MonoBehaviour
             if (m_RStandTrans == null) //RocketStandの存在チェック
                 m_LStandTnras = transform.FindChild("RocketStand").transform;
 
-            GameObject lArmObj = GameObject.Instantiate
+            GameObject lRocketObj = GameObject.Instantiate
                 ((GameObject)Resources.Load("Prefub/Prefub_Rocket"));
-            m_LRocket = lArmObj.GetComponent<Rocket>();
+            m_LRocket = lRocketObj.GetComponent<Rocket>();
             m_LRocket.m_StandTrans = m_LStandTnras;
         }
         //Rocketが指定されていなければ生成
@@ -35,9 +35,9 @@ public class RocketBattery : MonoBehaviour
             if (m_RStandTrans == null) //RocketStandの存在チェック
                 m_RStandTrans = transform.FindChild("RocketStand").transform;
 
-            GameObject rArmObj = GameObject.Instantiate
+            GameObject rRocketObj = GameObject.Instantiate
                 ((GameObject)Resources.Load("Prefub/Prefub_Rocket"));
-            m_RRocket = rArmObj.GetComponent<Rocket>();
+            m_RRocket = rRocketObj.GetComponent<Rocket>();
             m_RRocket.m_StandTrans = m_RStandTrans;        
         }
         Del_Collide = m_Del_Collide;
@@ -108,10 +108,6 @@ public class RocketBattery : MonoBehaviour
     {
         m_LRocket.m_AdvanceTime = time;
         m_RRocket.m_AdvanceTime = time;
-    }
-    public void SetDel_Returned()
-    {
-
     }
 }
 

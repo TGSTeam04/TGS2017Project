@@ -34,6 +34,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 
 	bool m_IsRun;
 
+	[SerializeField]
+	public BreakEnemyTable m_BreakEnemyTable;
+
 	//	public LevelParameter LevelParameter { get { return m_LevelParameterTable.LPTable[m_Level]; } }
 	public LevelParameter LevelParameter { get { return m_LevelParameter; } }
 

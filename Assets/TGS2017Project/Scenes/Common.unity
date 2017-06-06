@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-<<<<<<< HEAD
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
-=======
   m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
->>>>>>> 35b66c2a4a0077785923e69577ebf47688dadf0c
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -422,6 +418,7 @@ MonoBehaviour:
   m_IsGameOver: 0
   m_IsGameClear: 0
   m_GameStarter: {fileID: 1022911404}
+  m_BreakEnemyTable: {fileID: 11400000, guid: 3b3856ea162c1df4c80dccf990a36a09, type: 2}
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0
