@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			case PlayMode.HumanoidRobot:
-				m_Energy -= Time.deltaTime * (m_IsBeamShooting ? 1 : 1);
+				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
 				if (Input.GetButtonDown("Jump") && m_CharacterController.isGrounded)
 				{
 					m_MoveY = 1.5f;
@@ -169,6 +169,20 @@ public class PlayerController : MonoBehaviour
 				//m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
+				Vector3 move_ =
+					m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
+					m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL") +
+					m_HumanoidRobot.transform.up * m_MoveY;
+
+				float rotateSpeed = 1;
+				if (!m_IsBeamShooting)
+				{
+					m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+				}
+				else
+				{
+					rotateSpeed = 0.2f;
+				}
 				if (m_MoveY < 0 && m_CharacterController.isGrounded)
 				{
 					m_MoveY = 0;
@@ -178,20 +192,7 @@ public class PlayerController : MonoBehaviour
 					m_MoveY -= 3 * Time.fixedDeltaTime;
 
 				}
-				Vector3 move_ =
-					m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
-					m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL") +
-					m_HumanoidRobot.transform.up * m_MoveY;
-
-				float rotateSpeed = 1;
-				if (!m_IsBeamShooting)
-				{
-					m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * GameManager.Instance.LevelParameter.m_Speed * Time.fixedDeltaTime);
-				}
-				else
-				{
-					rotateSpeed = 0.2f;
-				}
+				m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
@@ -281,7 +282,7 @@ public class PlayerController : MonoBehaviour
 		m_TwinRobotL.Damage(-0.2f * count);
 		m_TwinRobotR.Damage(-0.2f * count);
 
-		m_Energy += count * 5 + 10;
+		m_Energy = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[count-1];
 		int nextexp = GameManager.Instance.LevelParameter.m_NextExp;
 		m_Exp += count;
 		GameManager.Instance.m_Level += m_Exp / nextexp;

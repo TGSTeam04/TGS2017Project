@@ -418,6 +418,7 @@ MonoBehaviour:
   m_IsGameOver: 0
   m_IsGameClear: 0
   m_GameStarter: {fileID: 1022911404}
+  m_BreakEnemyTable: {fileID: 11400000, guid: 3b3856ea162c1df4c80dccf990a36a09, type: 2}
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0
