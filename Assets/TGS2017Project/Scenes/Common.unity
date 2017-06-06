@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658017, g: 0.4964159, b: 0.5748179, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: 18d98293b2dc91d469001a93e871301b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: badef495bd315614eaf4ba7a82c8de28, type: 2}
 --- !u!1 &836631506
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa57f932836049408a7381a1791f4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadScene: 1
+  loadScene: 0
 --- !u!4 &1022911403
 Transform:
   m_ObjectHideFlags: 0
@@ -358,6 +358,20 @@ MonoBehaviour:
     - Credit
   - Scene:
     - Option
+  - Scene:
+    - TestStage
+    - Player
+    - GameUI
+  - Scene:
+    - TestStage
+    - Player
+    - GameUI
+  - Scene:
+    - TestStage
+    - Player
+    - GameUI
+  - Scene:
+    - Select
 --- !u!1 &1849378520
 GameObject:
   m_ObjectHideFlags: 0
