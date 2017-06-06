@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class BNode<T> where T : BBoard
+public class BNode
 {
     public enum BState
     {
@@ -12,26 +12,33 @@ public class BNode<T> where T : BBoard
         Success,    //実行成功
         Failure,    //実行失敗            
     }
-
     public BState m_State;
-    public T m_BB;
-    private List<BDecorator<T>> m_Decorators;
-    private BComposite<T> m_Parent;
+    public BBoard m_BB;
+    public BehaviorTree m_BT;
+    private List<BDecorator> m_Decorators;
+    protected BComposite m_Parent;
+    public string NodeName { get; set; }
 
-    public BNode()
+    public BNode(string name = "default")
     {
-        m_Decorators = new List<BDecorator<T>>();
+        NodeName = name;
+        m_State = BState.Ready;
+        m_Decorators = new List<BDecorator>();
     }
-    public BNode(BComposite<T> parent)
-    {
-        SetParent(parent);
-        m_Decorators = new List<BDecorator<T>>();
-    }
-    public void SetParent(BComposite<T> parent)
+    //public BNode(BComposite parent, string name = "default")
+    //{
+    //    NodeName = name;
+    //    SetParent(parent);
+    //    m_Decorators = new List<BDecorator>();
+    //}
+
+    public virtual void SetParent(BComposite parent)
     {
         m_BB = parent.m_BB;
+        m_BT = parent.m_BT;
         foreach (var dec in m_Decorators)
         {
+            dec.m_BT = parent.m_BT;
             dec.m_BB = m_BB;
         }
         m_Parent = parent;
@@ -43,44 +50,50 @@ public class BNode<T> where T : BBoard
     }
     protected virtual void Succes()
     {
-        m_Parent.ChildSuccess();
         Initialize();
+        m_Parent.ChildSuccess();
         m_State = BState.Success;
+        foreach (var dec in m_Decorators)
+            dec.NodeSuccess();
+
     }
     protected virtual void Failure()
     {
-        m_Parent.ChildFailure();
         Initialize();
+        m_Parent.ChildFailure();
         m_State = BState.Failure;
+        foreach (var dec in m_Decorators)
+            dec.NodeFailure();
     }
-    public virtual void Initialize() { }
+    public virtual void Initialize()
+    {
+        foreach (var dec in m_Decorators)
+            dec.Initialize();
+
+    }
     //public virtual void Enter() { }
 
-    public void AddDecorator(BDecorator<T> dec)
+    public void AddDecorator(BDecorator dec)
     {
         m_Decorators.Add(dec);
+        dec.m_BT = m_BT;
         dec.m_BB = m_BB;
     }
 
-    public void Update()
+    public void TryExecute()
     {
-        bool isCanUpdate = true;
         foreach (var dec in m_Decorators)
         {
             if (!dec.Check())
             {
-                isCanUpdate = false;
-                m_Parent.ChildFailure();
-                break;
+                //Debug.Log("フェイラー");
+                Failure();
+                return;
             }
         }
-        if (isCanUpdate)
-        {            
-            OnUpdate();
-            m_State = BState.Updating;
-        }
+        Execute();
     }
-    protected virtual void OnUpdate() { }
+    protected virtual void Execute() { }
     //public virtual void Exit() { }
 
     public virtual void DeleteNode()

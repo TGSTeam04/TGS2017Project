@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BComposite<T> : BNode<T> where T : BBoard
+public class BComposite : BNode
 {
-    protected List<BNode<T>> m_Child;
+    protected List<BNode> m_Child;
     protected int m_NowIndex;
     public BComposite() : base()
     {
-        m_Child = new List<BNode<T>>();
-        m_NowIndex = 0;
-    }
-    public BComposite(BComposite<T> pearent) : base(pearent)
-    {
-        m_Child = new List<BNode<T>>();
+        m_Child = new List<BNode>();
         m_NowIndex = 0;
     }
 
-    public virtual void AddNode(BNode<T> node)
+    public override void SetParent(BComposite parent)
+    {
+        base.SetParent(parent);
+        foreach (var child in m_Child)
+        {
+            child.SetParent(parent);
+        }
+    }
+
+    public virtual void AddNode(BNode node)
     {
         m_Child.Add(node);
         node.SetParent(this);
     }
-    public void RemoveNode(BNode<T> node)
+    public void RemoveNode(BNode node)
     {
         m_Child.Remove(node);
         node.SetParent(null);
@@ -35,12 +39,11 @@ public class BComposite<T> : BNode<T> where T : BBoard
         {
             c.Reset();
         }
-        Initialize();
     }
 
-    protected override void OnUpdate()
+    protected override void Execute()
     {
-        m_Child[m_NowIndex].Update();
+        m_Child[m_NowIndex].TryExecute();
     }
 
     public override void Initialize()
@@ -55,7 +58,7 @@ public class BComposite<T> : BNode<T> where T : BBoard
 
     public virtual void ChildSuccess() { }
     public virtual void ChildFailure() { }
-    public virtual void DeleteChild(BNode<T> node)
+    public virtual void DeleteChild(BNode node)
     {
         m_Child.Remove(node);
     }

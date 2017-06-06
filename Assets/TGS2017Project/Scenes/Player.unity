@@ -1504,11 +1504,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21fad918a06088438f6b581a52c35fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ArmState: 0
-  m_FirePosition: {fileID: 1363677506}
+  m_State: 0
+  m_StandTrans: {fileID: 0}
   m_Speed: 20
   m_BackSpeed: 40
-  m_Time: 3
+  m_AdvanceTime: 0
+  m_Del_Returned:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!54 &663187565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2117,6 +2122,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 877344269}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &882571784
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1389940281}
+    m_Modifications:
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &960187896
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2801,10 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1311958111 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400082, guid: 2c04ee7ccdcd8244ea3ab76591d6784e, type: 3}
+  m_PrefabInternal: {fileID: 882571784}
 --- !u!1001 &1356514139
 Prefab:
   m_ObjectHideFlags: 0
@@ -2809,7 +2860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363677506}
   m_Layer: 9
-  m_Name: ArmFirePosition
+  m_Name: RocketStand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2861,8 +2912,12 @@ Transform:
   - {fileID: 1180916882}
   - {fileID: 1422175878}
   - {fileID: 1363677506}
+<<<<<<< HEAD:Assets/TGS2017Project/Player/Player.unity
+  - {fileID: 1311958111}
+=======
   - {fileID: 158433145}
   - {fileID: 515139550}
+>>>>>>> 35b66c2a4a0077785923e69577ebf47688dadf0c:Assets/TGS2017Project/Scenes/Player.unity
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3694,11 +3749,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21fad918a06088438f6b581a52c35fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ArmState: 0
-  m_FirePosition: {fileID: 1363677506}
+  m_State: 0
+  m_StandTrans: {fileID: 0}
   m_Speed: 20
   m_BackSpeed: 40
-  m_Time: 3
+  m_AdvanceTime: 0
+  m_Del_Returned:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!4 &1974843969
 Transform:
   m_ObjectHideFlags: 0

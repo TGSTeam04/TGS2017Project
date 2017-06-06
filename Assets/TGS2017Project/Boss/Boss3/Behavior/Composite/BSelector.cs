@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BSelector<T> : BComposite<T> where T : BBoard
+public class BSelector : BComposite
 {
     public override void ChildSuccess()
     {
@@ -10,12 +10,14 @@ public class BSelector<T> : BComposite<T> where T : BBoard
     }
     public override void ChildFailure()
     {
-        if (m_NowIndex < m_Child.Count - 1)
+        m_NowIndex++;
+        if (m_NowIndex >= m_Child.Count)
         {
-            m_NowIndex++;
-            m_Child[m_NowIndex].Update();
+            Failure();
         }
         else
-            Failure();
+        {
+            m_Child[m_NowIndex].TryExecute();
+        }
     }
 }
