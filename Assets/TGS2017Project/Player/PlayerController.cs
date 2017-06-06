@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour
 
 		m_LRobotRigidbody.MovePosition(LSecondTarget);
 		m_RRobotRigidbody.MovePosition(RSecondTarget);
-		yield return null;
+		//yield return null;
 		m_ElectricGuid.SetActive(false);
 		m_HumanoidRobot.SetActive(true);
 		m_LRobot.SetActive(false);
