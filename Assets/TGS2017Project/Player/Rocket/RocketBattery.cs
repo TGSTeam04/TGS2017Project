@@ -109,9 +109,5 @@ public class RocketBattery : MonoBehaviour
         m_LRocket.m_AdvanceTime = time;
         m_RRocket.m_AdvanceTime = time;
     }
-    public void SetDel_Returned()
-    {
-
-    }
 }
 

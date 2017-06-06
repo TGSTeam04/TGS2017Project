@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44838375, g: 0.49841607, b: 0.5756182, a: 1}
+  m_IndirectSpecularColor: {r: 0.4483832, g: 0.49841547, b: 0.57561684, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -188,53 +188,8 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD:Assets/TGS2017Project/Player/PlayerTest.unity
---- !u!1001 &608782922
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114455311632460, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 29f987ce1b8943a4285b25be2d1e86bd, type: 2}
-  m_IsPrefabParent: 0
-=======
->>>>>>> 35b66c2a4a0077785923e69577ebf47688dadf0c:Assets/TGS2017Project/Scenes/PlayerTest.unity
 --- !u!1 &1104346634
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 44.567, y: -177.024, z: -339.265}
 --- !u!1 &1332295779
 GameObject:
@@ -382,8 +337,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1332295779}
-  m_LocalRotation: {x: -0.33254412, y: -0.0028292388, z: 0.0009976998, w: -0.9430829}
-  m_LocalPosition: {x: 0.36486995, y: 31.007818, z: -36.12795}
+  m_LocalRotation: {x: 0.12598684, y: 0.9313591, z: -0.31849346, w: 0.12352909}
+  m_LocalPosition: {x: -0.297, y: 3.254, z: 1.619}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
