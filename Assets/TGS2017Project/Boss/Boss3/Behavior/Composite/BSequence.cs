@@ -12,7 +12,7 @@ public class BSequence : BComposite
     {
         m_NowIndex++;
         if (m_NowIndex >= m_Child.Count)
-        {
+        {            
             Succes();
         }
     }

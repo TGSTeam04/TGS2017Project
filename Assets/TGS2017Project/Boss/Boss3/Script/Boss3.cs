@@ -34,23 +34,22 @@ public class Boss3 : MonoBehaviour
             float distance = Vector3.Distance(transform.position, m_BB.GObjValues["target"].transform.position);
             return distance > m_RPunchRange;
         };
-        //BSelector sel_null_other = new BSelector();
-        //BTask BTNull = new BTask();
-        //sel_null_other.AddNode(BTNull);
 
         BSelector sel_punch_move = new BSelector();
         m_BT.SetRootNode(sel_punch_move);
 
-        BT_RocketPunch RP = new BT_RocketPunch();
-        sel_punch_move.AddNode(RP);
+        /*ロケットパンチ*/
+        BT_Rocket BTT_Rocket = new BT_Rocket();
         BDecorator dec_RPRange = new BDecorator(() =>
         {
             float distance =
                 Vector3.Distance(transform.position, m_BB.GObjValues["target"].transform.position);
             return distance < m_RPunchRange;
         });
-        RP.AddDecorator(dec_RPRange);
-        RP.AddDecorator(new BD_CoolTime(1.0f));
+        BTT_Rocket.AddDecorator(dec_RPRange);
+        BTT_Rocket.AddDecorator(new BD_CoolTime(1.0f));
+
+        BT_LookTarget lookTarget = new BT_LookTarget("target", 5.0f);
 
         BSequence seq = new BSequence();        
         BT_MoveTo moveToRange = new BT_MoveTo("target", m_Speed);
@@ -58,9 +57,12 @@ public class Boss3 : MonoBehaviour
         moveToRange.m_StopDistance = m_RPunchRange;        
         m_BB.GObjValues["temp"] = m_Temp;
         BT_MoveTo testMoveto = new BT_MoveTo("temp", m_Speed);
+        seq.AddNode(lookTarget);
         seq.AddNode(moveToRange);
         seq.AddNode(testMoveto);
-        sel_punch_move.AddNode(seq);
+
+        sel_punch_move.AddNode(BTT_Rocket);
+        sel_punch_move.AddNode(seq);        
     }
 
     // Update is called once per frame

@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
 	public int m_Level;
 	public int m_Exp;
 
-	public GameObject m_RocketL;
-	public GameObject m_RocketR;
+    //ロケット砲台コンポーネント
+    public RocketBattery m_Battery;
 
 	public Transform m_TPSPosition;
 	public Transform m_ChargePosition;
@@ -79,7 +79,9 @@ public class PlayerController : MonoBehaviour
 		m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();
 		m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
 		m_HumanoidRobot.SetActive(false);
+        m_Battery = m_HumanoidRobot.GetComponent<RocketBattery>();
 		m_ElectricGuid.SetActive(false);
+
 		m_Level = 1;
 		m_Exp = 0;
 		m_Energy = 0;
@@ -117,15 +119,15 @@ public class PlayerController : MonoBehaviour
 				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
 				Jump(Input.GetButtonDown("Jump"));
 				Boost(Input.GetButton("Boost"));
-				if (m_RocketL.GetComponent<Rocket>().m_State == RocketState.Idle && m_RocketR.GetComponent<Rocket>().m_State == RocketState.Idle && (Input.GetButtonDown("Combine") || m_Energy <= 0))
+				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Combine") || m_Energy <= 0))
 				{
 					m_Energy = 0;
-					StartCoroutine(Release());
+					StartCoroutine(Release());                    
 				}
-				if (Input.GetButtonDown("Charge"))
-				{
-					StartCoroutine(Charge());
-				}
+				if (Input.GetButtonDown("Charge"))				
+					StartCoroutine(Charge(true));
+                //if (Input.GetButtonDown("Charge"))
+                //    StartCoroutine(Charge(false));
 				break;
 			case PlayMode.Combine:
 			case PlayMode.Release:
@@ -346,24 +348,14 @@ public class PlayerController : MonoBehaviour
 
 	}
 
-	public IEnumerator Charge()
-	{
-		if (m_IsBeamShooting || m_Energy < (6.25f + 0.5f) || (m_RocketL.GetComponent<Rocket>().m_State != RocketState.Idle && m_RocketR.GetComponent<Rocket>().m_State != RocketState.Idle)) { yield break; }
+	public IEnumerator Charge(bool isLeft)
+	{	
 		m_IsBeamShooting = true;
 		m_Energy -= 6.25f;
 		m_ChargeEffect.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
 		m_ChargeEffect.SetActive(false);
-		if (m_RocketL.GetComponent<Rocket>().m_State == RocketState.Idle)
-		{
-			m_RocketL.SetActive(true);
-			//m_RocketL.GetComponent<Rocket>().Fire();
-		}
-		else
-		{
-			m_RocketR.SetActive(true);
-			//m_RocketR.GetComponent<Rocket>().Fire();
-		}
+        m_Battery.Fire();
 		m_IsBeamShooting = false;
 	}
 
