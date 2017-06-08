@@ -2337,9 +2337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
-  m_LEffect: {fileID: 0}
-  m_REffect: {fileID: 0}
-  m_LStandTnras: {fileID: 0}
+  m_LStandTrans: {fileID: 0}
   m_RStandTrans: {fileID: 0}
 --- !u!114 &1389940283
 MonoBehaviour:
@@ -2382,7 +2380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1422175878
 Transform:
   m_ObjectHideFlags: 0
@@ -2807,7 +2805,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1641176574}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50091075b6bce714bbcd73abc4eee722, type: 3}
   m_Name: 

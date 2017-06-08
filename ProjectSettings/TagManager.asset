@@ -10,6 +10,7 @@ TagManager:
   - Panel
   - Beam
   - Boss
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Floor
   - EnemyBullet
   - Arm
-  - 
+  - PlayerBullet
   - 
   - 
   - 

@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class BSelector : BComposite
 {
-    protected override void Execute()
+    protected override void OnExecute()
     {
         //毎回0番目からトライする
         m_NowIndex = 0;
-        base.Execute();
+        base.OnExecute();
     }
     public override void ChildSuccess()
     {
         for (int i = m_NowIndex; i < m_Child.Count; i++)
         {
-            m_Child[i].Reset();
+            if (m_Child[i].m_State != BState.Ready)
+                m_Child[i].Reset();
         }
         Succes();
     }

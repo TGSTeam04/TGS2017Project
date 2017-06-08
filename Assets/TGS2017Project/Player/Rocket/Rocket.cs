@@ -9,7 +9,9 @@ public enum RocketState
 {
     Idle,
     Fire,
-    Back
+    Back,
+    Reflected,
+    Buried,
 }
 
 public class Rocket : MonoBehaviour
@@ -24,8 +26,15 @@ public class Rocket : MonoBehaviour
     public float m_AdvanceTime;
     public float m_Timer;
 
-    public UnityEvent<Collision> m_Del_Collide;
+    //衝突時イベントコールバック
+    public UnityEvent<Rocket, Collision> m_Del_Collide;
+    //衝突した雑魚リスト
+    public List<EnemyBase> m_ChildEnemys;
 
+    private void Awake()
+    {
+        m_ChildEnemys = new List<EnemyBase>();
+    }
     // Use this for initialization
     void Start()
     {
@@ -65,7 +74,7 @@ public class Rocket : MonoBehaviour
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
                     m_State = RocketState.Idle;
-                    gameObject.SetActive(false);                    
+                    gameObject.SetActive(false);
                 }
                 break;
             default:
@@ -87,10 +96,32 @@ public class Rocket : MonoBehaviour
         get { return m_State == RocketState.Idle; }
     }
 
+    //ChildEnemyを追加するとき（衝突時等）
+    public void AddChildEnemy(EnemyBase enemy)
+    {
+        enemy.transform.parent = transform;
+        m_ChildEnemys.Add(enemy);
+    }
+
+    //ChildEnemyを全て破壊
+    public void BreakChildEnemy()
+    {
+        foreach (var enemy in m_ChildEnemys)
+        {
+            enemy.transform.parent = null;
+            enemy.SetBreak();
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         m_State = RocketState.Back;
         if (m_Del_Collide != null)
-            m_Del_Collide.Invoke(collision);
+            m_Del_Collide.Invoke(this, collision);
+    }
+    public void SetLayer(string layerName)
+    {
+        int layer = LayerMask.NameToLayer(layerName);
+        gameObject.layer = layer;        
     }
 }

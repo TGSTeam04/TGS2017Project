@@ -12,6 +12,7 @@ public class BT_MoveTo : BTask
     public float m_StopDistance;
     public float m_Interval;
     public string m_BBVTarget;
+    public bool m_IsCanCancelMove;
 
     private GameObject m_TargetObj;
     float m_Timer;
@@ -24,37 +25,48 @@ public class BT_MoveTo : BTask
         m_StopDistance = targetDistance;
         m_Interval = updateInterval;
         m_Timer = updateInterval;
+        m_IsCanCancelMove = true;
 
         //RealUpdate = MoveToObject;
     }
 
     protected override void FirstExecute()
-    {
-        Debug.Log("MoveTo タスク");
+    {        
         m_nAgent = m_BB.GetComponent<NavMeshAgent>();
         m_TargetObj = m_BB.GObjValues[m_TargetKey];
         m_nAgent.destination = m_TargetObj.transform.position;
         m_nAgent.speed = m_Speed;
         m_nAgent.stoppingDistance = m_StopDistance;
     }
-    protected override void OnExcete()
+    protected override void OnExecute()
     {
+        //ナビメッシュの更新
         m_Timer -= Time.deltaTime;
-        float remainingDistance = m_nAgent.remainingDistance;
-        float distance = Vector2.Distance(m_BB.transform.position, m_TargetObj.transform.position);
         if (m_Timer <= 0.0f)
         {
             m_Timer = m_Interval;
             m_TargetObj = m_BB.GObjValues[m_TargetKey];
             m_nAgent.destination = m_TargetObj.transform.position;
         }
+
+        //到達したかの確認
+        float remainingDistance = m_nAgent.remainingDistance;
+        float distance = Vector2.Distance(m_BB.transform.position, m_TargetObj.transform.position);
         if (remainingDistance < m_StopDistance && distance < m_StopDistance)
-        {            
+        {
             if (StopEase())
             {
                 Succes();
             }
         }
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        if (m_IsCanCancelMove)//移動中止            
+            m_BB.StartCoroutine(m_BB.UpdateWhileMethodBool(StopEase));
     }
 
     private bool StopEase()
