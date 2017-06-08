@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody m_LRobotRigidbody;
 	private Rigidbody m_RRobotRigidbody;
+	private Rigidbody m_HumanoidRobotRigidbody;
 
 	public float m_CombineTime;
 	public AnimationCurve m_CombineCurve;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool m_IsBeamShooting;
 
-	public float m_MoveY;
+	public float m_JumpMove;
 
 	public TwinRobot m_TwinRobotL;
 	public TwinRobot m_TwinRobotR;
@@ -68,9 +69,17 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
-		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 		GameManager.Instance.m_IsGameClear = false;
 		GameManager.Instance.m_IsGameOver = false;
+
+		//GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
+		StartCoroutine(countdown());
+	}
+
+	IEnumerator countdown()
+	{
+		yield return new WaitForSeconds(3);
+		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
 
 	// Use this for initialization
@@ -78,6 +87,7 @@ public class PlayerController : MonoBehaviour
 	{
 		m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();
 		m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
+		m_HumanoidRobotRigidbody = m_HumanoidRobot.GetComponent<Rigidbody>();
 		m_HumanoidRobot.SetActive(false);
 		m_ElectricGuid.SetActive(false);
 		m_Level = 1;
@@ -85,7 +95,7 @@ public class PlayerController : MonoBehaviour
 		m_Energy = 0;
 		GameManager.Instance.m_CombineTime = m_CombineTime;
 		GameManager.Instance.m_PlayerController = this;
-		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
+//		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
 		m_RotateTwinRoboMode.Add(TwinRoboMode.A, Quaternion.Euler(0, 0, 0));
 		m_RotateTwinRoboMode.Add(TwinRoboMode.B, Quaternion.Euler(0, 90, 0));
 		m_RMode = TwinRoboMode.A;
@@ -117,7 +127,7 @@ public class PlayerController : MonoBehaviour
 				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
 				Jump(Input.GetButtonDown("Jump"));
 				Boost(Input.GetButton("Boost"));
-				if (m_RocketL.GetComponent<Rocket>().m_State == RocketState.Idle && m_RocketR.GetComponent<Rocket>().m_State == RocketState.Idle && (Input.GetButtonDown("Combine") || m_Energy <= 0))
+				if (m_RocketL.GetComponent<Rocket>().m_State == RocketState.Idle && m_RocketR.GetComponent<Rocket>().m_State == RocketState.Idle && (Input.GetButtonDown("Release") || m_Energy <= 0))
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());
@@ -164,30 +174,20 @@ public class PlayerController : MonoBehaviour
 				//m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
-				Vector3 move_ =
-					m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
-					m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL") +
-					m_HumanoidRobot.transform.up * m_MoveY;
+				Vector3 move_ = new Vector3(Input.GetAxis("HorizontalL"), 0, Input.GetAxis("VerticalL"));
+				move_ = m_HumanoidRobotRigidbody.rotation * move_;
 
-				float rotateSpeed = 1;
+				float rotateSpeed = m_IsBeamShooting ? 0.2f : 1;
 				if (!m_IsBeamShooting)
 				{
-					//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+					m_HumanoidRobotRigidbody.MovePosition(m_HumanoidRobotRigidbody.position + move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				}
-				else
-				{
-					rotateSpeed = 0.2f;
-				}
-				if (m_MoveY < 0)
-				{
-					m_MoveY = 0;
-				}
-				else
-				{
-					m_MoveY -= 3 * Time.fixedDeltaTime;
 
-				}
-				//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+				//if (m_JumpMove > 0)
+				//{
+				//	m_HumanoidRobotRigidbody.MovePosition(m_HumanoidRobotRigidbody.position + Vector3.up * m_JumpMove * Time.fixedDeltaTime);
+				//	m_JumpMove -= 3 * Time.fixedDeltaTime;
+				//}
 				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
@@ -204,7 +204,6 @@ public class PlayerController : MonoBehaviour
 		m_Electric.transform.position = Vector3.Lerp(m_LRobotRigidbody.position, m_RRobotRigidbody.position, 0.5f);
 		m_Electric.transform.localScale = new Vector3(1f, 1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
 		m_Electric.transform.LookAt(m_LRobot.transform);
-		//		m_Electric.transform.position += new Vector3(0f, 5f, 0f);
 	}
 
 	public IEnumerator Combine()
@@ -343,7 +342,16 @@ public class PlayerController : MonoBehaviour
 
 	private void Jump(bool jump)
 	{
+		if (jump && IsGround())
+		{
+			m_HumanoidRobotRigidbody.AddForce(Vector3.up * 70, ForceMode.Impulse);
+			//m_JumpMove = 13;
+		}
+	}
 
+	private bool IsGround()
+	{
+		return Physics.CheckSphere(m_HumanoidRobotRigidbody.position + Vector3.up * 0.7f, 0.72f, ~LayerMask.GetMask(new string[] { "Player" }));
 	}
 
 	public IEnumerator Charge()

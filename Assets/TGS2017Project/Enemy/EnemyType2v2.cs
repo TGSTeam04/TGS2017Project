@@ -67,7 +67,7 @@ public class EnemyType2v2 : MonoBehaviour
     void Update()
     {
         // プレイヤーが合体中・分離中でなければ
-        if (GameManager.Instance.m_PlayMode != PlayMode.Combine && GameManager.Instance.m_PlayMode != PlayMode.Release)
+        if (GameManager.Instance.m_PlayMode != PlayMode.Combine && GameManager.Instance.m_PlayMode != PlayMode.Release && GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
         {
             // 麻痺していなければ
             if (!m_IsParalysis)
@@ -122,7 +122,7 @@ public class EnemyType2v2 : MonoBehaviour
     void FixedUpdate()
     {
         // プレイヤーが合体中・分離中でなければ
-        if (GameManager.Instance.m_PlayMode != PlayMode.Combine && GameManager.Instance.m_PlayMode != PlayMode.Release)
+        if (GameManager.Instance.m_PlayMode != PlayMode.Combine && GameManager.Instance.m_PlayMode != PlayMode.Release && GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
         {
             // 麻痺していなければ
             if (!m_IsParalysis)
@@ -131,6 +131,7 @@ public class EnemyType2v2 : MonoBehaviour
                 if (m_State == Enemy2State_New.FollowPlayer)
                     Move();     // 移動処理
 
+				if (m_Target == null) return;
                 // 追従目標に向ける
                 transform.LookAt(m_Target.transform);
             }
@@ -181,6 +182,7 @@ public class EnemyType2v2 : MonoBehaviour
     // プレイヤーが射程圏内にいるか
     bool IsPlayerInRange()
     {
+		if (m_Target == null) return false;
         // float distanceToPlayer = Vector3.Distance(m_EyePoint.position, m_Target.position);
         // return (distanceToPlayer < m_MaxRange && distanceToPlayer > m_MinRange);
         float distanceToPlayerX = m_EyePoint.position.x - m_Target.position.x;  // x軸距離
@@ -206,6 +208,7 @@ public class EnemyType2v2 : MonoBehaviour
     // 移動
     void Move()
     {
+		if (m_Target == null) return;
         float distanceToPlayer = Vector3.Distance(m_EyePoint.position, m_Target.position);
 
         // 目標が近すぎると後退

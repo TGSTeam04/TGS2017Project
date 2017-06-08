@@ -40,6 +40,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	//	public LevelParameter LevelParameter { get { return m_LevelParameterTable.LPTable[m_Level]; } }
 	public LevelParameter LevelParameter { get { return m_LevelParameter; } }
 
+	public float m_LoadingAnimationTime;
+	public float m_LoadingProgress;
+
+
 	// Use this for initialization
 	void Start () {
 		Update();

@@ -467,7 +467,7 @@ MonoBehaviour:
   m_RocketR: {fileID: 663187562}
   m_TPSPosition: {fileID: 697516218}
   m_ChargePosition: {fileID: 1075860010}
-  m_MoveY: 0
+  m_JumpMove: 0
   m_TwinRobotL: {fileID: 774350930}
   m_TwinRobotR: {fileID: 1890064367}
   m_Boost: {fileID: 1422175877}
@@ -2539,7 +2539,6 @@ GameObject:
   - component: {fileID: 1265072894}
   - component: {fileID: 1265072893}
   - component: {fileID: 1265072892}
-  - component: {fileID: 1265072895}
   m_Layer: 9
   m_Name: Capsule
   m_TagString: Player
@@ -2612,21 +2611,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1265072890}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1265072895
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1265072890}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 2
 --- !u!1 &1292169924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,6 +2826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389940281}
   - component: {fileID: 1389940283}
+  - component: {fileID: 1389940282}
   m_Layer: 9
   m_Name: HumanoidRobot
   m_TagString: Player
@@ -2871,6 +2856,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1389940282
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389940280}
+  serializedVersion: 2
+  m_Mass: 5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!114 &1389940283
 MonoBehaviour:
   m_ObjectHideFlags: 0

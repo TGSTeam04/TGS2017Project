@@ -20,6 +20,10 @@ public class GameStarter : MonoBehaviour {
 
 	private List<string> m_LoadedScenes = new List<string>();
 
+	private AsyncOperation m_Async;
+
+	[SerializeField]
+	private string m_LoadingSceneName = "Loading";
 	// Use this for initialization
 	void Start () {
 		ChangeScenes(0);
@@ -41,17 +45,63 @@ public class GameStarter : MonoBehaviour {
 
 	public void ChangeScenes(int i)
 	{
-//		SceneManager.LoadScene("Loading",LoadSceneMode.Additive);
+		//		SceneManager.LoadScene("Loading",LoadSceneMode.Additive);
+		//foreach (var item in m_LoadedScenes)
+		//{
+		//	SceneManager.UnloadSceneAsync(item);
+		//}
+		//m_LoadedScenes.Clear();
+		//foreach (var item in m_SceneListTable[i].Scene)
+		//{
+		//	SceneManager.LoadScene(item, LoadSceneMode.Additive);
+		//	m_LoadedScenes.Add(item);
+		//}
+		//		SceneManager.UnloadSceneAsync("Loading");
+
+		StartCoroutine(LoadScene(i));
+	}
+
+	IEnumerator LoadScene(int i)
+	{
+		GameManager.Instance.m_LoadingProgress = 0;
+		m_Async = SceneManager.LoadSceneAsync(m_LoadingSceneName, LoadSceneMode.Additive);
+		yield return new WaitUntil(() => m_Async.isDone);
+
+		float time = GameManager.Instance.m_LoadingAnimationTime;
+		yield return new WaitForSeconds(time);
+
+		int progresscount =m_LoadedScenes.Count + m_SceneListTable[i].Scene.Count;
+		int count = 0;
 		foreach (var item in m_LoadedScenes)
 		{
-			SceneManager.UnloadSceneAsync(item);
+			m_Async = SceneManager.UnloadSceneAsync(item);
+			while (!m_Async.isDone)
+			{
+				GameManager.Instance.m_LoadingProgress = (m_Async.progress + count) / progresscount;
+				yield return null;
+			}
+			count++;
 		}
 		m_LoadedScenes.Clear();
 		foreach (var item in m_SceneListTable[i].Scene)
 		{
-			SceneManager.LoadScene(item, LoadSceneMode.Additive);
+			m_Async = SceneManager.LoadSceneAsync(item, LoadSceneMode.Additive);
+			while (!m_Async.isDone)
+			{
+				GameManager.Instance.m_LoadingProgress = (m_Async.progress + count) / progresscount;
+				yield return null;
+			}
+			count++;
 			m_LoadedScenes.Add(item);
 		}
-//		SceneManager.UnloadSceneAsync("Loading");
+		GameManager.Instance.m_LoadingProgress = 1;
+
+		yield return new WaitForSeconds(time);
+		yield return null;
+
+		m_Async = SceneManager.UnloadSceneAsync(m_LoadingSceneName);
+		yield return new WaitUntil(() => m_Async.isDone);
+		GameManager.Instance.m_LoadingProgress = 0;
+
 	}
 }
