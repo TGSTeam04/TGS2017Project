@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 /// <summary>
 /// MonoBehaviorの拡張クラス
@@ -56,5 +57,18 @@ public static class MonoBehaviorExtentsion
         {
             yield return parYield;
         }
+    }
+
+    /*安全なUnityEventの呼び出し*/
+    public static void SafeEvent(this MonoBehaviour mono, UnityEvent e)
+    {
+        if (e != null)
+            e.Invoke();
+    }
+    /*安全なUnityEventの呼び出し*/
+    public static void SafeEvent<T>(this MonoBehaviour mono, UnityEvent<T> e, T t1)
+    {
+        if (e != null)
+            e.Invoke(t1);
     }
 }

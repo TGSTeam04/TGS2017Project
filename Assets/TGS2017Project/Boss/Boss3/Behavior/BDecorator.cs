@@ -6,18 +6,34 @@ public class BDecorator// : BNode
 {
     public BBoard m_BB;
     public BehaviorTree m_BT;
-    public BAction m_Del_Check;
+    public event BAction Del_Check;
+    public bool m_Invert;
     public BDecorator()
     {
-        m_Del_Check = new BAction(() => { return true; });
+        Del_Check = OnCheck;
     }
     public BDecorator(BAction check)
     {
-        m_Del_Check = check;
+        Del_Check = check;
     }
-    public virtual bool Check()
+    public BDecorator Invert()
     {
-        return m_Del_Check();
+        m_Invert = !m_Invert;
+        return this;
+    }
+    public bool Check()
+    {
+        return Del_Check() == !m_Invert;
+    }
+    public virtual bool OnCheck()
+    {
+        Debug.Log("デコレータがデフォルトのままです");
+        return false;
+    }
+
+    public virtual void Reset()
+    {
+        Initialize();
     }
 
     public virtual void Initialize() { }

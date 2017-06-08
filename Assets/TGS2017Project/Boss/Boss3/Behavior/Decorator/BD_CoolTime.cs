@@ -6,26 +6,26 @@ using UnityEngine;
 public class BD_CoolTime : BDecorator
 {
     float m_CoolTime;
-    float m_Timer;
+    float m_RemainingTime;
     public BD_CoolTime(float coolTime)
     {
         m_CoolTime = coolTime;
-        m_Timer = 0.0f;
+        m_RemainingTime = 0.0f;
     }
-    public override bool Check()
+    public override bool OnCheck()
     {
-        return m_Timer <= float.Epsilon;
+        return m_RemainingTime <= float.Epsilon;
     }
     public override void NodeSuccess()
     {
-        m_Timer = m_CoolTime;
+        m_RemainingTime = m_CoolTime;
         m_BB.StartCoroutine(TimerUpdate());
     }
     private IEnumerator TimerUpdate()
     {        
-        while (m_Timer >= float.Epsilon)
+        while (m_RemainingTime >= float.Epsilon)
         {
-            m_Timer -= Time.deltaTime;     
+            m_RemainingTime -= Time.deltaTime;     
             yield return null;
         }
     }

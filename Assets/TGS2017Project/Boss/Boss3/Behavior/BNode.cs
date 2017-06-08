@@ -23,7 +23,10 @@ public class BNode
 
     public BNode(string name = "default")
     {
-        NodeName = name;
+        if (name == "default")
+            NodeName = ToString();
+        else
+            NodeName = name;
         m_State = BState.Ready;
         m_Decorators = new List<BDecorator>();
     }
@@ -50,12 +53,15 @@ public class BNode
     {
         m_State = BState.Ready;
         Initialize();
+
+        foreach (var dec in m_Decorators)
+            dec.Reset();
     }
     protected virtual void Succes()
     {
         Initialize();
         m_ParentSuccess();
-        m_State = BState.Success;        
+        m_State = BState.Success;
         foreach (var dec in m_Decorators)
             dec.NodeSuccess();
 
@@ -96,10 +102,20 @@ public class BNode
         }
         Execute();
     }
-    protected virtual void Execute() { }
-    //public virtual void Exit() { }
+    protected void Execute()
+    {
+        if (m_State != BState.Updating)
+        {
+            FirstExecute();
+            m_State = BState.Updating;
+        }
+        else        
+            OnExecute();        
+    }
+    protected virtual void FirstExecute() { }
+    protected virtual void OnExecute() { }
 
     public virtual void OnDelete()
-    {     
+    {
     }
 }

@@ -6,7 +6,15 @@ public class BehaviorTree : MonoBehaviour
 {
     private BRoot m_VirtualRoot;
     public BBoard m_BB;
-    public bool IsStop { get; set; }
+    public bool m_IsStop;
+    public bool IsStop {
+        get { return m_IsStop; }
+        set
+        {
+            m_IsStop = value;
+            m_VirtualRoot.Reset();
+        }
+    }
     //public BehaviorTree()
     //{
     //    m_VirtualRoot = new BRoot();

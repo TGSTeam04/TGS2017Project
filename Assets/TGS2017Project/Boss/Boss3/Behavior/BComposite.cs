@@ -42,7 +42,7 @@ public class BComposite : BNode
         }
     }
 
-    protected override void Execute()
+    protected override void OnExecute()
     {
         m_Child[m_NowIndex].TryExecute();
     }

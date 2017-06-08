@@ -9,7 +9,7 @@ public class BRoot : BComposite
     {
         m_RealRoot = new BTask();
     }
-    protected override void Execute()
+    protected override void OnExecute()
     {
         m_RealRoot.TryExecute();
     }

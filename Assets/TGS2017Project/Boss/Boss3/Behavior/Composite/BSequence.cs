@@ -19,5 +19,9 @@ public class BSequence : BComposite
     public override void ChildFailure()
     {
         Failure();
+        for (int i = m_NowIndex; i < m_Child.Count; i++)
+        {
+            m_Child[i].Reset();
+        }
     }
 }
