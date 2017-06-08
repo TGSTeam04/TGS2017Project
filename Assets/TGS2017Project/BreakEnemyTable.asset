@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BreakEnemyTable
   m_EditorClassIdentifier: 
   m_AddEnergy:
-  - 0
+  - 5
   - 5
   - 10
   - 15

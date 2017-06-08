@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody m_LRobotRigidbody;
 	private Rigidbody m_RRobotRigidbody;
+	private Rigidbody m_HumanoidRobotRigidbody;
 
 	public float m_CombineTime;
 	public AnimationCurve m_CombineCurve;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool m_IsBeamShooting;
 
-	public float m_MoveY;
+	public float m_JumpMove;
 
 	public TwinRobot m_TwinRobotL;
 	public TwinRobot m_TwinRobotR;
@@ -68,16 +69,19 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
-		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 		GameManager.Instance.m_IsGameClear = false;
 		GameManager.Instance.m_IsGameOver = false;
+
+		//GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
+
 
 	// Use this for initialization
 	void Start()
 	{
 		m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();
 		m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
+		m_HumanoidRobotRigidbody = m_HumanoidRobot.GetComponent<Rigidbody>();
 		m_HumanoidRobot.SetActive(false);
         m_Battery = m_HumanoidRobot.GetComponent<RocketBattery>();
 		m_ElectricGuid.SetActive(false);
@@ -87,7 +91,7 @@ public class PlayerController : MonoBehaviour
 		m_Energy = 0;
 		GameManager.Instance.m_CombineTime = m_CombineTime;
 		GameManager.Instance.m_PlayerController = this;
-		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
+//		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
 		m_RotateTwinRoboMode.Add(TwinRoboMode.A, Quaternion.Euler(0, 0, 0));
 		m_RotateTwinRoboMode.Add(TwinRoboMode.B, Quaternion.Euler(0, 90, 0));
 		m_RMode = TwinRoboMode.A;
@@ -119,7 +123,7 @@ public class PlayerController : MonoBehaviour
 				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
 				Jump(Input.GetButtonDown("Jump"));
 				Boost(Input.GetButton("Boost"));
-				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Combine") || m_Energy <= 0))
+				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Release") || m_Energy <= 0))
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());                    
@@ -146,17 +150,6 @@ public class PlayerController : MonoBehaviour
 				m_TwinRobotL.Move();
 				m_TwinRobotR.Move();
 
-				//Vector3 move = new Vector3(
-				//	Input.GetAxis("HorizontalL"), 0,
-				//	Input.GetAxis("VerticalL"));
-				//move = Vector3.ClampMagnitude(move, 1.0f) * m_MoveSpeed * GameManager.Instance.LevelParameter.m_Speed * Time.fixedDeltaTime;
-				//m_LRobotRigidbody.position += move;
-				//move = new Vector3(
-				//	Input.GetAxis("HorizontalR"), 0,
-				//	Input.GetAxis("VerticalR"));
-				//move = Vector3.ClampMagnitude(move, 1.0f) * m_MoveSpeed * GameManager.Instance.LevelParameter.m_Speed * Time.fixedDeltaTime;
-				//m_RRobotRigidbody.position += move;
-
 				ElectricUpdate();
 
 				m_TwinRobotL.Look(m_RRobotRigidbody.position);
@@ -166,30 +159,14 @@ public class PlayerController : MonoBehaviour
 				//m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
-				Vector3 move_ =
-					m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
-					m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL") +
-					m_HumanoidRobot.transform.up * m_MoveY;
+				Vector3 move_ = new Vector3(Input.GetAxis("HorizontalL"), 0, Input.GetAxis("VerticalL"));
+				move_ = m_HumanoidRobotRigidbody.rotation * move_;
 
-				float rotateSpeed = 1;
+				float rotateSpeed = m_IsBeamShooting ? 0.2f : 1;
 				if (!m_IsBeamShooting)
 				{
-					//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
+					m_HumanoidRobotRigidbody.MovePosition(m_HumanoidRobotRigidbody.position + move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				}
-				else
-				{
-					rotateSpeed = 0.2f;
-				}
-				if (m_MoveY < 0)
-				{
-					m_MoveY = 0;
-				}
-				else
-				{
-					m_MoveY -= 3 * Time.fixedDeltaTime;
-
-				}
-				//m_CharacterController.Move(move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
@@ -206,7 +183,6 @@ public class PlayerController : MonoBehaviour
 		m_Electric.transform.position = Vector3.Lerp(m_LRobotRigidbody.position, m_RRobotRigidbody.position, 0.5f);
 		m_Electric.transform.localScale = new Vector3(1f, 1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
 		m_Electric.transform.LookAt(m_LRobot.transform);
-		//		m_Electric.transform.position += new Vector3(0f, 5f, 0f);
 	}
 
 	public IEnumerator Combine()
@@ -309,8 +285,8 @@ public class PlayerController : MonoBehaviour
 			m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
 			m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL");
 		Vector3 vector = move_.magnitude == 0 ? m_HumanoidRobot.transform.right : -move_.normalized;
-		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.5f);
-		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.5f);
+		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.1f);
+		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.1f);
 		Quaternion lRotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
 		Quaternion rRotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
 		float preMove = 0;
@@ -323,8 +299,8 @@ public class PlayerController : MonoBehaviour
 		{
 			t = m_ReleaseCurve.Evaluate(f / m_CombineTime);
 			move = Mathf.Lerp(0.5f, l, t);
-			m_LRobotRigidbody.position -= vector * (move - preMove);
-			m_RRobotRigidbody.position += vector * (move - preMove);
+			m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * (move - preMove));
+			m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * (move - preMove));
 			preMove = move;
 			m_LRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(lRotation, rRotation, t * 4));
 			m_RRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(rRotation, lRotation, t * 4));
@@ -345,7 +321,15 @@ public class PlayerController : MonoBehaviour
 
 	private void Jump(bool jump)
 	{
+		if (jump && IsGround())
+		{
+			m_HumanoidRobotRigidbody.AddForce(Vector3.up * 15, ForceMode.Impulse);
+		}
+	}
 
+	private bool IsGround()
+	{
+		return Physics.CheckSphere(m_HumanoidRobotRigidbody.position + Vector3.up * 0.7f, 0.72f, ~LayerMask.GetMask(new string[] { "Player" }));
 	}
 
 	public IEnumerator Charge(bool isLeft)
