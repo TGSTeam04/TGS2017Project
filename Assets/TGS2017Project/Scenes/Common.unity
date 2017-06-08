@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.30040884, g: 0.251332, b: 0.2052058, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -56,8 +56,8 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 8
     m_Resolution: 1
-    m_BakeResolution: 10
-    m_TextureWidth: 1024
+    m_BakeResolution: 5
+    m_TextureWidth: 256
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1006babf2213ae448128fa1ac0817d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TopTransform: []
+  m_TopTransform: {fileID: 0}
   m_TPSTransform: {fileID: 0}
   m_TPSTarget: {fileID: 0}
   m_FOVCurve:
@@ -372,6 +372,10 @@ MonoBehaviour:
     - GameUI
   - Scene:
     - Select
+  - Scene:
+    - Result
+  - Scene:
+    - GameOver
   m_LoadingSceneName: LoadingDefault
 --- !u!1 &1849378520
 GameObject:
@@ -420,7 +424,7 @@ MonoBehaviour:
   m_IsGameClear: 0
   m_GameStarter: {fileID: 1022911404}
   m_BreakEnemyTable: {fileID: 11400000, guid: 3b3856ea162c1df4c80dccf990a36a09, type: 2}
-  m_LoadingAnimationTime: 1
+  m_LoadingAnimationTime: 0.5
   m_LoadingProgress: 0
 --- !u!4 &1849378522
 Transform:

@@ -50,7 +50,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         enemy.transform.position = resPos;
         enemy.GetComponent<EnemyBase>().NextTarget();
         enemy.GetComponent<EnemyBase>().m_IsDead = false;
-        enemy.transform.localScale = Vector3.one;// * scale;
+        //enemy.transform.localScale = Vector3.one * 0.4f;// * scale;
         enemy.gameObject.SetActive(true);
     }
 }

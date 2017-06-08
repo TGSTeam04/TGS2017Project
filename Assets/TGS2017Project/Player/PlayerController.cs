@@ -73,14 +73,8 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_IsGameOver = false;
 
 		//GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
-		StartCoroutine(countdown());
 	}
 
-	IEnumerator countdown()
-	{
-		yield return new WaitForSeconds(3);
-		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
-	}
 
 	// Use this for initialization
 	void Start()
@@ -129,7 +123,7 @@ public class PlayerController : MonoBehaviour
 				m_Energy -= Time.deltaTime * (Input.GetButton("Boost") ? 3 : 1);
 				Jump(Input.GetButtonDown("Jump"));
 				Boost(Input.GetButton("Boost"));
-				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Combine") || m_Energy <= 0))
+				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Release") || m_Energy <= 0))
 				{
 					m_Energy = 0;
 					StartCoroutine(Release());                    
@@ -156,17 +150,6 @@ public class PlayerController : MonoBehaviour
 				m_TwinRobotL.Move();
 				m_TwinRobotR.Move();
 
-				//Vector3 move = new Vector3(
-				//	Input.GetAxis("HorizontalL"), 0,
-				//	Input.GetAxis("VerticalL"));
-				//move = Vector3.ClampMagnitude(move, 1.0f) * m_MoveSpeed * GameManager.Instance.LevelParameter.m_Speed * Time.fixedDeltaTime;
-				//m_LRobotRigidbody.position += move;
-				//move = new Vector3(
-				//	Input.GetAxis("HorizontalR"), 0,
-				//	Input.GetAxis("VerticalR"));
-				//move = Vector3.ClampMagnitude(move, 1.0f) * m_MoveSpeed * GameManager.Instance.LevelParameter.m_Speed * Time.fixedDeltaTime;
-				//m_RRobotRigidbody.position += move;
-
 				ElectricUpdate();
 
 				m_TwinRobotL.Look(m_RRobotRigidbody.position);
@@ -184,12 +167,6 @@ public class PlayerController : MonoBehaviour
 				{
 					m_HumanoidRobotRigidbody.MovePosition(m_HumanoidRobotRigidbody.position + move_ * (m_Speed + m_BoostSpeed) * Time.fixedDeltaTime);
 				}
-
-				//if (m_JumpMove > 0)
-				//{
-				//	m_HumanoidRobotRigidbody.MovePosition(m_HumanoidRobotRigidbody.position + Vector3.up * m_JumpMove * Time.fixedDeltaTime);
-				//	m_JumpMove -= 3 * Time.fixedDeltaTime;
-				//}
 				m_HumanoidRobot.transform.Rotate(0, Input.GetAxis("HorizontalR") * m_RotateSpeed * rotateSpeed * Time.fixedDeltaTime, 0);
 				break;
 			case PlayMode.Combine:
@@ -308,8 +285,8 @@ public class PlayerController : MonoBehaviour
 			m_HumanoidRobot.transform.right * Input.GetAxis("HorizontalL") +
 			m_HumanoidRobot.transform.forward * Input.GetAxis("VerticalL");
 		Vector3 vector = move_.magnitude == 0 ? m_HumanoidRobot.transform.right : -move_.normalized;
-		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.5f);
-		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.5f);
+		m_LRobotRigidbody.position = m_HumanoidRobot.transform.position - (vector * 0.1f);
+		m_RRobotRigidbody.position = m_HumanoidRobot.transform.position + (vector * 0.1f);
 		Quaternion lRotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
 		Quaternion rRotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
 		float preMove = 0;
@@ -322,8 +299,8 @@ public class PlayerController : MonoBehaviour
 		{
 			t = m_ReleaseCurve.Evaluate(f / m_CombineTime);
 			move = Mathf.Lerp(0.5f, l, t);
-			m_LRobotRigidbody.position -= vector * (move - preMove);
-			m_RRobotRigidbody.position += vector * (move - preMove);
+			m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * (move - preMove));
+			m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * (move - preMove));
 			preMove = move;
 			m_LRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(lRotation, rRotation, t * 4));
 			m_RRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(rRotation, lRotation, t * 4));
@@ -346,8 +323,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (jump && IsGround())
 		{
-			m_HumanoidRobotRigidbody.AddForce(Vector3.up * 70, ForceMode.Impulse);
-			//m_JumpMove = 13;
+			m_HumanoidRobotRigidbody.AddForce(Vector3.up * 15, ForceMode.Impulse);
 		}
 	}
 

@@ -109,6 +109,34 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: badef495bd315614eaf4ba7a82c8de28, type: 2}
+--- !u!1 &17056037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 17056038}
+  m_Layer: 9
+  m_Name: LookPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &17056038
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 17056037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1389940281}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &127205740
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +411,7 @@ MonoBehaviour:
   m_Battery: {fileID: 0}
   m_TPSPosition: {fileID: 697516218}
   m_ChargePosition: {fileID: 1075860010}
-  m_MoveY: 0
+  m_JumpMove: 0
   m_TwinRobotL: {fileID: 774350930}
   m_TwinRobotR: {fileID: 1890064367}
   m_Boost: {fileID: 1422175877}
@@ -514,6 +542,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1 &223293235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 223293236}
+  m_Layer: 9
+  m_Name: LookPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223293236
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 223293235}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 774350929}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &226087116
 Prefab:
   m_ObjectHideFlags: 0
@@ -664,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c4b04ca2361df44bd9deccc6639b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TopTransform: []
+  m_TopTransform: {fileID: 0}
   m_TPSTransform: {fileID: 697516218}
   m_TPSTarget: {fileID: 1032982814}
   m_LRobot: {fileID: 774350927}
@@ -1322,6 +1378,34 @@ Transform:
   m_Father: {fileID: 1890064366}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &707608600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 707608601}
+  m_Layer: 9
+  m_Name: LookPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &707608601
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707608600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1890064366}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774350927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,6 +1454,7 @@ Transform:
   - {fileID: 1013446364}
   - {fileID: 610834427}
   - {fileID: 1356514140}
+  - {fileID: 223293236}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1948,7 +2033,6 @@ GameObject:
   - component: {fileID: 1265072894}
   - component: {fileID: 1265072893}
   - component: {fileID: 1265072892}
-  - component: {fileID: 1265072895}
   m_Layer: 9
   m_Name: Capsule
   m_TagString: Player
@@ -2021,21 +2105,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1265072890}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1265072895
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1265072890}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 2
 --- !u!1 &1292169924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2293,7 @@ GameObject:
   - component: {fileID: 1389940281}
   - component: {fileID: 1389940283}
   - component: {fileID: 1389940282}
+  - component: {fileID: 1389940284}
   m_Layer: 9
   m_Name: HumanoidRobot
   m_TagString: Player
@@ -2250,6 +2320,7 @@ Transform:
   - {fileID: 1165701556}
   - {fileID: 158433145}
   - {fileID: 515139550}
+  - {fileID: 17056038}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2282,6 +2353,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayerController: {fileID: 180186486}
+--- !u!54 &1389940284
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389940280}
+  serializedVersion: 2
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!1 &1422175877
 GameObject:
   m_ObjectHideFlags: 0
@@ -2991,6 +3077,7 @@ Transform:
   - {fileID: 705929766}
   - {fileID: 610416828}
   - {fileID: 1187960222}
+  - {fileID: 707608601}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

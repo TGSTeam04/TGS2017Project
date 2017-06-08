@@ -65,6 +65,7 @@ public class LoadingController : MonoBehaviour {
 	IEnumerator Out()
 	{
 		yield return new WaitUntil(() => GameManager.Instance.m_LoadingProgress == 1);
+		yield return new WaitForSeconds(0.5f);
 		for (float t = Time.deltaTime; t < m_Time; t += Time.deltaTime)
 		{
 			m_T = 1 - t / m_Time;
