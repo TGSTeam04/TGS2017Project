@@ -12,6 +12,7 @@ public class BBoard : MonoBehaviour
     private Dictionary<string, float> m_FloatValues;
     private Dictionary<string, Vector2> m_Vec2Values;
     private Dictionary<string, Vector3> m_Vec3Values;
+    private Dictionary<string, Transform> m_TransValues;
     private Dictionary<string, GameObject> m_GameObjValus;
     private Dictionary<string, MonoBehaviour> m_MonoValues;
 
@@ -21,6 +22,7 @@ public class BBoard : MonoBehaviour
     public Dictionary<string, float> FloatValues { get { return m_FloatValues; } }
     public Dictionary<string, Vector2> Vec2Values { get { return m_Vec2Values; } }
     public Dictionary<string, Vector3> Vec3Values { get { return m_Vec3Values; } }
+    public Dictionary<string, Transform> TransValues { get { return m_TransValues; } }
     public Dictionary<string, GameObject> GObjValues { get { return m_GameObjValus; } }
     public Vector3 PositionValus(string name)
     {
@@ -40,6 +42,7 @@ public class BBoard : MonoBehaviour
         m_FloatValues = new Dictionary<string, float>();
         m_Vec2Values = new Dictionary<string, Vector2>();
         m_Vec3Values = new Dictionary<string, Vector3>();
+        m_TransValues = new Dictionary<string, Transform>();
         m_GameObjValus = new Dictionary<string, GameObject>();
         m_MonoValues = new Dictionary<string, MonoBehaviour>();
     }

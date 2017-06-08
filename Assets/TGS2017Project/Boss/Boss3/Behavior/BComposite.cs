@@ -17,8 +17,9 @@ public class BComposite : BNode
         base.SetParent(parent);
         foreach (var child in m_Child)
         {
-            child.SetParent(parent);
+            child.SetParent(this);                       
         }
+
     }
 
     public virtual void AddNode(BNode node)

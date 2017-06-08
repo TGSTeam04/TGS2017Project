@@ -30,6 +30,7 @@ public class BT_MoveTo : BTask
 
     protected override void FirstExecute()
     {
+        Debug.Log("MoveTo タスク");
         m_nAgent = m_BB.GetComponent<NavMeshAgent>();
         m_TargetObj = m_BB.GObjValues[m_TargetKey];
         m_nAgent.destination = m_TargetObj.transform.position;

@@ -13,7 +13,7 @@ public enum RocketState
 }
 
 public class Rocket : MonoBehaviour
-{    
+{
     public RocketState m_State;
     //戻るべきトランスフォーム
     public Transform m_StandTrans;
@@ -22,11 +22,10 @@ public class Rocket : MonoBehaviour
     public float m_BackSpeed;
     //前進時間
     public float m_AdvanceTime;
-    //腕が戻った時のデリゲート
-    public UnityEvent m_Del_Returned;
+    public float m_Timer;
+
     public UnityEvent<Collision> m_Del_Collide;
 
-    private float m_Timer;
     // Use this for initialization
     void Start()
     {
@@ -66,35 +65,32 @@ public class Rocket : MonoBehaviour
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
                     m_State = RocketState.Idle;
-                    gameObject.SetActive(false);
-                    if (m_Del_Returned != null)
-                        m_Del_Returned.Invoke();
+                    gameObject.SetActive(false);                    
                 }
                 break;
             default:
                 break;
         }
     }
-    
-    public bool TryFire()
-    {
-        if (!IsCanFire)
-            return false;
 
+    public void Fire()
+    {
+        gameObject.SetActive(true);
         transform.position = m_StandTrans.position;
         transform.rotation = m_StandTrans.rotation;
         m_State = RocketState.Fire;
         m_Timer = 0;
-
-        return true;
-    }
-    public void Hit()
-    {
-        m_State = RocketState.Back;
     }
 
     public bool IsCanFire
     {
         get { return m_State == RocketState.Idle; }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        m_State = RocketState.Back;
+        if (m_Del_Collide != null)
+            m_Del_Collide.Invoke(collision);
     }
 }

@@ -16,7 +16,9 @@ public class BNode
     public BBoard m_BB;
     public BehaviorTree m_BT;
     private List<BDecorator> m_Decorators;
-    protected BComposite m_Parent;
+    //private BComposite m_Parent;
+    Action m_ParentSuccess;
+    Action m_ParentFailure;
     public string NodeName { get; set; }
 
     public BNode(string name = "default")
@@ -41,7 +43,8 @@ public class BNode
             dec.m_BT = parent.m_BT;
             dec.m_BB = m_BB;
         }
-        m_Parent = parent;
+        m_ParentSuccess = parent.ChildSuccess;
+        m_ParentFailure = parent.ChildFailure;
     }
     public virtual void Reset()
     {
@@ -51,8 +54,8 @@ public class BNode
     protected virtual void Succes()
     {
         Initialize();
-        m_Parent.ChildSuccess();
-        m_State = BState.Success;
+        m_ParentSuccess();
+        m_State = BState.Success;        
         foreach (var dec in m_Decorators)
             dec.NodeSuccess();
 
@@ -60,7 +63,7 @@ public class BNode
     protected virtual void Failure()
     {
         Initialize();
-        m_Parent.ChildFailure();
+        m_ParentFailure();
         m_State = BState.Failure;
         foreach (var dec in m_Decorators)
             dec.NodeFailure();
@@ -96,8 +99,7 @@ public class BNode
     protected virtual void Execute() { }
     //public virtual void Exit() { }
 
-    public virtual void DeleteNode()
-    {
-        m_Parent.DeleteChild(this);
+    public virtual void OnDelete()
+    {     
     }
 }
