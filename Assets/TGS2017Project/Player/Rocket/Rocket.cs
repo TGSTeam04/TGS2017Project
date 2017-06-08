@@ -75,6 +75,7 @@ public class Rocket : MonoBehaviour
                 {
                     m_State = RocketState.Idle;
                     gameObject.SetActive(false);
+                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
                 break;
             default:
@@ -85,6 +86,7 @@ public class Rocket : MonoBehaviour
     public void Fire()
     {
         gameObject.SetActive(true);
+        m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_StandTrans.rotation;
         m_State = RocketState.Fire;
@@ -114,7 +116,7 @@ public class Rocket : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {        
         m_State = RocketState.Back;
         if (m_Del_Collide != null)
             m_Del_Collide.Invoke(this, collision);
@@ -123,5 +125,20 @@ public class Rocket : MonoBehaviour
     {
         int layer = LayerMask.NameToLayer(layerName);
         gameObject.layer = layer;        
+    }
+    public IEnumerator Break(float repairTime)
+    {
+        //一定時間無効
+        gameObject.SetActive(false);
+        while (repairTime < 0)
+        {
+            repairTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.SetActive(true);
+        //float reSpanwTime = 2.0f;
+        //while()
+        //transform.localScale *= 0.0f;
     }
 }
