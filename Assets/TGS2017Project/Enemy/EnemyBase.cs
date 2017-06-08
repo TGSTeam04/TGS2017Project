@@ -68,8 +68,8 @@ public class EnemyBase : MonoBehaviour
 		m_LRobot = GameManager.Instance.m_LRobot;
 		m_RRobot = GameManager.Instance.m_RRobot;
 		m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
-		m_LRobotPos = m_LRobot.transform.position;
-		m_RRobotPos = m_RRobot.transform.position;
+		if (m_LRobot != null) m_LRobotPos = m_LRobot.transform.position;
+		if (m_RRobot != null) m_RRobotPos = m_RRobot.transform.position;
 
 		switch (GameManager.Instance.m_PlayMode)
 		{

@@ -56,6 +56,15 @@ public class EnemyType1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+		if(m_Target == null)
+		{
+			SetTarget();
+		}
+
+
+
+
         // 一定間隔で追従目標を変更
         if (m_ChangeTargetCount >= m_ChangeTargetInterval)
         {
@@ -104,6 +113,7 @@ public class EnemyType1 : MonoBehaviour
         m_Agent.isStopped = true;
         if (m_State == Enemy1State.Move && !m_IsParalysis)
         {
+			if (m_Target == null) return;
             Move();
         }
     }

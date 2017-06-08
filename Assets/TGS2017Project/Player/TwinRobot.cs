@@ -49,6 +49,11 @@ public class TwinRobot : MonoBehaviour
 				{
 					case "Enemy":
 					case "Bullet":
+						if (!m_Shield.activeSelf)
+						{
+							GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+							GameManager.Instance.m_GameStarter.ChangeScenes(9);
+						}
 						HP-=0.1f;
 						break;
 					default:

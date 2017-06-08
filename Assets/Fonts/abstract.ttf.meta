@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 49372206090af2d4ebba61b747dd5ac9
+timeCreated: 1496945423
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gts.Abstract
+  fontNames:
+  - Gts.Abstract
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

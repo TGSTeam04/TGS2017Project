@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectsLinker : MonoBehaviour {
 
 	[SerializeField]
-	public Transform[] m_TopTransform;
+	public Transform m_TopTransform;
 	public Transform m_TPSTransform;
 	public Transform m_TPSTarget;
 	public GameObject m_LRobot;
@@ -17,7 +17,7 @@ public class ObjectsLinker : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		m_Camera = GameManager.Instance.m_PlayCamera.GetComponent<PlayCameraController>();
-		if (m_TopTransform.Length>0) m_Camera.m_TopTransform = m_TopTransform;
+		if (m_TopTransform != null) m_Camera.m_TopTransform = m_TopTransform;
 		if (m_TPSTarget != null) m_Camera.m_TPSTarget = m_TPSTarget;
 		if (m_TPSTransform != null) m_Camera.m_TPSTransform = m_TPSTransform;
 		if (m_LRobot != null) GameManager.Instance.m_LRobot = m_LRobot;

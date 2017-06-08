@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackProcess : MonoBehaviour {
+public class AttackProcess : MonoBehaviour
+{
 
     public GameObject m_LeftPunch;
     public GameObject m_LeftSwing;
     public GameObject m_RightPunch;
     public GameObject m_RightSwing;
 
+    [SerializeField]
+    private int m_StopTime = 3;
+    private int m_StopCounter;
+
+    public static bool s_Chance = false;
+
     Animator m_Anim;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         m_Anim = GetComponent<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    void LeftPunchStart() {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        print(m_StopCounter);
+    }
+    void LeftPunchStart()
+    {
         m_LeftPunch.SetActive(true);
     }
-    void LeftPunchEnd() {
+    void LeftPunchEnd()
+    {
+        s_Chance = true;
+        m_Anim.speed = 0.0f;
+        StartCoroutine(Stop());
         m_LeftPunch.SetActive(false);
     }
-    void LeftPunchStateEnd() {
+    void LeftPunchStateEnd()
+    {
         m_Anim.SetBool("LeftPunch", false);
     }
     void LeftSwingStart()
@@ -41,13 +56,19 @@ public class AttackProcess : MonoBehaviour {
     {
         m_Anim.SetBool("LeftSwing", false);
     }
-    void RPunchStart() {
+    void RPunchStart()
+    {
         m_RightPunch.SetActive(true);
     }
-    void RPunchEnd() {
+    void RPunchEnd()
+    {
+        s_Chance = true;
+        m_Anim.speed = 0.0f;
+        StartCoroutine(Stop());
         m_RightPunch.SetActive(false);
     }
-    void RPunchStateEnd() {
+    void RPunchStateEnd()
+    {
         m_Anim.SetBool("RightPunch", false);
     }
     void RSwingStart()
@@ -61,5 +82,27 @@ public class AttackProcess : MonoBehaviour {
     void RSwingStateEnd()
     {
         m_Anim.SetBool("RightSwing", false);
+    }
+    void AttackStart()
+    {
+
+    }
+    void AttackEnd()
+    {
+
+    }
+    void StateEnd()
+    {
+        m_Anim.SetBool("BodyAttack", false);
+    }
+    IEnumerator Stop()
+    {
+        m_StopCounter = m_StopTime;
+        while (m_StopCounter > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            m_StopCounter--;
+        }
+        s_Chance = false;
     }
 }

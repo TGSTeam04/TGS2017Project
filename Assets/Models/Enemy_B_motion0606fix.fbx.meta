@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 00406a36f02e92b448285763c40068b0
+timeCreated: 1496820760
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: All_parent
+    100002: core
+    100004: //RootNode
+    100006: front
+    100008: Head
+    100010: Head_dami
+    100012: Head_Joint_1
+    100014: L_wing
+    100016: L_wingjoint
+    100018: pCube11
+    100020: pCube13
+    100022: pCube15
+    100024: pCube17
+    100026: pCube19
+    100028: pCube7
+    100030: pCylinder10
+    100032: pCylinder12
+    100034: pCylinder2
+    100036: pCylinder6
+    100038: pCylinder7
+    100040: pCylinder8
+    100042: R_wing
+    100044: R_wingjoint
+    100046: Rig_ALP
+    100048: Under_gun
+    100050: Under_gunbarrel
+    100052: Under_gunHontai
+    400000: All_parent
+    400002: core
+    400004: //RootNode
+    400006: front
+    400008: Head
+    400010: Head_dami
+    400012: Head_Joint_1
+    400014: L_wing
+    400016: L_wingjoint
+    400018: pCube11
+    400020: pCube13
+    400022: pCube15
+    400024: pCube17
+    400026: pCube19
+    400028: pCube7
+    400030: pCylinder10
+    400032: pCylinder12
+    400034: pCylinder2
+    400036: pCylinder6
+    400038: pCylinder7
+    400040: pCylinder8
+    400042: R_wing
+    400044: R_wingjoint
+    400046: Rig_ALP
+    400048: Under_gun
+    400050: Under_gunbarrel
+    400052: Under_gunHontai
+    2300000: pCube11
+    2300002: pCube13
+    2300004: pCube15
+    2300006: pCube17
+    2300008: pCube19
+    2300010: pCube7
+    2300012: pCylinder10
+    2300014: pCylinder12
+    2300016: pCylinder2
+    2300018: pCylinder6
+    2300020: pCylinder7
+    2300022: pCylinder8
+    3300000: pCube11
+    3300002: pCube13
+    3300004: pCube15
+    3300006: pCube17
+    3300008: pCube19
+    3300010: pCube7
+    3300012: pCylinder10
+    3300014: pCylinder12
+    3300016: pCylinder2
+    3300018: pCylinder6
+    3300020: pCylinder7
+    3300022: pCylinder8
+    4300000: pCube19
+    4300002: pCylinder12
+    4300004: pCube15
+    4300006: pCylinder7
+    4300008: pCylinder2
+    4300010: pCube7
+    4300012: pCylinder8
+    4300014: pCube11
+    4300016: pCube13
+    4300018: pCylinder6
+    4300020: pCylinder10
+    4300022: pCube17
+    7400000: Idle
+    7400002: Front_move
+    7400004: Spawn
+    7400006: Spaek
+    7400008: Barrel_L
+    7400010: Barrel_R
+    7400012: Damege_start
+    7400014: Damege_end
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Front_move
+      takeName: Front_move
+      firstFrame: 0
+      lastFrame: 160
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Spawn
+      takeName: Spawn
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Spaek
+      takeName: Spaek
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Barrel_L
+      takeName: Barrel_L
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Barrel_R
+      takeName: Barrel_R
+      firstFrame: 0
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Damege_start
+      takeName: Damege_start
+      firstFrame: 0
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Damege_end
+      takeName: Damege_end
+      firstFrame: 25
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: All_parent
+        weight: 1
+      - path: All_parent/core
+        weight: 1
+      - path: All_parent/core/front
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/L_wing
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCube7
+        weight: 1
+      - path: All_parent/core/front/L_wingjoint/pCylinder2
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCube11
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/pCylinder8
+        weight: 1
+      - path: All_parent/core/front/R_wingjoint/R_wing
+        weight: 1
+      - path: All_parent/core/Head_Joint_1
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/Head_dami
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCube15
+        weight: 1
+      - path: All_parent/core/Head_Joint_1/Head/pCylinder7
+        weight: 1
+      - path: All_parent/core/pCube13
+        weight: 1
+      - path: All_parent/core/pCube17
+        weight: 1
+      - path: All_parent/core/pCylinder6
+        weight: 1
+      - path: All_parent/core/pCylinder10
+        weight: 1
+      - path: All_parent/core/Under_gun
+        weight: 1
+      - path: All_parent/core/Under_gun/pCylinder12
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/pCube19
+        weight: 1
+      - path: All_parent/core/Under_gun/Under_gunHontai/Under_gunbarrel
+        weight: 1
+      - path: Rig_ALP
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
