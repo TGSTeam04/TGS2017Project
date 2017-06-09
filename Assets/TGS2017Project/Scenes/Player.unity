@@ -2341,12 +2341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
-<<<<<<< HEAD
   m_RocketLayer: Arm
   m_Anim: {fileID: 0}
-=======
-  m_RocketLayer: 
->>>>>>> 2a814cc0d9c7fbbec04cb1e19f407529f697ba21
   m_LStandTrans: {fileID: 0}
   m_RStandTrans: {fileID: 0}
 --- !u!114 &1389940283
