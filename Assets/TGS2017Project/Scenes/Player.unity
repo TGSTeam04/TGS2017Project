@@ -2342,7 +2342,6 @@ MonoBehaviour:
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
   m_RocketLayer: Arm
-  m_Anim: {fileID: 0}
   m_LStandTrans: {fileID: 0}
   m_RStandTrans: {fileID: 0}
 --- !u!114 &1389940283

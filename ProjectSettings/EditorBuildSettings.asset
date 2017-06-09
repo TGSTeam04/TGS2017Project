@@ -37,7 +37,7 @@ EditorBuildSettings:
     guid: ebad509f7b1756648908b3588510be7e
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/GameOver.unity
-    guid: 00000000000000000000000000000000
+    guid: 48775b78d87c8004f857313c6ed1278d
   - enabled: 0
     path: Assets/Scenes/Loading.unity
     guid: 00000000000000000000000000000000
@@ -50,3 +50,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Credit.unity
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Result.unity
+    guid: c780c456deb5bf24b8d4a1c9a73d1d63

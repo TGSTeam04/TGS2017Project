@@ -20,7 +20,7 @@ public class ResultController : MonoBehaviour {
 			m_TimeText.text = time / 60 + ":" + (time % 60).ToString("00");
 			yield return null;
 		}
-		m_TimeText.text = m_Time / 60 + ":" + (m_Time % 60).ToString("00");
+		m_TimeText.text = (int)m_Time / 60 + ":" + ((int)m_Time % 60).ToString("00");
 		for (float t = 0; t < 1.0f; t += Time.deltaTime)
 		{
 			m_ScoreText.text = ((int)Mathf.Lerp(0, m_Score, t)).ToString();

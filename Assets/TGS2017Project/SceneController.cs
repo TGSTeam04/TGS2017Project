@@ -10,31 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    private string m_NextScene;
-    public string GetNextScene
-    {
-        get { return m_NextScene; }
-    }
-
-    void Awake()
-    {
-//        DontDestroyOnLoad(this);
-    }
-
-    // シーンの変更
-    public void ChangeSceneWithLoad(string scene)
-    {
-        SceneManager.LoadScene("Loading");
-        m_NextScene = scene;
-    }
-
 	public void ChangeSceneWithLoad(int scene)
 	{
 		GameManager.Instance.m_GameStarter.ChangeScenes(scene);
 	}
-
-	public void ChangeScene(string scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
 }
