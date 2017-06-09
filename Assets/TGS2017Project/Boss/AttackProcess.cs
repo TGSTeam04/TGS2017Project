@@ -27,7 +27,7 @@ public class AttackProcess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(m_StopCounter);
+        //print(m_StopCounter);
     }
     void LeftPunchStart()
     {

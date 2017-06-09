@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.Events;
+//using UnityEngine.Events;
 
 //ロケット２つをラップしたロケット砲台クラス
 //詳細パラメータは各ロケット　m_XRocket　のパラメータをいじってください。
@@ -12,16 +12,16 @@ public class RocketBattery : MonoBehaviour
     public Rocket m_LRocket;
     public Rocket m_RRocket;
     public string m_RocketLayer;
+    private Animator m_Anim;
 
     [SerializeField] private Transform m_LStandTrans;
     [SerializeField] private Transform m_RStandTrans;
 
     private void Awake()
     {
-        //m_Rockets = new List<Rocket>();               
-    }
-    private void Start()
-    {
+        m_Anim = GetComponentInChildren<Animator>();
+
+
         //Rocketが指定されていなければ生成
         if (m_LRocket == null)
         {
@@ -52,7 +52,11 @@ public class RocketBattery : MonoBehaviour
         m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
-    }    
+    }
+
+    private void Start()
+    {
+    }
 
     //LRどちらでもいいから発射可能か確認
     public bool IsCanFire { get { return m_LRocket.IsCanFire || m_RRocket.IsCanFire; } }
@@ -62,8 +66,23 @@ public class RocketBattery : MonoBehaviour
     //右方の発射可能か確認
     public bool RIsCanFire { get { return m_RRocket.IsCanFire; } }
 
-    //LRどちらでもいいから発射トライ　発射できればtrue
     public void Fire()
+    {
+        StartCoroutine(AnimatedFire());
+    }
+
+    private IEnumerator AnimatedFire()
+    {
+        m_Anim.SetTrigger("LFire");
+        //アニメ反映        
+        yield return new WaitForSeconds(0.5f);
+        //Debug.Log(m_Anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        yield return new WaitForAnimation(m_Anim, 0.7f, 0);
+        RealFire();
+    }
+
+    //LRどちらでもいいから発射トライ　発射できればtrue
+    public void RealFire()
     {
         if (m_LRocket.IsCanFire)
             m_LRocket.Fire();
@@ -81,13 +100,17 @@ public class RocketBattery : MonoBehaviour
 
     /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/
 
-    public UnityEvent<Rocket, Collision> Del_Collide
+    public event Action<Rocket, Collision> Del_Collide
     {
-        get { return m_LRocket.m_Del_Collide; }
-        set
+        add
         {
-            m_LRocket.m_Del_Collide = value;
-            m_RRocket.m_Del_Collide = value;
+            m_LRocket.Del_Collide += value;
+            m_RRocket.Del_Collide += value;
+        }
+        remove
+        {
+            m_LRocket.Del_Collide -= value;
+            m_RRocket.Del_Collide -= value;
         }
     }
     public void SetSpeed(float speed)

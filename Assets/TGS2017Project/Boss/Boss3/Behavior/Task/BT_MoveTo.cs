@@ -16,7 +16,7 @@ public class BT_MoveTo : BTask
 
     private GameObject m_TargetObj;
     float m_Timer;
-    NavMeshAgent m_nAgent;
+    NavMeshAgent m_NavAgent;
 
     public BT_MoveTo(string target, float speed = 10.0f, float targetDistance = 5.0f, float updateInterval = 1.0f)
     {
@@ -32,11 +32,11 @@ public class BT_MoveTo : BTask
 
     protected override void FirstExecute()
     {        
-        m_nAgent = m_BB.GetComponent<NavMeshAgent>();
+        m_NavAgent = m_BB.m_NavAgent;
         m_TargetObj = m_BB.GObjValues[m_TargetKey];
-        m_nAgent.destination = m_TargetObj.transform.position;
-        m_nAgent.speed = m_Speed;
-        m_nAgent.stoppingDistance = m_StopDistance;
+        m_NavAgent.destination = m_TargetObj.transform.position;
+        m_NavAgent.speed = m_Speed;
+        m_NavAgent.stoppingDistance = m_StopDistance;
     }
     protected override void OnExecute()
     {
@@ -46,11 +46,11 @@ public class BT_MoveTo : BTask
         {
             m_Timer = m_Interval;
             m_TargetObj = m_BB.GObjValues[m_TargetKey];
-            m_nAgent.destination = m_TargetObj.transform.position;
+            m_NavAgent.destination = m_TargetObj.transform.position;
         }
 
         //到達したかの確認
-        float remainingDistance = m_nAgent.remainingDistance;
+        float remainingDistance = m_NavAgent.remainingDistance;
         float distance = Vector2.Distance(m_BB.transform.position, m_TargetObj.transform.position);
         if (remainingDistance < m_StopDistance && distance < m_StopDistance)
         {
@@ -71,10 +71,10 @@ public class BT_MoveTo : BTask
 
     private bool StopEase()
     {
-        Vector3 vel = m_nAgent.velocity;
-        m_nAgent.velocity = vel.sqrMagnitude < 2.0f
+        Vector3 vel = m_NavAgent.velocity;
+        m_NavAgent.velocity = vel.sqrMagnitude < 2.0f
             ? Vector3.zero
             : vel - vel * 0.1f;
-        return m_nAgent.velocity.magnitude < 1.0f;
+        return m_NavAgent.velocity.magnitude < 1.0f;
     }
 }

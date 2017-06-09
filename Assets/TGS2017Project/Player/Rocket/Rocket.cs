@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 public delegate void OnCollideEnter_Del();
 
@@ -27,7 +27,7 @@ public class Rocket : MonoBehaviour
     public float m_Timer;
 
     //衝突時イベントコールバック
-    public UnityEvent<Rocket, Collision> m_Del_Collide;
+    public event Action<Rocket, Collision> Del_Collide;
     //衝突した雑魚リスト
     public List<EnemyBase> m_ChildEnemys;
 
@@ -116,10 +116,10 @@ public class Rocket : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {        
+    {
         m_State = RocketState.Back;
-        if (m_Del_Collide != null)
-            m_Del_Collide.Invoke(this, collision);
+        if (Del_Collide != null)
+            Del_Collide.Invoke(this, collision);
     }
     public void SetLayer(string layerName)
     {

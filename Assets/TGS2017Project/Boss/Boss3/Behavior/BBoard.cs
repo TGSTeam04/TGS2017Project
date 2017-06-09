@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.AI;
 
 //値設定するのに便利だからMonoBehavior継承。
 public class BBoard : MonoBehaviour
@@ -24,14 +24,6 @@ public class BBoard : MonoBehaviour
     public Dictionary<string, Vector3> Vec3Values { get { return m_Vec3Values; } }
     public Dictionary<string, Transform> TransValues { get { return m_TransValues; } }
     public Dictionary<string, GameObject> GObjValues { get { return m_GameObjValus; } }
-    public Vector3 PositionValus(string name)
-    {
-        GameObject obj;
-        if (m_GameObjValus.TryGetValue(name, out obj))
-            return obj.transform.position;
-        else
-            return m_Vec3Values[name];
-    }
     public Dictionary<string, MonoBehaviour> MonoValues { get { return m_MonoValues; } }
 
     public BBoard()
@@ -45,5 +37,16 @@ public class BBoard : MonoBehaviour
         m_TransValues = new Dictionary<string, Transform>();
         m_GameObjValus = new Dictionary<string, GameObject>();
         m_MonoValues = new Dictionary<string, MonoBehaviour>();
+    }
+
+    public NavMeshAgent m_NavAgent;
+    public Rigidbody m_Rb;
+    public Animator m_Anim;
+
+    private void Start()
+    {
+        m_NavAgent = GetComponent<NavMeshAgent>();
+        m_Rb = GetComponent<Rigidbody>();
+        m_Anim = GetComponentInChildren<Animator>();
     }
 }
