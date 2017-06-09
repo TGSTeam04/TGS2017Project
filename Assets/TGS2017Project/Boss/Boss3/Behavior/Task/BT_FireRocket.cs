@@ -15,9 +15,17 @@ public class BT_FireRocket : BTask
         if (m_Battery.IsCanFire)
         {
             m_Battery.Fire();
+            //m_BB.m_Anim.SetTrigger("LFire");
             Succes();
         }
         else
             Failure();
+    }
+
+    private IEnumerator FireRocket(bool isLeft)
+    {
+        m_BB.m_Anim.SetTrigger("LFire");
+        //アニメ反映
+        yield return null;
     }
 }

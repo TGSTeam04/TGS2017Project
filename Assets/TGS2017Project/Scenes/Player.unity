@@ -312,6 +312,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 19b68d7070723414a98de9324186951c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1bf64ed74cf203f4db51de51f967b461, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19b68d7070723414a98de9324186951c, type: 3}
   m_IsPrefabParent: 0
@@ -2337,7 +2341,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
+<<<<<<< HEAD
+  m_RocketLayer: Arm
+  m_Anim: {fileID: 0}
+=======
   m_RocketLayer: 
+>>>>>>> 2a814cc0d9c7fbbec04cb1e19f407529f697ba21
   m_LStandTrans: {fileID: 0}
   m_RStandTrans: {fileID: 0}
 --- !u!114 &1389940283

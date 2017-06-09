@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.Events;
 using UnityEngine.AI;
 
 [SelectionBase]
@@ -15,8 +17,13 @@ public class Boss3_Humanoid : MonoBehaviour
     public float m_RocketInterval;
     public float m_NeedMoveDistance;
 
+    //各コンポーネント
+    public NavMeshAgent m_NavAgent;
+    public Rigidbody m_Rb;
+    public Animator m_Anim;
     public RocketBattery m_Battery;
 
+    //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
     public GameObject m_Target;
@@ -25,14 +32,30 @@ public class Boss3_Humanoid : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        SetUpBT();
+        m_NavAgent = GetComponent<NavMeshAgent>();
+        m_Rb = GetComponent<Rigidbody>();
+        m_Anim = GetComponentInChildren<Animator>();       
         m_Battery = GetComponent<RocketBattery>();
+        m_Battery.Del_Collide += RocketCollide;
+
+        //ビヘイビアツリーのセットアップ
+        SetUpBT();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(m_Anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
         m_BT.BUpdate();
+        
+        Vector3 vel = transform.rotation * -m_NavAgent.velocity;
+        //Debug.Log(vel);
+        //Debug.Log(m_NavAgent.velocity);
+        //Debug.Log(transform.forward);
+        //m_Anim.SetFloat("Forward", m_NavAgent.velocity.z / m_NavAgent.speed);
+        m_Anim.SetFloat("Forward", vel.z / m_NavAgent.speed);
+        m_Anim.SetFloat("Right", vel.x / m_NavAgent.speed);
     }
 
     //ビヘイビアの設定
@@ -47,7 +70,6 @@ public class Boss3_Humanoid : MonoBehaviour
         BParallel par_Look_Other = new BParallel();
         //LookAtPlayer
         BT_LookTarget lookTarget = new BT_LookTarget("target", 5.0f);
-
         BSelector sl_Rocket_Other = new BSelector();
         m_BT.SetRootNode(par_Look_Other);
 
