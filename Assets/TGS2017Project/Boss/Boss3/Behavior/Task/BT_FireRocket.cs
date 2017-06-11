@@ -14,7 +14,8 @@ public class BT_FireRocket : BTask
     {
         if (m_Battery.IsCanFire)
         {
-            m_Battery.Fire();            
+            m_Battery.Fire();
+            //m_BB.m_Anim.SetTrigger("LFire");
             Succes();
         }
         else
