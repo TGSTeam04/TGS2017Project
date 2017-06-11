@@ -30,13 +30,13 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
             ReSpawn, enemy));
+        enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        enemy.Del_CollideEnter = null;
     }
 
     void ReSpawn(EnemyBase enemy)
     {
         StageManager stageManager = GameManager.Instance.m_StageManger;
-        //int stageLevel = stageManager.StageLevel;
-        //float scale = m_ScaleByStageLeve[stageLevel];
         
         //アクティブなパネルのうちランダムなものを取得
         List<StagePanel> panels = stageManager.m_ActivePanels;
