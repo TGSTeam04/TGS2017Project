@@ -600,7 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_State: 0
   m_Battery: {fileID: 0}
-  m_StandTrans: {fileID: 0}
+  m_StandTrans: {fileID: 2029757660}
   m_ApplyDamage: 0
   m_ChildApplyDamage: 0
   m_Speed: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_RocketPrefub: {fileID: 1783115579795336, guid: 7ba18909da0cb6e46a4f8fcfa8a400ae,
     type: 2}
   m_LStandTrans: {fileID: 1425325784}
-  m_RStandTrans: {fileID: 1425325784}
+  m_RStandTrans: {fileID: 1377804569}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
   m_RocketLayer: BossBullet
@@ -5540,6 +5540,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1362163643}
   m_Mesh: {fileID: 4300000, guid: f5af230ea5aa2e5468d6125c2b6ce955, type: 3}
+--- !u!4 &1377804569 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400268, guid: 1f248629a73f93141ad038fd77589805, type: 3}
+  m_PrefabInternal: {fileID: 809737174}
 --- !u!1 &1391144653
 GameObject:
   m_ObjectHideFlags: 0
@@ -7613,6 +7617,34 @@ Transform:
   m_Father: {fileID: 581251969}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
+--- !u!1 &2029757659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2029757660}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2029757660
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2029757659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 16.852352, z: -27.753922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030738321
 GameObject:
   m_ObjectHideFlags: 0

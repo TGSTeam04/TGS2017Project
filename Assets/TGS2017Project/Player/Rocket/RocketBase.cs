@@ -10,6 +10,7 @@ public enum RocketState
     Back,
     Reflected,
     Buried,
+    Repair,
 }
 
 public class RocketBase : MonoBehaviour
@@ -47,7 +48,7 @@ public class RocketBase : MonoBehaviour
     private void Awake()
     {
         m_ChildEnemys = new List<EnemyBase>();
-        m_IsKnockBack = false;
+        m_IsKnockBack = true;
     }
 
     // Use this for initialization
@@ -58,10 +59,6 @@ public class RocketBase : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(Break(1.0f));
-        }
         switch (m_State)
         {
             case RocketState.Idle:
@@ -237,25 +234,5 @@ public class RocketBase : MonoBehaviour
     public void SetLayer(string layerName)
     {
         gameObject.layer = LayerMask.NameToLayer(layerName);
-    }
-    public IEnumerator Break(float repairTime)
-    {
-        //一定時間無効
-        gameObject.SetActive(false);
-        while (repairTime < 0)
-        {
-            repairTime -= Time.deltaTime;
-            yield return null;
-        }
-
-        gameObject.SetActive(true);
-        float reSpanwTime = 2.0f;
-        float scale = 0;
-        while (reSpanwTime < 0)
-        {
-            scale += Time.deltaTime;
-            transform.localScale = new Vector3(scale, scale, scale);
-            yield return null;
-        }
-    }
+    }    
 }

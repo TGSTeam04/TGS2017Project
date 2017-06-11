@@ -236,6 +236,8 @@ MonoBehaviour:
   m_IsKnockBack: 1
   m_ChildEnemys: []
   m_ReflectDamage: 50
+  m_ReActiveTime: 0
+  m_RepairTime: 1
 --- !u!135 &135549104756783596
 SphereCollider:
   m_ObjectHideFlags: 1

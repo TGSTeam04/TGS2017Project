@@ -8,7 +8,7 @@ using System;
 //詳細パラメータは各ロケット　m_XRocket　のパラメータをいじってください。
 public class RocketBattery : MonoBehaviour
 {
-    [SerializeField] private GameObject m_RocketPrefub;    
+    [SerializeField] private GameObject m_RocketPrefub;
     [SerializeField] private Transform m_LStandTrans;
     [SerializeField] private Transform m_RStandTrans;
 
@@ -20,7 +20,7 @@ public class RocketBattery : MonoBehaviour
 
     private void Awake()
     {
-        m_Anim = GetComponentInChildren<Animator>();        
+        m_Anim = GetComponentInChildren<Animator>();
 
         //ロケットの初期位置取得
         if (m_LStandTrans == null) //RocketStandの存在チェック
@@ -44,9 +44,9 @@ public class RocketBattery : MonoBehaviour
             m_RRocket = rRocketObj.GetComponent<RocketBase>();
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
-        
+
         m_LRocket.SetLayer(m_RocketLayer);
-        m_RRocket.SetLayer(m_RocketLayer);        
+        m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
@@ -77,9 +77,15 @@ public class RocketBattery : MonoBehaviour
     private void Fire(bool isLeft)
     {
         if (isLeft)
-            StartCoroutine(LAnimatedFire());
+        {
+            if (m_LRocket.IsCanFire)
+                StartCoroutine(LAnimatedFire());
+        }
         else
-            StartCoroutine(RAnimatedFire());
+        {
+            if (m_RRocket.IsCanFire)
+                StartCoroutine(RAnimatedFire());
+        }
     }
 
     //L発射
@@ -95,7 +101,7 @@ public class RocketBattery : MonoBehaviour
         m_Anim.SetTrigger("RFire");
         yield return new WaitForAnimation(m_Anim, 0.7f);
         m_RRocket.Fire();
-    }   
+    }
 
     /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/
 
