@@ -16,7 +16,7 @@ public class WaitForAnimation : CustomYieldInstruction
     public WaitForAnimation(Animator animator, float exitAnimRate = 1.0f, int layerNo = 0)
     {
         //補間中は前のアニメーション判定なのでとりあえずそれを保存
-        Init(animator, exitAnimRate, layerNo, animator.GetCurrentAnimatorStateInfo(layerNo).shortNameHash);          
+        Init(animator, exitAnimRate, layerNo, animator.GetCurrentAnimatorStateInfo(layerNo).shortNameHash);
     }
 
     void Init(Animator animator, float exitAnimRate, int layerNo, int hash)
@@ -24,7 +24,7 @@ public class WaitForAnimation : CustomYieldInstruction
         m_LayerNo = layerNo;
         m_Animator = animator;
         m_LastStateHash = hash;
-        m_ExitAnimRate = exitAnimRate;        
+        m_ExitAnimRate = exitAnimRate;
     }
 
     public override bool keepWaiting
@@ -32,13 +32,9 @@ public class WaitForAnimation : CustomYieldInstruction
         get
         {
             var currentAnimatorState = m_Animator.GetCurrentAnimatorStateInfo(m_LayerNo);
-            //Debug.Log("最初のハッシュ" + m_LastStateHash + "/ 再生中のハッシュ" + currentAnimatorState.shortNameHash);
-
-            //補間が終了していなければ　Wait
-            if (currentAnimatorState.shortNameHash == m_LastStateHash)
-                return true;
-            else//補間が終了 && アニメが指定したExitRateを超えたら
-                return currentAnimatorState.normalizedTime < m_ExitAnimRate;
+            //補間が終了していて（補間時のアニメーションと現在のアニメーションが違う。）
+            //且つ、現在のアニメーションが指定Rateより進んでいる。
+            return (currentAnimatorState.normalizedTime < m_ExitAnimRate) || currentAnimatorState.fullPathHash == m_LastStateHash;
         }
     }
 }

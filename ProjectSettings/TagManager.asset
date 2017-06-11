@@ -11,9 +11,6 @@ TagManager:
   - Beam
   - Boss
   - Wall
-  - Earth Clouds
-  - BossBullet
-  - PlayerBullet
   layers:
   - Default
   - TransparentFX
@@ -32,8 +29,8 @@ TagManager:
   - EnemyBullet
   - Arm
   - PlayerBullet
-  - BossBullet
-  - Boss3
+  - 
+  - 
   - 
   - 
   - 
