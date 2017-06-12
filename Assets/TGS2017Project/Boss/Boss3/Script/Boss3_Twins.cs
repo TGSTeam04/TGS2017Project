@@ -10,7 +10,7 @@ public class Boss3_Twins : MonoBehaviour
         Damageable[] damageComps = GetComponentsInChildren<Damageable>();
         foreach (var comp in damageComps)
         {
-            comp.Event_Damaged = (float d, MonoBehaviour s)
+            comp.Del_ReciveDamage = (float d, MonoBehaviour s)
             => { bossCon.Hp -= d; };
         }        
     }

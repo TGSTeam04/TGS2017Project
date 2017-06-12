@@ -53,7 +53,7 @@ public class Boss : MonoBehaviour
     {
         s_HitPoint = m_MaxHp;
         m_Damage = GetComponent<Damageable>();
-        m_Damage.Event_Damaged = Damage;
+        m_Damage.Del_ReciveDamage = Damage;
     }
 
     //ダメージコンポーネントのダメージ

@@ -42,7 +42,7 @@ public class Boss3_Humanoid : MonoBehaviour
         m_Anim = GetComponentInChildren<Animator>();
         m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
-        m_DamageComp.Event_Damaged = Damaged;
+        m_DamageComp.Del_ReciveDamage = Damaged;
     }
     // Use this for initialization
     void Start()
