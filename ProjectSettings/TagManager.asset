@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - Wall
   - Earth Clouds
+  - Floor
   - BossBullet
   - PlayerBullet
   layers:

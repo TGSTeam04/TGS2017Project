@@ -5,18 +5,94 @@ using UnityEngine;
 public class HumanoidRobot : MonoBehaviour {
 
 	public PlayerController m_PlayerController;
+
+	[SerializeField]
+	private HumanoidBaseConfig m_BaseConfig;
+	public HumanoidConfig m_Config;
+
+	private Rigidbody m_Rigidbody;
+
+	public float m_Energy;
+
+	[SerializeField]
+	private Animator m_Animator;
+
+	private float m_Speed;
+	private float m_Rotate;
+
+	private bool m_Charging;
+
+	[SerializeField]
+	private RocketBattery m_Battery;
+
 	// Use this for initialization
 	void Start () {
-		
+		m_Rigidbody = GetComponent<Rigidbody>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		
+	public void UpdateInput () {
+		if (Input.GetButtonDown(m_BaseConfig.m_InputJump) && IsGround())
+		{
+			m_Animator.SetTrigger("Jump");
+			m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
+		}
+
+		if (Input.GetButtonDown(m_BaseConfig.m_InputCharge) && m_Energy>=m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.IsCanFire)
+		{
+			StartCoroutine(Charge());
+		}
+
+		float energy = 0;
+		if (Input.GetButton(m_BaseConfig.m_InputBoost) && !m_Charging)
+		{
+			m_Animator.SetBool("IsBoost", true);
+			m_Speed = m_Config.m_BoostSpeed;
+			energy = m_Config.m_BoostUseEnergy;
+		}
+		else
+		{
+			m_Animator.SetBool("IsBoost", false);
+			m_Speed = m_Config.m_NormalSpeed;
+			energy = m_Config.m_NormalUseEnergy;
+		}
+		m_Energy -= Time.deltaTime * energy;
+	}
+	public IEnumerator Charge()
+	{
+		m_Charging = true;
+		m_Energy -= m_Config.m_ChargeUseEnergy;
+		//yield return new WaitForSeconds(1f);
+//		yield return new WaitForAnimation(m_Animator,0.3f);
+		m_Battery.Fire();
+		//	yield return new WaitForAnimation(m_Animator,0.7f);
+		yield return new WaitForSeconds(1.0f);
+
+		m_Charging = false;
+	}
+
+	public bool IsGround()
+	{
+		return Physics.CheckSphere(m_Rigidbody.position + Vector3.up * 0.7f, 0.72f, ~LayerMask.GetMask(new string[] { "Player" }));
+	}
+
+	public void Move()
+	{
+		m_Rotate = m_Config.m_ChargeRotate;
+		if (!m_Charging)
+		{
+			m_Rotate = m_Config.m_NormalRotate;
+			Vector3 move_ = new Vector3(Input.GetAxis(m_BaseConfig.m_InputHorizontal), 0, Input.GetAxis(m_BaseConfig.m_InputVertical));
+			m_Animator.SetFloat("Forward",move_.z);
+			m_Animator.SetFloat("Right", move_.x);
+			move_ = m_Rigidbody.rotation * move_;
+			m_Rigidbody.MovePosition(m_Rigidbody.position + move_ * m_Speed * Time.fixedDeltaTime);
+		}
+		transform.Rotate(0, Input.GetAxis(m_BaseConfig.m_InputRotation) * m_Rotate * Time.fixedDeltaTime, 0);
+		m_Animator.SetFloat("Up", m_Rigidbody.velocity.y);
 	}
 	void OnCollisionEnter(Collision other)
 	{
-		Debug.Log("damege");
 		switch (GameManager.Instance.m_PlayMode)
 		{
 			case PlayMode.NoPlay:
@@ -28,8 +104,12 @@ public class HumanoidRobot : MonoBehaviour {
 				{
 					case "Enemy":
 					case "Bullet":
-						m_PlayerController.m_Energy -= 2;
-						Debug.Log("damege");
+						m_Energy -= 2;
+						m_Animator.SetTrigger("Damage");
+						//Debug.Log("damege");
+						break;
+					case "Floor":
+						m_Animator.SetTrigger("Granded");
 						break;
 					default:
 						break;

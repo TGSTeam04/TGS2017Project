@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[CreateAssetMenu(menuName = "MyGame/Create HumanoidConfig", fileName = "HumanoidConfig")]
 public class HumanoidConfig : ScriptableObject {
 	public float m_NormalSpeed;
 	public float m_BoostSpeed;
