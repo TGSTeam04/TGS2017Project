@@ -25,11 +25,15 @@ public class BreakArm : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("これあ");
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && AttackProcess.s_Chance)
         {
             Boss.s_HitPoint -= 0.25f;
             Boss.s_State = Boss.BossState.Invincible;
             Dead();
         }
+        var damageComp = other.gameObject.GetComponent<Damageable>();
+        if (damageComp != null)
+            damageComp.ApplyDamage(150, this);
     }
 }

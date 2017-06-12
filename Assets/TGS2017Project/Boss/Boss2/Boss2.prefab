@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4575566836757692}
   - component: {fileID: 33416825042616108}
   - component: {fileID: 23273104675964738}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4384385944743930}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: C_Wheel_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4402933027701714}
   - component: {fileID: 33640567595179356}
   - component: {fileID: 65712960952914266}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4385413956533558}
   - component: {fileID: 114476737666471836}
   - component: {fileID: 54589762075447008}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: C_Leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4743978287695746}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4569795455060006}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: A_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4343140385104950}
   - component: {fileID: 33840807952761096}
   - component: {fileID: 65634383437943146}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 4519165584244558}
   - component: {fileID: 114602974364387232}
   - component: {fileID: 54988623564793102}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: D_Leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4542945096720638}
   - component: {fileID: 33703827622013250}
   - component: {fileID: 23494883999975782}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4886459383983112}
   - component: {fileID: 33331140915689918}
   - component: {fileID: 23779369517661374}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder2 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4786682118307420}
   - component: {fileID: 33226022244354874}
   - component: {fileID: 23939189811403806}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 4569844369952046}
   - component: {fileID: 33611421102478010}
   - component: {fileID: 65066193040741464}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Collider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4207554889708640}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: All_parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4258991482004736}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 4602689330858744}
   - component: {fileID: 33793464897128154}
   - component: {fileID: 23974743505251286}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder8 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 4000709185819034}
   - component: {fileID: 33402054216351084}
   - component: {fileID: 23256884593362688}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder1 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4784161500499854}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: GunBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4832499527196536}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: C_Leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 4929411535684840}
   - component: {fileID: 33860544145898976}
   - component: {fileID: 23913077901762472}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4306995993914048}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spark1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4760272830261862}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: B_Wheel_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 4347983739967318}
   - component: {fileID: 33126666144163340}
   - component: {fileID: 23488480800621876}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder2 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +375,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4759675365578522}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Barrel_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4498680866894082}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spark3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 4167846206532840}
   - component: {fileID: 33789119653101428}
   - component: {fileID: 23901224431052364}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 4905725052704956}
   - component: {fileID: 33726315550570488}
   - component: {fileID: 23964287570814638}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,9 +443,9 @@ GameObject:
   - component: {fileID: 114245271678019676}
   - component: {fileID: 82090461974333698}
   - component: {fileID: 114914035168213944}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Boss2
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,7 +458,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4190269953147376}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4330540975765630}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: B_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4505536932717254}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: D_Wheel_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 4908077903446894}
   - component: {fileID: 33324047756445708}
   - component: {fileID: 23398002229746702}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder8 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 4210479219778588}
   - component: {fileID: 33618272788514354}
   - component: {fileID: 23478631636889338}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube3 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 4122476483259614}
   - component: {fileID: 114639406557804862}
   - component: {fileID: 54743608946454876}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: A_Leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 4201776721298658}
   - component: {fileID: 33886333851645360}
   - component: {fileID: 23052402668698516}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube3 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 4846307879499796}
   - component: {fileID: 33810730665699726}
   - component: {fileID: 23044405438875118}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 4736462973485300}
   - component: {fileID: 198130337337641570}
   - component: {fileID: 199441436134295788}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 4925734053494380}
   - component: {fileID: 198792488091472552}
   - component: {fileID: 199259322329750254}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4598364011438632}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: A_Wheel_dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 4902539798074690}
   - component: {fileID: 33154739723807368}
   - component: {fileID: 65439582888231610}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4868421379736688}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: D_Leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +669,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4304243127818744}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: D_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 4862825633074794}
   - component: {fileID: 198878731923476292}
   - component: {fileID: 199203706042902968}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4216752657998704}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: C_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4127360095884196}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spark4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4797348072732866}
   - component: {fileID: 95587019317346380}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Enemy_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 4552192048541634}
   - component: {fileID: 33889747999595332}
   - component: {fileID: 23904853951835570}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder1 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   - component: {fileID: 4738636490136426}
   - component: {fileID: 33529292080455054}
   - component: {fileID: 23998560844555286}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +783,7 @@ GameObject:
   - component: {fileID: 4255543688919908}
   - component: {fileID: 33254360588522238}
   - component: {fileID: 23806902417335384}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube8 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 4398003631025792}
   - component: {fileID: 33921654647783464}
   - component: {fileID: 23635375164105996}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4698847916204252}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 4724165386601230}
   - component: {fileID: 33293996498934512}
   - component: {fileID: 23659690784177556}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube8 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 4959146662955696}
   - component: {fileID: 114205682893057246}
   - component: {fileID: 54406506919256262}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: B_Leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 4859713639797450}
   - component: {fileID: 33355160819983224}
   - component: {fileID: 23742257962665490}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 4994824249318584}
   - component: {fileID: 33029156681754386}
   - component: {fileID: 23040309605833570}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCylinder8 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 4859250458633758}
   - component: {fileID: 33507741231049352}
   - component: {fileID: 23114660261224038}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube8 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +915,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4659697077708096}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,7 +932,7 @@ GameObject:
   - component: {fileID: 4869610144961394}
   - component: {fileID: 33024609574758572}
   - component: {fileID: 23354427825838332}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: pCube3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 4414622961357020}
   - component: {fileID: 198107705543538444}
   - component: {fileID: 199569445734218456}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 4737921429827198}
   - component: {fileID: 33535159808837108}
   - component: {fileID: 65901810844703870}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Collider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4433544840177262}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: A_Leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +996,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4194904629049154}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: B_Leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3059,8 +3059,7 @@ MonoBehaviour:
   - {fileID: 1901485958628690}
   - {fileID: 1397894636108156}
   - {fileID: 1682427966457176}
-  m_Damage: {fileID: 0}
-  m_MaxHp: 0
+  m_MaxHp: 1
   m_CollideSound: {fileID: 8300000, guid: dd288f27c9f73dc4d8968532080f7f0d, type: 3}
   m_MoveSound: {fileID: 8300000, guid: f0e7795500410054ea168ba2824ac1a8, type: 3}
   m_StanSound: {fileID: 8300000, guid: 3d4322f7ddd3648409b0eea303a65794, type: 3}

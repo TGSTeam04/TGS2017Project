@@ -29,10 +29,11 @@ public class Boss3_Humanoid : MonoBehaviour
     //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
-    public GameObject m_Target;
 
     //エフェクト
     [SerializeField] GameObject m_Explosion;
+
+    public GameObject tempTarget;
 
     private void Awake()
     {
@@ -43,12 +44,34 @@ public class Boss3_Humanoid : MonoBehaviour
         m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
         m_DamageComp.Del_ReciveDamage = Damaged;
+
+        m_BT = GetComponent<BehaviorTree>();
+        m_BB = GetComponent<BBoard>();
     }
     // Use this for initialization
     void Start()
     {
+        StartCoroutine(UpdateTarget());
         //ビヘイビアツリーのセットアップ
         SetUpBT();
+    }
+    private IEnumerator UpdateTarget()
+    {
+        while (true)
+        {
+            GameManager gm = GameManager.Instance;
+            float Ldistance = (gm.m_LRobot.transform.position - transform.position).magnitude;
+            float Rdistance = (gm.m_RRobot.transform.position - transform.position).magnitude;
+            GameObject target = gm.m_PlayMode == PlayMode.HumanoidRobot
+                ? gm.m_HumanoidRobot
+                : Ldistance < Rdistance
+                        ? gm.m_LRobot
+                        : gm.m_RRobot;
+            //Debug.Log("Target Update" + target.ToString());
+
+            m_BB.GObjValues["target"] = target; //tempTarget;
+            yield return new WaitForSeconds(3.0f);
+        }
     }
 
     private void OnEnable()
@@ -74,6 +97,7 @@ public class Boss3_Humanoid : MonoBehaviour
     private void Damaged(float damage, MonoBehaviour src)
     {
         m_Controller.Hp -= damage;
+        m_Anim.SetTrigger("Damage");
     }
 
     public void Dead()
@@ -94,7 +118,6 @@ public class Boss3_Humanoid : MonoBehaviour
         m_BT = GetComponent<BehaviorTree>();
         m_BT.Init();
         m_BT.SetBoard(m_BB);
-        m_BB.GObjValues["target"] = m_Target;
 
         BParallel par_Look_Other = new BParallel();
         //LookAtPlayer

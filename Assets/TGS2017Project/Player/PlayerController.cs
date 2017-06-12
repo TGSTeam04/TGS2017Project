@@ -322,7 +322,6 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
 
-
 	//public IEnumerator Charge(bool isLeft)
 	//{
 	//    m_IsBeamShooting = true;

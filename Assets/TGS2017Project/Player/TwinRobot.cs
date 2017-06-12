@@ -30,9 +30,9 @@ public class TwinRobot : MonoBehaviour
         HP = m_BaseConfig.m_MaxHP;
     }
 
-    public void Damage(float damage,MonoBehaviour src)
+    public void Damage(float damage, MonoBehaviour src)
     {
-        HP -= damage;
+        HP -= damage / 300;
     }
 
     public void Move()

@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 199745761785693008}
   - component: {fileID: 114148805586186218}
   - component: {fileID: 82605323756621444}
-  m_Layer: 0
+  - component: {fileID: 135933115087197758}
+  m_Layer: 17
   m_Name: BossBullet
-  m_TagString: Untagged
+  m_TagString: BossBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425387227998530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 38, z: 70}
+  m_LocalPosition: {x: -1.97, y: 3.58, z: -14.211494}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,7 +111,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -134,7 +135,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76438a61e9e79864b9dd34778bf689be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ApplyDamage: 50
   m_Speed: 90
+--- !u!135 &135933115087197758
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425387227998530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198527026878244438
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -190,7 +204,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1297714193
+  randomSeed: 786764744
   InitialModule:
     serializedVersion: 3
     enabled: 1
