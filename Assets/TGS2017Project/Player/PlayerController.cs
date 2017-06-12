@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
 	private void ElectricUpdate()
 	{
 		m_Electric.transform.position = Vector3.Lerp(m_LRobotRigidbody.position, m_RRobotRigidbody.position, 0.5f);
-		m_Electric.transform.localScale = new Vector3(1f, 1f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
+		m_Electric.transform.localScale = new Vector3(1.2f, 1.2f, Vector3.Distance(m_LRobotRigidbody.position, m_RRobotRigidbody.position));
 		m_Electric.transform.LookAt(m_LRobot.transform);
 	}
 

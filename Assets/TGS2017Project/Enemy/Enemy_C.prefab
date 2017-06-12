@@ -3543,7 +3543,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_BreakType: 0
-  m_Fragment: {fileID: 0}
+  m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
 --- !u!114 &114777421079484794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3591,8 +3591,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!195 &195390973320678264
 NavMeshAgent:
   m_ObjectHideFlags: 1
