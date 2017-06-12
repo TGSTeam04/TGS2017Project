@@ -16,11 +16,13 @@ public class AttackProcess : MonoBehaviour
 
     public static bool s_Chance = false;
 
+    AudioSource m_Sound;
     Animator m_Anim;
 
     // Use this for initialization
     void Start()
     {
+        m_Sound = GetComponent<AudioSource>();
         m_Anim = GetComponent<Animator>();
     }
 
@@ -36,6 +38,7 @@ public class AttackProcess : MonoBehaviour
     void LeftPunchEnd()
     {
         s_Chance = true;
+        m_Sound.Play();
         m_Anim.speed = 0.0f;
         StartCoroutine(Stop());
         m_LeftPunch.SetActive(false);
@@ -63,6 +66,7 @@ public class AttackProcess : MonoBehaviour
     void RPunchEnd()
     {
         s_Chance = true;
+        m_Sound.Play();
         m_Anim.speed = 0.0f;
         StartCoroutine(Stop());
         m_RightPunch.SetActive(false);
@@ -89,7 +93,7 @@ public class AttackProcess : MonoBehaviour
     }
     void AttackEnd()
     {
-
+        m_Sound.Play();
     }
     void StateEnd()
     {

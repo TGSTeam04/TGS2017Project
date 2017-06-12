@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SecondBoss : MonoBehaviour {
+public class SecondBoss : MonoBehaviour
+{
 
     public enum SecondBossState
     {
@@ -25,10 +26,14 @@ public class SecondBoss : MonoBehaviour {
     public GameObject m_Bullet;
     public Transform m_GunBarrel;
     public GameObject m_Explosion;
+    public GameObject m_LastExplosion;
     public Collider m_Collision;
-    public Image m_HitPointBar;
+    //public Image m_HitPointBar;
     public List<GameObject> m_Particle;
 
+    //ダメージコンポーネント
+    private Damageable m_Damage;
+    [SerializeField] private float m_MaxHp;
     public static float s_HitPoint = 1.0f;
     private int m_AmmoCount = 4;
     private bool m_Fire = true;
@@ -46,7 +51,15 @@ public class SecondBoss : MonoBehaviour {
     GameObject m_Target;
     Vector3 m_TargetPosition;
 
+    public AudioClip m_CollideSound;
+    public AudioClip m_MoveSound;
+    public AudioClip m_StanSound;
+    public AudioClip m_DriftSound;
+
+    AudioSource m_Sound;
     Animator m_Anim;
+
+
 
     public static SecondBossState s_State = SecondBossState.Ready;
 
@@ -56,26 +69,52 @@ public class SecondBoss : MonoBehaviour {
     public float m_Accel = 245.7f;
     Vector3 m_Velocity;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        s_HitPoint = m_MaxHp;
+        m_Damage = GetComponent<Damageable>();
+        m_Damage.Event_Damaged = Damage;
+    }
+
+    //ダメージコンポーネントのダメージ
+    private void Damage(float damage, MonoBehaviour src)
+    {
+        s_HitPoint -= damage;
+        GameManager.Instance.m_BossHpRate = (s_HitPoint / m_MaxHp);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
         m_Target = GameObject.FindGameObjectWithTag("Player");
+        m_Sound = GetComponent<AudioSource>();
         m_Anim = GetComponentInChildren<Animator>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        s_HitPoint = 1.0f;
+        s_State = SecondBossState.Ready;
+        foreach (GameObject p in m_Particle)
+        {
+            p.SetActive(false);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    m_Sound.clip = m_MoveSound;
+        //    m_Sound.Play();
+        //}
 
         if (m_Velocity.magnitude < m_MoveSpeed)
         {
             m_Velocity += transform.forward * m_Accel * Time.deltaTime;
         }
         m_Velocity *= 0.95f;
-   
-        m_HitPointBar.fillAmount = s_HitPoint;
-        if (s_HitPoint <= 0)
-        {
-            Destroy(gameObject);
-        }
+
+        //m_HitPointBar.fillAmount = s_HitPoint;
+
 
         switch (GameManager.Instance.m_PlayMode)
         {
@@ -109,13 +148,25 @@ public class SecondBoss : MonoBehaviour {
                 {
                     StartCoroutine(BattleChange());
                 }
-                if (angle > m_SearchAngle)
+                if (angle > m_SearchAngle && GameManager.Instance.m_PlayMode != PlayMode.Combine)
                 {
+                    if (m_Sound.clip != m_MoveSound)
+                    {
+                        m_Sound.clip = m_MoveSound;
+                        m_Sound.loop = true;
+                        m_Sound.Play();
+                    }
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(m_TargetPosition - transform.position), m_RotateSpeed * Time.deltaTime);
                     transform.Translate(Vector3.forward * m_MoveSpeed / 4 * Time.deltaTime);
                 }
                 else
                 {
+                    if (m_Sound.clip != m_MoveSound)
+                    {
+                        m_Sound.clip = m_MoveSound;
+                        m_Sound.loop = true;
+                        m_Sound.Play();
+                    }
                     transform.Translate(Vector3.forward * m_MoveSpeed / 3 * Time.deltaTime);
                 }
                 break;
@@ -133,6 +184,12 @@ public class SecondBoss : MonoBehaviour {
                     {
                         p.SetActive(true);
                     }
+                    if (m_Sound.clip != m_DriftSound)
+                    {
+                        m_Sound.clip = m_DriftSound;
+                        m_Sound.loop = true;
+                        m_Sound.Play();
+                    }
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(m_TargetPosition - transform.position), m_RotateSpeed * Time.deltaTime);
                     //transform.Translate(m_Velocity * Time.deltaTime);
                     transform.position += m_Velocity * 0.8f * Time.deltaTime;
@@ -142,6 +199,12 @@ public class SecondBoss : MonoBehaviour {
                     foreach (GameObject p in m_Particle)
                     {
                         p.SetActive(false);
+                    }
+                    if (m_Sound.clip != m_MoveSound)
+                    {
+                        m_Sound.clip = m_MoveSound;
+                        m_Sound.loop = true;
+                        m_Sound.Play();
                     }
                     transform.position += m_Velocity * Time.deltaTime;
                     //transform.Translate(m_Velocity * Time.deltaTime);
@@ -164,6 +227,12 @@ public class SecondBoss : MonoBehaviour {
                 break;
             case SecondBossState.Paralysis:
                 m_Anim.speed = 0.0f;
+                if (m_Sound.clip != m_StanSound)
+                {
+                    m_Sound.clip = m_StanSound;
+                    m_Sound.loop = true;
+                    m_Sound.Play();
+                }
                 foreach (GameObject p in m_Particle)
                 {
                     p.SetActive(false);
@@ -172,6 +241,7 @@ public class SecondBoss : MonoBehaviour {
                 break;
             case SecondBossState.Invincible:
                 m_Anim.speed = 1.0f;
+                m_Sound.Stop();
                 foreach (GameObject p in m_Particle)
                 {
                     p.SetActive(false);
@@ -185,11 +255,22 @@ public class SecondBoss : MonoBehaviour {
                 {
                     s_State = SecondBossState.Ready;
                 }
+                if (s_HitPoint <= 0)
+                {
+                    s_State = SecondBossState.Paralysis;
+                    StartCoroutine(Death());
+                    Instantiate(m_LastExplosion, transform.position, transform.rotation);
+                }
                 break;
         }
-        
-	}
 
+    }
+    void Dead()
+    {
+        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+        GameManager.Instance.m_GameStarter.ChangeScenes(8);
+        Destroy(gameObject);
+    }
     IEnumerator BattleChange()
     {
         m_ChangeCounter = m_BattleChangeSpeed;
@@ -223,10 +304,21 @@ public class SecondBoss : MonoBehaviour {
             s_State = SecondBossState.Invincible;
         }
     }
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(4.0f);
+        Dead();
+    }
     void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Wall" && s_State == SecondBossState.Battle)
         {
+            if (m_Sound.clip != m_CollideSound)
+            {
+                m_Sound.clip = m_CollideSound;
+                m_Sound.loop = false;
+                m_Sound.Play();
+            }
             Instantiate(m_Explosion, transform.position, transform.rotation);
             if (m_RecoverCounter <= 0)
             {

@@ -1,16 +1,53 @@
 fileFormatVersion: 2
-guid: 814508e4800cf134da5d975ad6020589
+guid: 95d7af65ce171c04aa15af9872b66ad9
+timeCreated: 1497274792
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Sphere01
-    400000: //RootNode
-    400002: Sphere01
-    2300000: Sphere01
-    3300000: Sphere01
-    4300000: Sphere01
+    100000: centet
+    100002: front
+    100004: poly_R_railgun1
+    100006: poly_R_railgun2
+    100008: poly_R_railgun3
+    100010: poly_R_railgun4
+    100012: poly_R_railgun5
+    100014: poly_R_railgun6
+    100016: poly_R_railgun7
+    100018: poly_R_railgun8
+    100020: railgun
+    100022: //RootNode
+    100024: root
+    400000: centet
+    400002: front
+    400004: poly_R_railgun1
+    400006: poly_R_railgun2
+    400008: poly_R_railgun3
+    400010: poly_R_railgun4
+    400012: poly_R_railgun5
+    400014: poly_R_railgun6
+    400016: poly_R_railgun7
+    400018: poly_R_railgun8
+    400020: railgun
+    400022: //RootNode
+    400024: root
+    4300000: poly_R_railgun5
+    4300002: poly_R_railgun7
+    4300004: poly_R_railgun8
+    4300006: poly_R_railgun6
+    4300008: poly_R_railgun4
+    4300010: poly_R_railgun3
+    4300012: poly_R_railgun2
+    4300014: poly_R_railgun1
     9500000: //RootNode
+    13700000: poly_R_railgun1
+    13700002: poly_R_railgun2
+    13700004: poly_R_railgun3
+    13700006: poly_R_railgun4
+    13700008: poly_R_railgun5
+    13700010: poly_R_railgun6
+    13700012: poly_R_railgun7
+    13700014: poly_R_railgun8
   materials:
     importMaterials: 1
     materialName: 0
@@ -37,7 +74,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 30
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -51,12 +88,12 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-  importAnimation: 1
+    tangentImportMode: 3
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -73,7 +110,7 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1

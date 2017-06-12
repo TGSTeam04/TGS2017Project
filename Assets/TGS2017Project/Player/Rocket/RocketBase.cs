@@ -18,6 +18,9 @@ public class RocketBase : MonoBehaviour
     //各コンポーネント
     private Rigidbody m_Rigidbody;
     private Collider m_Collider;
+    private AudioSource m_AudioSrc;
+    [SerializeField] private AudioClip m_SEFire;
+    [SerializeField] private AudioClip m_SEHit;
 
     //ロケットの状態
     public RocketState m_State;
@@ -52,7 +55,9 @@ public class RocketBase : MonoBehaviour
     private void Awake()
     {
         m_ChildEnemys = new List<EnemyBase>();
-        m_IsKnockBack = true;
+        m_AudioSrc = gameObject.AddComponent<AudioSource>();
+        m_AudioSrc.spatialBlend = 1.0f;
+        m_IsKnockBack = true;        
     }
 
     // Use this for initialization
@@ -63,6 +68,10 @@ public class RocketBase : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            m_AudioSrc.Play();
+        }
         switch (m_State)
         {
             case RocketState.Idle:
@@ -105,9 +114,10 @@ public class RocketBase : MonoBehaviour
                 m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
-                    m_State = RocketState.Idle;
+                    m_State = RocketState.Idle;                    
                     gameObject.SetActive(false);
-                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    m_Battery.CollectRocket();
+                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);                                       
                 }
                 break;
             case RocketState.Reflected:
@@ -120,11 +130,12 @@ public class RocketBase : MonoBehaviour
 
     public void Fire()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(true);        
         m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_Battery.transform.rotation;
         m_State = RocketState.Fire;
+        m_AudioSrc.PlayOneShot(m_SEFire);
         m_Timer = 0;
     }
 
@@ -157,6 +168,7 @@ public class RocketBase : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
+        m_AudioSrc.PlayOneShot(m_SEHit);
 
         if (obj.tag == m_TargetTag)
         {//攻撃対象に当たったら

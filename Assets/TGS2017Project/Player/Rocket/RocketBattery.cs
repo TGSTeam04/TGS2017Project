@@ -12,16 +12,21 @@ public class RocketBattery : MonoBehaviour
     [SerializeField] private Transform m_LStandTrans;
     [SerializeField] private Transform m_RStandTrans;
     [SerializeField] private float m_KnockBackForce;
+    [SerializeField] private AudioClip m_SEColectRocet;
 
     [HideInInspector] public RocketBase m_LRocket;
     [HideInInspector] public RocketBase m_RRocket;
     public string m_RocketLayer;
     public string m_TargetTag;
     private Animator m_Anim;
+    private AudioSource m_AudioSrc;    
 
     private void Awake()
     {
         m_Anim = GetComponentInChildren<Animator>();
+        m_AudioSrc = gameObject.AddComponent<AudioSource>();
+        m_AudioSrc.spatialBlend = 1.0f;
+        m_AudioSrc.playOnAwake = false;
 
         //ロケットの初期位置取得
         if (m_LStandTrans == null) //RocketStandの存在チェック
@@ -55,8 +60,9 @@ public class RocketBattery : MonoBehaviour
         m_RRocket.m_Battery = this;
     }
 
-    private void Start()
+    public void CollectRocket()
     {
+        m_AudioSrc.PlayOneShot(m_SEColectRocet);
     }
 
     //LRどちらでもいいから発射可能か確認

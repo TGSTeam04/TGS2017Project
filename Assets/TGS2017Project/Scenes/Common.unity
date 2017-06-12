@@ -426,6 +426,7 @@ MonoBehaviour:
   m_LoadingProgress: 0
   m_PlayScore: 0
   m_PlayTime: 0
+  m_BossHpRate: 0
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0

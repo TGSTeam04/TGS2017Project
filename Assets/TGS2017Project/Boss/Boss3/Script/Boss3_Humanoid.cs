@@ -17,47 +17,38 @@ public class Boss3_Humanoid : MonoBehaviour
     public float m_RocketInterval;
     public float m_NeedMoveDistance;
 
-    //各コンポーネント
-    public NavMeshAgent m_NavAgent;
-    public Rigidbody m_Rb;
-    public Animator m_Anim;
-    public RocketBattery m_Battery;
-    public Damageable m_DamageComp;
+    //各コンポーネント    
+    private NavMeshAgent m_NavAgent;
+    private Rigidbody m_Rb;
+    private Animator m_Anim;
+    private RocketBattery m_Battery;
+    private Damageable m_DamageComp;    
 
     //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
     public GameObject m_Target;
 
-    private void OnDisable()
-    {
-        m_BT.IsStop = true;
-    }
-    private void OnEnable()
-    {
-        StartCoroutine(Kimepo());
-    }
-    private IEnumerator Kimepo()
-    {
-        yield return new WaitForAnimation(m_Anim);
-        m_BT.IsStop = false;
-    }
-
     private void Awake()
-    {         
+    {
         m_Controller = GetComponentInParent<Boss3_Controller>();
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Rb = GetComponent<Rigidbody>();
         m_Anim = GetComponentInChildren<Animator>();
         m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
-        m_DamageComp.Event_Damaged = Damaged;        
+        m_DamageComp.Event_Damaged = Damaged;
     }
     // Use this for initialization
     void Start()
     {
         //ビヘイビアツリーのセットアップ
         SetUpBT();
+    }
+    private IEnumerator Kimepo()
+    {
+        yield return new WaitForAnimation(m_Anim);
+        m_BT.IsStop = false;
     }
     // Update is called once per frame
     public void BossUpdate()
@@ -71,7 +62,7 @@ public class Boss3_Humanoid : MonoBehaviour
     }
     private void Damaged(float damage, MonoBehaviour src)
     {
-        m_Controller.Hp -= damage;     
+        m_Controller.Hp -= damage;
         //m_Anim.SetTrigger("Damage");
     }
 

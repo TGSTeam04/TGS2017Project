@@ -22,6 +22,10 @@ public class BehaviorTree : MonoBehaviour
         if (m_VirtualRoot != null)
             m_VirtualRoot.Initialize();
     }
+    private void OnDisable()
+    {
+        IsStop = true;
+    }
 
     public void Init()
     {
