@@ -39,7 +39,8 @@ public class HumanoidRobot : MonoBehaviour
     {
         //ApplyDamageされたときの処理
         m_Energy -= damage;
-    }
+		m_Animator.SetTrigger("Damage");
+	}
 
     // Update is called once per frame
     public void UpdateInput()
@@ -128,8 +129,8 @@ public class HumanoidRobot : MonoBehaviour
                 {
                     case "Enemy":
                     case "Bullet":
-                        m_Energy -= 2;
-                        m_Animator.SetTrigger("Damage");
+                        //m_Energy -= 2;
+                        //m_Animator.SetTrigger("Damage");
                         //Debug.Log("damege");
                         break;
                     case "Floor":
