@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 製作者：大格
@@ -58,7 +59,8 @@ public class StageManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //m_Observer.NotifyToSubjects("")
+		//m_Observer.NotifyToSubjects("")
+		SceneManager.SetActiveScene(gameObject.scene);
     }
 
     // Update is called once per frame

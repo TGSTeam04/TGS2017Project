@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Name: BreakEnemyTable
   m_EditorClassIdentifier: 
   m_AddEnergy:
-  - 5
-  - 5
-  - 10
-  - 15
-  - 20
-  - 25
-  - 30
-  - 35
-  - 40
-  - 45
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 1000
+  - 10001
+  - 1000

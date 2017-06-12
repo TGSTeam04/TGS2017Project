@@ -26,8 +26,11 @@ public class GameStarter : MonoBehaviour {
 	private string m_LoadingSceneName = "Loading";
 
 	private bool m_Loading;
+
+	private Scene m_Common;
 	// Use this for initialization
 	void Start () {
+		m_Common = SceneManager.GetActiveScene();
 		ChangeScenes(0);
 	}
 	
@@ -88,6 +91,9 @@ public class GameStarter : MonoBehaviour {
 
 		float time = GameManager.Instance.m_LoadingAnimationTime;
 		yield return new WaitForSeconds(time);
+		yield return null;
+
+		SceneManager.SetActiveScene(m_Common);
 
 		int progresscount =m_LoadedScenes.Count + m_SceneListTable[i].Scene.Count;
 		int count = 0;

@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 20262053}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 176864390}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1228,7 +1228,7 @@ GameObject:
   - component: {fileID: 300561875}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2066,7 +2066,7 @@ GameObject:
   - component: {fileID: 756866789}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2409,7 +2409,7 @@ GameObject:
   - component: {fileID: 791989627}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2497,7 +2497,7 @@ GameObject:
   - component: {fileID: 800052015}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2649,7 +2649,7 @@ GameObject:
   - component: {fileID: 819298520}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3142,7 +3142,7 @@ GameObject:
   - component: {fileID: 915989612}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3257,7 +3257,7 @@ GameObject:
   - component: {fileID: 941579705}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3869,7 +3869,7 @@ GameObject:
   - component: {fileID: 1067282609}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3953,7 +3953,7 @@ GameObject:
   - component: {fileID: 1088817025}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4567,7 +4567,7 @@ GameObject:
   - component: {fileID: 1292657157}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4880,7 +4880,7 @@ GameObject:
   - component: {fileID: 1420095465}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5093,7 +5093,7 @@ GameObject:
   - component: {fileID: 1461495066}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5261,7 +5261,7 @@ GameObject:
   - component: {fileID: 1501321306}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5569,7 +5569,7 @@ GameObject:
   - component: {fileID: 1585453595}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6135,7 +6135,7 @@ GameObject:
   - component: {fileID: 1716939543}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -7065,7 +7065,7 @@ GameObject:
   - component: {fileID: 2052941966}
   m_Layer: 13
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

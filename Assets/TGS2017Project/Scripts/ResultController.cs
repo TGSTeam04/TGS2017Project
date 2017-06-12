@@ -13,6 +13,8 @@ public class ResultController : MonoBehaviour {
 
 	IEnumerator Start()
 	{
+		m_Time = GameManager.Instance.m_PlayTime;
+		m_Score = GameManager.Instance.m_PlayScore;
 		yield return new WaitForSeconds(1);
 		for (float t = 0; t < 1.0f ; t += Time.deltaTime)
 		{

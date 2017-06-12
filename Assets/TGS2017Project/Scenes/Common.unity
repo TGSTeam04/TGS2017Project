@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.30036062, g: 0.25133297, b: 0.20512995, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 23800000, guid: badef495bd315614eaf4ba7a82c8de28, type: 2}
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &836631506
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,15 +360,15 @@ MonoBehaviour:
     - Option
   - Scene:
     - Player
-    - TestStage
+    - Stage 1
     - GameUI
   - Scene:
-    - TestStage
     - Player
+    - Stage 2
     - GameUI
   - Scene:
-    - TestStage
     - Player
+    - Stage 3
     - GameUI
   - Scene:
     - Select
@@ -411,8 +411,6 @@ MonoBehaviour:
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
-  m_LevelParameterTable: {fileID: 11400000, guid: b4b3682a8e832bc40ad9a566a3456ecc,
-    type: 2}
   m_Level: 0
   m_PlayerController: {fileID: 0}
   m_StageManger: {fileID: 0}
@@ -426,6 +424,8 @@ MonoBehaviour:
   m_BreakEnemyTable: {fileID: 11400000, guid: 3b3856ea162c1df4c80dccf990a36a09, type: 2}
   m_LoadingAnimationTime: 0.5
   m_LoadingProgress: 0
+  m_PlayScore: 0
+  m_PlayTime: 0
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0

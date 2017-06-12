@@ -18,8 +18,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	public GameObject m_LRobot;
 	public GameObject m_RRobot;
 	public GameObject m_HumanoidRobot;
-	[SerializeField]
-	private LevelParameterTable m_LevelParameterTable;
 	public int m_Level;
 	public PlayerController m_PlayerController;
 
@@ -43,6 +41,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	public float m_LoadingAnimationTime;
 	public float m_LoadingProgress;
 
+	public int m_PlayScore;
+	public float m_PlayTime;
+
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +52,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.P))
+		switch (m_PlayMode)
+		{
+			case PlayMode.NoPlay:
+				break;
+			case PlayMode.TwinRobot:
+			case PlayMode.HumanoidRobot:
+				m_PlayTime += Time.deltaTime;
+				break;
+			case PlayMode.Combine:
+			case PlayMode.Release:
+				break;
+			default:
+				break;
+		}
+		if (Input.GetKeyDown(KeyCode.P))
             Pauser.Pause();
         if (Input.GetKeyDown(KeyCode.O))
             Pauser.Resume();

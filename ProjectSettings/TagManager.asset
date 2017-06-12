@@ -11,6 +11,8 @@ TagManager:
   - Beam
   - Boss
   - Wall
+  - Earth Clouds
+  - Floor
   layers:
   - Default
   - TransparentFX
