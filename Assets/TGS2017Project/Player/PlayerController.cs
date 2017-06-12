@@ -65,6 +65,19 @@ public class PlayerController : MonoBehaviour
 	public GameObject m_ChargeEffect;
 	public GameObject m_CombineEffect;
 
+	[SerializeField]
+	private HumanoidConfig m_HumanoidN;
+	[SerializeField]
+	private HumanoidConfig m_HumanoidT;
+	[SerializeField]
+	private HumanoidConfig m_HumanoidI;
+
+	[SerializeField]
+	private Material m_HumanoidMaterial;
+
+	private float m_AxisL;
+	private float m_AxisR;
+
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
@@ -95,6 +108,9 @@ public class PlayerController : MonoBehaviour
 		m_RotateTwinRoboMode.Add(TwinRoboMode.B, Quaternion.Euler(0, 90, 0));
 		m_RMode = TwinRoboMode.A;
 		m_LMode = TwinRoboMode.A;
+
+		m_HumanoidMaterial.color = m_ModeAA;
+
 	}
 
 	// Update is called once per frame
@@ -105,21 +121,23 @@ public class PlayerController : MonoBehaviour
 			case PlayMode.NoPlay:
 				break;
 			case PlayMode.TwinRobot:
-				if (Input.GetButtonDown("Combine"))
+				if (Input.GetButton("CombineL")&& Input.GetButton("CombineR"))
 				{
 					StartCoroutine(Combine());
 				}
-				if (Input.GetKeyDown(KeyCode.Slash))
+				if (Input.GetAxis("RotateL")>0.5f&&m_AxisL<=0.5f)
 				{
 					m_LMode = m_LMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
 				}
-				if (Input.GetKeyDown(KeyCode.Backslash))
+				m_AxisL = Input.GetAxis("RotateL");
+				if (Input.GetAxis("RotateR")>0.5f && m_AxisR <= 0.5f)
 				{
 					m_RMode = m_RMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
 				}
+				m_AxisR = Input.GetAxis("RotateR");
 				break;
 			case PlayMode.HumanoidRobot:
-				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && (Input.GetButtonDown("Release") || m_HumanoidRobot.m_Energy <= 0))
+				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
 				{
 					m_HumanoidRobot.m_Energy = 0;
 					StartCoroutine(Release());
@@ -151,8 +169,8 @@ public class PlayerController : MonoBehaviour
 				m_TwinRobotL.Look(m_RRobotRigidbody.position);
 				m_TwinRobotR.Look(m_LRobotRigidbody.position);
 
-				//m_LRobotRigidbody.rotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position) * m_RotateTwinRoboMode[m_LMode];
-				//m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
+				m_LRobotRigidbody.rotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position) * m_RotateTwinRoboMode[m_LMode];
+				m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
 				m_HumanoidRobot.Move();
@@ -249,8 +267,10 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_Level += m_Exp / nextexp;
 		m_Exp = m_Exp % nextexp;
 
-		m_HRobot.transform.FindChild("Capsule").GetComponent<Renderer>().material.color = m_LMode != m_RMode ? m_ModeAB :
+		m_HumanoidMaterial.color = m_LMode != m_RMode ? m_ModeAB :
 																m_RMode == TwinRoboMode.A ? m_ModeAA : m_ModeBB;
+		m_HumanoidRobot.m_Config = m_LMode != m_RMode ? m_HumanoidT :
+																m_RMode == TwinRoboMode.A ? m_HumanoidN : m_HumanoidI;
 
 		m_LRobotRigidbody.MovePosition(LSecondTarget);
 		m_RRobotRigidbody.MovePosition(RSecondTarget);
@@ -265,6 +285,7 @@ public class PlayerController : MonoBehaviour
 	public IEnumerator Release()
 	{
 		GameManager.Instance.m_PlayMode = PlayMode.Release;
+		m_HumanoidMaterial.color = m_ModeAA;
 		m_HRobot.SetActive(false);
 		m_LRobot.SetActive(true);
 		m_RRobot.SetActive(true);

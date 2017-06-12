@@ -72,6 +72,10 @@ public class GameStarter : MonoBehaviour {
 		{
 			ChangeScenes(8);
 		}
+		if (Input.GetKeyDown(KeyCode.Alpha9))
+		{
+			ChangeScenes(9);
+		}
 
 
 	}
@@ -83,6 +87,7 @@ public class GameStarter : MonoBehaviour {
 
 	IEnumerator LoadScene(int i)
 	{
+		GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
 		if (m_Loading) yield break;
 		m_Loading = true;
 		GameManager.Instance.m_LoadingProgress = 0;
