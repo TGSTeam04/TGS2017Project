@@ -9,6 +9,11 @@ public class BRoot : BComposite
     {
         m_RealRoot = new BTask();
     }
+    public override void Initialize()
+    {
+        base.Initialize();
+        m_RealRoot.Initialize();
+    }
     protected override void OnExecute()
     {
         m_RealRoot.TryExecute();

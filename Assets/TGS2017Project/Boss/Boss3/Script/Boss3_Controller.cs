@@ -5,8 +5,14 @@ using UnityEngine.Events;
 
 public class Boss3_Controller : MonoBehaviour
 {
+    public float m_MaxHp;
+    private float m_Hp;
+
     public GameObject m_TwinRobot;
-    public GameObject m_HRobot;
+    public Boss3_Humanoid m_HRobot;
+    [HideInInspector] public PlayMode m_State;
+    public float m_ReleaseTime;
+    [HideInInspector] public float m_StateTimer;
 
     public AnimationClip m_CombineAnim;
     public AnimationClip m_ReleaseAnim;
@@ -19,7 +25,7 @@ public class Boss3_Controller : MonoBehaviour
 
     //合体完了時イベント        
     //public UnityAction m_CombineEnd;
-    public UnityEvent m_CombineEnd;
+    //public UnityEvent m_CombineEnd;
 
     //プレイヤーと共有するとき使う
     //各イベント
@@ -31,15 +37,54 @@ public class Boss3_Controller : MonoBehaviour
     //操作等の行動を無効化するためのスクリプトの参照
     //public MonoBehaviour m_Controller;
 
+    public float Hp
+    {
+        get { return m_Hp; }
+        set
+        {
+            m_Hp = value;
+            Debug.Log("ダメージ" + value);
+            if (Hp <= 0)
+            {
+                m_State = PlayMode.NoPlay;
+                Debug.Log("Boss3死亡");
+            }
+        }
+    }
+
+    private void Awake()
+    {
+        m_Hp = m_MaxHp;
+        m_State = PlayMode.HumanoidRobot;
+    }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-            StartCoroutine(Combine());
-        if (Input.GetKeyDown(KeyCode.R))
-            StartCoroutine(Release());
+        m_StateTimer += Time.deltaTime;
+        switch (m_State)
+        {
+            case PlayMode.HumanoidRobot:
+                m_HRobot.BossUpdate();
+                break;
+            case PlayMode.Release:
+                if (m_StateTimer > m_ReleaseTime)
+                    CombineStart();
+                break;
+            default:
+                break;
+        }
     }
-    public IEnumerator Combine()
+    public void CombineStart()
     {
+        StartCoroutine(Combine());
+    }
+    public void ReleaseStart()
+    {
+        StartCoroutine(Release());
+    }
+
+    private IEnumerator Combine()
+    {
+        m_StateTimer = 0.0f;
         Vector3 pos = m_TwinRobot.transform.position;
         transform.position = pos;
         m_HRobot.transform.position = pos;
@@ -54,11 +99,14 @@ public class Boss3_Controller : MonoBehaviour
         }
         StartCoroutine(CombineEffect());
         m_HAnimator.SetTrigger("Combined");
-        m_CombineEnd.Invoke();
+        //m_CombineEnd.Invoke();
+        m_State = PlayMode.HumanoidRobot;
     }
 
-    public IEnumerator Release()
+    private IEnumerator Release()
     {
+        m_StateTimer = 0.0f;
+        m_State = PlayMode.Release;
         transform.position = m_HAnimator.transform.position;
         StartCoroutine(CombineEffect());
         float timer = 0.0f;

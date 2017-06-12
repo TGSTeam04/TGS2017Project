@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33620872918495592}
   - component: {fileID: 136736847216827934}
   - component: {fileID: 23627584221161466}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33482668587227516}
   - component: {fileID: 135742831931001704}
   - component: {fileID: 23038148723732618}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,9 +59,9 @@ GameObject:
   - component: {fileID: 54138577234799254}
   - component: {fileID: 65181894797639614}
   - component: {fileID: 135156823380407836}
-  m_Layer: 15
+  m_Layer: 16
   m_Name: Prefub_Rocket
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,11 +224,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_State: 0
+  m_Battery: {fileID: 0}
   m_StandTrans: {fileID: 0}
+  m_ApplyDamage: 10
+  m_ChildApplyDamage: 5
   m_Speed: 20
   m_BackSpeed: 40
   m_AdvanceTime: 1
   m_Timer: 0
+  m_TargetTag: Boss
+  m_BuriedTime: 1
+  m_IsKnockBack: 0
   m_ChildEnemys: []
 --- !u!135 &135156823380407836
 SphereCollider:

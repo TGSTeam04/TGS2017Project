@@ -193,6 +193,7 @@ public class RocketBase : MonoBehaviour
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
         target.GetComponent<Damageable>().ApplyDamage(damage, this);        
         BreakChildEnemys();
+        Debug.Log("ターゲットダメージ" + damage);
         m_State = RocketState.Back;
     }
 

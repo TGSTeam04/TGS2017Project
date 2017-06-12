@@ -49,17 +49,24 @@ public class BNode
         m_ParentSuccess = parent.ChildSuccess;
         m_ParentFailure = parent.ChildFailure;
     }
+    //初期化
+    public virtual void Initialize()
+    {
+        foreach (var dec in m_Decorators)
+            dec.Initialize();
+    }
     public virtual void Reset()
     {
         m_State = BState.Ready;
-        Initialize();
-
+        StateChanged();
+        OnReset();
+        //Debug.Log(ToString());
         foreach (var dec in m_Decorators)
-            dec.Reset();
+            dec.NodeStateChanged();
     }
     protected virtual void Succes()
     {
-        Initialize();
+        StateChanged();
         m_ParentSuccess();
         m_State = BState.Success;
         foreach (var dec in m_Decorators)
@@ -68,17 +75,16 @@ public class BNode
     }
     protected virtual void Failure()
     {
-        Initialize();
+        StateChanged();
         m_ParentFailure();
         m_State = BState.Failure;
         foreach (var dec in m_Decorators)
             dec.NodeFailure();
     }
-    public virtual void Initialize()
-    {
-        foreach (var dec in m_Decorators)
-            dec.Initialize();
 
+    //リセット、サクセス、フェイラーで共通の処理
+    public virtual void StateChanged()
+    {
     }
     //public virtual void Enter() { }
 
@@ -109,13 +115,14 @@ public class BNode
             FirstExecute();
             m_State = BState.Updating;
         }
-        else        
-            OnExecute();        
+        else
+            OnExecute();
+
+        //Debug.Log(ToString());
     }
     protected virtual void FirstExecute() { }
     protected virtual void OnExecute() { }
+    public virtual void OnReset() { }
 
-    public virtual void OnDelete()
-    {
-    }
+    public virtual void OnDelete() { }
 }

@@ -15,7 +15,8 @@ public class BD_CloserThen : BDecorator
     public override bool OnCheck()
     {
         Vector3 pos = m_BB.transform.position;
-        Vector3 targetPos = m_BB.GObjValues[m_Target].transform.position;        
-        return Vector3.Distance(pos, targetPos) < m_Distance;
+        Vector3 targetPos = m_BB.GObjValues[m_Target].transform.position;
+        float distance = Vector3.Distance(pos, targetPos);
+        return distance < m_Distance;
     }
 }

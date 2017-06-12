@@ -738,7 +738,7 @@ GameObject:
   - component: {fileID: 186941061}
   m_Layer: 18
   m_Name: Boss3_Humanoid
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -750,7 +750,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186941052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.67, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 809737175}
@@ -769,8 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4290acb2159a7846a0ffd71b568ecf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxHp: 100
-  m_Hp: 0
+  m_Controller: {fileID: 0}
   m_Speed: 10
   m_RocketSpeed: 10
   m_RocketRange: 32.05
@@ -782,7 +781,6 @@ MonoBehaviour:
   m_Battery: {fileID: 186941060}
   m_DamageComp: {fileID: 0}
   m_Target: {fileID: 1030254894}
-  m_Temp: {fileID: 881753084}
 --- !u!195 &186941055
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -843,7 +841,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BB: {fileID: 0}
-  m_IsStop: 0
 --- !u!54 &186941059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1449,9 +1446,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 287747815}
+  - component: {fileID: 287747817}
+  - component: {fileID: 287747816}
   m_Layer: 18
   m_Name: Boss3_Twins
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1472,6 +1471,28 @@ Transform:
   m_Father: {fileID: 1391144654}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &287747816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287747814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be20e31a2e9954f4891dc1c8b2ae8c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &287747817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287747814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e9b33a8b5b9d84abb539180969d34b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &323564136
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,9 +2165,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 616072198}
+  - component: {fileID: 616072199}
   m_Layer: 18
   m_Name: RBoss3Under
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2165,6 +2187,18 @@ Transform:
   m_Father: {fileID: 287747815}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &616072199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 616072197}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 1.2, z: 2.5}
+  m_Center: {x: 0, y: 0.7, z: -0.2}
 --- !u!1 &620006805
 GameObject:
   m_ObjectHideFlags: 0
@@ -4244,9 +4278,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1015231644}
   - component: {fileID: 1015231643}
+  - component: {fileID: 1015231645}
   m_Layer: 18
   m_Name: Boss3Top
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4282,6 +4317,18 @@ Transform:
   m_Father: {fileID: 287747815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &1015231645
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1015231642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 4}
+  m_Center: {x: 0, y: 1, z: 1.4}
 --- !u!1 &1030254894
 GameObject:
   m_ObjectHideFlags: 0
@@ -5587,19 +5634,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385e390d4b7bf6f4a9c033ce1e49a0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MaxHp: 100
   m_TwinRobot: {fileID: 287747814}
-  m_HRobot: {fileID: 186941052}
+  m_HRobot: {fileID: 186941054}
+  m_State: 0
+  m_ReleaseTime: 3
+  m_StateTimer: 0
   m_CombineAnim: {fileID: 7400000, guid: baace44365813484d8b461930445a2a2, type: 2}
   m_ReleaseAnim: {fileID: 7400000, guid: 5434a36098072124e8954d8ae5fa6f22, type: 2}
   m_ElectricGuid: {fileID: 1184462773}
   m_Electric: {fileID: 263391535}
   m_CombineEffect: {fileID: 1593739951}
   m_HAnimator: {fileID: 998622897}
-  m_CombineEnd:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!1 &1408600627
 GameObject:
   m_ObjectHideFlags: 0

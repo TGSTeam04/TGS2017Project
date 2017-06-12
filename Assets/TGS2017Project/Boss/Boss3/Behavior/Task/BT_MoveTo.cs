@@ -18,7 +18,7 @@ public class BT_MoveTo : BTask
     float m_Timer;
     NavMeshAgent m_NavAgent;
 
-    public BT_MoveTo(string target, float speed = 10.0f, float targetDistance = 5.0f, float updateInterval = 1.0f)
+    public BT_MoveTo(string target, float speed = 10.0f, float targetDistance = 1.0f, float updateInterval = 1.0f)
     {
         m_TargetKey = target;
         m_Speed = speed;
@@ -61,9 +61,9 @@ public class BT_MoveTo : BTask
         }
     }
 
-    public override void Initialize()
+    public override void StateChanged()
     {
-        base.Initialize();
+        base.StateChanged();
 
         if (m_IsCanCancelMove)//移動中止            
             m_BB.StartCoroutine(m_BB.UpdateWhileMethodBool(StopEase));
