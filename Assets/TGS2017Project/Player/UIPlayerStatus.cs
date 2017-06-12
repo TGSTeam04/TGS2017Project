@@ -7,7 +7,14 @@ public class UIPlayerStatus : MonoBehaviour {
 	public Image m_Energy;
 	public PlayerController m_Player;
 	public GameObject m_Black;
-	public Text m_CountDown;
+
+	public Image m_BossHP;
+
+	[SerializeField]
+	private GameObject m_ImageA;
+	[SerializeField]
+	private GameObject m_ImageB;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,16 +25,19 @@ public class UIPlayerStatus : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		m_Energy.fillAmount = m_Player.Energy / GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[4];
+		m_BossHP.fillAmount = GameManager.Instance.m_BossHpRate;
 	}
 	IEnumerator countdown()
 	{
 		m_Black.SetActive(true);
+		m_ImageA.SetActive(false);
+		m_ImageB.SetActive(false);
 		yield return new WaitForSeconds(GameManager.Instance.m_LoadingAnimationTime);
-		m_CountDown.text = "3";
 		yield return new WaitForSeconds(1);
-		m_CountDown.text = "2";
+		m_ImageA.SetActive(true);
 		yield return new WaitForSeconds(1);
-		m_CountDown.text = "1";
+		m_ImageA.SetActive(false);
+		m_ImageB.SetActive(true);
 		yield return new WaitForSeconds(1);
 		m_Black.SetActive(false);
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;

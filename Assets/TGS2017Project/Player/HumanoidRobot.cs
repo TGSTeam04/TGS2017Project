@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class HumanoidRobot : MonoBehaviour
 {
 
@@ -30,19 +31,14 @@ public class HumanoidRobot : MonoBehaviour
 
     private void Awake()
     {
-        m_Damage = GetComponent<Damageable>();
+		m_Rigidbody = GetComponent<Rigidbody>();
+		m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
     public void Damage(float damage, MonoBehaviour src)
     {
         //ApplyDamageされたときの処理
         m_Energy -= damage;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -54,12 +50,16 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
         }
 
-        if (Input.GetButtonDown(m_BaseConfig.m_InputCharge) && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.IsCanFire)
-        {
-            StartCoroutine(Charge());
-        }
+			if (Input.GetButtonDown("RotateL") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
+			{
+				StartCoroutine(Charge(true));
+			}
+			else if (Input.GetButtonDown("RotateR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
+			{
+				StartCoroutine(Charge(false));
+			}
 
-        float energy = 0;
+			float energy = 0;
         if (Input.GetButton(m_BaseConfig.m_InputBoost) && !m_Charging)
         {
             m_Animator.SetBool("IsBoost", true);
@@ -74,20 +74,28 @@ public class HumanoidRobot : MonoBehaviour
         }
         m_Energy -= Time.deltaTime * energy;
     }
-    public IEnumerator Charge()
-    {
-        m_Charging = true;
-        m_Energy -= m_Config.m_ChargeUseEnergy;
-        //yield return new WaitForSeconds(1f);
-        //		yield return new WaitForAnimation(m_Animator,0.3f);
-        m_Battery.Fire();
-        //	yield return new WaitForAnimation(m_Animator,0.7f);
-        yield return new WaitForSeconds(1.0f);
+		public IEnumerator Charge(bool L)
+		{
+			m_Charging = true;
+			m_Energy -= m_Config.m_ChargeUseEnergy;
+			//yield return new WaitForSeconds(1f);
+			//		yield return new WaitForAnimation(m_Animator,0.3f);
+			if (L)
+			{
+				StartCoroutine(m_Battery.LAnimatedFire());
+			}
+			else
+			{
+				StartCoroutine(m_Battery.RAnimatedFire());
+			}
+			//m_Battery.Fire();
+			//	yield return new WaitForAnimation(m_Animator,0.7f);
+			yield return new WaitForSeconds(1.0f);
 
-        m_Charging = false;
-    }
+			m_Charging = false;
+		}
 
-    public bool IsGround()
+		public bool IsGround()
     {
         return Physics.CheckSphere(m_Rigidbody.position + Vector3.up * 0.7f, 0.72f, ~LayerMask.GetMask(new string[] { "Player" }));
     }
