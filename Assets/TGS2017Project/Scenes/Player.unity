@@ -5805,7 +5805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RocketPrefub: {fileID: 0}
+  m_RocketPrefub: {fileID: 1946853532632280, guid: 86b0ff5a1b73f3c4da1391651a9353cc,
+    type: 2}
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
   m_LRocket: {fileID: 0}

@@ -11,6 +11,7 @@ public class RocketBattery : MonoBehaviour
     [SerializeField] private GameObject m_RocketPrefub;
     [SerializeField] private Transform m_LStandTrans;
     [SerializeField] private Transform m_RStandTrans;
+    [SerializeField] private float m_KnockBackForce;
 
     [HideInInspector] public RocketBase m_LRocket;
     [HideInInspector] public RocketBase m_RRocket;
@@ -45,6 +46,7 @@ public class RocketBattery : MonoBehaviour
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
 
+        SetKnockBackForce(m_KnockBackForce);
         m_LRocket.SetLayer(m_RocketLayer);
         m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
@@ -120,4 +122,10 @@ public class RocketBattery : MonoBehaviour
         m_LRocket.m_AdvanceTime = time;
         m_RRocket.m_AdvanceTime = time;
     }
+    public void SetKnockBackForce(float force)
+    {
+        m_LRocket.m_KnockBackForce = force;
+        m_RRocket.m_KnockBackForce = force;
+    }
+
 }

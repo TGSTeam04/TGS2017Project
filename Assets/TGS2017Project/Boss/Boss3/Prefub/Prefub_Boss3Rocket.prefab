@@ -234,6 +234,7 @@ MonoBehaviour:
   m_TargetTag: Player
   m_BuriedTime: 1
   m_IsKnockBack: 1
+  m_KnockBackForce: 0
   m_ChildEnemys: []
   m_ReflectDamage: 50
   m_ReActiveTime: 0

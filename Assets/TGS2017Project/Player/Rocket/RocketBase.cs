@@ -40,10 +40,14 @@ public class RocketBase : MonoBehaviour
     public string m_TargetTag;
     //埋まる時間
     public float m_BuriedTime = 1.0f;
+
     //ノックバック状態か
     public bool m_IsKnockBack;
+    //ノックバックの力
+    public float m_KnockBackForce;
+
     //衝突した雑魚リスト
-    public List<EnemyBase> m_ChildEnemys;
+    public List<EnemyBase> m_ChildEnemys;    
 
     private void Awake()
     {
@@ -97,7 +101,7 @@ public class RocketBase : MonoBehaviour
             case RocketState.Fire:
                 m_Rigidbody.MovePosition(m_Rigidbody.position + transform.forward * m_Speed * Time.fixedDeltaTime);
                 break;
-            case RocketState.Back:      
+            case RocketState.Back:
                 m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
@@ -142,9 +146,7 @@ public class RocketBase : MonoBehaviour
     public void BreakChildEnemys()
     {
         foreach (var enemy in m_ChildEnemys)
-        {
-            enemy.transform.parent = null;
-            enemy.GetComponent<Rigidbody>().isKinematic = false;
+        {            
             enemy.SetBreak();
         }
         m_ChildEnemys.Clear();
@@ -164,8 +166,12 @@ public class RocketBase : MonoBehaviour
         {//雑魚と衝突
             if (m_IsKnockBack)
             {//ノックバック
-                enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                Rigidbody rb = enemy.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
                 enemy.Del_CollideEnter = KnockBackEnemyCollide;
+
+                Vector3 dire = enemy.transform.position - transform.position;
+                rb.AddForce(dire.normalized * m_KnockBackForce,ForceMode.Impulse);                
             }
             else
             {//子オブジェクトに追加
@@ -186,12 +192,12 @@ public class RocketBase : MonoBehaviour
                 return m_Timer < m_BuriedTime;
             }));
         }
-    }    
+    }
 
     protected void CollideTarget(GameObject target)
     {
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
-        target.GetComponent<Damageable>().ApplyDamage(damage, this);        
+        target.GetComponent<Damageable>().ApplyDamage(damage, this);
         BreakChildEnemys();
         Debug.Log("ターゲットダメージ" + damage);
         m_State = RocketState.Back;
@@ -209,7 +215,7 @@ public class RocketBase : MonoBehaviour
 
         if (obj.tag == m_TargetTag)
         {//攻撃対象と衝突
-            CollideTarget(obj);           
+            CollideTarget(obj);
         }
         else if (otherEnemy != null)
         {//雑魚と衝突    子オブジェクトに追加
@@ -229,11 +235,15 @@ public class RocketBase : MonoBehaviour
         {//攻撃対象と衝突
             collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ChildApplyDamage, this);
             Debug.Log("ノックバックEnemy　が　Player　と衝突");
+        }        
+        if(collision.gameObject.tag != gameObject.tag)
+        {
+            enemy.SetBreak();
         }
     }
 
     public void SetLayer(string layerName)
     {
         gameObject.layer = LayerMask.NameToLayer(layerName);
-    }    
+    }
 }
