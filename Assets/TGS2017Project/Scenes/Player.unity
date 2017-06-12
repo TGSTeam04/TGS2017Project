@@ -5805,11 +5805,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RocketPrefub: {fileID: 0}
+  m_LStandTrans: {fileID: 158433148}
+  m_RStandTrans: {fileID: 158433147}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
   m_RocketLayer: Arm
-  m_LStandTrans: {fileID: 158433148}
-  m_RStandTrans: {fileID: 158433147}
+  m_TargetTag: 
 --- !u!114 &1389940283
 MonoBehaviour:
   m_ObjectHideFlags: 0
