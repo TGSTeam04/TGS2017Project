@@ -3295,6 +3295,7 @@ GameObject:
   - component: {fileID: 774350929}
   - component: {fileID: 774350928}
   - component: {fileID: 774350930}
+  - component: {fileID: 774350931}
   m_Layer: 9
   m_Name: LRobot
   m_TagString: Player
@@ -3351,6 +3352,17 @@ MonoBehaviour:
   m_Shield: {fileID: 610834426}
   m_Config: {fileID: 11400000, guid: ab9182199e996804ab766cb0c5b8a7a5, type: 2}
   m_BaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7, type: 2}
+--- !u!114 &774350931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 774350927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be20e31a2e9954f4891dc1c8b2ae8c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &779960023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5764,6 +5776,7 @@ GameObject:
   - component: {fileID: 1389940283}
   - component: {fileID: 1389940282}
   - component: {fileID: 1389940284}
+  - component: {fileID: 1389940285}
   m_Layer: 9
   m_Name: HumanoidRobot
   m_TagString: Player
@@ -5847,6 +5860,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &1389940285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389940280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be20e31a2e9954f4891dc1c8b2ae8c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1394361622
 GameObject:
   m_ObjectHideFlags: 0
@@ -7881,6 +7905,7 @@ GameObject:
   - component: {fileID: 1890064366}
   - component: {fileID: 1890064365}
   - component: {fileID: 1890064367}
+  - component: {fileID: 1890064368}
   m_Layer: 9
   m_Name: RRobot
   m_TagString: Player
@@ -7937,6 +7962,17 @@ MonoBehaviour:
   m_Shield: {fileID: 610416827}
   m_Config: {fileID: 11400000, guid: 10552ccb2b584264e954d2fcbc37410e, type: 2}
   m_BaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7, type: 2}
+--- !u!114 &1890064368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1890064364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be20e31a2e9954f4891dc1c8b2ae8c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1915364112
 GameObject:
   m_ObjectHideFlags: 0
