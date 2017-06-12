@@ -12,7 +12,6 @@ public enum PlayMode
 }
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-
     public float m_TimeRate = 1.0f;
     public PlayMode m_PlayMode = PlayMode.NoPlay;
     public float m_CombineTime;

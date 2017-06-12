@@ -5823,11 +5823,12 @@ MonoBehaviour:
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
   m_KnockBackForce: 0
+  m_IsKnockBack: 0
   m_SEColectRocet: {fileID: 0}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
   m_RocketLayer: Arm
-  m_TargetTag: 
+  m_TargetTag: Boss
 --- !u!114 &1389940283
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public delegate void OnCollideEnter_Del(Collision collsion, EnemyBase enemy);
+public delegate void OnCollideEnter_Del(Collider other, EnemyBase enemy);
 
 public enum BreakType
 {
@@ -35,7 +35,7 @@ public class EnemyBase : MonoBehaviour
 
     private NavMeshAgent m_NavMeshAgent;
 
-    public OnCollideEnter_Del Del_CollideEnter;
+    public OnCollideEnter_Del Del_Trigger;
 
     public bool IsBreakable
     {
@@ -133,13 +133,14 @@ public class EnemyBase : MonoBehaviour
     }
 
     public void SetBreak()
-    {
+    {        
         transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        Del_CollideEnter = null;
-        EnemyManager.Instance.ReSpawnEnemy(this);
+        Del_Trigger = null;
         m_IsDead = true;
+        gameObject.SetActive(false);
+        EnemyManager.Instance.ReSpawnEnemy(this);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -155,6 +156,9 @@ public class EnemyBase : MonoBehaviour
             m_LRobotPos = m_LRobot.transform.position;
             m_RRobotPos = m_RRobot.transform.position;
         }
+
+        if (Del_Trigger != null)
+            Del_Trigger.Invoke(other, this);
     }
     public void OnTriggerStay(Collider other)
     {
@@ -176,9 +180,9 @@ public class EnemyBase : MonoBehaviour
             m_SpeedRate = 1.0f;
         }
     }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (Del_CollideEnter != null)
-            Del_CollideEnter.Invoke(collision, this);
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Wall")
+    //        Debug.Log("Enemy OnCollisionEnter");        
+    //}
 }

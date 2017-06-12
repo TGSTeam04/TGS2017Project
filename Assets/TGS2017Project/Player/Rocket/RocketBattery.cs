@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 //using UnityEngine.Events;
 
 //ロケット２つをラップしたロケット砲台クラス
@@ -12,6 +10,7 @@ public class RocketBattery : MonoBehaviour
     [SerializeField] private Transform m_LStandTrans;
     [SerializeField] private Transform m_RStandTrans;
     [SerializeField] private float m_KnockBackForce;
+    [SerializeField] private bool m_IsKnockBack;
     [SerializeField] private AudioClip m_SEColectRocet;
 
     [HideInInspector] public RocketBase m_LRocket;
@@ -51,6 +50,7 @@ public class RocketBattery : MonoBehaviour
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
 
+        SetIsKnockBack(m_IsKnockBack);
         SetKnockBackForce(m_KnockBackForce);
         m_LRocket.SetLayer(m_RocketLayer);
         m_RRocket.SetLayer(m_RocketLayer);
@@ -111,7 +111,7 @@ public class RocketBattery : MonoBehaviour
         m_RRocket.Fire();
     }
 
-    /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/
+    /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/        
 
     public void SetSpeed(float speed)
     {
@@ -133,5 +133,9 @@ public class RocketBattery : MonoBehaviour
         m_LRocket.m_KnockBackForce = force;
         m_RRocket.m_KnockBackForce = force;
     }
-
+    public void SetIsKnockBack(bool isKnockBack)
+    {
+        m_LRocket.m_IsKnockBack = isKnockBack;
+        m_RRocket.m_IsKnockBack = isKnockBack;
+    }
 }

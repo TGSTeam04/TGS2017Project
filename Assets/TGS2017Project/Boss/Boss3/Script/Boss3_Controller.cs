@@ -45,7 +45,7 @@ public class Boss3_Controller : MonoBehaviour
         set
         {
             m_Hp = value;
-            Debug.Log("残りHP" + value);
+            //Debug.Log("残りHP" + value);
             if (Hp <= 0)
             {
                 Dead();
@@ -61,6 +61,9 @@ public class Boss3_Controller : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
+            return;
+
         m_StateTimer += Time.deltaTime;
         switch (m_State)
         {

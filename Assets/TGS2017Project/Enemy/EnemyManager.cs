@@ -29,7 +29,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
     {
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
-            ReSpawn, enemy));        
+            ReSpawn, enemy));
     }
 
     void ReSpawn(EnemyBase enemy)
