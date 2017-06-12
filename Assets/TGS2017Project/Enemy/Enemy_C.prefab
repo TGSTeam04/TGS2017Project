@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 114396985530869848}
   - component: {fileID: 114777421079484794}
   - component: {fileID: 114780743203656554}
-  - component: {fileID: 135760364123621632}
   m_Layer: 10
   m_Name: Enemy_C
   m_TagString: Enemy
@@ -2677,8 +2676,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121284775246832}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -10.591672, y: 3.710132, z: -21.483074}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -11.06, y: 0, z: 7.99}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4684090284594472}
   - {fileID: 4052039298817816}
@@ -3544,7 +3543,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_BreakType: 0
-  m_Fragment: {fileID: 0}
+  m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
 --- !u!114 &114777421079484794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3582,18 +3581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135760364123621632
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1121284775246832}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.5
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!135 &135949272925717790
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3605,7 +3592,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2.5
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!195 &195390973320678264
 NavMeshAgent:
   m_ObjectHideFlags: 1
