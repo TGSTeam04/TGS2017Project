@@ -31,19 +31,14 @@ public class HumanoidRobot : MonoBehaviour
 
     private void Awake()
     {
-        m_Damage = GetComponent<Damageable>();
+		m_Rigidbody = GetComponent<Rigidbody>();
+		m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
     public void Damage(float damage, MonoBehaviour src)
     {
         //ApplyDamageされたときの処理
         m_Energy -= damage;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame

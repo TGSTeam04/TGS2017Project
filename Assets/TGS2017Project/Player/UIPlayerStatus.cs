@@ -25,7 +25,7 @@ public class UIPlayerStatus : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		m_Energy.fillAmount = m_Player.Energy / GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[4];
-		m_BossHP.fillAmount = GameManager.Instance.m_BossHP;
+		m_BossHP.fillAmount = GameManager.Instance.m_BossHpRate;
 	}
 	IEnumerator countdown()
 	{
