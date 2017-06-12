@@ -3059,7 +3059,7 @@ MonoBehaviour:
   - {fileID: 1901485958628690}
   - {fileID: 1397894636108156}
   - {fileID: 1682427966457176}
-  m_MaxHp: 1
+  m_MaxHp: 100
   m_CollideSound: {fileID: 8300000, guid: dd288f27c9f73dc4d8968532080f7f0d, type: 3}
   m_MoveSound: {fileID: 8300000, guid: f0e7795500410054ea168ba2824ac1a8, type: 3}
   m_StanSound: {fileID: 8300000, guid: 3d4322f7ddd3648409b0eea303a65794, type: 3}

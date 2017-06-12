@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum PlayMode
 {
@@ -54,13 +55,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetButtonDown("Pause"))
-        {
-            Debug.Log("ポーズ");
-            Pauser.Pause();
-        }
-
+    {       
         switch (m_PlayMode)
         {
             case PlayMode.NoPlay:
@@ -75,10 +70,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             default:
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.P))
-            Pauser.Pause();
-        if (Input.GetKeyDown(KeyCode.O))
-            Pauser.Resume();
 
         if (m_IsGameClear || m_IsGameOver)
         {
