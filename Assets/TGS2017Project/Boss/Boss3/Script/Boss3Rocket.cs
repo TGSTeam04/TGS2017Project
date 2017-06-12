@@ -40,12 +40,12 @@ public class Boss3Rocket : RocketBase
         }
         else if (collision.gameObject == m_Battery.gameObject) //Enemy　PlayerBullet　以外に当たったらレイヤーを元に戻す
         {
-            collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ReflectDamage, this);            
+            collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ReflectDamage, this);
+            SetLayer("BossBullet");
             m_State = RocketState.Idle;
             gameObject.SetActive(false);
             m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-            SetLayer("BossBullet");
             Boss3_Humanoid boss3 = m_Battery.GetComponent<Boss3_Humanoid>();
             boss3.Release();
         }

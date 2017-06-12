@@ -45,7 +45,7 @@ public class Boss3_Controller : MonoBehaviour
         set
         {
             m_Hp = value;
-            //Debug.Log("ダメージ" + value);
+            Debug.Log("残りHP" + value);
             if (Hp <= 0)
             {
                 Dead();

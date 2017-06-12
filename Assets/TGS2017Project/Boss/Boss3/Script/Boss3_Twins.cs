@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Boss3_Twins : MonoBehaviour
 {
-    Damageable m_Damage;
-    Boss3_Controller m_Controller;
     private void Awake()
     {
-        m_Damage = GetComponent<Damageable>();
-        m_Damage.Event_Damaged = (float d, MonoBehaviour s) 
-            => { m_Controller.Hp -= d; };
+        var bossCon = GetComponentInParent<Boss3_Controller>();
+        Damageable[] damageComps = GetComponentsInChildren<Damageable>();
+        foreach (var comp in damageComps)
+        {
+            comp.Event_Damaged = (float d, MonoBehaviour s)
+            => { bossCon.Hp -= d; };
+        }        
     }
 }
