@@ -8,8 +8,8 @@ using UnityEngine.AI;
 [SelectionBase]
 public class Boss3_Humanoid : MonoBehaviour
 {
-    //基本ステ  
-    public int m_Hp;
+    public Boss3_Controller m_Controller;
+
     public float m_Speed;
     //ロケットパンチ
     public float m_RocketSpeed;
@@ -22,40 +22,63 @@ public class Boss3_Humanoid : MonoBehaviour
     public Rigidbody m_Rb;
     public Animator m_Anim;
     public RocketBattery m_Battery;
+    public Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
     public GameObject m_Target;
-    public GameObject m_Temp;
 
+    private void OnDisable()
+    {
+        m_BT.IsStop = true;
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(Kimepo());
+    }
+    private IEnumerator Kimepo()
+    {
+        yield return new WaitForAnimation(m_Anim);
+        m_BT.IsStop = false;
+    }
+
+    private void Awake()
+    {         
+        m_Controller = GetComponentInParent<Boss3_Controller>();
+        m_NavAgent = GetComponent<NavMeshAgent>();
+        m_Rb = GetComponent<Rigidbody>();
+        m_Anim = GetComponentInChildren<Animator>();
+        m_Battery = GetComponent<RocketBattery>();
+        m_DamageComp = GetComponent<Damageable>();
+        m_DamageComp.Event_Damaged = Damaged;        
+    }
     // Use this for initialization
     void Start()
     {
-        m_NavAgent = GetComponent<NavMeshAgent>();
-        m_Rb = GetComponent<Rigidbody>();
-        m_Anim = GetComponentInChildren<Animator>();       
-        m_Battery = GetComponent<RocketBattery>();
-        m_Battery.Del_Collide += RocketCollide;
-
         //ビヘイビアツリーのセットアップ
         SetUpBT();
     }
-
     // Update is called once per frame
-    void Update()
+    public void BossUpdate()
     {
-        //Debug.Log(m_Anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
-
         m_BT.BUpdate();
-        
+
+        //アニメーションの値をセット
         Vector3 vel = transform.rotation * -m_NavAgent.velocity;
-        //Debug.Log(vel);
-        //Debug.Log(m_NavAgent.velocity);
-        //Debug.Log(transform.forward);
-        //m_Anim.SetFloat("Forward", m_NavAgent.velocity.z / m_NavAgent.speed);
         m_Anim.SetFloat("Forward", vel.z / m_NavAgent.speed);
         m_Anim.SetFloat("Right", vel.x / m_NavAgent.speed);
+    }
+    private void Damaged(float damage, MonoBehaviour src)
+    {
+        m_Controller.Hp -= damage;     
+        //m_Anim.SetTrigger("Damage");
+    }
+
+    public void Release()
+    {
+        m_BT.BTReset();
+        m_Controller.ReleaseStart();
     }
 
     //ビヘイビアの設定
@@ -79,13 +102,12 @@ public class Boss3_Humanoid : MonoBehaviour
         BTT_Rocket.AddDecorator(dec_RocektRnage);
         BTT_Rocket.AddDecorator(new BD_CoolTime(m_RocketInterval));
 
-        //接近        
+        //接近
         BSequence seq = new BSequence();
         BT_MoveTo moveToRange = new BT_MoveTo("target", m_Speed);
         moveToRange.m_StopDistance = m_RocketRange;
         moveToRange.m_IsCanCancelMove = false;
-        moveToRange.AddDecorator(new BD_CloserThen("target", m_NeedMoveDistance).Invert());
-        m_BB.GObjValues["temp"] = m_Temp;
+        //moveToRange.AddDecorator(new BD_CloserThen("target", m_NeedMoveDistance).Invert());
 
         seq.AddNode(moveToRange);
 
@@ -93,39 +115,5 @@ public class Boss3_Humanoid : MonoBehaviour
         sl_Rocket_Other.AddNode(seq);
         par_Look_Other.AddNode(lookTarget);
         par_Look_Other.AddNode(sl_Rocket_Other);
-    }
-
-    public void RocketCollide(Rocket rocket, Collision collision)
-    {
-        EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
-        if (enemy != null)
-        {
-            //Enemyを巻き込む
-            rocket.AddChildEnemy(enemy);
-        }
-        else if (collision.gameObject.GetComponent<Rocket>() != null && rocket.m_State != RocketState.Buried)
-        {
-            //反射
-            rocket.SetLayer("PlayerBullet");
-            rocket.m_State = RocketState.Reflected;
-        }
-        else //Enemy　PlayerBullet　以外に当たったらレイヤーを元に戻す
-            rocket.SetLayer("EnemyBullet");
-
-        if (collision.gameObject == gameObject)
-        {
-            if (rocket.m_State == RocketState.Reflected)
-            {
-                rocket.BreakChildEnemy();
-                //未実装
-            }
-        }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-        {
-            rocket.m_State = RocketState.Buried;
-            Rigidbody rb = rocket.GetComponent<Rigidbody>();
-            rb.MovePosition(rb.position + rb.velocity.normalized);
-            rocket.transform.parent = collision.transform;
-        }
     }
 }

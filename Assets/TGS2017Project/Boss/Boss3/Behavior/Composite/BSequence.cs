@@ -21,7 +21,7 @@ public class BSequence : BComposite
         Failure();
         for (int i = m_NowIndex; i < m_Child.Count; i++)
         {
-            m_Child[i].Reset();
+            m_Child[i].OnReset();
         }
     }
 }

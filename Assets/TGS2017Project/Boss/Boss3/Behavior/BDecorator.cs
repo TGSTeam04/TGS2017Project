@@ -29,15 +29,9 @@ public class BDecorator// : BNode
     {
         Debug.Log("デコレータがデフォルトのままです");
         return false;
-    }
-
-    public virtual void Reset()
-    {
-        Initialize();
-    }
-
+    }    
     public virtual void Initialize() { }
-
+    public virtual void NodeStateChanged() { }
     public virtual void NodeSuccess() { }
     public virtual void NodeFailure() { }
 }

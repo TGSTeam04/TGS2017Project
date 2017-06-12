@@ -15,7 +15,7 @@ public class BSelector : BComposite
         for (int i = m_NowIndex; i < m_Child.Count; i++)
         {
             if (m_Child[i].m_State != BState.Ready)
-                m_Child[i].Reset();
+                m_Child[i].OnReset();
         }
         Succes();
     }

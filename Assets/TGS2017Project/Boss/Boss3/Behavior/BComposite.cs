@@ -33,9 +33,16 @@ public class BComposite : BNode
         node.SetParent(null);
     }
 
-    public override void Reset()
+    public override void Initialize()
     {
-        base.Reset();
+        base.Initialize();
+        foreach (var child in m_Child)
+            child.Initialize();
+    }
+
+    public override void OnReset()
+    {
+        base.OnReset();
         foreach (var c in m_Child)
         {
             c.Reset();
@@ -47,12 +54,12 @@ public class BComposite : BNode
         m_Child[m_NowIndex].TryExecute();
     }
 
-    public override void Initialize()
+    public override void StateChanged()
     {
-        base.Initialize();
+        base.StateChanged();
         foreach (var c in m_Child)
         {
-            c.Initialize();
+            c.StateChanged();
         }
         m_NowIndex = 0;
     }
