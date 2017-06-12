@@ -44,6 +44,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager> {
 	public int m_PlayScore;
 	public float m_PlayTime;
 
+	public float m_BossHP;
+
 
 	// Use this for initialization
 	void Start () {

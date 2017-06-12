@@ -71,7 +71,7 @@ public class SecondBoss : MonoBehaviour {
         }
         m_Velocity *= 0.95f;
    
-        m_HitPointBar.fillAmount = s_HitPoint;
+        //m_HitPointBar.fillAmount = s_HitPoint;
         if (s_HitPoint <= 0)
         {
             Destroy(gameObject);

@@ -143,7 +143,7 @@ public class EnemyBase : MonoBehaviour
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && m_IsDead)
         {
             gameObject.SetActive(false);
-            //m_Fragment.SetActive(true);
+            Instantiate(m_Fragment,transform.position,transform.rotation,transform.parent);
         }
         if (GameManager.Instance.m_PlayMode == PlayMode.TwinRobot && other.tag == "Guid")
         {

@@ -805,11 +805,15 @@ MonoBehaviour:
   m_TwinRobotR: {fileID: 1890064367}
   m_HumanoidRobot: {fileID: 1389940283}
   m_Boost: {fileID: 1422175877}
-  m_ModeAA: {r: 0.5882353, g: 0, b: 0.5882353, a: 1}
+  m_ModeAA: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   m_ModeAB: {r: 0.5882353, g: 0.5882353, b: 0, a: 1}
-  m_ModeBB: {r: 0, g: 0.5882353, b: 0.5882353, a: 1}
+  m_ModeBB: {r: 0.006338646, g: 0, b: 0.4310345, a: 1}
   m_ChargeEffect: {fileID: 515139551}
   m_CombineEffect: {fileID: 226087118}
+  m_HumanoidN: {fileID: 11400000, guid: abaf1de16e9b756478f8202244268696, type: 2}
+  m_HumanoidT: {fileID: 11400000, guid: 880ab5be5613a564984e759872af0a4e, type: 2}
+  m_HumanoidI: {fileID: 11400000, guid: 8191465196210a3418213f73c04b8b2a, type: 2}
+  m_HumanoidMaterial: {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
 --- !u!4 &180186487
 Transform:
   m_ObjectHideFlags: 0
@@ -5805,7 +5809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RocketPrefub: {fileID: 0}
+  m_RocketPrefub: {fileID: 1946853532632280, guid: 86b0ff5a1b73f3c4da1391651a9353cc,
+    type: 2}
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
   m_LRocket: {fileID: 0}

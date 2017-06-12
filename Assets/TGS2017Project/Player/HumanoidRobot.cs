@@ -26,7 +26,7 @@ public class HumanoidRobot : MonoBehaviour {
 	private RocketBattery m_Battery;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		m_Rigidbody = GetComponent<Rigidbody>();
 	}
 
@@ -38,9 +38,13 @@ public class HumanoidRobot : MonoBehaviour {
 			m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
 		}
 
-		if (Input.GetButtonDown(m_BaseConfig.m_InputCharge) && m_Energy>=m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.IsCanFire)
+		if (Input.GetButtonDown("RotateL") && m_Energy>=m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
 		{
-			StartCoroutine(Charge());
+			StartCoroutine(Charge(true));
+		}
+		else if (Input.GetButtonDown("RotateR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
+		{
+			StartCoroutine(Charge(false));
 		}
 
 		float energy = 0;
@@ -58,13 +62,21 @@ public class HumanoidRobot : MonoBehaviour {
 		}
 		m_Energy -= Time.deltaTime * energy;
 	}
-	public IEnumerator Charge()
+	public IEnumerator Charge(bool L)
 	{
 		m_Charging = true;
 		m_Energy -= m_Config.m_ChargeUseEnergy;
 		//yield return new WaitForSeconds(1f);
-//		yield return new WaitForAnimation(m_Animator,0.3f);
-		m_Battery.Fire();
+		//		yield return new WaitForAnimation(m_Animator,0.3f);
+		if (L)
+		{
+			StartCoroutine(m_Battery.LAnimatedFire());
+		}
+		else
+		{
+			StartCoroutine(m_Battery.RAnimatedFire());
+		}
+		//m_Battery.Fire();
 		//	yield return new WaitForAnimation(m_Animator,0.7f);
 		yield return new WaitForSeconds(1.0f);
 
