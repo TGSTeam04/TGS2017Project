@@ -33,8 +33,8 @@ public class SecondBoss : MonoBehaviour
 
     //ダメージコンポーネント
     private Damageable m_Damage;
-    [SerializeField] private float m_MaxHp;
-    public static float s_HitPoint = 1.0f;
+    [SerializeField] private float m_MaxHp = 1.0f;
+    public static float s_HitPoint;
     private int m_AmmoCount = 4;
     private bool m_Fire = true;
     private bool m_Reload;
@@ -59,11 +59,8 @@ public class SecondBoss : MonoBehaviour
     AudioSource m_Sound;
     Animator m_Anim;
 
-
-
     public static SecondBossState s_State = SecondBossState.Ready;
-
-
+    
     /***    okaku  ***/
     //加速度
     public float m_Accel = 245.7f;
@@ -72,6 +69,7 @@ public class SecondBoss : MonoBehaviour
     private void Awake()
     {
         s_HitPoint = m_MaxHp;
+        GameManager.Instance.m_BossHpRate = 1.0f;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -89,7 +87,6 @@ public class SecondBoss : MonoBehaviour
         m_Target = GameObject.FindGameObjectWithTag("Player");
         m_Sound = GetComponent<AudioSource>();
         m_Anim = GetComponentInChildren<Animator>();
-        s_HitPoint = 1.0f;
         s_State = SecondBossState.Ready;
         foreach (GameObject p in m_Particle)
         {

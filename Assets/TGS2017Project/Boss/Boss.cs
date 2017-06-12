@@ -39,7 +39,7 @@ public class Boss : MonoBehaviour
     //public Image m_HitPointBar;
     //ダメージコンポーネント
     private Damageable m_Damage;
-    [SerializeField] private float m_MaxHp;
+    [SerializeField] private float m_MaxHp = 1.0f;
     public static float s_HitPoint = 1.0f;
 
     Transform m_Target;
@@ -52,6 +52,7 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         s_HitPoint = m_MaxHp;
+        GameManager.Instance.m_BossHpRate = 1.0f;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -66,7 +67,6 @@ public class Boss : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        s_HitPoint = 1.0f;
         s_State = BossState.Move;
         m_Target = GameObject.FindGameObjectWithTag("Player").transform;
         m_Anim = GetComponent<Animator>();
@@ -74,7 +74,7 @@ public class Boss : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
         {
@@ -211,7 +211,6 @@ public class Boss : MonoBehaviour
         //        }
         //    }
         //}
-
     }
     void Dead()
     {
@@ -255,24 +254,26 @@ public class Boss : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Beam")
-        {
-            m_SearchArea.SetActive(false);
-            s_State = BossState.Paralysis;
-            StartCoroutine(Recovery());
-        }
+        //if (other.name == "Beam")
+        //{
+        //    m_SearchArea.SetActive(false);
+        //    s_State = BossState.Paralysis;
+        //    StartCoroutine(Recovery());
+        //}
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && s_State != BossState.Invincible)
         {
             if (m_LeftArm.activeSelf == false && m_RightArm.activeSelf == false)
             {
                 Instantiate(m_Explosion, transform.position, transform.rotation);
                 s_HitPoint -= 0.25f;
+                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
                 s_State = BossState.Invincible;
             }
             else
             {
                 Instantiate(m_Explosion, transform.position, transform.rotation);
                 s_HitPoint -= 0.05f;
+                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
                 s_State = BossState.Invincible;
             }
 
@@ -283,6 +284,5 @@ public class Boss : MonoBehaviour
                 StartCoroutine(Death());
             }
         }
-
     }
 }

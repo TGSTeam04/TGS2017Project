@@ -44,7 +44,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public int m_PlayScore;
     public float m_PlayTime;
-    public float m_BossHpRate;
+    public float m_BossHpRate = 1.0f;
 
     // Use this for initialization
     void Start()

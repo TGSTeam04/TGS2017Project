@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4873963925536558}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_vernier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4219358310104402}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_leg_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4270936207108412}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4261491891262106}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4423632935527442}
   - component: {fileID: 33140605397029864}
   - component: {fileID: 23222350041076254}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638486568156414}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4461810896064598}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4788904818443230}
   - component: {fileID: 33156744818222008}
   - component: {fileID: 23119613630890576}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4930481470023094}
   - component: {fileID: 33515255174053426}
   - component: {fileID: 23422628695378760}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 4675554629966768}
   - component: {fileID: 33230623544460898}
   - component: {fileID: 23835819419120906}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_arm1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 4341236421033968}
   - component: {fileID: 33187313818179270}
   - component: {fileID: 23411629807110466}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 33568548059399628}
   - component: {fileID: 65408605253256358}
   - component: {fileID: 23047491002024046}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LSwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4719950737995078}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4935113745511132}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4827609878109268}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable6_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 4336873293685556}
   - component: {fileID: 33368781252078974}
   - component: {fileID: 23167444656154928}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4827748475318640}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable5_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4465520196900254}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_knee1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4941017605107464}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_toes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 4033342602636580}
   - component: {fileID: 33138888455461826}
   - component: {fileID: 135590301957782652}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: LeftPunch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 4728835386199266}
   - component: {fileID: 33560419526012392}
   - component: {fileID: 23548680669853714}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4579733932295550}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 4093885483961726}
   - component: {fileID: 33551758070236078}
   - component: {fileID: 23442490062059688}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4117533813019432}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_shoulder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 4330507476352692}
   - component: {fileID: 33845821556802016}
   - component: {fileID: 23121168803724298}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4818721677345136}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable4_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4008942396921082}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 4745665749626174}
   - component: {fileID: 33421209255740866}
   - component: {fileID: 23069718996895334}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 4143975365844106}
   - component: {fileID: 33223701898380538}
   - component: {fileID: 23371970358437210}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_leg_vernier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4618063252936322}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_leg_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 4896939234847080}
   - component: {fileID: 33042604975336218}
   - component: {fileID: 23200291741506400}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4964482524503238}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: head1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 4788813138064784}
   - component: {fileID: 33912126834527370}
   - component: {fileID: 23029687797136864}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_body1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 4735055253822708}
   - component: {fileID: 33728828367181198}
   - component: {fileID: 23357585278986964}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4494026182815796}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 4102259208965616}
   - component: {fileID: 33073633693572002}
   - component: {fileID: 23690280150605700}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 4983273693356500}
   - component: {fileID: 33582717371721990}
   - component: {fileID: 23714210694311374}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +611,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4597924314537758}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_knee2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4592040604986488}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable6_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4619948928952106}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4470101636410618}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 4491699427160938}
   - component: {fileID: 33474762184874250}
   - component: {fileID: 23420852726101998}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +688,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4179215982426474}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_shoulder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 4374096572360126}
   - component: {fileID: 33961748312090532}
   - component: {fileID: 23391315161679962}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ GameObject:
   - component: {fileID: 4396777569606800}
   - component: {fileID: 33626149832652076}
   - component: {fileID: 23165221103482162}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 4839316652129902}
   - component: {fileID: 33968488789580738}
   - component: {fileID: 23024429413229366}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_weaponjoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 33686942951443580}
   - component: {fileID: 65655702246912558}
   - component: {fileID: 114747537913620134}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SearchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +772,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4074979235877534}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: belly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 33512521355749426}
   - component: {fileID: 65048383932381108}
   - component: {fileID: 23774297146416018}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: RSwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +805,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4026642858738762}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_shoulder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +820,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4134665336063328}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +835,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4998257305497834}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 4310267489052132}
   - component: {fileID: 33479458197805048}
   - component: {fileID: 23659541670577030}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 4471458915553926}
   - component: {fileID: 33954652887835684}
   - component: {fileID: 23245277838905148}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_leg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,7 +884,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4414874665357504}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,7 +899,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4648660029571534}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4980444040166494}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - component: {fileID: 4121535042532750}
   - component: {fileID: 33318805190876574}
   - component: {fileID: 23599517958746836}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +948,7 @@ GameObject:
   - component: {fileID: 4879142147109538}
   - component: {fileID: 33224254494015424}
   - component: {fileID: 23774373546217564}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +963,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4867097791954438}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4146949042872668}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +993,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4921475965416336}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 4952964177477000}
   - component: {fileID: 33410624857045986}
   - component: {fileID: 23666876662439230}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1025,7 +1025,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4001339413083662}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable6_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1042,7 +1042,7 @@ GameObject:
   - component: {fileID: 4011309584254008}
   - component: {fileID: 33992898605030894}
   - component: {fileID: 23790218705161506}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1057,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4368624610938288}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable5_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1072,7 +1072,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4015273833653138}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 4438551613362730}
   - component: {fileID: 33853152894387248}
   - component: {fileID: 23015097241278524}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 4755443059136550}
   - component: {fileID: 33519654442378926}
   - component: {fileID: 23874914740047952}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1123,7 @@ GameObject:
   - component: {fileID: 4758273788512258}
   - component: {fileID: 33215395850385672}
   - component: {fileID: 23010114111757642}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_hand2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1138,7 +1138,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4966429050116034}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1153,7 +1153,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4894303576304454}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,9 +1176,9 @@ GameObject:
   - component: {fileID: 95999452161171590}
   - component: {fileID: 114360447694533666}
   - component: {fileID: 136858155895230254}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: BOSS
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1191,7 +1191,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4778955405922826}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1206,7 +1206,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4437602424456022}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1223,7 +1223,7 @@ GameObject:
   - component: {fileID: 4607913955120812}
   - component: {fileID: 33683682993073782}
   - component: {fileID: 23753860868283932}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 4025295417909154}
   - component: {fileID: 33114254977143860}
   - component: {fileID: 23059304152144248}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_weaponjoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4527291198977854}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4568119798863444}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1285,7 +1285,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4742455585963280}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_wrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1300,7 +1300,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4960329697801122}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1317,7 @@ GameObject:
   - component: {fileID: 4106901999389130}
   - component: {fileID: 33908625649783436}
   - component: {fileID: 23580715766950818}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1332,7 +1332,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4931870853103224}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1347,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4412546755439392}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1362,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4983787872790086}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable6_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 4852565881616968}
   - component: {fileID: 33611227262369652}
   - component: {fileID: 23049638623157814}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1394,7 +1394,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4406834210018684}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_leg_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1409,7 +1409,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4986190489074968}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_wrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   - component: {fileID: 4919869894722102}
   - component: {fileID: 114987411418580624}
   - component: {fileID: 54143216172677796}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1441,7 +1441,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4384047460626468}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1456,7 +1456,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4269754020571384}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,7 +1471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4317846150849414}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1486,7 +1486,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4072991686434584}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1503,7 @@ GameObject:
   - component: {fileID: 4250259858075732}
   - component: {fileID: 33887034637271340}
   - component: {fileID: 23203905835451914}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1518,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4601145667631326}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,7 +1533,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4557208427927766}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1548,7 +1548,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4777522300537744}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_knee1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1565,7 +1565,7 @@ GameObject:
   - component: {fileID: 4399602175614910}
   - component: {fileID: 33118138902990040}
   - component: {fileID: 23026580585250850}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1580,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4066033001078798}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_vernier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1596,7 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4441267522217830}
   - component: {fileID: 136944916199423240}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1611,7 +1611,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4302692055100066}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_thigh1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1628,7 +1628,7 @@ GameObject:
   - component: {fileID: 4770734024301176}
   - component: {fileID: 33095315056900282}
   - component: {fileID: 23509322912061486}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1643,7 +1643,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4860692162017338}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1658,7 +1658,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4870602963798530}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_toes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1673,7 +1673,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4241337899846006}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1688,7 +1688,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4626162416632922}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_weaponjoint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,7 +1705,7 @@ GameObject:
   - component: {fileID: 4201296180184642}
   - component: {fileID: 33461725083740254}
   - component: {fileID: 23764825815920280}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1720,7 +1720,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4975708557201304}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_knee2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1735,7 +1735,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4708769288580550}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1750,7 +1750,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4917477985220518}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1765,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4181914809982458}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_leg_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 4909660332482634}
   - component: {fileID: 33008785846517294}
   - component: {fileID: 23562822707108914}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1799,7 +1799,7 @@ GameObject:
   - component: {fileID: 4899016761771758}
   - component: {fileID: 33660818516406944}
   - component: {fileID: 135316424744986288}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: RightPunch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,7 +1816,7 @@ GameObject:
   - component: {fileID: 4087562317467588}
   - component: {fileID: 33936845933862870}
   - component: {fileID: 23298526152490376}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1831,7 +1831,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4941699099311864}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1846,7 +1846,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4711365563261618}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1863,7 @@ GameObject:
   - component: {fileID: 4209542956823248}
   - component: {fileID: 33609205496991454}
   - component: {fileID: 23629955153102718}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_leg_vernier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1878,7 +1878,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4977221752048160}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_shoulder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1895,7 +1895,7 @@ GameObject:
   - component: {fileID: 4940974125155734}
   - component: {fileID: 33540650934900938}
   - component: {fileID: 23949437159054348}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 4378369407178702}
   - component: {fileID: 33361417616777636}
   - component: {fileID: 23960950336590764}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,7 +1929,7 @@ GameObject:
   - component: {fileID: 4306440873221242}
   - component: {fileID: 33603845950286130}
   - component: {fileID: 23451125481683644}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,7 +1944,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4576845780225414}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: breast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522816289056888}
   - component: {fileID: 136500355959139732}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 4212766727457966}
   - component: {fileID: 33732619140778004}
   - component: {fileID: 23632663056232714}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_railgun5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1992,7 +1992,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4715493953498610}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_railgun_movable2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2007,7 +2007,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4651762466896954}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2022,7 +2022,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4723925643157092}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2037,7 +2037,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4981939851589252}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2054,7 +2054,7 @@ GameObject:
   - component: {fileID: 4232501093754966}
   - component: {fileID: 33786792263186210}
   - component: {fileID: 23836841131348882}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_R_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2069,7 +2069,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4143884200318534}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_thigh1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2086,7 +2086,7 @@ GameObject:
   - component: {fileID: 4673955768199428}
   - component: {fileID: 114920639042236780}
   - component: {fileID: 54396484056942244}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2103,7 +2103,7 @@ GameObject:
   - component: {fileID: 4508738506852146}
   - component: {fileID: 33884965981624756}
   - component: {fileID: 23900503520634920}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: poly_L_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2118,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4629862387929058}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: L_railgun_movable4_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2134,7 +2134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4922777048471218}
   - component: {fileID: 95104607165636268}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: player_union01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6146,7 +6146,7 @@ MonoBehaviour:
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
   m_LastExplosion: {fileID: 1220756523573468, guid: 2e7f405a3f1fa314f905ea45e614445c,
     type: 2}
-  m_MaxHp: 3
+  m_MaxHp: 1
 --- !u!114 &114348879670099554
 MonoBehaviour:
   m_ObjectHideFlags: 1
