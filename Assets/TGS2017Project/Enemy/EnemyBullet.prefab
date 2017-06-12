@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23070504439845996}
   - component: {fileID: 54147271814690080}
   - component: {fileID: 114291824608132024}
+  - component: {fileID: 114796185763601802}
   m_Layer: 14
   m_Name: EnemyBullet
   m_TagString: Bullet
@@ -110,6 +111,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 5
+--- !u!114 &114796185763601802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232027840241046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135639476682115532
 SphereCollider:
   m_ObjectHideFlags: 1

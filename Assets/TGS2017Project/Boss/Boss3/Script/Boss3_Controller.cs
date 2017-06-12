@@ -21,7 +21,9 @@ public class Boss3_Controller : MonoBehaviour
     public GameObject m_Electric;
     public GameObject m_CombineEffect;
 
-    public Animator m_HAnimator;
+    [SerializeField] private Animator m_HAnimator;
+    [SerializeField] private AudioClip m_SEKimepo;
+    [SerializeField] private AudioSource m_EffectAudioSrc;
 
     //合体完了時イベント        
     //public UnityAction m_CombineEnd;
@@ -43,12 +45,12 @@ public class Boss3_Controller : MonoBehaviour
         set
         {
             m_Hp = value;
-            Debug.Log("ダメージ" + value);
+            Debug.Log("残りHP" + value);
             if (Hp <= 0)
             {
-                m_State = PlayMode.NoPlay;
-                Debug.Log("Boss3死亡");
+                Dead();
             }
+            GameManager.Instance.m_BossHpRate = m_Hp / m_MaxHp;
         }
     }
 
@@ -73,13 +75,24 @@ public class Boss3_Controller : MonoBehaviour
                 break;
         }
     }
+
+    public void Dead()
+    {
+        if (m_State == PlayMode.HumanoidRobot)
+            m_HRobot.Dead();
+
+        m_State = PlayMode.NoPlay;
+        Debug.Log("Boss3死亡");
+    }
+
     public void CombineStart()
     {
         StartCoroutine(Combine());
     }
     public void ReleaseStart()
     {
-        StartCoroutine(Release());
+        if (m_Hp > 0)
+            StartCoroutine(Release());
     }
 
     private IEnumerator Combine()
@@ -97,10 +110,14 @@ public class Boss3_Controller : MonoBehaviour
             m_CombineAnim.SampleAnimation(gameObject, timer);
             yield return null;
         }
+        m_EffectAudioSrc.clip = m_SEKimepo;
+        m_EffectAudioSrc.playOnAwake = true;
         StartCoroutine(CombineEffect());
         m_HAnimator.SetTrigger("Combined");
         //m_CombineEnd.Invoke();
         m_State = PlayMode.HumanoidRobot;
+
+        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator Release()
@@ -108,6 +125,7 @@ public class Boss3_Controller : MonoBehaviour
         m_StateTimer = 0.0f;
         m_State = PlayMode.Release;
         transform.position = m_HAnimator.transform.position;
+        m_EffectAudioSrc.playOnAwake = false;
         StartCoroutine(CombineEffect());
         float timer = 0.0f;
         while (timer < m_ReleaseAnim.length)

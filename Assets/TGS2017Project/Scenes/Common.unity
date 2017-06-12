@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_LoadingProgress: 0
   m_PlayScore: 0
   m_PlayTime: 0
-  m_BossHP: 0
+  m_BossHpRate: 0
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0

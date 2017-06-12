@@ -8,8 +8,10 @@ using UnityEngine.AI;
 [SelectionBase]
 public class Boss3_Humanoid : MonoBehaviour
 {
+    //分裂時と合体時のコントロールをするクラスの参照
     public Boss3_Controller m_Controller;
 
+    //移動
     public float m_Speed;
     //ロケットパンチ
     public float m_RocketSpeed;
@@ -17,47 +19,47 @@ public class Boss3_Humanoid : MonoBehaviour
     public float m_RocketInterval;
     public float m_NeedMoveDistance;
 
-    //各コンポーネント
-    public NavMeshAgent m_NavAgent;
-    public Rigidbody m_Rb;
-    public Animator m_Anim;
-    public RocketBattery m_Battery;
-    public Damageable m_DamageComp;
+    //各コンポーネント    
+    private NavMeshAgent m_NavAgent;
+    private Rigidbody m_Rb;
+    private Animator m_Anim;
+    private RocketBattery m_Battery;
+    private Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
     public GameObject m_Target;
 
-    private void OnDisable()
-    {
-        m_BT.IsStop = true;
-    }
-    private void OnEnable()
-    {
-        StartCoroutine(Kimepo());
-    }
-    private IEnumerator Kimepo()
-    {
-        yield return new WaitForAnimation(m_Anim);
-        m_BT.IsStop = false;
-    }
+    //エフェクト
+    [SerializeField] GameObject m_Explosion;
 
     private void Awake()
-    {         
+    {
         m_Controller = GetComponentInParent<Boss3_Controller>();
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Rb = GetComponent<Rigidbody>();
         m_Anim = GetComponentInChildren<Animator>();
         m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
-        m_DamageComp.Event_Damaged = Damaged;        
+        m_DamageComp.Del_ReciveDamage = Damaged;
     }
     // Use this for initialization
     void Start()
     {
         //ビヘイビアツリーのセットアップ
         SetUpBT();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Restart());
+    }
+
+    private IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(1.0f);
+        m_BT.IsStop = false;
     }
     // Update is called once per frame
     public void BossUpdate()
@@ -71,8 +73,12 @@ public class Boss3_Humanoid : MonoBehaviour
     }
     private void Damaged(float damage, MonoBehaviour src)
     {
-        m_Controller.Hp -= damage;     
-        //m_Anim.SetTrigger("Damage");
+        m_Controller.Hp -= damage;
+    }
+
+    public void Dead()
+    {
+        Instantiate(m_Explosion, transform.position, transform.rotation);
     }
 
     public void Release()

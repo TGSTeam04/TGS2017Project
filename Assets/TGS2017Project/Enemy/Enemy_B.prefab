@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 195233312492843470}
   - component: {fileID: 114080014868632124}
   - component: {fileID: 114765394621484514}
+  - component: {fileID: 114087573480924558}
   m_Layer: 10
   m_Name: Enemy_B
   m_TagString: Enemy
@@ -758,7 +759,7 @@ Transform:
   m_GameObject: {fileID: 1199730886601060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -14.38, y: -0.047949154, z: -1.06}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4607738106257626}
   - {fileID: 4439861913472950}
@@ -1429,6 +1430,17 @@ MonoBehaviour:
   m_HumanoidRobot: {fileID: 0}
   m_BreakType: 0
   m_Fragment: {fileID: 0}
+--- !u!114 &114087573480924558
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1199730886601060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114765394621484514
 MonoBehaviour:
   m_ObjectHideFlags: 1

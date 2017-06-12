@@ -29,9 +29,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
     {
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
-            ReSpawn, enemy));
-        enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        enemy.Del_CollideEnter = null;
+            ReSpawn, enemy));        
     }
 
     void ReSpawn(EnemyBase enemy)

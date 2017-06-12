@@ -83,10 +83,7 @@ public class BNode
     }
 
     //リセット、サクセス、フェイラーで共通の処理
-    public virtual void StateChanged()
-    {
-    }
-    //public virtual void Enter() { }
+    public virtual void StateChanged() { }    
 
     public void AddDecorator(BDecorator dec)
     {
@@ -117,7 +114,7 @@ public class BNode
         }
         else
             OnExecute();
-
+        
         //Debug.Log(ToString());
     }
     protected virtual void FirstExecute() { }

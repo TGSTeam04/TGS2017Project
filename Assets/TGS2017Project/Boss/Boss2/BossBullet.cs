@@ -12,10 +12,13 @@ public class BossBullet : MonoBehaviour {
 
     private int m_DeathCount = 4;
 
+    AudioSource m_Sound;
+
 	// Use this for initialization
 	void Start () {
         m_Position = transform.position;
         m_TargetPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        m_Sound = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame

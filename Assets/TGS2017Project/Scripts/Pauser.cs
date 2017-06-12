@@ -16,6 +16,7 @@ using System;
 
 public class Pauser : MonoBehaviour
 {
+    static bool m_IsPause;
     //全体で共有するポーズ対象
     static List<Pauser> targets = new List<Pauser>();   // ポーズ対象のスクリプト
 

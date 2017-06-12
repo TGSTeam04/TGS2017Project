@@ -92,7 +92,7 @@ public class EnemyBase : MonoBehaviour
             default:
                 break;
         }
-        m_Rigidbody.velocity = Vector3.zero;
+        //m_Rigidbody.velocity = Vector3.zero;
     }
 
     private void Move()
@@ -134,6 +134,10 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
+        transform.parent = null;
+        m_Rigidbody.isKinematic = false;
+        m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        Del_CollideEnter = null;
         EnemyManager.Instance.ReSpawnEnemy(this);
         m_IsDead = true;
     }

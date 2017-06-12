@@ -42,5 +42,4 @@ public class UIPlayerStatus : MonoBehaviour {
 		m_Black.SetActive(false);
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
-
 }

@@ -18,6 +18,9 @@ public class RocketBase : MonoBehaviour
     //各コンポーネント
     private Rigidbody m_Rigidbody;
     private Collider m_Collider;
+    private AudioSource m_AudioSrc;
+    [SerializeField] private AudioClip m_SEFire;
+    [SerializeField] private AudioClip m_SEHit;
 
     //ロケットの状態
     public RocketState m_State;
@@ -40,15 +43,21 @@ public class RocketBase : MonoBehaviour
     public string m_TargetTag;
     //埋まる時間
     public float m_BuriedTime = 1.0f;
+
     //ノックバック状態か
     public bool m_IsKnockBack;
+    //ノックバックの力
+    public float m_KnockBackForce;
+
     //衝突した雑魚リスト
-    public List<EnemyBase> m_ChildEnemys;
+    public List<EnemyBase> m_ChildEnemys;    
 
     private void Awake()
     {
         m_ChildEnemys = new List<EnemyBase>();
-        m_IsKnockBack = true;
+        m_AudioSrc = gameObject.AddComponent<AudioSource>();
+        m_AudioSrc.spatialBlend = 1.0f;
+        m_IsKnockBack = true;        
     }
 
     // Use this for initialization
@@ -59,6 +68,10 @@ public class RocketBase : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            m_AudioSrc.Play();
+        }
         switch (m_State)
         {
             case RocketState.Idle:
@@ -97,13 +110,14 @@ public class RocketBase : MonoBehaviour
             case RocketState.Fire:
                 m_Rigidbody.MovePosition(m_Rigidbody.position + transform.forward * m_Speed * Time.fixedDeltaTime);
                 break;
-            case RocketState.Back:      
+            case RocketState.Back:
                 m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
-                    m_State = RocketState.Idle;
+                    m_State = RocketState.Idle;                    
                     gameObject.SetActive(false);
-                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                    m_Battery.CollectRocket();
+                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);                                       
                 }
                 break;
             case RocketState.Reflected:
@@ -116,11 +130,12 @@ public class RocketBase : MonoBehaviour
 
     public void Fire()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(true);        
         m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_Battery.transform.rotation;
         m_State = RocketState.Fire;
+        m_AudioSrc.PlayOneShot(m_SEFire);
         m_Timer = 0;
     }
 
@@ -142,9 +157,7 @@ public class RocketBase : MonoBehaviour
     public void BreakChildEnemys()
     {
         foreach (var enemy in m_ChildEnemys)
-        {
-            enemy.transform.parent = null;
-            enemy.GetComponent<Rigidbody>().isKinematic = false;
+        {            
             enemy.SetBreak();
         }
         m_ChildEnemys.Clear();
@@ -155,6 +168,7 @@ public class RocketBase : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
+        m_AudioSrc.PlayOneShot(m_SEHit);
 
         if (obj.tag == m_TargetTag)
         {//攻撃対象に当たったら
@@ -164,8 +178,12 @@ public class RocketBase : MonoBehaviour
         {//雑魚と衝突
             if (m_IsKnockBack)
             {//ノックバック
-                enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                Rigidbody rb = enemy.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
                 enemy.Del_CollideEnter = KnockBackEnemyCollide;
+
+                Vector3 dire = enemy.transform.position - transform.position;
+                rb.AddForce(dire.normalized * m_KnockBackForce,ForceMode.Impulse);                
             }
             else
             {//子オブジェクトに追加
@@ -186,12 +204,12 @@ public class RocketBase : MonoBehaviour
                 return m_Timer < m_BuriedTime;
             }));
         }
-    }    
+    }
 
     protected void CollideTarget(GameObject target)
     {
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
-        target.GetComponent<Damageable>().ApplyDamage(damage, this);        
+        target.GetComponent<Damageable>().ApplyDamage(damage, this);
         BreakChildEnemys();
         Debug.Log("ターゲットダメージ" + damage);
         m_State = RocketState.Back;
@@ -209,7 +227,7 @@ public class RocketBase : MonoBehaviour
 
         if (obj.tag == m_TargetTag)
         {//攻撃対象と衝突
-            CollideTarget(obj);           
+            CollideTarget(obj);
         }
         else if (otherEnemy != null)
         {//雑魚と衝突    子オブジェクトに追加
@@ -229,11 +247,15 @@ public class RocketBase : MonoBehaviour
         {//攻撃対象と衝突
             collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ChildApplyDamage, this);
             Debug.Log("ノックバックEnemy　が　Player　と衝突");
+        }        
+        if(collision.gameObject.tag != gameObject.tag)
+        {
+            enemy.SetBreak();
         }
     }
 
     public void SetLayer(string layerName)
     {
         gameObject.layer = LayerMask.NameToLayer(layerName);
-    }    
+    }
 }
