@@ -8,8 +8,10 @@ using UnityEngine.AI;
 [SelectionBase]
 public class Boss3_Humanoid : MonoBehaviour
 {
+    //分裂時と合体時のコントロールをするクラスの参照
     public Boss3_Controller m_Controller;
 
+    //移動
     public float m_Speed;
     //ロケットパンチ
     public float m_RocketSpeed;
@@ -22,12 +24,15 @@ public class Boss3_Humanoid : MonoBehaviour
     private Rigidbody m_Rb;
     private Animator m_Anim;
     private RocketBattery m_Battery;
-    private Damageable m_DamageComp;    
+    private Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
     BehaviorTree m_BT;
     BBoard m_BB;
     public GameObject m_Target;
+
+    //エフェクト
+    [SerializeField] GameObject m_Explosion;
 
     private void Awake()
     {
@@ -45,9 +50,15 @@ public class Boss3_Humanoid : MonoBehaviour
         //ビヘイビアツリーのセットアップ
         SetUpBT();
     }
-    private IEnumerator Kimepo()
+
+    private void OnEnable()
     {
-        yield return new WaitForAnimation(m_Anim);
+        StartCoroutine(Restart());
+    }
+
+    private IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(1.0f);
         m_BT.IsStop = false;
     }
     // Update is called once per frame
@@ -63,7 +74,11 @@ public class Boss3_Humanoid : MonoBehaviour
     private void Damaged(float damage, MonoBehaviour src)
     {
         m_Controller.Hp -= damage;
-        //m_Anim.SetTrigger("Damage");
+    }
+
+    public void Dead()
+    {
+        Instantiate(m_Explosion, transform.position, transform.rotation);
     }
 
     public void Release()

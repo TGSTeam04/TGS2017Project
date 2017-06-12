@@ -45,12 +45,12 @@ public class Boss3_Controller : MonoBehaviour
         set
         {
             m_Hp = value;
-            Debug.Log("ダメージ" + value);
+            //Debug.Log("ダメージ" + value);
             if (Hp <= 0)
             {
-                m_State = PlayMode.NoPlay;
-                Debug.Log("Boss3死亡");
+                Dead();
             }
+            GameManager.Instance.m_BossHpRate = m_Hp / m_MaxHp;
         }
     }
 
@@ -75,13 +75,24 @@ public class Boss3_Controller : MonoBehaviour
                 break;
         }
     }
+
+    public void Dead()
+    {
+        if (m_State == PlayMode.HumanoidRobot)
+            m_HRobot.Dead();
+
+        m_State = PlayMode.NoPlay;
+        Debug.Log("Boss3死亡");
+    }
+
     public void CombineStart()
     {
         StartCoroutine(Combine());
     }
     public void ReleaseStart()
     {
-        StartCoroutine(Release());
+        if (m_Hp > 0)
+            StartCoroutine(Release());
     }
 
     private IEnumerator Combine()

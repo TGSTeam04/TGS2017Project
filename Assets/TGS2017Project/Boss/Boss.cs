@@ -74,8 +74,7 @@ public class Boss : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
+    {        
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
         {
@@ -112,8 +111,6 @@ public class Boss : MonoBehaviour
                     if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
                     {
                         transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
-                        //transform.position += transform.forward * m_MoveSpeed * Time.deltaTime;
-
                     }
                     else
                     {
