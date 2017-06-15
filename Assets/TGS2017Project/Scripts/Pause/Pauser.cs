@@ -11,7 +11,8 @@ public enum PauseTag
 }
 
 //ポーズ管理する際のメンバ郡（初期化だるいからクラス）
-public class PauseParams
+[System.SerializableAttribute]
+public class PauseManageParam
 {
     public bool m_IsPause = false;
     //全体で共有するポーズ対象
@@ -31,14 +32,49 @@ public class PauseParams
 
 public class Pauser : MonoBehaviour
 {
-    static public Dictionary<PauseTag, PauseParams> s_TargetByTag = new Dictionary<PauseTag, PauseParams>()
+    static public Dictionary<PauseTag, PauseManageParam> s_TargetByTag = new Dictionary<PauseTag, PauseManageParam>()
     {
-        { PauseTag.Pause,new PauseParams() },
-        { PauseTag.Enemy,new PauseParams() }
+        { PauseTag.Pause , new PauseManageParam() },
+        { PauseTag.Enemy , new PauseManageParam() }
     };
+    // ポーズ
+    static public void Pause(PauseTag tag = PauseTag.Pause)
+    {
+        //対象タグが既にポーズ中ならリターン
+        if (s_TargetByTag[tag].m_IsPause) return;
+
+        s_TargetByTag[tag].m_IsPause = true;
+        foreach (var obj in s_TargetByTag[tag].m_Targets)
+        {
+            //既に他のタグでポーズされていれば無視
+            if (obj.m_PauseCunt <= 0)
+                obj.OnPause();
+            //カウンタ更新
+            obj.m_PauseCunt++;
+        }
+    }
+
+    // ポーズ解除
+    static public void Resume(PauseTag tag = PauseTag.Pause)
+    {
+        //対象タグがポーズされていなければリターン
+        if (!s_TargetByTag[tag].m_IsPause) return;
+
+        s_TargetByTag[tag].m_IsPause = false;
+        foreach (var obj in s_TargetByTag[tag].m_Targets)
+        {
+            //カウンタ更新
+            obj.m_PauseCunt--;
+            //他のタグでポーズされていれば無視
+            if (obj.m_PauseCunt <= 0)
+                obj.OnResume();
+        }
+    }
+    static public bool IsTagPause(PauseTag tag = PauseTag.Pause) { return s_TargetByTag[tag].m_IsPause; }
 
     //ポーズタグ
     public List<PauseTag> m_Tags = new List<PauseTag>() { PauseTag.Pause };
+    private int m_PauseCunt = 0;
 
     //ポーズ中のコンポーネント
     Behaviour[] pauseBehavs = null;
@@ -51,6 +87,8 @@ public class Pauser : MonoBehaviour
     Rigidbody2D[] rg2dBodies = null;
     Vector2[] rg2dBodyVels = null;
     float[] rg2dBodyAVels = null;
+
+    public bool IsPause { get { return m_PauseCunt > 0; } }
 
     // 初期化
     void Start()
@@ -72,7 +110,7 @@ public class Pauser : MonoBehaviour
     }
 
     // ポーズされたとき
-    public void OnPause()
+    private void OnPause()
     {
         if (pauseBehavs != null)
         {
@@ -110,7 +148,7 @@ public class Pauser : MonoBehaviour
     }
 
     // ポーズ解除されたとき
-    public void OnResume()
+    private void OnResume()
     {
         if (pauseBehavs == null)
         {
@@ -146,29 +184,5 @@ public class Pauser : MonoBehaviour
         rg2dBodies = null;
         rg2dBodyVels = null;
         rg2dBodyAVels = null;
-    }
-
-    // ポーズ
-    static public void Pause(PauseTag tag = PauseTag.Pause)
-    {
-        if (s_TargetByTag[tag].m_IsPause) return;
-
-        s_TargetByTag[tag].m_IsPause = true;
-        foreach (var obj in s_TargetByTag[tag].m_Targets)
-        {
-            obj.OnPause();
-        }
-    }
-
-    // ポーズ解除
-    static public void Resume(PauseTag tag = PauseTag.Pause)
-    {
-        if (!s_TargetByTag[tag].m_IsPause) return;
-
-        s_TargetByTag[tag].m_IsPause = false;
-        foreach (var obj in s_TargetByTag[tag].m_Targets)
-        {
-            obj.OnResume();
-        }
     }
 }

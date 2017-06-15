@@ -14,8 +14,6 @@ public class StageManager : MonoBehaviour
     public ObserverBase m_Observer;
     private int m_killNum;
 
-    private bool m_IsPause = false;
-
     //[SerializeField]//ボスが出てくるStageLevel
     //private int m_MaxStageLevel;
     //[SerializeField]//次のレベルに進むまでのKill数
@@ -61,8 +59,8 @@ public class StageManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		//m_Observer.NotifyToSubjects("")
-		SceneManager.SetActiveScene(gameObject.scene);
+        //m_Observer.NotifyToSubjects("")
+        SceneManager.SetActiveScene(gameObject.scene);
     }
 
     // Update is called once per frame
@@ -70,8 +68,8 @@ public class StageManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
-            m_IsPause = !m_IsPause;
-            if (m_IsPause)
+            bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
+            if (!isPause)
             {
                 SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
                 Pauser.Pause();
@@ -81,6 +79,14 @@ public class StageManager : MonoBehaviour
                 SceneManager.UnloadSceneAsync("Pause");
                 Pauser.Resume();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            bool isPause = Pauser.s_TargetByTag[PauseTag.Enemy].m_IsPause;
+            if (!isPause)
+                Pauser.Pause(PauseTag.Enemy);
+            else
+                Pauser.Resume(PauseTag.Enemy);
         }
     }
 
