@@ -33,9 +33,7 @@ public class SecondBoss : MonoBehaviour
     private Collider m_Collision;
 
     //ダメージコンポーネント
-    private Damageable m_Damage;
-    [SerializeField] private float m_MaxHp = 1.0f;
-    public static float s_HitPoint;
+    private Damageable m_Damage;    
     private int m_AmmoCount = 4;
     private bool m_Fire = true;
     private bool m_Reload;
@@ -61,7 +59,19 @@ public class SecondBoss : MonoBehaviour
     Animator m_Anim;
 
     public static SecondBossState s_State = SecondBossState.Ready;
-    
+
+    private static float s_MaxHp = 100.0f;
+    private static float s_HitPoint;
+    public static float HitPoint
+    {
+        get { return s_HitPoint; }
+        set
+        {
+            s_HitPoint = value;
+            GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
+        }
+    }
+
     /***    okaku  ***/
     //加速度
     public float m_Accel = 245.7f;
@@ -69,7 +79,7 @@ public class SecondBoss : MonoBehaviour
 
     private void Awake()
     {
-        s_HitPoint = m_MaxHp;
+        HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
@@ -78,8 +88,7 @@ public class SecondBoss : MonoBehaviour
     //ダメージコンポーネントのダメージ
     private void Damage(float damage, MonoBehaviour src)
     {
-        s_HitPoint -= damage;
-        GameManager.Instance.m_BossHpRate = (s_HitPoint / m_MaxHp);
+        HitPoint -= damage;
     }
 
     // Use this for initialization
@@ -128,7 +137,6 @@ public class SecondBoss : MonoBehaviour
             case PlayMode.Release:
             default:
                 return;
-                break;
         }
 
         m_TargetPosition = m_Target.transform.position;
@@ -254,7 +262,7 @@ public class SecondBoss : MonoBehaviour
                 {
                     s_State = SecondBossState.Ready;
                 }
-                if (s_HitPoint <= 0)
+                if (HitPoint <= 0)
                 {
                     s_State = SecondBossState.Paralysis;
                     StartCoroutine(Death());
