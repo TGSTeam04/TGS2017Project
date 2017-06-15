@@ -145,6 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4051958166360556}
   - component: {fileID: 95875583501477272}
+  - component: {fileID: 65555320335528756}
   m_Layer: 0
   m_Name: railgun_20170612
   m_TagString: Untagged
@@ -161,7 +162,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4328595291630888}
   - component: {fileID: 54097614837757600}
-  - component: {fileID: 65713172265561578}
   - component: {fileID: 114819148976569218}
   - component: {fileID: 114306511433509154}
   m_Layer: 17
@@ -282,7 +282,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783115579795336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 8.42, z: -26.315035}
+  m_LocalPosition: {x: -8.3381405, y: -51.739296, z: -13.804846}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4051958166360556}
@@ -444,18 +444,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65713172265561578
+--- !u!65 &65555320335528756
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1783115579795336}
+  m_GameObject: {fileID: 1759329894475512}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 3.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.5, z: 3.5}
+  m_Center: {x: 0, y: 0.3, z: 0.3}
 --- !u!95 &95875583501477272
 Animator:
   serializedVersion: 3

@@ -2678,7 +2678,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121284775246832}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -11.06, y: 0, z: 7.99}
+  m_LocalPosition: {x: -8.74, y: 0, z: -5.35}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4684090284594472}
@@ -3698,7 +3698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2af1fe39ff893418fdcb4edc37cf17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Destinations: []
+  m_Destinations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40
@@ -3755,7 +3758,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!195 &195390973320678264
 NavMeshAgent:

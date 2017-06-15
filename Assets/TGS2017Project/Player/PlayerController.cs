@@ -193,6 +193,8 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator Combine()
     {
+        Pauser.Pause(PauseTag.Enemy);
+
         GameManager.Instance.m_PlayMode = PlayMode.Combine;
         m_TwinRobotL.Active(false);
         m_TwinRobotR.Active(false);
@@ -281,6 +283,8 @@ public class PlayerController : MonoBehaviour
         m_RRobot.SetActive(false);
         m_Electric.SetActive(false);
         GameManager.Instance.m_PlayMode = PlayMode.HumanoidRobot;
+
+        Pauser.Resume(PauseTag.Enemy);
     }
     public IEnumerator Release()
     {

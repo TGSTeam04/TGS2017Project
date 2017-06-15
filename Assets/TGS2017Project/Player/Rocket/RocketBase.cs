@@ -38,6 +38,8 @@ public class RocketBase : MonoBehaviour
     public float m_BackSpeed;
     //前進時間
     public float m_AdvanceTime;
+    //発射方向
+    public Vector3 m_AdvanceDire;
     //発射からの経過時間
     public float m_Timer;
     public string m_TargetTag;
@@ -108,9 +110,10 @@ public class RocketBase : MonoBehaviour
             case RocketState.Idle:
                 break;
             case RocketState.Fire:
-                m_Rigidbody.MovePosition(m_Rigidbody.position + transform.forward * m_Speed * Time.fixedDeltaTime);
+                Move(m_AdvanceDire * m_Speed);
                 break;
             case RocketState.Back:
+                Move((m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed);
                 m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
                 if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
                 {
@@ -128,6 +131,12 @@ public class RocketBase : MonoBehaviour
         }
     }
 
+    public void Move(Vector3 direction)
+    {
+        m_Rigidbody.MovePosition(m_Rigidbody.position + direction * Time.fixedDeltaTime);
+        m_Rigidbody.MoveRotation(m_Rigidbody.rotation * Quaternion.Euler(new Vector3(360, 0, 0) * Time.fixedDeltaTime));
+    }
+
     public void Fire()
     {
         gameObject.SetActive(true);
@@ -136,6 +145,7 @@ public class RocketBase : MonoBehaviour
         transform.rotation = m_Battery.transform.rotation;
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
+        m_AdvanceDire = transform.forward;
         m_Timer = 0;
     }
 
@@ -149,7 +159,7 @@ public class RocketBase : MonoBehaviour
     {
         enemy.transform.parent = transform;
         enemy.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        enemy.Del_Trigger = HasEnemyCollide;        
+        enemy.Del_Trigger = HasEnemyCollide;
         m_ChildEnemys.Add(enemy);
     }
 
@@ -237,7 +247,7 @@ public class RocketBase : MonoBehaviour
         else
         {
             BreakChildEnemys();
-            m_State = RocketState.Back;            
+            m_State = RocketState.Back;
         }
 
         if (obj.tag == m_TargetTag)
