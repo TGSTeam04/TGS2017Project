@@ -258,8 +258,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //GameManager.Instance.m_PlayScore += count;
-        m_TwinRobotL.Damage(-0.2f * count);
-        m_TwinRobotR.Damage(-0.2f * count);
+        m_TwinRobotL.Damage(-10.0f * count, this);
+        m_TwinRobotR.Damage(-10.0f * count, this);
 
         m_HumanoidRobot.m_Energy = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[count - 1];
         int nextexp = GameManager.Instance.LevelParameter.m_NextExp;

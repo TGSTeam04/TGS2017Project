@@ -11,7 +11,7 @@ public class TwinRobot : MonoBehaviour
 {
     [SerializeField] private GameObject m_Shield;
     [SerializeField] private TwinRobotConfig m_Config;
-    [SerializeField] private TwinRobotBaseConfig m_BaseConfig;
+    [SerializeField] public TwinRobotBaseConfig m_BaseConfig;//GameUIで参照するんでとりまpublicにしました
 
     private float m_HP;
     private Renderer m_Renderer;
@@ -32,7 +32,7 @@ public class TwinRobot : MonoBehaviour
 
     public void Damage(float damage, MonoBehaviour src)
     {
-        HP -= damage / 300;
+        HP -= damage; 
     }
     public void Move()
     {
@@ -63,7 +63,7 @@ public class TwinRobot : MonoBehaviour
                             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
                             GameManager.Instance.m_GameStarter.ChangeScenes(9);
                         }
-                        HP -= 0.1f;
+                        HP -= 5f;
                         break;
                     default:
                         break;
@@ -78,17 +78,17 @@ public class TwinRobot : MonoBehaviour
     {
         m_Shield.SetActive(active && HP != 0);
     }
-    public float Damage(float damage)
-    {
-        HP -= damage;
-        return HP;
-    }
+    //public float Damage(float damage)
+    //{
+    //    HP -= damage;
+    //    return HP;
+    //}
     public float HP
     {
         get { return m_HP; }
         set
         {
-            m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);
+            m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);            
             ShieldUpdate();
         }
     }
