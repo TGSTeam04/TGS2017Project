@@ -68,6 +68,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         s_State = BossState.Move;
+        m_LookCounter = 0;
         m_Target = GameObject.FindGameObjectWithTag("Player").transform;
         m_Anim = GetComponent<Animator>();
     }
@@ -75,6 +76,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(s_State);
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
         {
@@ -101,7 +103,7 @@ public class Boss : MonoBehaviour
         //{
         //    m_State = BossState.Paralysis;
         //}
-
+        print("Chance:" + AttackProcess.s_Chance);
         switch (s_State)
         {
             case BossState.Move:
