@@ -158,7 +158,7 @@ public class RocketBase : MonoBehaviour
     {
         foreach (var enemy in m_ChildEnemys)
         {
-            enemy.SetBreak();
+            enemy.SetBreakForPlayer();
         }
         m_ChildEnemys.Clear();
     }
@@ -255,7 +255,7 @@ public class RocketBase : MonoBehaviour
         }
         if (other.gameObject.tag != gameObject.tag)
         {
-            enemy.SetBreak();
+            enemy.SetBreakForPlayer();
         }
     }
 

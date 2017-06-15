@@ -128,7 +128,6 @@ public class SecondBoss : MonoBehaviour
             case PlayMode.Release:
             default:
                 return;
-                break;
         }
 
         m_TargetPosition = m_Target.transform.position;

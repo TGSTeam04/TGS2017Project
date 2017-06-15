@@ -23,7 +23,7 @@ public class BreakLeg : MonoBehaviour {
         {
             Instantiate(m_Explosion, transform.position, transform.rotation);
             m_Collision.isTrigger = false;
-            SecondBoss.s_HitPoint -= 0.25f;
+            SecondBoss.s_HitPoint -= 10.0f;
             SecondBoss.s_State = SecondBoss.SecondBossState.Invincible;
         }
     }

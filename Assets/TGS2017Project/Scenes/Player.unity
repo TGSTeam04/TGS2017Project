@@ -5857,8 +5857,9 @@ MonoBehaviour:
   m_IsKnockBack: 0
   m_RocketLayer: PlayerBullet
   m_TargetTag: Boss
-  m_SEColectRocet: {fileID: 0}
-  m_Effect_Chage: {fileID: 0}
+  m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
+  m_Effect_Chage: {fileID: 1276318460339736, guid: ae359c9f97dba68419ae616fbbb69f2f,
+    type: 2}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
 --- !u!114 &1389940283

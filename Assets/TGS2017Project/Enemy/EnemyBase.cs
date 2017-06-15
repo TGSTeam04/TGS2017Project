@@ -133,7 +133,7 @@ public class EnemyBase : MonoBehaviour
     }
 
     public void SetBreak()
-    {        
+    {
         transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -141,6 +141,12 @@ public class EnemyBase : MonoBehaviour
         m_IsDead = true;
         gameObject.SetActive(false);
         EnemyManager.Instance.ReSpawnEnemy(this);
+    }
+
+    public void SetBreakForPlayer()
+    {
+        GameManager.Instance.m_PlayScore++;
+        SetBreak();
     }
 
     public void OnTriggerEnter(Collider other)

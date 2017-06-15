@@ -76,7 +76,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(s_State);
+        //Debug.Log(s_State);
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
         {
@@ -103,7 +103,7 @@ public class Boss : MonoBehaviour
         //{
         //    m_State = BossState.Paralysis;
         //}
-        print("Chance:" + AttackProcess.s_Chance);
+        //print("Chance:" + AttackProcess.s_Chance);
         switch (s_State)
         {
             case BossState.Move:

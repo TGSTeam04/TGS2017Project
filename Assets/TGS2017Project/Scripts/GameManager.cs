@@ -55,14 +55,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // Update is called once per frame
     void Update()
-    {       
+    {
+        if (m_PlayMode != PlayMode.NoPlay)
+            m_PlayTime += Time.deltaTime;
+
         switch (m_PlayMode)
         {
             case PlayMode.NoPlay:
                 break;
             case PlayMode.TwinRobot:
             case PlayMode.HumanoidRobot:
-                m_PlayTime += Time.deltaTime;
                 break;
             case PlayMode.Combine:
             case PlayMode.Release:
