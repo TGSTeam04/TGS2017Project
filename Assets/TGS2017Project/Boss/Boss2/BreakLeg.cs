@@ -22,8 +22,8 @@ public class BreakLeg : MonoBehaviour {
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && SecondBoss.s_State == SecondBoss.SecondBossState.Paralysis)
         {
             Instantiate(m_Explosion, transform.position, transform.rotation);
-            m_Collision.isTrigger = false;
-            SecondBoss.s_HitPoint -= 10.0f;
+            //m_Collision.isTrigger = false;
+            SecondBoss.HitPoint -= 10.0f;            
             SecondBoss.s_State = SecondBoss.SecondBossState.Invincible;
         }
     }

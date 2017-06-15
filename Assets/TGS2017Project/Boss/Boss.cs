@@ -39,19 +39,27 @@ public class Boss : MonoBehaviour
     //public Image m_HitPointBar;
     //ダメージコンポーネント
     private Damageable m_Damage;
-    [SerializeField] private float m_MaxHp = 1.0f;
-    public static float s_HitPoint = 1.0f;
 
     Transform m_Target;
     Vector3 m_TargetPosition;
     Animator m_Anim;
 
-
     public static BossState s_State = BossState.Move;
+    private static float s_MaxHp = 100.0f;
+    private static float s_HitPoint;
+    public static float HitPoint
+    {
+        get { return s_HitPoint; }
+        set
+        {
+            s_HitPoint = value;
+            GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
+        }
+    }
 
     private void Awake()
     {
-        s_HitPoint = m_MaxHp;
+        s_HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
@@ -60,8 +68,7 @@ public class Boss : MonoBehaviour
     //ダメージコンポーネントのダメージ
     private void Damage(float damage, MonoBehaviour src)
     {
-        s_HitPoint -= damage;
-        GameManager.Instance.m_BossHpRate = (s_HitPoint / m_MaxHp);
+        HitPoint -= damage;        
     }
 
     // Use this for initialization
