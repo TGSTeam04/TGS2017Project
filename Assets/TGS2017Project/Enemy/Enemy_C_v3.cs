@@ -4,31 +4,39 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// スクリプト：敵タイプB（近距離型）
+/// スクリプト：敵タイプC（射撃型）Ver.3
 /// 製作者：Ho Siu Ki（何兆祺）
 /// </summary>
 
 // 敵Cの状態
-enum EnemyB_State
+enum EnemyC_State_v3
 {
     Entry,      // 登場
-    Normal,     // 通常
+    Move,       // 移動
+    Attack,     // 攻撃
     Damage,     // 被弾
     Paralysis   // 麻痺
 }
 
-public class Enemy_B : MonoBehaviour
+public class Enemy_C_v3 : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;                          // Rigidbodyの参照
     private NavMeshAgent m_NavMeshAgent;                    // NavMeshAgentの参照
     private Animator m_Animator;                            // Animatorの参照
 
-    private EnemyB_State m_State;                           // 敵Bの状態
+    private EnemyC_State_v3 m_State;                        // 敵Cの状態
 
     private Transform m_Target = null;                      // 追従目標
+
     [SerializeField]
+    private Transform[] m_Destinations;                     // 移動ポイント
+    private int m_DestinationIndex = -1;                    // 移動ポイントインデックス
+    [SerializeField]
+    private int m_ChangePositionInterval;                   // 移動間隔（フレーム数を入力、60フレーム=1秒）
+    private int m_ChangePositionCount = 0;                  // 移動タイマー
+
     private int m_ChangeTargetInterval;                     // 追従目標の変更間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_ChangeTargetCount = 0;                    // 目標変更カウンター
+    private int m_ChangeTargetCount = 0;                    // 目標変更タイマー
     [SerializeField]
     private float m_RotateSpeed;                            // 回転速度
 
@@ -43,27 +51,31 @@ public class Enemy_B : MonoBehaviour
 
     [SerializeField]
     private int m_AttackInterval;                           // 攻撃間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_AttackCount = 120;                        // 攻撃カウンター
+    private int m_AttackCount = 120;                        // 攻撃タイマー
     [SerializeField]
-    private float m_Range;                                  // 射程距離
+    private float m_MinDistance;                            // 目標との最短距離
+
     [SerializeField]
-    private Transform m_Muzzle;                             // 銃口の位置
+    private Transform m_Muzzle1;                            // 銃口1の位置
+    [SerializeField]
+    private Transform m_Muzzle2;                            // 銃口2の位置
+    [SerializeField]
+    private Transform m_Muzzle3;                            // 銃口3の位置
+
     [SerializeField]
     private GameObject m_Bullet;                            // 弾
     public Transform m_BulletParent;
 
     [SerializeField]
     private int m_DamageTime;                               // のけぞり時間
-    private int m_DamageTimeCounter;                        // のけぞりカウンター
+    private int m_DamageTimeCounter;                        // のけぞりタイマー
 
     [SerializeField]
     private int m_ParalysisTime;                            // 麻痺時間（フレーム数を入力、60フレーム=1秒）
-    private int m_ParalysisCount;                           // 麻痺時間カウンター
+    private int m_ParalysisCount;                           // 麻痺時間タイマー
 
     [SerializeField]
     private int m_EntryTime;                                // 登場モーション時間
-    [SerializeField]
-    private ParticleSystem m_FireEffect;                    // 攻撃エフェクト
 
     // SE
     private AudioSource m_Fire;                             // 発砲
@@ -81,7 +93,9 @@ public class Enemy_B : MonoBehaviour
 
         // 追従目標を指定
         SetTarget();
-        m_State = EnemyB_State.Entry;
+        // 初期位置を指定
+        m_DestinationIndex = 0;
+        m_State = EnemyC_State_v3.Entry;
     }
 
     // Update is called once per frame
@@ -90,33 +104,27 @@ public class Enemy_B : MonoBehaviour
         // プレイヤーが合体中・分離中でなければ
         if (GameManager.Instance.m_PlayMode != PlayMode.Combine && GameManager.Instance.m_PlayMode != PlayMode.Release)
         {
-            // 登場モーション
-            if (m_State == EnemyB_State.Entry)
+            // 登場
+            if (m_State == EnemyC_State_v3.Entry)
             {
                 --m_EntryTime;
 
-                // 通常状態に移行
+                // 攻撃状態に移行
                 if (m_EntryTime <= 0)
-                    m_State = EnemyB_State.Normal;
+                    m_State = EnemyC_State_v3.Attack;
             }
-            // 通常状態
-            else if (m_State == EnemyB_State.Normal)
+            // 攻撃状態
+            else if (m_State == EnemyC_State_v3.Attack)
             {
-                // プレイヤーに向けて移動
+                // プレイヤーに向ける
                 LookAtPlayer();
-                if (m_Target != null)
-                {
-                    m_NavMeshAgent.destination = m_Target.position;
-                    m_Animator.SetFloat("Speed", m_NavMeshAgent.velocity.sqrMagnitude);
-                }
 
-                // プレイヤーが見えると
-                if (CanSeePlayer())
+                // 攻撃
+                if (m_AttackCount >= m_AttackInterval)
                 {
-                    if (m_AttackCount >= m_AttackInterval)
-                    {
+                    // プレイヤーが見えると攻撃
+                    if (CanSeePlayer())
                         Attack();
-                    }
                 }
 
                 // 追従目標を変更
@@ -125,21 +133,46 @@ public class Enemy_B : MonoBehaviour
                     SetTarget();
                 }
 
+                // プレイヤーが接近すると移動
+                if (IsPlayerNear() && m_ChangePositionCount >= m_ChangePositionInterval)
+                {
+                    SetPosition();          // 次の目的地を設定
+                    m_State = EnemyC_State_v3.Move;
+                }
+
                 // 攻撃カウンター
                 ++m_AttackCount;
 
                 // 目標変更カウンター
                 ++m_ChangeTargetCount;
             }
+            // 移動状態
+            else if (m_State == EnemyC_State_v3.Move)
+            {
+                // 次の目的地に移動
+                m_NavMeshAgent.destination = m_Destinations[m_DestinationIndex].position;
+                // 目的地に到達すると、攻撃状態に移行
+                if (IsArrived())
+                {
+                    m_State = EnemyC_State_v3.Attack;
+                }
+            }
             // 被弾した場合
-            else if (m_State == EnemyB_State.Damage)
+            else if (m_State == EnemyC_State_v3.Damage)
             {
                 // のけぞり時間を加算
                 ++m_DamageTimeCounter;
                 if (m_DamageTimeCounter >= m_DamageTime)
                 {
-                    m_State = EnemyB_State.Normal;
-
+                    // 被弾前の状態に戻る
+                    if (!IsArrived())
+                    {
+                        m_State = EnemyC_State_v3.Move;
+                    }
+                    else
+                    {
+                        m_State = EnemyC_State_v3.Attack;
+                    }
                 }
             }
             // 麻痺中の場合
@@ -149,9 +182,19 @@ public class Enemy_B : MonoBehaviour
                 ++m_ParalysisCount;
                 if (m_ParalysisCount >= m_ParalysisTime)
                 {
-                    m_State = EnemyB_State.Normal;
+                    // 麻痺前の状態に戻る
+                    if (!IsArrived())
+                    {
+                        m_State = EnemyC_State_v3.Move;
+                    }
+                    else
+                    {
+                        m_State = EnemyC_State_v3.Attack;
+                    }
                 }
             }
+            // 移動タイマーを加算
+            ++m_ChangePositionCount;
         }
     }
 
@@ -169,8 +212,8 @@ public class Enemy_B : MonoBehaviour
                 float m_DistanceL = Vector3.Distance(transform.position, m_PlayerL.transform.position);
                 float m_DistanceR = Vector3.Distance(transform.position, m_PlayerR.transform.position);
 
-                // 近い方のプレイヤーに追従（距離が同じ場合、PlayerL優先）
-                if (m_DistanceL <= m_DistanceR)
+                // 目標を遠い方のプレイヤーに指定（距離が同じ場合、PlayerL優先）
+                if (m_DistanceL >= m_DistanceR)
                 {
                     m_Player = m_PlayerL;
                     m_Target = m_PlayerL.transform;
@@ -186,7 +229,7 @@ public class Enemy_B : MonoBehaviour
             case PlayMode.HumanoidRobot:
                 GameObject m_PlayerCombine = GameManager.Instance.m_HumanoidRobot;
 
-                // プレイヤーに追従
+                // プレイヤーを目標に指定
                 m_Player = m_PlayerCombine;
                 m_Target = m_PlayerCombine.transform;
                 break;
@@ -195,7 +238,6 @@ public class Enemy_B : MonoBehaviour
             default:
                 break;
         }
-
         // カウンターをリセット
         m_ChangeTargetCount = 0;
 
@@ -204,6 +246,24 @@ public class Enemy_B : MonoBehaviour
 
         // プレイヤーの注視点を名前で検索して保持
         m_PlayerLookPoint = m_Player.transform.Find("LookPoint");
+    }
+
+    // 位置を変更
+    void SetPosition()
+    {
+        // 移動ポイントは一つ以下である場合は何もしない
+        if (m_Destinations.Length <= 1) return;
+        // 次の移動ポイントを乱数で決める
+        m_DestinationIndex = Random.Range(0, m_Destinations.Length);
+
+        // カウンターをリセット
+        m_ChangePositionCount = 0;
+    }
+
+    // 目的地に到着したか
+    bool IsArrived()
+    {
+        return (Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.5f);
     }
 
     // プレイヤーが見える距離内にいるか
@@ -275,6 +335,18 @@ public class Enemy_B : MonoBehaviour
         return true;
     }
 
+    // プレイヤーと近すぎるか
+    bool IsPlayerNear()
+    {
+        // プレイヤーがいなかったら、falseを返す
+        if (m_Target == null) return false;
+
+        float distanceToPlayerX = transform.position.x - m_Target.position.x;  // x軸距離
+        float distanceToPlayerZ = transform.position.z - m_Target.position.z;  // z軸距離
+
+        return (distanceToPlayerX < m_MinDistance || distanceToPlayerZ < m_MinDistance);
+    }
+
     // プレイヤーに向ける
     void LookAtPlayer()
     {
@@ -291,11 +363,10 @@ public class Enemy_B : MonoBehaviour
     // 攻撃
     void Attack()
     {
-        m_Animator.SetBool("Attack", true);
         m_Fire.Play();      // SEを再生
-        m_FireEffect.transform.rotation = m_Muzzle.transform.rotation;
-        m_FireEffect.Play();
-        Instantiate(m_Bullet, m_Muzzle.position, m_Muzzle.rotation, m_BulletParent);
+        Instantiate(m_Bullet, m_Muzzle1.position, m_Muzzle1.rotation, m_BulletParent);
+        Instantiate(m_Bullet, m_Muzzle2.position, m_Muzzle2.rotation, m_BulletParent);
+        Instantiate(m_Bullet, m_Muzzle3.position, m_Muzzle3.rotation, m_BulletParent);
         m_AttackCount = 0;
     }
 
@@ -305,13 +376,12 @@ public class Enemy_B : MonoBehaviour
         // 電撃を受けると麻痺
         if (other.name == "Cylinder")
         {
-            // 麻痺してない場合、麻痺状態になる
-            if (m_State != EnemyB_State.Paralysis)
-                m_State = EnemyB_State.Paralysis;
+            m_State = EnemyC_State_v3.Paralysis;
             m_ParalysisCount = 0;
         }
 
         // ロケットパンチを受けると…
+
     }
 
     // Gizomsを描画（デバッグ用）
@@ -334,6 +404,12 @@ public class Enemy_B : MonoBehaviour
             // 視界の左端を描画
             Gizmos.DrawRay(eyePosition, Quaternion.Euler(0, -m_ViewingAngle, 0) * forward);
         }
+
+        // 最短射程を描画
+        Vector3 min_distance = transform.forward * m_MinDistance;
+
+        Gizmos.color = new Color(1.0f, 0.0f, 0.0f);
+        Gizmos.DrawRay(transform.position, min_distance);
 
         // 文字で情報を表示
         if (m_NavMeshAgent != null)
