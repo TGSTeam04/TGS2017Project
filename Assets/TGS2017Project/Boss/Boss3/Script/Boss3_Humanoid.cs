@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
-    public Boss3_Controller m_Controller;
+    private Boss3_Controller m_Controller;
 
     //移動
     public float m_Speed;
