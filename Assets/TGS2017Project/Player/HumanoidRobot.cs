@@ -28,6 +28,8 @@ public class HumanoidRobot : MonoBehaviour
     //ダメージコンポーネント
     private Damageable m_Damage;
 
+    [SerializeField] private GameObject m_Effect_Damage;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -127,10 +129,12 @@ public class HumanoidRobot : MonoBehaviour
                 switch (other.gameObject.tag)
                 {
                     case "Enemy":
-                    case "Bullet":
-                        //m_Energy -= 2;
-                        //m_Animator.SetTrigger("Damage");
-                        //Debug.Log("damege");
+                    case "Bullet":                        
+                        foreach (var contact in other.contacts)
+                        {
+                            GameObject eff = Instantiate(m_Effect_Damage, transform);
+                            eff.transform.position = contact.point;
+                        }
                         break;
                     case "Floor":
                         m_Animator.SetTrigger("Granded");

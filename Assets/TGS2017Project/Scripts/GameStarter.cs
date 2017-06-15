@@ -31,7 +31,7 @@ public class GameStarter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		m_Common = SceneManager.GetActiveScene();
-		ChangeScenes(4);
+		ChangeScenes(1);
 	}
 	
 	// Update is called once per frame

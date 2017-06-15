@@ -3658,7 +3658,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 835782271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0.07, y: 3.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1180916882}
@@ -3677,7 +3677,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5861,13 +5861,12 @@ MonoBehaviour:
     type: 2}
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
-  m_KnockBackForce: 0
+  m_KnockBackForce: 100
   m_IsKnockBack: 0
   m_RocketLayer: PlayerBullet
   m_TargetTag: Boss
   m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
-  m_Effect_Chage: {fileID: 1276318460339736, guid: ae359c9f97dba68419ae616fbbb69f2f,
-    type: 2}
+  m_Effect_Chage: {fileID: 515139551}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
 --- !u!114 &1389940283
@@ -5887,6 +5886,8 @@ MonoBehaviour:
   m_Energy: 0
   m_Animator: {fileID: 158433146}
   m_Battery: {fileID: 1389940282}
+  m_Effect_Damage: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!54 &1389940284
 Rigidbody:
   m_ObjectHideFlags: 0

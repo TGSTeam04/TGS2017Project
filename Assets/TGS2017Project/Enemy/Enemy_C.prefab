@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 114780743203656554}
   - component: {fileID: 82094224450601440}
   - component: {fileID: 82628617610216744}
+  - component: {fileID: 135860509274280340}
   m_Layer: 10
   m_Name: Enemy_C
   m_TagString: Enemy
@@ -2678,7 +2679,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121284775246832}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -8.74, y: 0, z: -5.35}
+  m_LocalPosition: {x: -11.06, y: 0, z: 7.99}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4684090284594472}
@@ -3508,7 +3509,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!82 &82094224450601440
 AudioSource:
@@ -3748,6 +3749,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Tags: 0000000001000000
+--- !u!135 &135860509274280340
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121284775246832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!135 &135949272925717790
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3758,7 +3771,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!195 &195390973320678264
 NavMeshAgent:

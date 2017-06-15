@@ -455,7 +455,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 4.49}
+  m_Size: {x: 0.5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65300796645900548
 BoxCollider:
@@ -499,6 +499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SEFire: {fileID: 8300000, guid: 4d64a4735cbd93d42b73f4e974c93cf9, type: 3}
   m_SEHit: {fileID: 8300000, guid: dce191af1dba81f418bb96e96f91d825, type: 3}
+  m_EffectHitPrefub: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
   m_State: 0
   m_Battery: {fileID: 0}
   m_StandTrans: {fileID: 0}
