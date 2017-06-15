@@ -5856,7 +5856,7 @@ MonoBehaviour:
   m_SEColectRocet: {fileID: 0}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
-  m_RocketLayer: Arm
+  m_RocketLayer: PlayerBullet
   m_TargetTag: Boss
 --- !u!114 &1389940283
 MonoBehaviour:

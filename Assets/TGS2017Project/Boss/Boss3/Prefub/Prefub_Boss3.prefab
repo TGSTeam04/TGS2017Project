@@ -1199,6 +1199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4729179919562120}
   - component: {fileID: 114713040598017948}
+  - component: {fileID: 114806994075815456}
   m_Layer: 18
   m_Name: Prefub_Boss3
   m_TagString: Boss
@@ -7769,9 +7770,9 @@ MonoBehaviour:
   m_RocketRange: 32.05
   m_RocketInterval: 4
   m_NeedMoveDistance: 40
-  m_Target: {fileID: 0}
   m_Explosion: {fileID: 1220756523573468, guid: 2e7f405a3f1fa314f905ea45e614445c,
     type: 2}
+  tempTarget: {fileID: 0}
 --- !u!114 &114713040598017948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7797,6 +7798,18 @@ MonoBehaviour:
   m_HAnimator: {fileID: 95988550449448482}
   m_SEKimepo: {fileID: 8300000, guid: 21c2f681b1930214492f8c6c468a4234, type: 3}
   m_EffectAudioSrc: {fileID: 82490010545475122}
+--- !u!114 &114806994075815456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1388455412181692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tags: 
 --- !u!114 &114828457495872340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7813,6 +7826,7 @@ MonoBehaviour:
   m_LStandTrans: {fileID: 4012010918328848}
   m_RStandTrans: {fileID: 4670792150155546}
   m_KnockBackForce: 80
+  m_IsKnockBack: 0
   m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}

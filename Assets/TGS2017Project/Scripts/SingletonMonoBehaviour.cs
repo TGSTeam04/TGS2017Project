@@ -53,5 +53,4 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBe
 		Destroy(this);
 		return false;
 	}
-
 }

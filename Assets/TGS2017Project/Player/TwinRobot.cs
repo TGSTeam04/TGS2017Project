@@ -34,7 +34,6 @@ public class TwinRobot : MonoBehaviour
     {
         HP -= damage / 300;
     }
-
     public void Move()
     {
         Vector3 move = new Vector3(
