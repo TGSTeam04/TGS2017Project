@@ -27,9 +27,10 @@ public class SecondBoss : MonoBehaviour
     public Transform m_GunBarrel;
     public GameObject m_Explosion;
     public GameObject m_LastExplosion;
-    public Collider m_Collision;
     //public Image m_HitPointBar;
     public List<GameObject> m_Particle;
+
+    private Collider m_Collision;
 
     //ダメージコンポーネント
     private Damageable m_Damage;
@@ -88,6 +89,7 @@ public class SecondBoss : MonoBehaviour
         m_Sound = GetComponent<AudioSource>();
         m_Anim = GetComponentInChildren<Animator>();
         s_State = SecondBossState.Ready;
+        m_Collision = GetComponent<Collider>();
         foreach (GameObject p in m_Particle)
         {
             p.SetActive(false);
@@ -326,7 +328,7 @@ public class SecondBoss : MonoBehaviour
         if (other.gameObject.tag == "Enemy" && m_Reload)
         {
             m_AmmoCount++;
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<EnemyBase>().SetBreak();
         }
     }
 }
