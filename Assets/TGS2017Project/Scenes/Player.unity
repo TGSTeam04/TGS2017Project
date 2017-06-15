@@ -839,6 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Tags: 00000000
 --- !u!1 &192379136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,6 +3392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Tags: 00000000
 --- !u!1 &779960023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5853,11 +5855,12 @@ MonoBehaviour:
   m_RStandTrans: {fileID: 158433147}
   m_KnockBackForce: 0
   m_IsKnockBack: 0
-  m_SEColectRocet: {fileID: 0}
-  m_LRocket: {fileID: 0}
-  m_RRocket: {fileID: 0}
   m_RocketLayer: PlayerBullet
   m_TargetTag: Boss
+  m_SEColectRocet: {fileID: 0}
+  m_Effect_Chage: {fileID: 0}
+  m_LRocket: {fileID: 0}
+  m_RRocket: {fileID: 0}
 --- !u!114 &1389940283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5912,6 +5915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Tags: 00000000
 --- !u!1 &1394361622
 GameObject:
   m_ObjectHideFlags: 0
@@ -8026,6 +8030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Tags: 00000000
 --- !u!1 &1915364112
 GameObject:
   m_ObjectHideFlags: 0

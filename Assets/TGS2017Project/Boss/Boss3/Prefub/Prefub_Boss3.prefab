@@ -7764,7 +7764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4290acb2159a7846a0ffd71b568ecf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Controller: {fileID: 0}
   m_Speed: 10
   m_RocketSpeed: 10
   m_RocketRange: 32.05
@@ -7826,12 +7825,13 @@ MonoBehaviour:
   m_LStandTrans: {fileID: 4012010918328848}
   m_RStandTrans: {fileID: 4670792150155546}
   m_KnockBackForce: 80
-  m_IsKnockBack: 0
+  m_IsKnockBack: 1
   m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
-  m_LRocket: {fileID: 0}
-  m_RRocket: {fileID: 0}
+  m_Effect_Chage: {fileID: 0}
   m_RocketLayer: BossBullet
   m_TargetTag: Player
+  m_LRocket: {fileID: 0}
+  m_RRocket: {fileID: 0}
 --- !u!114 &114865039109560458
 MonoBehaviour:
   m_ObjectHideFlags: 1
