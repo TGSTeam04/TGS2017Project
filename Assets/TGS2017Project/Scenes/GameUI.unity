@@ -1331,6 +1331,8 @@ MonoBehaviour:
   m_ImageB: {fileID: 1005054453}
   m_LShield: {fileID: 788318968}
   m_RShield: {fileID: 1811906517}
+  m_TwinRobotBaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7,
+    type: 2}
 --- !u!4 &2133282815
 Transform:
   m_ObjectHideFlags: 0
