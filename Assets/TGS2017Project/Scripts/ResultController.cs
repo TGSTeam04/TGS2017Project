@@ -11,11 +11,16 @@ public class ResultController : MonoBehaviour {
 	public float m_Time;
 	public int m_Score;
 
+    AudioSource m_Audio;
+
 	IEnumerator Start()
 	{
+        m_Audio = GetComponent<AudioSource>();
         m_Time = GameManager.Instance.m_PlayTime;
         m_Score = GameManager.Instance.m_PlayScore;
         yield return new WaitForSeconds(1);
+        m_Audio.Play();
+        yield return null;
 		for (float t = 0; t < 1.0f ; t += Time.deltaTime)
 		{
 			int time = (int)Mathf.Lerp(0, m_Time, t);
