@@ -9,14 +9,19 @@ public enum TwinRobotMode
 }
 public class TwinRobot : MonoBehaviour
 {
+	[SerializeField] private PlayerController m_Controller;
     [SerializeField] private GameObject m_Shield;
     [SerializeField] private TwinRobotConfig m_Config;
-    [SerializeField] public TwinRobotBaseConfig m_BaseConfig;//GameUIで参照するんでとりまpublicにしました
+    [SerializeField] private TwinRobotBaseConfig m_BaseConfig;
+	[SerializeField] private float m_BreakerSizeS;
+	[SerializeField] private float m_BreakerSizeL;
 
-    private float m_HP;
+
+	private float m_HP;
     private Renderer m_Renderer;
     private Rigidbody m_Rigidbody;
-    private TwinRoboMode m_Mode;
+    private TwinRobotMode m_Mode;
+	private float m_Axis;
 
     //ダメージコンポーネント
     private Damageable m_Damage;
@@ -30,9 +35,24 @@ public class TwinRobot : MonoBehaviour
         HP = m_BaseConfig.m_MaxHP;
     }
 
-    public void Damage(float damage, MonoBehaviour src)
+	public void UpdateInput()
+	{
+		float axis = Input.GetAxis(m_Config.m_InputModeChange);
+		if (axis >= 0.5f && m_Axis < 0.5f)
+		{
+			ModeChange();
+		}
+		m_Axis = axis;
+	}
+
+	private void ModeChange()
+	{
+		m_Mode = m_Mode == TwinRobotMode.A ? TwinRobotMode.B : TwinRobotMode.A;
+	}
+
+	public void Damage(float damage, MonoBehaviour src)
     {
-        HP -= damage; 
+        HP -= damage;
     }
     public void Move()
     {
@@ -44,7 +64,7 @@ public class TwinRobot : MonoBehaviour
         m_Rigidbody.MovePosition(m_Rigidbody.position + move);
     }
 
-    public void Look(Vector3 target)
+    public void Look(Vector3 target, Quaternion quaternion)
     {
         m_Rigidbody.rotation = Quaternion.LookRotation(target - m_Rigidbody.position);
     }
@@ -69,6 +89,16 @@ public class TwinRobot : MonoBehaviour
                         break;
                 }
                 break;
+			case PlayMode.Combine:
+				switch (other.gameObject.tag)
+				{
+					case "Wall":
+						m_Controller.Crushable = false;
+						break;
+					default:
+						break;
+				}
+				break;
             default:
                 break;
         }
@@ -78,11 +108,7 @@ public class TwinRobot : MonoBehaviour
     {
         m_Shield.SetActive(active && HP != 0);
     }
-    //public float Damage(float damage)
-    //{
-    //    HP -= damage;
-    //    return HP;
-    //}
+
     public float HP
     {
         get { return m_HP; }
@@ -92,6 +118,16 @@ public class TwinRobot : MonoBehaviour
             ShieldUpdate();
         }
     }
+
+	public TwinRobotMode Mode
+	{
+		get { return m_Mode; }
+	}
+
+	public float BreakerSize
+	{
+		get { return Mode == TwinRobotMode.A ? m_BreakerSizeS : m_BreakerSizeL; }
+	}
 
     private void ShieldUpdate()
     {

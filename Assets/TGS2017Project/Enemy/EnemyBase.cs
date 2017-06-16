@@ -29,28 +29,11 @@ public class EnemyBase : MonoBehaviour
 
     private Vector3 m_Target;
 
-    public BreakType m_BreakType;
-
     public GameObject m_Fragment;
 
     private NavMeshAgent m_NavMeshAgent;
 
     public OnCollideEnter_Del Del_Trigger;
-
-    public bool IsBreakable
-    {
-        get
-        {
-            switch (m_BreakType)
-            {
-                case BreakType.Normal:
-                    return true;
-                case BreakType.Shock:
-                    return m_IsShock;
-            }
-            return false;
-        }
-    }
 
     // Use this for initialization
     void Start()
@@ -92,7 +75,7 @@ public class EnemyBase : MonoBehaviour
             default:
                 break;
         }
-        //m_Rigidbody.velocity = Vector3.zero;
+        m_Rigidbody.velocity = Vector3.zero;
     }
 
     private void Move()
@@ -134,7 +117,8 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
-        transform.parent = null;
+		Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+		transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;
@@ -151,11 +135,6 @@ public class EnemyBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && m_IsDead)
-        {
-            gameObject.SetActive(false);
-            Instantiate(m_Fragment,transform.position,transform.rotation,transform.parent);
-        }
         if (GameManager.Instance.m_PlayMode == PlayMode.TwinRobot && other.tag == "Guid")
         {
             m_SpeedRate = 0.5f;

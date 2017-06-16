@@ -17,7 +17,7 @@ public class UIPlayerStatus : MonoBehaviour
     private GameObject m_ImageB;
     [SerializeField] private Image m_LShield;
     [SerializeField] private Image m_RShield;
-
+	[SerializeField] private TwinRobotBaseConfig m_TwinRobotBaseConfig;
 
     // Use this for initialization
     void Start()
@@ -29,9 +29,9 @@ public class UIPlayerStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float MaxShield = m_Player.m_TwinRobotL.m_BaseConfig.m_MaxHP;
+        float MaxShield = m_TwinRobotBaseConfig.m_MaxHP;
         m_LShield.fillAmount = m_Player.m_TwinRobotL.HP / MaxShield;
-        m_RShield.fillAmount = m_Player.m_TwinRobotL.HP / MaxShield;
+        m_RShield.fillAmount = m_Player.m_TwinRobotR.HP / MaxShield;
         m_Energy.fillAmount = m_Player.Energy / GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[4];
         m_BossHP.fillAmount = GameManager.Instance.m_BossHpRate;
     }
