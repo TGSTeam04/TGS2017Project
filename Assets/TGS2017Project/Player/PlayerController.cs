@@ -4,15 +4,13 @@ using UnityEngine;
 
 public enum TwinRoboMode
 {
-    A,
-    B
+	A,
+	B
 }
 
 public class PlayerController : MonoBehaviour
 {
-	private Dictionary<TwinRoboMode, Quaternion> m_RotateTwinRoboMode = new Dictionary<TwinRoboMode, Quaternion>();
-	private TwinRoboMode m_LMode;
-	private TwinRoboMode m_RMode;
+	private Dictionary<TwinRobotMode, Quaternion> m_RotateTwinRoboMode = new Dictionary<TwinRobotMode, Quaternion>();
 	public GameObject m_HRobot;
 	public GameObject m_LRobot;
 	public GameObject m_RRobot;
@@ -78,6 +76,10 @@ public class PlayerController : MonoBehaviour
 	private float m_AxisL;
 	private float m_AxisR;
 
+	[SerializeField]
+	private AnimationCurve m_CombineDistance;
+
+
 	private void Awake()
 	{
 		m_Subject = new SubjectBase();
@@ -104,51 +106,37 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_CombineTime = m_CombineTime;
 		GameManager.Instance.m_PlayerController = this;
 		//		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
-		m_RotateTwinRoboMode.Add(TwinRoboMode.A, Quaternion.Euler(0, 0, 0));
-		m_RotateTwinRoboMode.Add(TwinRoboMode.B, Quaternion.Euler(0, 90, 0));
-		m_RMode = TwinRoboMode.A;
-		m_LMode = TwinRoboMode.A;
+		m_RotateTwinRoboMode.Add(TwinRobotMode.A, Quaternion.Euler(0, 0, 0));
+		m_RotateTwinRoboMode.Add(TwinRobotMode.B, Quaternion.Euler(0, 90, 0));
 
 		m_HumanoidMaterial.color = m_ModeAA;
 
 	}
 
-	// Update is called once per frame
 	void LateUpdate()
 	{
 		switch (GameManager.Instance.m_PlayMode)
 		{
-			case PlayMode.NoPlay:
-				break;
 			case PlayMode.TwinRobot:
-				if (Input.GetButton("CombineL")&& Input.GetButton("CombineR"))
+				if (Input.GetButton("CombineL") && Input.GetButton("CombineR"))
 				{
 					StartCoroutine(Combine());
+					break;
 				}
-				if (Input.GetAxis("RotateL")>0.5f&&m_AxisL<=0.5f)
-				{
-					m_LMode = m_LMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
-				}
-				m_AxisL = Input.GetAxis("RotateL");
-				if (Input.GetAxis("RotateR")>0.5f && m_AxisR <= 0.5f)
-				{
-					m_RMode = m_RMode == TwinRoboMode.A ? TwinRoboMode.B : TwinRoboMode.A;
-				}
-				m_AxisR = Input.GetAxis("RotateR");
+				m_TwinRobotL.UpdateInput();
+				m_TwinRobotR.UpdateInput();
 				break;
 			case PlayMode.HumanoidRobot:
 				if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
 				{
-					m_HumanoidRobot.m_Energy = 0;
 					StartCoroutine(Release());
+					break;
 				}
-				else
-				{
-					m_HumanoidRobot.UpdateInput();
-				}
+				m_HumanoidRobot.UpdateInput();
 				break;
 			case PlayMode.Combine:
 			case PlayMode.Release:
+			case PlayMode.NoPlay:
 			default:
 				break;
 		}
@@ -158,19 +146,12 @@ public class PlayerController : MonoBehaviour
 	{
 		switch (GameManager.Instance.m_PlayMode)
 		{
-			case PlayMode.NoPlay:
-				break;
 			case PlayMode.TwinRobot:
 				m_TwinRobotL.Move();
 				m_TwinRobotR.Move();
-
+				m_TwinRobotL.Look(m_RRobotRigidbody.position, m_RotateTwinRoboMode[m_TwinRobotL.Mode]);
+				m_TwinRobotR.Look(m_LRobotRigidbody.position, m_RotateTwinRoboMode[m_TwinRobotR.Mode]);
 				ElectricUpdate();
-
-				m_TwinRobotL.Look(m_RRobotRigidbody.position);
-				m_TwinRobotR.Look(m_LRobotRigidbody.position);
-
-				m_LRobotRigidbody.rotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position) * m_RotateTwinRoboMode[m_LMode];
-				m_RRobotRigidbody.rotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position) * m_RotateTwinRoboMode[m_RMode];
 				break;
 			case PlayMode.HumanoidRobot:
 				m_HumanoidRobot.Move();
@@ -179,6 +160,7 @@ public class PlayerController : MonoBehaviour
 			case PlayMode.Release:
 				ElectricUpdate();
 				break;
+			case PlayMode.NoPlay:
 			default:
 				break;
 		}
@@ -197,84 +179,96 @@ public class PlayerController : MonoBehaviour
 		m_TwinRobotL.Active(false);
 		m_TwinRobotR.Active(false);
 		m_ElectricGuid.SetActive(true);
-		Vector3 LPos = m_LRobotRigidbody.position;
-		Vector3 RPos = m_RRobotRigidbody.position;
-		Vector3 HitPos = Vector3.Lerp(LPos, RPos, 0.5f);
-		Vector3 LFirstTarget = HitPos + Vector3.Normalize(LPos - HitPos) * (1.0f + 0.5f);
-		Vector3 RFirstTarget = HitPos + Vector3.Normalize(RPos - HitPos) * (1.0f + 0.5f);
-		Vector3 LSecondTarget = HitPos + Vector3.Normalize(LPos - HitPos) * 0.5f;
-		Vector3 RSecondTarget = HitPos + Vector3.Normalize(RPos - HitPos) * 0.5f;
-		m_HRobot.transform.position = m_Electric.transform.position;
-		m_HRobot.transform.LookAt(m_Electric.transform.position + m_Electric.transform.right);
+		Vector3 StartPositionL = m_LRobotRigidbody.position;
+		Vector3 StartPositionR = m_RRobotRigidbody.position;
+		Vector3 Direction = Vector3.Normalize(StartPositionL - StartPositionR);
+		Vector3 CenterPosition = Vector3.Lerp(StartPositionL, StartPositionR, 0.5f);
+		Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
+		Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
+		m_HRobot.transform.position = CenterPosition;
+		m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(Direction, Vector3.up));
 
 		m_CombineEffect.transform.position = m_Electric.transform.position + new Vector3(0, 0.5f, 0);
 		StartCoroutine(CombineEffect());
 
-		for (float f = 0; f < m_CombineTime; f += Time.fixedDeltaTime)
+		float time = 0.5f;
+		Quaternion StartRotationL = m_LRobotRigidbody.rotation;
+		Quaternion StartRotationR = m_RRobotRigidbody.rotation;
+		Quaternion EndRotationL = Quaternion.LookRotation(-Direction);
+		Quaternion EndRotationR = Quaternion.LookRotation(Direction);
+		for (float t = 0; t < time; t+=Time.fixedDeltaTime)
 		{
-			m_LRobotRigidbody.MovePosition(Vector3.Lerp(LPos, LFirstTarget, m_CombineCurve.Evaluate(f / m_CombineTime)));
-			m_RRobotRigidbody.MovePosition(Vector3.Lerp(RPos, RFirstTarget, m_CombineCurve.Evaluate(f / m_CombineTime)));
+			m_LRobotRigidbody.MoveRotation(Quaternion.Slerp(StartRotationL, EndRotationL, t/time));
+			m_RRobotRigidbody.MoveRotation(Quaternion.Slerp(StartRotationR, EndRotationR, t/time));
 			yield return new WaitForFixedUpdate();
 		}
-		LPos = HitPos + Vector3.Normalize(LPos - HitPos) * 8.0f;
-		RPos = HitPos + Vector3.Normalize(RPos - HitPos) * 8.0f;
+		m_LRobotRigidbody.rotation = EndRotationL;
+		m_RRobotRigidbody.rotation = EndRotationR;
 
-		bool breakable = true;
-		int count = 0;
-		Collider[] collider = Physics.OverlapBox(HitPos + Vector3.up / 2, new Vector3(1f, 0.5f, (m_LMode == m_RMode) && m_RMode == TwinRoboMode.A ? 1.5f : 0.5f), m_HRobot.transform.rotation, LayerMask.GetMask(new string[] { "Enemy" }));
+		yield return new WaitForSeconds(0.5f);
+
+		List<EnemyBase> enemys = new List<EnemyBase>();
+		float distance = Vector3.Distance(CenterPosition, StartPositionL);
+		Vector3 offset = Direction * distance;
+		Collider[] collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(distance, 2, m_TwinRobotL.BreakerSize), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
 			if (enemy == null) continue;
-			count++;
-			if (!enemy.IsBreakable)
-			{
-				breakable = false;
-			}
+			enemys.Add(enemy);
 		}
-		if (breakable)
+		collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(distance, 2, m_TwinRobotR.BreakerSize), EndRotationR, LayerMask.GetMask(new string[] { "Enemy" }));
+		foreach (var item in collider)
 		{
-			foreach (var item in collider)
-			{
-				EnemyBase enemy = item.GetComponent<EnemyBase>();
-				if (enemy == null)
-					continue;
-				enemy.SetBreak();
-			}
+			EnemyBase enemy = item.GetComponent<EnemyBase>();
+			if (enemy == null || enemys.Contains(enemy)) continue;
+			enemys.Add(enemy);
 		}
+		Crushable = true;
 
-		for (float f = 0; f < m_CombineTime; f += Time.fixedDeltaTime)
+		for (float t = 0;Crushable&&m_RRobotRigidbody.position!=EndPositionR&&m_LRobotRigidbody.position!=EndPositionL; t+=Time.fixedDeltaTime)
 		{
-			m_LRobotRigidbody.MovePosition(Vector3.Lerp(LPos, Vector3.Lerp(LFirstTarget, LSecondTarget, f), m_CombineCurve.Evaluate(f / m_CombineTime + 1)));
-			m_RRobotRigidbody.MovePosition(Vector3.Lerp(RPos, Vector3.Lerp(RFirstTarget, RSecondTarget, f), m_CombineCurve.Evaluate(f / m_CombineTime + 1)));
+			m_LRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t)*m_Speed*2));
+			m_RRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionR, EndPositionR, m_CombineDistance.Evaluate(t)*m_Speed*2));
 			yield return new WaitForFixedUpdate();
 		}
-		if (!breakable || count == 0)
+
+		if (!Crushable || enemys.Count == 0)
 		{
-			m_ElectricGuid.SetActive(false);
-			GameManager.Instance.m_PlayMode = PlayMode.Release;
 			yield return StartCoroutine(Release());
 			yield break;
 		}
 
-		GameManager.Instance.m_PlayScore += count;
-		m_TwinRobotL.Damage(-0.2f * count);
-		m_TwinRobotR.Damage(-0.2f * count);
+		m_LRobotRigidbody.MovePosition(EndPositionL);
+		m_RRobotRigidbody.MovePosition(EndPositionR);
 
-		m_HumanoidRobot.m_Energy = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[count - 1];
-		int nextexp = GameManager.Instance.LevelParameter.m_NextExp;
-		m_Exp += count;
-		GameManager.Instance.m_Level += m_Exp / nextexp;
-		m_Exp = m_Exp % nextexp;
+		foreach (var item in enemys)
+		{
+			item.SetBreak();
+		}
 
-		m_HumanoidMaterial.color = m_LMode != m_RMode ? m_ModeAB :
-																m_RMode == TwinRoboMode.A ? m_ModeAA : m_ModeBB;
-		m_HumanoidRobot.m_Config = m_LMode != m_RMode ? m_HumanoidT :
-																m_RMode == TwinRoboMode.A ? m_HumanoidN : m_HumanoidI;
+		float add = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[enemys.Count - 1];
+		GameManager.Instance.m_PlayScore += (int)add;
+		m_TwinRobotL.HP += add;
+		m_TwinRobotR.HP += add;
+		m_HumanoidRobot.m_Energy = add;
 
-		m_LRobotRigidbody.MovePosition(LSecondTarget);
-		m_RRobotRigidbody.MovePosition(RSecondTarget);
-		//yield return null;
+		if(m_TwinRobotL.Mode != m_TwinRobotR.Mode)
+		{
+			m_HumanoidMaterial.color = m_ModeAB;
+			m_HumanoidRobot.m_Config = m_HumanoidT;
+		}
+		else if(m_TwinRobotL.Mode == TwinRobotMode.A)
+		{
+			m_HumanoidMaterial.color = m_ModeAA;
+			m_HumanoidRobot.m_Config = m_HumanoidN;
+		}
+		else
+		{
+			m_HumanoidMaterial.color = m_ModeBB;
+			m_HumanoidRobot.m_Config = m_HumanoidI;
+		}
+
 		m_ElectricGuid.SetActive(false);
 		m_HRobot.SetActive(true);
 		m_LRobot.SetActive(false);
@@ -284,6 +278,7 @@ public class PlayerController : MonoBehaviour
 	}
 	public IEnumerator Release()
 	{
+		m_HumanoidRobot.m_Energy = 0;
 		GameManager.Instance.m_PlayMode = PlayMode.Release;
 		m_HumanoidMaterial.color = m_ModeAA;
 		m_HRobot.SetActive(false);
@@ -322,17 +317,6 @@ public class PlayerController : MonoBehaviour
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
 
-	//public IEnumerator Charge(bool isLeft)
-	//{
-	//    m_IsBeamShooting = true;
-	//    m_Energy -= 3.0f;//6.25f;
-	//    m_ChargeEffect.SetActive(true);
-	//    yield return new WaitForSeconds(1.5f);
-	//    m_ChargeEffect.SetActive(false);
-	//    m_Battery.Fire();
-	//    m_IsBeamShooting = false;
-	//}
-
 	private IEnumerator CombineEffect()
 	{
 		yield return new WaitForSeconds(2f);
@@ -340,5 +324,7 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(1);
 		m_CombineEffect.SetActive(false);
 	}
-	public float Energy{get{ return m_HumanoidRobot.m_Energy; }}
+	public float Energy { get { return m_HumanoidRobot.m_Energy; } }
+	public bool Crushable { get; set; }
+
 }

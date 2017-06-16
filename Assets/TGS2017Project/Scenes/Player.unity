@@ -814,6 +814,30 @@ MonoBehaviour:
   m_HumanoidT: {fileID: 11400000, guid: 880ab5be5613a564984e759872af0a4e, type: 2}
   m_HumanoidI: {fileID: 11400000, guid: 8191465196210a3418213f73c04b8b2a, type: 2}
   m_HumanoidMaterial: {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  m_CombineDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 2
+      inSlope: 3.2882984
+      outSlope: 3.2882984
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 5
+      value: 16
+      inSlope: 3.5
+      outSlope: 0
+      tangentMode: 5
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &180186487
 Transform:
   m_ObjectHideFlags: 0
@@ -3330,7 +3354,7 @@ Transform:
   m_GameObject: {fileID: 774350927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 983173822}
   - {fileID: 458666862}
@@ -3353,9 +3377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39abaed520aee0949a1f1722968b29c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Controller: {fileID: 180186486}
   m_Shield: {fileID: 610834426}
   m_Config: {fileID: 11400000, guid: ab9182199e996804ab766cb0c5b8a7a5, type: 2}
   m_BaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7, type: 2}
+  m_BreakerSizeS: 1.5
+  m_BreakerSizeL: 2
 --- !u!114 &774350931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7941,7 +7968,7 @@ Transform:
   m_GameObject: {fileID: 1890064364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 2127709320}
   - {fileID: 1639896463}
@@ -7964,9 +7991,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39abaed520aee0949a1f1722968b29c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Controller: {fileID: 180186486}
   m_Shield: {fileID: 610416827}
   m_Config: {fileID: 11400000, guid: 10552ccb2b584264e954d2fcbc37410e, type: 2}
   m_BaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7, type: 2}
+  m_BreakerSizeS: 1.5
+  m_BreakerSizeL: 2
 --- !u!114 &1890064368
 MonoBehaviour:
   m_ObjectHideFlags: 0

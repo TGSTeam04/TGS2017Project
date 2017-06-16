@@ -6,4 +6,5 @@ using UnityEngine;
 public class TwinRobotConfig : ScriptableObject {
 	public string m_InputHorizontal = "Horizontal";
 	public string m_InputVertical = "Vertical";
+	public string m_InputModeChange = "Change";
 }

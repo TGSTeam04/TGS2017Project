@@ -51,11 +51,11 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
         }
 
-			if (Input.GetButtonDown("RotateL") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
+			if (Input.GetAxis("RotateL") > 0.5f && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
 			{
 				StartCoroutine(Charge(true));
 			}
-			else if (Input.GetButtonDown("RotateR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
+			else if (Input.GetAxis("RotateR") > 0.5f && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
 			{
 				StartCoroutine(Charge(false));
 			}
