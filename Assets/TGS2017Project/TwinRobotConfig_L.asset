@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InputHorizontal: HorizontalL
   m_InputVertical: VerticalL
-  m_InputModeChange: ChangeL
+  m_InputModeChange: ChargeL
