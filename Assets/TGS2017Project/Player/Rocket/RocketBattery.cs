@@ -11,14 +11,16 @@ public class RocketBattery : MonoBehaviour
     [SerializeField] private Transform m_RStandTrans;
     [SerializeField] private float m_KnockBackForce;
     [SerializeField] private bool m_IsKnockBack;
+    [SerializeField] private string m_RocketLayer;
+    [SerializeField] private string m_TargetTag;
     [SerializeField] private AudioClip m_SEColectRocet;
+    [SerializeField] private GameObject m_Effect_Chage;
+    private Vector3 m_EffectChagePos = new Vector3(0, 3, 0);
 
     [HideInInspector] public RocketBase m_LRocket;
     [HideInInspector] public RocketBase m_RRocket;
-    public string m_RocketLayer;
-    public string m_TargetTag;
     private Animator m_Anim;
-    private AudioSource m_AudioSrc;    
+    private AudioSource m_AudioSrc;
 
     private void Awake()
     {
@@ -58,6 +60,8 @@ public class RocketBattery : MonoBehaviour
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
         m_RRocket.m_Battery = this;
+
+        m_EffectChagePos = m_Effect_Chage.transform.localPosition;
     }
 
     public void CollectRocket()
@@ -100,18 +104,24 @@ public class RocketBattery : MonoBehaviour
     public IEnumerator LAnimatedFire()
     {
         m_Anim.SetTrigger("LFire");
+        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
+        m_Effect_Chage.SetActive(true);
         yield return new WaitForAnimation(m_Anim, 0.7f);
+        //m_Effect_Chage.SetActive(false);
         m_LRocket.Fire();
     }
     //R発射
     public IEnumerator RAnimatedFire()
     {
         m_Anim.SetTrigger("RFire");
+        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
+        m_Effect_Chage.SetActive(true);
         yield return new WaitForAnimation(m_Anim, 0.7f);
+        //m_Effect_Chage.SetActive(false);
         m_RRocket.Fire();
     }
 
-    /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/        
+    /************左右のパラメータを同時に設定（ロケットのパラメータを個々でいじりたいときはメンバのロケットにアクセスしてください。***************/
 
     public void SetSpeed(float speed)
     {

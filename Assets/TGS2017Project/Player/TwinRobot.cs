@@ -54,7 +54,6 @@ public class TwinRobot : MonoBehaviour
     {
         HP -= damage;
     }
-
     public void Move()
     {
         Vector3 move = new Vector3(
@@ -84,7 +83,7 @@ public class TwinRobot : MonoBehaviour
                             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
                             GameManager.Instance.m_GameStarter.ChangeScenes(9);
                         }
-                        HP -= 0.1f;
+                        HP -= 5f;
                         break;
                     default:
                         break;
@@ -115,7 +114,7 @@ public class TwinRobot : MonoBehaviour
         get { return m_HP; }
         set
         {
-            m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);
+            m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);            
             ShieldUpdate();
         }
     }

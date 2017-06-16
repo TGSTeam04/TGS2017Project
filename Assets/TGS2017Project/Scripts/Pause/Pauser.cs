@@ -1,7 +1,22 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
+
+//タグ追加する際はPauserのs_TargetByTagの初期化部分も処理を増やしてください。
+public enum PauseTag
+{
+    Pause,
+    Enemy,
+}
+
+//ポーズ管理する際のメンバ郡（初期化だるいからクラス）
+[System.SerializableAttribute]
+public class PauseManageParam
+{
+    public bool m_IsPause = false;
+    //全体で共有するポーズ対象
+    public List<Pauser> m_Targets = new List<Pauser>();   // ポーズ対象のスクリプト
+}
 
 /// <summary>
 /// 製作者 ：大格
@@ -16,38 +31,85 @@ using System;
 
 public class Pauser : MonoBehaviour
 {
-    static bool m_IsPause;
-    //全体で共有するポーズ対象
-    static List<Pauser> targets = new List<Pauser>();   // ポーズ対象のスクリプト
+    static public Dictionary<PauseTag, PauseManageParam> s_TargetByTag = new Dictionary<PauseTag, PauseManageParam>()
+    {
+        { PauseTag.Pause , new PauseManageParam() },
+        { PauseTag.Enemy , new PauseManageParam() }
+    };
+    // ポーズ
+    static public void Pause(PauseTag tag = PauseTag.Pause)
+    {
+        //対象タグが既にポーズ中ならリターン
+        if (s_TargetByTag[tag].m_IsPause) return;
 
-    // ポーズ対象のコンポーネント
+        s_TargetByTag[tag].m_IsPause = true;
+        foreach (var obj in s_TargetByTag[tag].m_Targets)
+        {
+            //既に他のタグでポーズされていれば無視
+            if (obj.m_PauseCunt <= 0)
+                obj.OnPause();
+            //カウンタ更新
+            obj.m_PauseCunt++;
+        }
+    }
+
+    // ポーズ解除
+    static public void Resume(PauseTag tag = PauseTag.Pause)
+    {
+        //対象タグがポーズされていなければリターン
+        if (!s_TargetByTag[tag].m_IsPause) return;
+
+        s_TargetByTag[tag].m_IsPause = false;
+        foreach (var obj in s_TargetByTag[tag].m_Targets)
+        {
+            //カウンタ更新
+            obj.m_PauseCunt--;
+            //他のタグでポーズされていれば無視
+            if (obj.m_PauseCunt <= 0)
+                obj.OnResume();
+        }
+    }
+    static public bool IsTagPause(PauseTag tag = PauseTag.Pause) { return s_TargetByTag[tag].m_IsPause; }
+
+    //ポーズタグ
+    public List<PauseTag> m_Tags = new List<PauseTag>() { PauseTag.Pause };
+    private int m_PauseCunt = 0;
+
+    //ポーズ中のコンポーネント
     Behaviour[] pauseBehavs = null;
-    
+
     //ポーズ復帰時に使用するリジットボディとそのパラメータ
     Rigidbody[] rgBodies = null;
     Vector3[] rgBodyVels = null;
     Vector3[] rgBodyAVels = null;
-    //２D
+    //2D
     Rigidbody2D[] rg2dBodies = null;
     Vector2[] rg2dBodyVels = null;
     float[] rg2dBodyAVels = null;
 
+    public bool IsPause { get { return m_PauseCunt > 0; } }
+
     // 初期化
     void Start()
     {
-        // ポーズ対象に追加する
-        targets.Add(this);
+        // ポーズ対象に追加する        
+        foreach (var tag in m_Tags)
+        {
+            s_TargetByTag[tag].m_Targets.Add(this);
+        }
     }
 
-    // 破棄されるとき
-    void OnDestory()
+    private void OnDestroy()
     {
         // ポーズ対象から除外する
-        targets.Remove(this);
+        foreach (var tag in m_Tags)
+        {
+            s_TargetByTag[tag].m_Targets.Remove(this);
+        }
     }
 
     // ポーズされたとき
-    void OnPause()
+    private void OnPause()
     {
         if (pauseBehavs != null)
         {
@@ -56,6 +118,8 @@ public class Pauser : MonoBehaviour
 
         // 有効なコンポーネントを取得
         pauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
+        if (pauseBehavs == null)
+            return;
         foreach (var com in pauseBehavs)
         {
             com.enabled = false;
@@ -83,7 +147,7 @@ public class Pauser : MonoBehaviour
     }
 
     // ポーズ解除されたとき
-    void OnResume()
+    private void OnResume()
     {
         if (pauseBehavs == null)
         {
@@ -119,23 +183,5 @@ public class Pauser : MonoBehaviour
         rg2dBodies = null;
         rg2dBodyVels = null;
         rg2dBodyAVels = null;
-    }
-
-    // ポーズ
-    public static void Pause()
-    {
-        foreach (var obj in targets)
-        {
-            obj.OnPause();
-        }
-    }
-
-    // ポーズ解除
-    public static void Resume()
-    {
-        foreach (var obj in targets)
-        {
-            obj.OnResume();
-        }
     }
 }

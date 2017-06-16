@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 4072991686434584}
   m_Layer: 18
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1598,7 +1598,7 @@ GameObject:
   - component: {fileID: 136944916199423240}
   m_Layer: 18
   m_Name: L_weaponjoint1
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6124,6 +6124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Tags: 0000000001000000
 --- !u!114 &114251708463455026
 MonoBehaviour:
   m_ObjectHideFlags: 1

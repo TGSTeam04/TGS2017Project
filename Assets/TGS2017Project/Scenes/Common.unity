@@ -376,6 +376,8 @@ MonoBehaviour:
     - Result
   - Scene:
     - GameOver
+  - Scene:
+    - GameOver
   m_LoadingSceneName: LoadingDefault
 --- !u!1 &1849378520
 GameObject:

@@ -59,13 +59,35 @@ public class StageManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		//m_Observer.NotifyToSubjects("")
-		SceneManager.SetActiveScene(gameObject.scene);
+        //m_Observer.NotifyToSubjects("")
+        SceneManager.SetActiveScene(gameObject.scene);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Pause"))
+        {
+            bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
+            if (!isPause)
+            {
+                SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+                Pauser.Pause();
+            }
+            else
+            {
+                SceneManager.UnloadSceneAsync("Pause");
+                Pauser.Resume();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            bool isPause = Pauser.s_TargetByTag[PauseTag.Enemy].m_IsPause;
+            if (!isPause)
+                Pauser.Pause(PauseTag.Enemy);
+            else
+                Pauser.Resume(PauseTag.Enemy);
+        }
     }
 
     private void OnDestroy()

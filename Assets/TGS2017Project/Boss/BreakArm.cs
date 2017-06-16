@@ -24,11 +24,10 @@ public class BreakArm : MonoBehaviour
         this.gameObject.SetActive(false);
     }
     public void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("これあ");
+    {        
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && AttackProcess.s_Chance)
         {
-            Boss.s_HitPoint -= 0.25f;
+            Boss.HitPoint -= 30.0f;
             Boss.s_State = Boss.BossState.Invincible;
             Dead();
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum PlayMode
 {
@@ -55,11 +56,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Pause"))
-        {
-            Debug.Log("ポーズ");
-            Pauser.Pause();
-        }
+        if (m_PlayMode != PlayMode.NoPlay)
+            m_PlayTime += Time.deltaTime;
 
         switch (m_PlayMode)
         {
@@ -67,7 +65,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 break;
             case PlayMode.TwinRobot:
             case PlayMode.HumanoidRobot:
-                m_PlayTime += Time.deltaTime;
                 break;
             case PlayMode.Combine:
             case PlayMode.Release:
@@ -75,10 +72,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             default:
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.P))
-            Pauser.Pause();
-        if (Input.GetKeyDown(KeyCode.O))
-            Pauser.Resume();
 
         if (m_IsGameClear || m_IsGameOver)
         {

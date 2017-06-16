@@ -116,7 +116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4343140385104950}
   - component: {fileID: 33840807952761096}
-  - component: {fileID: 65634383437943146}
   m_Layer: 18
   m_Name: Collider
   m_TagString: Untagged
@@ -443,6 +442,8 @@ GameObject:
   - component: {fileID: 114245271678019676}
   - component: {fileID: 82090461974333698}
   - component: {fileID: 114914035168213944}
+  - component: {fileID: 65067470051384444}
+  - component: {fileID: 114243138408473656}
   m_Layer: 18
   m_Name: Boss2
   m_TagString: Boss
@@ -2875,6 +2876,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65067470051384444
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451048505559804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 5, z: 6}
+  m_Center: {x: 0, y: 2.61, z: 0}
 --- !u!65 &65439582888231610
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2883,18 +2896,6 @@ BoxCollider:
   m_GameObject: {fileID: 1628807606742916}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65634383437943146
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1202078518254290}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -3032,7 +3033,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
-  m_Collision: {fileID: 65634383437943146}
+  m_Collision: {fileID: 0}
+--- !u!114 &114243138408473656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451048505559804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tags: 0000000001000000
 --- !u!114 &114245271678019676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3053,13 +3066,13 @@ MonoBehaviour:
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
   m_LastExplosion: {fileID: 1220756523573468, guid: 2e7f405a3f1fa314f905ea45e614445c,
     type: 2}
-  m_Collision: {fileID: 65634383437943146}
+  m_Collision: {fileID: 0}
   m_Particle:
   - {fileID: 1367356134836548}
   - {fileID: 1901485958628690}
   - {fileID: 1397894636108156}
   - {fileID: 1682427966457176}
-  m_MaxHp: 1
+  m_MaxHp: 100
   m_CollideSound: {fileID: 8300000, guid: dd288f27c9f73dc4d8968532080f7f0d, type: 3}
   m_MoveSound: {fileID: 8300000, guid: f0e7795500410054ea168ba2824ac1a8, type: 3}
   m_StanSound: {fileID: 8300000, guid: 3d4322f7ddd3648409b0eea303a65794, type: 3}
@@ -3077,7 +3090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
-  m_Collision: {fileID: 65634383437943146}
+  m_Collision: {fileID: 0}
 --- !u!114 &114602974364387232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3090,7 +3103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
-  m_Collision: {fileID: 65634383437943146}
+  m_Collision: {fileID: 0}
 --- !u!114 &114639406557804862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3103,7 +3116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
-  m_Collision: {fileID: 65634383437943146}
+  m_Collision: {fileID: 0}
 --- !u!114 &114914035168213944
 MonoBehaviour:
   m_ObjectHideFlags: 1

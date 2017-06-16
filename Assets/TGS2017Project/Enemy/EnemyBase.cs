@@ -123,11 +123,17 @@ public class EnemyBase : MonoBehaviour
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;
         m_IsDead = true;
+        gameObject.SetActive(false);
         EnemyManager.Instance.ReSpawnEnemy(this);
-		gameObject.SetActive(false);
-	}
+    }
 
-	public void OnTriggerEnter(Collider other)
+    public void SetBreakForPlayer()
+    {
+        GameManager.Instance.m_PlayScore++;
+        SetBreak();
+    }
+
+    public void OnTriggerEnter(Collider other)
     {
         if (GameManager.Instance.m_PlayMode == PlayMode.TwinRobot && other.tag == "Guid")
         {
