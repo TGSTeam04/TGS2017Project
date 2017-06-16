@@ -210,15 +210,15 @@ public class PlayerController : MonoBehaviour
 
 		List<EnemyBase> enemys = new List<EnemyBase>();
 		float distance = Vector3.Distance(CenterPosition, StartPositionL);
-		Vector3 offset = Direction * distance;
-		Collider[] collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(distance, 2, m_TwinRobotL.BreakerSize), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
+		Vector3 offset = Direction * distance/2;
+		Collider[] collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(m_TwinRobotL.BreakerSize, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
 			if (enemy == null) continue;
 			enemys.Add(enemy);
 		}
-		collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(distance, 2, m_TwinRobotR.BreakerSize), EndRotationR, LayerMask.GetMask(new string[] { "Enemy" }));
+		collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(m_TwinRobotR.BreakerSize, 2, distance), EndRotationR, LayerMask.GetMask(new string[] { "Enemy" }));
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
@@ -226,6 +226,9 @@ public class PlayerController : MonoBehaviour
 			enemys.Add(enemy);
 		}
 		Crushable = true;
+
+		m_LRobotRigidbody.isKinematic = true;
+		m_RRobotRigidbody.isKinematic = true;
 
 		for (float t = 0;Crushable&&m_RRobotRigidbody.position!=EndPositionR&&m_LRobotRigidbody.position!=EndPositionL; t+=Time.fixedDeltaTime)
 		{
@@ -243,6 +246,9 @@ public class PlayerController : MonoBehaviour
 
 		m_LRobotRigidbody.MovePosition(EndPositionL);
 		m_RRobotRigidbody.MovePosition(EndPositionR);
+
+		m_LRobotRigidbody.isKinematic = false;
+		m_RRobotRigidbody.isKinematic = false;
 
 		foreach (var item in enemys)
 		{
