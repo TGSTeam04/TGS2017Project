@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
-    public Boss3_Controller m_Controller;
+    private Boss3_Controller m_Controller;
 
     //移動
     public float m_Speed;
@@ -68,7 +68,7 @@ public class Boss3_Humanoid : MonoBehaviour
                         ? gm.m_LRobot
                         : gm.m_RRobot;
             //Debug.Log("Target Update" + target.ToString());
-
+            //GameObject target = tempTarget;
             m_BB.GObjValues["target"] = target; //tempTarget;
             yield return new WaitForSeconds(3.0f);
         }

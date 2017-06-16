@@ -45,19 +45,19 @@ public class EnemyB_Bullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            print("Enemy B bullet hit player");
+            //print("Enemy B bullet hit player");
         }
         Destroy(gameObject);
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
 
         // プレイヤーに命中
         if (other.gameObject.tag == "Player")
         {
-            print("Enemy B bullet hit player");
+            //print("Enemy B bullet hit player");
         }
         Destroy(gameObject);
     }

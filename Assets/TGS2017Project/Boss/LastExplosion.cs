@@ -22,7 +22,7 @@ public class LastExplosion : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        print(m_Dead);
+        //print(m_Dead);
 	}
     IEnumerator Explosion()
     {

@@ -161,9 +161,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4328595291630888}
   - component: {fileID: 54097614837757600}
-  - component: {fileID: 65713172265561578}
   - component: {fileID: 114819148976569218}
   - component: {fileID: 114306511433509154}
+  - component: {fileID: 65169781874850810}
   m_Layer: 17
   m_Name: Prefub_Boss3Rocket
   m_TagString: BossBullet
@@ -282,7 +282,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783115579795336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 8.42, z: -26.315035}
+  m_LocalPosition: {x: 12.68, y: 7.59, z: -6.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4051958166360556}
@@ -442,9 +442,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65713172265561578
+--- !u!65 &65169781874850810
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -454,7 +454,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1, z: 3.5}
+  m_Size: {x: 0.5, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95875583501477272
 Animator:
@@ -498,6 +498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SEFire: {fileID: 8300000, guid: 4d64a4735cbd93d42b73f4e974c93cf9, type: 3}
   m_SEHit: {fileID: 8300000, guid: dce191af1dba81f418bb96e96f91d825, type: 3}
+  m_EffectHitPrefub: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
   m_State: 0
   m_Battery: {fileID: 0}
   m_StandTrans: {fileID: 0}
@@ -506,6 +508,7 @@ MonoBehaviour:
   m_Speed: 20
   m_BackSpeed: 30
   m_AdvanceTime: 1
+  m_AdvanceDire: {x: 0, y: 0, z: 0}
   m_Timer: 0
   m_TargetTag: Player
   m_BuriedTime: 1

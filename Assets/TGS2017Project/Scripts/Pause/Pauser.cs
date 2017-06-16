@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
 //タグ追加する際はPauserのs_TargetByTagの初期化部分も処理を増やしてください。
 public enum PauseTag

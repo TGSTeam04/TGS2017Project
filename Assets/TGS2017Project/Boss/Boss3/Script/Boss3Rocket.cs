@@ -38,7 +38,7 @@ public class Boss3Rocket : RocketBase
             SetLayer("PlayerBullet");
             m_State = RocketState.Reflected;
         }
-        else if (collision.gameObject == m_Battery.gameObject) //Enemy　PlayerBullet　以外に当たったらレイヤーを元に戻す
+        else if (collision.gameObject == m_Battery.gameObject) 
         {
             collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ReflectDamage, this);
             SetLayer("BossBullet");
@@ -48,6 +48,10 @@ public class Boss3Rocket : RocketBase
 
             Boss3_Humanoid boss3 = m_Battery.GetComponent<Boss3_Humanoid>();
             boss3.Release();
+        }
+        else//Enemy　PlayerBullet　以外に当たったらレイヤーを元に戻す
+        {
+            SetLayer("BossBullet");
         }
     }
 }

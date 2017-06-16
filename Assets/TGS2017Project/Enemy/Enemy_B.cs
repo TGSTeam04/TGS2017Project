@@ -65,6 +65,9 @@ public class Enemy_B : MonoBehaviour
     [SerializeField]
     private ParticleSystem m_FireEffect;                    // 攻撃エフェクト
 
+    // SE
+    private AudioSource m_Fire;                             // 発砲
+
     // Use this for initialization
     void Start()
     {
@@ -72,6 +75,9 @@ public class Enemy_B : MonoBehaviour
         m_NavMeshAgent = GetComponent<NavMeshAgent>();      // NavMeshAgentを取得
         m_NavMeshAgent.destination = transform.position;    // 登場直後はしばらく移動しない
         m_Animator = GetComponentInChildren<Animator>();    // Animatorを取得
+
+        AudioSource[] m_AudioSources = GetComponents<AudioSource>();
+        m_Fire = m_AudioSources[0];
 
         // 追従目標を指定
         SetTarget();
@@ -239,6 +245,7 @@ public class Enemy_B : MonoBehaviour
 
         // 自分からプレイヤーへの方向ベクトル
         Vector3 directionToPlayer = m_PlayerLookPoint.position - m_EyePoint.position;
+        directionToPlayer.y = 0.0f;
 
         // 壁の向かう側などにいる場合は見えない
         RaycastHit hitInfo;
@@ -285,8 +292,9 @@ public class Enemy_B : MonoBehaviour
     void Attack()
     {
         m_Animator.SetBool("Attack", true);
-        //m_FireEffect.transform.rotation = m_Muzzle.transform.rotation;
-        //m_FireEffect.Play();
+        m_Fire.Play();      // SEを再生
+        m_FireEffect.transform.rotation = m_Muzzle.transform.rotation;
+        m_FireEffect.Play();
         Instantiate(m_Bullet, m_Muzzle.position, m_Muzzle.rotation, m_BulletParent);
         m_AttackCount = 0;
     }
