@@ -147,7 +147,6 @@ MonoBehaviour:
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
-  m_BreakType: 0
   m_Fragment: {fileID: 0}
 --- !u!23 &61104050
 MeshRenderer:
@@ -4443,7 +4442,6 @@ MonoBehaviour:
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
-  m_BreakType: 0
   m_Fragment: {fileID: 0}
 --- !u!1 &1132261706
 GameObject:

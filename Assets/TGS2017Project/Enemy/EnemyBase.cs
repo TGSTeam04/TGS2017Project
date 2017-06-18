@@ -75,7 +75,7 @@ public class EnemyBase : MonoBehaviour
             default:
                 break;
         }
-        m_Rigidbody.velocity = Vector3.zero;
+        //m_Rigidbody.velocity = Vector3.zero;
     }
 
     private void Move()
