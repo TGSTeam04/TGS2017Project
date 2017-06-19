@@ -118,7 +118,6 @@ public class EnemyBase : MonoBehaviour
     public void SetBreak()
     {
 		Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
-		transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;

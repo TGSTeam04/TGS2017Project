@@ -120,17 +120,12 @@ public class RocketBase : MonoBehaviour
                 break;
             case RocketState.Back:
                 Move((m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed);
-                //m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
-                if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
-                {
-                    m_State = RocketState.Idle;
-                    gameObject.SetActive(false);
-                    m_Battery.CollectRocket();
-                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                }
+                if (Vector3.Distance(m_StandTrans.position, m_Rigidbody.position) <= m_BackSpeed * Time.fixedDeltaTime * 2)
+                    Colected();
                 break;
             case RocketState.Reflected:
-                m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
+                Vector3 velocity = m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed;
+                m_Rigidbody.MovePosition(velocity * Time.fixedDeltaTime);
                 break;
             default:
                 break;
@@ -141,6 +136,14 @@ public class RocketBase : MonoBehaviour
     {
         m_Rigidbody.MovePosition(m_Rigidbody.position + direction * Time.fixedDeltaTime);
         // m_Rigidbody.MoveRotation(m_Rigidbody.rotation * Quaternion.Euler(new Vector3(360, 0, 0) * Time.fixedDeltaTime));
+    }
+
+    public void Colected()
+    {
+        m_State = RocketState.Idle;
+        gameObject.SetActive(false);
+        m_Battery.CollectRocket();
+        m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     public void Fire()
@@ -181,16 +184,21 @@ public class RocketBase : MonoBehaviour
         m_ChildEnemys.Clear();
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        //Debug.Log(collision.gameObject);
+    }
+
     //Player、Boss3共通処理オーバーライドするときにbaseの関数を呼んでください。
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject);
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         m_AudioSrc.PlayOneShot(m_SEHit);
 
         foreach (var col in collision.contacts)
         {
-            //Debug.Log(collision.gameObject);
             GameObject EffectHit = Instantiate(m_EffectHitPrefub, transform);
             EffectHit.transform.position = col.point;
             EffectHit.SetActive(true);
@@ -204,12 +212,12 @@ public class RocketBase : MonoBehaviour
                 CollideTarget(obj, contact.point);
             }
         }
-        else if (enemy != null)
-        {//雑魚と衝突            
-            //Debug.Log("エネミーヒット");
+        else if (enemy != null && m_State == RocketState.Fire)
+        {//雑魚と衝突
+         //Debug.Log("エネミーヒット");
             if (m_IsKnockBack)
             {//ノックバック
-                //Debug.Log("ノックバック");
+             //Debug.Log("ノックバック");
                 Rigidbody rb = enemy.GetComponent<Rigidbody>();
                 rb.constraints = RigidbodyConstraints.None;
                 rb.isKinematic = false;
@@ -220,15 +228,13 @@ public class RocketBase : MonoBehaviour
             }
             else
             {//子オブジェクトに追加
-                Debug.Log("Rocket　Add　Enemy");
+             //Debug.Log("Rocket　Add　Enemy");
                 AddChildEnemy(enemy);
-                //collision.collider.isTrigger = true;
-
-                m_State = RocketState.Fire;
             }
         }
-        else if (obj.tag == "Wall" && m_ChildEnemys.Count == 0)
-        {//壁に埋まる処理
+        if (obj.tag == "Wall")
+        {//壁に埋まる処理                  
+            BreakChildEnemys();
             m_State = RocketState.Buried;
             m_Timer = 0.0f;
             Vector3 center = Vector3.Lerp(transform.position, collision.contacts[0].point, 0.7f);
@@ -281,7 +287,7 @@ public class RocketBase : MonoBehaviour
         {
             BreakChildEnemys();
             m_State = RocketState.Back;
-        }        
+        }
     }
 
     protected virtual void KnockBackEnemyTrigger(Collider other, EnemyBase enemy)
@@ -306,10 +312,5 @@ public class RocketBase : MonoBehaviour
             enemy.SetBreakForPlayer();
         else
             enemy.SetBreak();
-    }
-
-    public void SetLayer(string layerName)
-    {
-        gameObject.layer = LayerMask.NameToLayer(layerName);
     }
 }

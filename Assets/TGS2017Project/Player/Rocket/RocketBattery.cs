@@ -54,8 +54,8 @@ public class RocketBattery : MonoBehaviour
 
         SetIsKnockBack(m_IsKnockBack);
         SetKnockBackForce(m_KnockBackForce);
-        m_LRocket.SetLayer(m_RocketLayer);
-        m_RRocket.SetLayer(m_RocketLayer);
+        //m_LRocket.SetLayer(m_RocketLayer);
+        //m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
