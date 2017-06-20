@@ -103,23 +103,23 @@ public class RocketBattery : MonoBehaviour
     //L発射
     public IEnumerator LAnimatedFire()
     {
-        //m_Anim.SetTrigger("LFire");
+        m_Anim.SetTrigger("LFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
         yield return null;
-        //yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        yield return new WaitForAnimation(m_Anim, 0.7f);
+        m_Effect_Chage.SetActive(false);
         m_LRocket.Fire();
     }
     //R発射
     public IEnumerator RAnimatedFire()
     {        
-        //m_Anim.SetTrigger("RFire");
+        m_Anim.SetTrigger("RFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
         yield return null;
-        //yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        yield return new WaitForAnimation(m_Anim, 0.7f);
+        m_Effect_Chage.SetActive(false);
         m_RRocket.Fire();
     }
 
