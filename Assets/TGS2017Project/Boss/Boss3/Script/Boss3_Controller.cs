@@ -86,7 +86,7 @@ public class Boss3_Controller : MonoBehaviour
             m_HRobot.Dead();
 
         m_State = PlayMode.NoPlay;
-        Debug.Log("Boss3死亡");
+        GameManager.Instance.m_IsGameClear = true;
     }
 
     public void CombineStart()

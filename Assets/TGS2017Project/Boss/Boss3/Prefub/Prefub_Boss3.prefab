@@ -1216,7 +1216,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4729179919562120}
   - component: {fileID: 114713040598017948}
-  - component: {fileID: 114806994075815456}
   - component: {fileID: 114697404434138210}
   m_Layer: 18
   m_Name: Prefub_Boss3
@@ -7955,18 +7954,6 @@ MonoBehaviour:
   m_HAnimator: {fileID: 95988550449448482}
   m_SEKimepo: {fileID: 8300000, guid: 21c2f681b1930214492f8c6c468a4234, type: 3}
   m_EffectAudioSrc: {fileID: 82490010545475122}
---- !u!114 &114806994075815456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1388455412181692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Tags: 0000000001000000
 --- !u!114 &114828457495872340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7978,7 +7965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RocketPrefub: {fileID: 1783115579795336, guid: 7ba18909da0cb6e46a4f8fcfa8a400ae,
+  m_RocketPrefub: {fileID: 1022884173409118, guid: 269db99d988fa7e4ba41daa499ac3a41,
     type: 2}
   m_LStandTrans: {fileID: 4012010918328848}
   m_RStandTrans: {fileID: 4670792150155546}

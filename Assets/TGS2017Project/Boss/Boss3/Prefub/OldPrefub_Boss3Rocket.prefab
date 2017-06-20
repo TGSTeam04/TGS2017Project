@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 114306511433509154}
   - component: {fileID: 65169781874850810}
   m_Layer: 17
-  m_Name: Prefub_Boss3Rocket
+  m_Name: OldPrefub_Boss3Rocket
   m_TagString: BossBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,7 +508,6 @@ MonoBehaviour:
   m_Speed: 20
   m_BackSpeed: 30
   m_AdvanceTime: 1
-  m_AdvanceDire: {x: 0, y: 0, z: 0}
   m_Timer: 0
   m_TargetTag: Player
   m_BuriedTime: 1
