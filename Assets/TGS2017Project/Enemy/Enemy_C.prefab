@@ -3735,8 +3735,7 @@ MonoBehaviour:
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
-  m_BreakType: 0
-  m_Fragment: {fileID: 0}
+  m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
 --- !u!114 &114780743203656554
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -62,7 +62,11 @@ public class TwinRobot : MonoBehaviour
         move = Vector3.ClampMagnitude(move, 1.0f) * m_BaseConfig.m_MoveSpeed * Time.fixedDeltaTime;
 
         m_Rigidbody.MovePosition(m_Rigidbody.position + move);
-    }
+		if (move.magnitude != 0)
+		{
+			m_Rigidbody.MoveRotation(Quaternion.LookRotation(move));
+		}
+	}
 
     public void Look(Vector3 target, Quaternion quaternion)
     {
@@ -89,8 +93,18 @@ public class TwinRobot : MonoBehaviour
                         break;
                 }
                 break;
+            default:
+                break;
+        }
+
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		switch (GameManager.Instance.m_PlayMode)
+		{
 			case PlayMode.Combine:
-				switch (other.gameObject.tag)
+				switch (other.tag)
 				{
 					case "Wall":
 						m_Controller.Crushable = false;
@@ -99,12 +113,34 @@ public class TwinRobot : MonoBehaviour
 						break;
 				}
 				break;
-            default:
-                break;
-        }
-    }
+			default:
+				break;
+		}
+	}
 
-    public void Active(bool active)
+
+
+
+	void OnTriggerStay(Collider other)
+	{
+		switch (GameManager.Instance.m_PlayMode)
+		{
+			case PlayMode.Combine:
+				switch (other.tag)
+				{
+					case "Wall":
+						m_Controller.Crushable = false;
+						break;
+					default:
+						break;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	public void Active(bool active)
     {
         m_Shield.SetActive(active && HP != 0);
     }
