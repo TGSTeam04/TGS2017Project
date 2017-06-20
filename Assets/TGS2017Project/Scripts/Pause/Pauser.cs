@@ -45,11 +45,7 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = true;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            //既に他のタグでポーズされていれば無視
-            if (obj.m_PauseCunt <= 0)
-                obj.OnPause();
-            //カウンタ更新
-            obj.m_PauseCunt++;
+            obj.OnPause();            
         }
     }
 
@@ -62,11 +58,7 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = false;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            //カウンタ更新
-            obj.m_PauseCunt--;
-            //他のタグでポーズされていれば無視
-            if (obj.m_PauseCunt <= 0)
-                obj.OnResume();
+            obj.OnResume();
         }
     }
     static public bool IsTagPause(PauseTag tag = PauseTag.Pause) { return s_TargetByTag[tag].m_IsPause; }
@@ -111,6 +103,12 @@ public class Pauser : MonoBehaviour
     // ポーズされたとき
     public void OnPause()
     {
+        //カウンタ更新
+        m_PauseCunt++;
+        //初回のみポーズ
+        if (m_PauseCunt != 1)
+            return;
+
         if (pauseBehavs != null)
         {
             return;
@@ -149,6 +147,12 @@ public class Pauser : MonoBehaviour
     // ポーズ解除されたとき
     public void OnResume()
     {
+        //カウンタ更新
+        m_PauseCunt--;
+        //他のタグでポーズされていれば無視
+        if (m_PauseCunt != 0)
+            return;
+
         if (pauseBehavs == null)
         {
             return;
