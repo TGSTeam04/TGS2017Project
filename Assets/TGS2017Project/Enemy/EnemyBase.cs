@@ -155,6 +155,7 @@ public class EnemyBase : MonoBehaviour
                 Vector3.Distance(transform.position, m_LRobot.transform.position) / (
                 Vector3.Distance(transform.position, m_LRobot.transform.position) +
                 Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.3f);
+			m_NavMeshAgent.Move(Vector3.zero);
         }
     }
     public void OnTriggerExit(Collider other)
