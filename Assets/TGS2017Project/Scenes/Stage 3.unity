@@ -21552,9 +21552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1167190937}
+  - {fileID: 321880933}
+  - {fileID: 1720752165}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40
@@ -27378,9 +27378,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 590264519}
+  - {fileID: 1167190937}
+  - {fileID: 321880933}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40
@@ -34539,9 +34539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1340609181}
+  - {fileID: 321880933}
+  - {fileID: 85663766}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40
@@ -37167,9 +37167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 164302555}
+  - {fileID: 1137504273}
+  - {fileID: 590264519}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40
@@ -51340,9 +51340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Destinations:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1340609181}
+  - {fileID: 164302555}
+  - {fileID: 164302555}
   m_ChangePositionInterval: 180
   m_RotateSpeed: 2.5
   m_ViewingDistance: 40

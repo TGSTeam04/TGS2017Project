@@ -147,6 +147,7 @@ public class RocketBattery : MonoBehaviour
     }
     public void SetIsKnockBack(bool isKnockBack)
     {
+
         m_LRocket.m_IsKnockBack = isKnockBack;
         m_RRocket.m_IsKnockBack = isKnockBack;
     }
