@@ -5884,12 +5884,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RocketPrefub: {fileID: 1946853532632280, guid: 86b0ff5a1b73f3c4da1391651a9353cc,
+  m_RocketPrefub: {fileID: 1146969715133232, guid: 783305f9952a3bd44abd85e34e7ac670,
     type: 2}
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
   m_KnockBackForce: 100
-  m_IsKnockBack: 0
+  m_IsKnockBack: 1
   m_RocketLayer: PlayerBullet
   m_TargetTag: Boss
   m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}

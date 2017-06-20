@@ -213,6 +213,7 @@ public class RocketBase : MonoBehaviour
                 rb.constraints = RigidbodyConstraints.None;
                 rb.isKinematic = false;
                 enemy.Del_Trigger = KnockBackEnemyTrigger;
+                enemy.m_FreezeVelocity = false;
 
                 Vector3 dire = enemy.transform.position - transform.position;
                 rb.AddForce(dire.normalized * m_KnockBackForce, ForceMode.Impulse);
