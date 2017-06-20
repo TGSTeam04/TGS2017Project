@@ -117,7 +117,7 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
-		Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+        Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;
@@ -152,9 +152,9 @@ public class EnemyBase : MonoBehaviour
             m_NavMeshAgent.Move(Vector3.Lerp(
                 m_LRobot.transform.position - m_LRobotPos,
                 m_RRobot.transform.position - m_RRobotPos,
-                Vector3.Distance(transform.position, m_LRobot.transform.position) / (
-                Vector3.Distance(transform.position, m_LRobot.transform.position) +
-                Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.3f);
+                Vector3.Distance(transform.position, m_LRobot.transform.position) /
+                (Vector3.Distance(transform.position, m_LRobot.transform.position) +
+                 Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.1f);
         }
     }
     public void OnTriggerExit(Collider other)

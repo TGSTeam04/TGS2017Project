@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class CenterOfMass : MonoBehaviour
 {
-    public Vector3 m_Center;
+    [SerializeField] private Vector3 m_Center;
     private Rigidbody m_Rb;
+
+    public Vector3 Center
+    {
+        get { return m_Rb.centerOfMass; }
+        set { m_Rb.centerOfMass = value; }
+    }
 
     // Use this for initialization
     void Start()
     {
         m_Rb = GetComponent<Rigidbody>();
         m_Rb.centerOfMass = m_Center;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnDrawGizmosSelected()

@@ -3279,16 +3279,16 @@ ModelImporter:
     - serializedVersion: 16
       name: Boost_mid
       takeName: Boost_mid
-      firstFrame: 0
-      lastFrame: 300
+      firstFrame: 69
+      lastFrame: 69
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

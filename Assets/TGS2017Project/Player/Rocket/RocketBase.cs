@@ -16,8 +16,9 @@ public enum RocketState
 public class RocketBase : MonoBehaviour
 {
     //各コンポーネント
-    private Rigidbody m_Rigidbody;
-    private Collider m_Collider;
+    private Rigidbody m_Rb;
+    private BoxCollider m_BCollider;
+    //private CenterOfMass m_MassCenter;
     private AudioSource m_AudioSrc;
     [SerializeField] private AudioClip m_SEFire;
     [SerializeField] private AudioClip m_SEHit;
@@ -66,7 +67,8 @@ public class RocketBase : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rb = GetComponent<Rigidbody>();
+        m_BCollider = GetComponent<BoxCollider>();        
     }
 
     void Update()
@@ -118,13 +120,13 @@ public class RocketBase : MonoBehaviour
                 Move(m_AdvanceDire * m_Speed);
                 break;
             case RocketState.Back:
-                Move((m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed);
-                if (Vector3.Distance(m_StandTrans.position, m_Rigidbody.position) <= m_BackSpeed * Time.fixedDeltaTime * 2)
+                Move((m_StandTrans.position - m_Rb.position).normalized * m_BackSpeed);
+                if (Vector3.Distance(m_StandTrans.position, m_Rb.position) <= m_BackSpeed * Time.fixedDeltaTime * 2)
                     Colected();
                 break;
             case RocketState.Reflected:
-                Vector3 velocity = m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed;
-                m_Rigidbody.MovePosition(velocity * Time.fixedDeltaTime);
+                Vector3 velocity = m_Rb.position + (m_StandTrans.position - m_Rb.position).normalized * m_BackSpeed;
+                m_Rb.MovePosition(velocity * Time.fixedDeltaTime);
                 break;
             default:
                 break;
@@ -132,10 +134,20 @@ public class RocketBase : MonoBehaviour
     }
 
     public void Move(Vector3 velocity)
-    {
-        m_Rigidbody.velocity = Vector3.zero;
-        m_Rigidbody.MovePosition(m_Rigidbody.position + velocity * Time.fixedDeltaTime);
-        // m_Rigidbody.MoveRotation(m_Rigidbody.rotation * Quaternion.Euler(new Vector3(360, 0, 0) * Time.fixedDeltaTime));
+    {        
+        m_Rb.MovePosition(m_Rb.position + velocity * Time.fixedDeltaTime);
+
+        float heigth = transform.position.y - m_BCollider.size.y / 2;
+        float pich = transform.rotation.eulerAngles.x;
+        float forwardLen = (m_BCollider.size.z / 2 * transform.lossyScale.z) - m_Rb.centerOfMass.z;// * m_Collider.size.z;
+        float borderHigth = forwardLen * Mathf.Sin(pich * Mathf.Deg2Rad);// + transform.lossyScale.y / 2;
+        if (borderHigth > heigth && heigth > float.Epsilon)
+        {
+            float sin = heigth / forwardLen;
+            float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
+            Debug.Log(deg);
+            m_Rb.rotation = Quaternion.Euler(new Vector3(deg, 0, 0));
+        }
     }
 
     public void Colected()
@@ -154,7 +166,7 @@ public class RocketBase : MonoBehaviour
         transform.rotation = m_Battery.transform.rotation;
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
-        m_AdvanceDire = transform.forward;
+        m_AdvanceDire = new Vector3(0, -1, 0);
         m_Timer = 0;
     }
 

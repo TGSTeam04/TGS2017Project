@@ -22,6 +22,7 @@ public class HumanoidRobot : MonoBehaviour
     private float m_Rotate;
 
     private bool m_Charging;
+    private bool m_IsBoost = false;
 
     [SerializeField]
     private RocketBattery m_Battery;
@@ -67,6 +68,7 @@ public class HumanoidRobot : MonoBehaviour
             m_Animator.SetBool("IsBoost", true);
             m_Speed = m_Config.m_BoostSpeed;
             energy = m_Config.m_BoostUseEnergy;
+
         }
         else
         {
@@ -74,6 +76,7 @@ public class HumanoidRobot : MonoBehaviour
             m_Speed = m_Config.m_NormalSpeed;
             energy = m_Config.m_NormalUseEnergy;
         }
+
         m_Energy -= Time.deltaTime * energy;
     }
     public IEnumerator Charge(bool L)
@@ -129,7 +132,7 @@ public class HumanoidRobot : MonoBehaviour
                 switch (other.gameObject.tag)
                 {
                     case "Enemy":
-                    case "Bullet":                        
+                    case "Bullet":
                         foreach (var contact in other.contacts)
                         {
                             GameObject eff = Instantiate(m_Effect_Damage, transform);
