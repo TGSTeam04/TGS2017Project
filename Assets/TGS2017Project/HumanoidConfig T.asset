@@ -19,3 +19,4 @@ MonoBehaviour:
   m_NormalUseEnergy: 1
   m_BoostUseEnergy: 1
   m_ChargeUseEnergy: 3
+  m_IsKnockBack: 1

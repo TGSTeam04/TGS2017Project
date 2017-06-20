@@ -508,14 +508,14 @@ ModelImporter:
       name: Idol
       takeName: Idol
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -816,15 +816,15 @@ ModelImporter:
       name: Move_Front
       takeName: Move_Front
       firstFrame: 0
-      lastFrame: 450
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -1124,15 +1124,15 @@ ModelImporter:
       name: Move_Buck
       takeName: Move_Buck
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 450
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -1439,8 +1439,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -1740,15 +1740,15 @@ ModelImporter:
       name: Move_Right
       takeName: Move_Right
       firstFrame: 0
-      lastFrame: 240
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -2048,7 +2048,7 @@ ModelImporter:
       name: Jump_start
       takeName: Jump_start
       firstFrame: 0
-      lastFrame: 240
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2355,8 +2355,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump_Mid
       takeName: Jump_Mid
-      firstFrame: 0
-      lastFrame: 240
+      firstFrame: 60
+      lastFrame: 180
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2663,8 +2663,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump_End
       takeName: Jump_End
-      firstFrame: 0
-      lastFrame: 300
+      firstFrame: 180
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2972,7 +2972,7 @@ ModelImporter:
       name: Boost_start
       takeName: Boost_start
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -3279,8 +3279,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Boost_mid
       takeName: Boost_mid
-      firstFrame: 69
-      lastFrame: 69
+      firstFrame: 60
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -3587,8 +3587,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Boost_end
       takeName: Boost_end
-      firstFrame: 0
-      lastFrame: 120
+      firstFrame: 240
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -3896,7 +3896,7 @@ ModelImporter:
       name: Kimepo
       takeName: Kimepo
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -4204,7 +4204,7 @@ ModelImporter:
       name: Wepon_R
       takeName: Wepon_R
       firstFrame: 0
-      lastFrame: 90
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -4512,7 +4512,7 @@ ModelImporter:
       name: Damege_A
       takeName: Damege_A
       firstFrame: 0
-      lastFrame: 90
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -4820,7 +4820,7 @@ ModelImporter:
       name: Damege_B
       takeName: Damege_B
       firstFrame: 25
-      lastFrame: 89
+      lastFrame: 90
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
