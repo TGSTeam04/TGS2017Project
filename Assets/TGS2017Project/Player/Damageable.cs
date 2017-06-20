@@ -15,7 +15,7 @@ public class Damageable : MonoBehaviour
     /// <param name="src">与えてきた相手（基本呼ぶ側はthisを入れれば良い）</param>    
     public virtual void ApplyDamage(float damage, MonoBehaviour src)
     {
-        Debug.Log(src + "ApplyDamage" + this);
+        //Debug.Log(src + "ApplyDamage" + this);
         if (Del_ReciveDamage != null)
             Del_ReciveDamage.Invoke(damage, src);
     }
