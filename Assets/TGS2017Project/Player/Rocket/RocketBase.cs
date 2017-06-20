@@ -41,8 +41,6 @@ public class RocketBase : MonoBehaviour
     public float m_BackSpeed;
     //前進時間
     public float m_AdvanceTime;
-    //発射方向
-    public Vector3 m_AdvanceDire;
     //発射からの経過時間
     public float m_Timer;
     public string m_TargetTag;
@@ -68,7 +66,7 @@ public class RocketBase : MonoBehaviour
     void Start()
     {
         m_Rb = GetComponent<Rigidbody>();
-        m_BCollider = GetComponent<BoxCollider>();        
+        m_BCollider = GetComponent<BoxCollider>();
     }
 
     void Update()
@@ -117,7 +115,8 @@ public class RocketBase : MonoBehaviour
             case RocketState.Idle:
                 break;
             case RocketState.Fire:
-                Move(m_AdvanceDire * m_Speed);
+                Move(transform.forward * m_Speed);
+                //Move(transform.rotation * new Vector3(0, -10, 10));
                 break;
             case RocketState.Back:
                 Move((m_StandTrans.position - m_Rb.position).normalized * m_BackSpeed);
@@ -134,7 +133,7 @@ public class RocketBase : MonoBehaviour
     }
 
     public void Move(Vector3 velocity)
-    {        
+    {
         m_Rb.MovePosition(m_Rb.position + velocity * Time.fixedDeltaTime);
 
         float heigth = transform.position.y - m_BCollider.size.y / 2;
@@ -164,9 +163,9 @@ public class RocketBase : MonoBehaviour
         m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_Battery.transform.rotation;
+        //transform.rotation = Quaternion.Euler(new Vector3(20, 0, 0));
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
-        m_AdvanceDire = new Vector3(0, -1, 0);
         m_Timer = 0;
     }
 
@@ -324,5 +323,5 @@ public class RocketBase : MonoBehaviour
 
         //Enmeyの消滅処理
         BreakEnemy(enemy);
-    }    
+    }
 }
