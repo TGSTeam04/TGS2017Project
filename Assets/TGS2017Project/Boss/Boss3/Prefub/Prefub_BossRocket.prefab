@@ -24,9 +24,9 @@ GameObject:
   - component: {fileID: 65588225996255016}
   - component: {fileID: 114022956455639598}
   - component: {fileID: 114523049246158894}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: Prefub_BossRocket
-  m_TagString: PlayerBullet
+  m_TagString: BossBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4931082496545326}
   - component: {fileID: 137868999927103146}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4202788378181822}
   - component: {fileID: 137716243865390332}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4254479657984946}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4069844007527840}
   - component: {fileID: 137719661793007534}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4081241810237462}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: railgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4577146957943114}
   - component: {fileID: 137543638173011244}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4255570600850098}
   - component: {fileID: 137159213571003078}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4140734770771908}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,9 +166,9 @@ GameObject:
   - component: {fileID: 4318524611446688}
   - component: {fileID: 95258221178511974}
   - component: {fileID: 65585312399956902}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: railgun_20170612
-  m_TagString: PlayerBullet
+  m_TagString: BossBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4748745041187252}
   - component: {fileID: 137916384171516182}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4949035338156292}
   - component: {fileID: 137976454082928494}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4790974181116424}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: centet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4191331111999502}
   - component: {fileID: 137094252809732946}
-  m_Layer: 16
+  m_Layer: 17
   m_Name: poly_R_railgun7
   m_TagString: Untagged
   m_Icon: {fileID: 0}

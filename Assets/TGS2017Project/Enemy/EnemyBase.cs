@@ -19,7 +19,7 @@ public class EnemyBase : MonoBehaviour
     public bool m_IsDead;
     public bool m_IsShock;
     public bool m_FreezeVelocity = true;
-    private Rigidbody m_Rigidbody;
+    private Rigidbody m_Rigidbody;    
 
     public GameObject m_LRobot;
     public GameObject m_RRobot;
@@ -47,7 +47,7 @@ public class EnemyBase : MonoBehaviour
         m_RRobot = GameManager.Instance.m_RRobot;
         m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        //NextTarget();
+        //NextTarget();        
     }
 
     // Update is called once per frame

@@ -45,7 +45,7 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = true;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            obj.OnPause();            
+            obj.OnPause();
         }
     }
 
@@ -69,6 +69,9 @@ public class Pauser : MonoBehaviour
 
     //ポーズ中のコンポーネント
     Behaviour[] pauseBehavs = null;
+
+    //コリジョン
+    Collider[] cols = null;
 
     //ポーズ復帰時に使用するリジットボディとそのパラメータ
     Rigidbody[] rgBodies = null;
@@ -109,20 +112,21 @@ public class Pauser : MonoBehaviour
         if (m_PauseCunt != 1)
             return;
 
-        if (pauseBehavs != null)
-        {
-            return;
-        }
-
-        // 有効なコンポーネントを取得
+        // 有効なコンポーネントを取得、無効化
         pauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
-        if (pauseBehavs == null)
-            return;
+        //if (pauseBehavs == null)
+        //    return;
         foreach (var com in pauseBehavs)
-        {
             com.enabled = false;
-        }
 
+        //有効なコリジョンを取得、無効化
+        cols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
+        //if (pauseBehavs == null)
+        //    return;
+        foreach (var com in pauseBehavs)
+            com.enabled = false;
+
+        //リジットボディのデータを保存、スリープ
         rgBodies = Array.FindAll(GetComponentsInChildren<Rigidbody>(), (obj) => { return !obj.IsSleeping(); });
         rgBodyVels = new Vector3[rgBodies.Length];
         rgBodyAVels = new Vector3[rgBodies.Length];
@@ -132,7 +136,7 @@ public class Pauser : MonoBehaviour
             rgBodyAVels[i] = rgBodies[i].angularVelocity;
             rgBodies[i].Sleep();
         }
-
+        //２Dリジットボディ
         rg2dBodies = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return !obj.IsSleeping(); });
         rg2dBodyVels = new Vector2[rg2dBodies.Length];
         rg2dBodyAVels = new float[rg2dBodies.Length];
@@ -153,15 +157,15 @@ public class Pauser : MonoBehaviour
         if (m_PauseCunt != 0)
             return;
 
-        if (pauseBehavs == null)
-        {
-            return;
-        }
-
         // ポーズ前の状態にコンポーネントの有効状態を復元
         foreach (var com in pauseBehavs)
         {
             com.enabled = true;
+        }
+
+        foreach (var col in cols)
+        {
+            col.enabled = true;
         }
 
         for (var i = 0; i < rgBodies.Length; ++i)
