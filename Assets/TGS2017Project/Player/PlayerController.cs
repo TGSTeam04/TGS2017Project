@@ -323,15 +323,35 @@ public class PlayerController : MonoBehaviour
 		float move;
 		float t;
 		float l = 10f;
-
+		float radius = 2*1.6f;
+		RaycastHit hit;
+		int layermask = LayerMask.GetMask(new string[] { "Wall" });
 		yield return null;
 		for (float f = 0; f < m_CombineTime; f += Time.fixedDeltaTime)
 		{
 			t = m_ReleaseCurve.Evaluate(f / m_CombineTime);
-			move = Mathf.Lerp(0.5f, l, t);
-			m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * (move - preMove));
-			m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * (move - preMove));
-			preMove = move;
+			move = Mathf.Lerp(0.5f, l, t) - preMove;
+			if (!Physics.CheckSphere(m_LRobotRigidbody.position,radius,layermask)) {
+				if (Physics.SphereCast(m_LRobotRigidbody.position, radius, -vector, out hit, move, layermask)) {
+					m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * hit.distance);
+				}
+				else
+				{
+					m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * move);
+				}
+			}
+			if (!Physics.CheckSphere(m_RRobotRigidbody.position, radius, layermask))
+			{
+				if (Physics.SphereCast(m_RRobotRigidbody.position, radius, vector, out hit, move, layermask))
+				{
+					m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * hit.distance);
+				}
+				else
+				{
+					m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * move);
+				}
+			}
+			preMove += move;
 			m_LRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(lRotation, rRotation, t * 4));
 			m_RRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(rRotation, lRotation, t * 4));
 			yield return new WaitForFixedUpdate();
