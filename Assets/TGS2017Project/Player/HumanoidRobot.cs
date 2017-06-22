@@ -31,6 +31,11 @@ public class HumanoidRobot : MonoBehaviour
 
     [SerializeField] private GameObject m_Effect_Damage;
 
+	[SerializeField] private Transform m_TPSTarget;
+	[SerializeField] private float m_PitchMax;
+	[SerializeField] private float m_PitchMin;
+	private float m_Pitch;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -124,6 +129,8 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.MovePosition(m_Rigidbody.position + move_ * m_Speed * Time.fixedDeltaTime);
         }
         transform.Rotate(0, Input.GetAxis(m_BaseConfig.m_InputRotation) * m_Rotate * Time.fixedDeltaTime, 0);
+		m_Pitch = Mathf.Clamp(m_Pitch + -Input.GetAxis("VerticalR") * m_Rotate * Time.fixedDeltaTime, m_PitchMin, m_PitchMax);
+		m_TPSTarget.localRotation = Quaternion.Euler(m_Pitch, 0, 0);
         m_Animator.SetFloat("Up", m_Rigidbody.velocity.y);
     }
     void OnCollisionEnter(Collision other)

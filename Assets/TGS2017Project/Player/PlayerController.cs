@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 		m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
 		m_HumanoidRobotRigidbody = m_HRobot.GetComponent<Rigidbody>();
 		m_HRobot.SetActive(false);
-		m_Battery = m_HRobot.GetComponent<RocketBattery>();
+		//m_Battery = m_HRobot.GetComponent<RocketBattery>();
 		m_ElectricGuid.SetActive(false);
 
 		m_Level = 1;
@@ -152,8 +152,6 @@ public class PlayerController : MonoBehaviour
 			case PlayMode.TwinRobot:
 				m_TwinRobotL.Move();
 				m_TwinRobotR.Move();
-				//m_TwinRobotL.Look(m_RRobotRigidbody.position, m_RotateTwinRoboMode[m_TwinRobotL.Mode]);
-				//m_TwinRobotR.Look(m_LRobotRigidbody.position, m_RotateTwinRoboMode[m_TwinRobotR.Mode]);
 				ElectricUpdate();
 				break;
 			case PlayMode.HumanoidRobot:
@@ -193,6 +191,7 @@ public class PlayerController : MonoBehaviour
 		m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(-Direction, Vector3.up));
 
 		float distaceRate = 1.5f;
+		m_TPSPosition.parent.rotation = Quaternion.identity;
 		Vector3 v = m_TPSPosition.position;
 		v.y =  5.5f + distaceRate*Vector3.Distance(CenterPosition, StartPositionL);
 		m_TPSPosition.position = v;
@@ -273,12 +272,19 @@ public class PlayerController : MonoBehaviour
 		m_TwinRobotR.HP += add;
 		m_HumanoidRobot.m_Energy = add;
 
-		if(m_TwinRobotL.Mode != m_TwinRobotR.Mode)
+		bool breakTypeS = false;
+		bool breakTypeL = false;
+		foreach (var item in enemys)
+		{
+			if (item.m_EnemyType == EnemyType.Short) breakTypeS = true;
+			if (item.m_EnemyType == EnemyType.Long) breakTypeL = true;
+		}
+		if (breakTypeS && breakTypeL)
 		{
 			m_HumanoidMaterial.color = m_ModeAB;
 			m_HumanoidRobot.m_Config = m_HumanoidT;
 		}
-		else if(m_TwinRobotL.Mode == TwinRobotMode.A)
+		else if(breakTypeS)
 		{
 			m_HumanoidMaterial.color = m_ModeAA;
 			m_HumanoidRobot.m_Config = m_HumanoidN;
