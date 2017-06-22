@@ -61,6 +61,7 @@ public class Boss : MonoBehaviour
     {
         s_HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
+        GameManager.s_StageNumber = 1;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -223,8 +224,7 @@ public class Boss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-        GameManager.Instance.m_GameStarter.ChangeScenes(8);
+        GameManager.Instance.m_PlayMode = PlayMode.Clear;
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
