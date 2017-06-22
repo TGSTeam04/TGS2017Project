@@ -6,25 +6,25 @@ using UnityEngine;
 //詳細パラメータは各ロケット　m_XRocket　のパラメータをいじってください。
 public class RocketBattery : MonoBehaviour
 {
-    [SerializeField] private GameObject m_RocketPrefub;
-    [SerializeField] private Transform m_LStandTrans;
-    [SerializeField] private Transform m_RStandTrans;
-    [SerializeField] private float m_KnockBackForce;
-    [SerializeField] private bool m_IsKnockBack;
-    [SerializeField] private string m_RocketLayer;
-    [SerializeField] private string m_TargetTag;
-    [SerializeField] private AudioClip m_SEColectRocet;
-    [SerializeField] private GameObject m_Effect_Chage;
-    private Vector3 m_EffectChagePos = new Vector3(0, 3, 0);
+    [SerializeField] GameObject m_RocketPrefub;
+    [SerializeField] Transform m_LStandTrans;
+    [SerializeField] Transform m_RStandTrans;
+    [SerializeField] float m_KnockBackForce;
+    [SerializeField] bool m_IsKnockBack;
+    [SerializeField] string m_RocketLayer;
+    [SerializeField] string m_TargetTag;
+    [SerializeField] AudioClip m_SEColectRocet;
+    [SerializeField] GameObject m_Effect_Chage;
+	[SerializeField] Animator m_HumanoidAnim;
+	private Vector3 m_EffectChagePos = new Vector3(0, 3, 0);
 
     [HideInInspector] public RocketBase m_LRocket;
     [HideInInspector] public RocketBase m_RRocket;
-    private Animator m_Anim;
+    
     private AudioSource m_AudioSrc;
 
     private void Awake()
     {
-        m_Anim = GetComponentInChildren<Animator>();
         m_AudioSrc = gameObject.AddComponent<AudioSource>();
         m_AudioSrc.spatialBlend = 1.0f;
         m_AudioSrc.playOnAwake = false;
@@ -77,8 +77,8 @@ public class RocketBattery : MonoBehaviour
     //右方の発射可能か確認
     public bool RIsCanFire { get { return m_RRocket.IsCanFire; } }
 
-    //LRどっちでもいいから発射
-    public void Fire()
+	//LRどっちでもいいから発射
+	public void Fire()
     {
         if (m_LRocket.IsCanFire)
             StartCoroutine(LAnimatedFire());
@@ -103,22 +103,22 @@ public class RocketBattery : MonoBehaviour
     //L発射
     public IEnumerator LAnimatedFire()
     {
-        m_Anim.SetTrigger("LFire");
+        m_HumanoidAnim.SetTrigger("LFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
         yield return null;
-        yield return new WaitForAnimation(m_Anim, 0.7f);
+        yield return new WaitForAnimation(m_HumanoidAnim, 0.7f);
         m_Effect_Chage.SetActive(false);
         m_LRocket.Fire();
     }
     //R発射
     public IEnumerator RAnimatedFire()
     {        
-        m_Anim.SetTrigger("RFire");
+        m_HumanoidAnim.SetTrigger("RFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
         yield return null;
-        yield return new WaitForAnimation(m_Anim, 0.7f);
+        yield return new WaitForAnimation(m_HumanoidAnim, 0.7f);
         m_Effect_Chage.SetActive(false);
         m_RRocket.Fire();
     }

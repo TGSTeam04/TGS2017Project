@@ -11,6 +11,11 @@ public enum BreakType
     Shock,
     UnBreak
 }
+public enum EnemyType
+{
+	Short,
+	Long
+}
 
 public class EnemyBase : MonoBehaviour
 {
@@ -35,6 +40,8 @@ public class EnemyBase : MonoBehaviour
     private NavMeshAgent m_NavMeshAgent;
 
     public OnCollideEnter_Del Del_Trigger;
+
+	public EnemyType m_EnemyType;
 
     // Use this for initialization
     void Start()
