@@ -421,7 +421,7 @@ public class Enemy_C_v3 : MonoBehaviour
                 + "\nCanSeePlayer:" + CanSeePlayer()
                 + "\nSpeed: " + m_NavMeshAgent.velocity.magnitude;
 
-            UnityEditor.Handles.Label(transform.position, text);
+            //UnityEditor.Handles.Label(transform.position, text);
         }
     }
 }

@@ -16,9 +16,7 @@ public class Boss3_Controller : MonoBehaviour
 
     public AnimationClip m_CombineAnim;
     public AnimationClip m_ReleaseAnim;
-    //合体、分裂　エフェクト
-    public GameObject m_ElectricGuid;   //？？
-    public GameObject m_Electric;
+    //合体、分裂　エフェクト    
     public GameObject m_CombineEffect;
 
     [SerializeField] private Animator m_HAnimator;
@@ -56,14 +54,17 @@ public class Boss3_Controller : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.m_BossHpRate = 1.0f;
+        //GameManager.Instance.m_BossHpRate = 1.0f;
         m_Hp = m_MaxHp;
         m_State = PlayMode.HumanoidRobot;
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            ReleaseStart();
+
         if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
-            return;
+            return;        
 
         m_StateTimer += Time.deltaTime;
         switch (m_State)
@@ -86,7 +87,7 @@ public class Boss3_Controller : MonoBehaviour
             m_HRobot.Dead();
 
         m_State = PlayMode.NoPlay;
-        Debug.Log("Boss3死亡");
+        GameManager.Instance.m_IsGameClear = true;
     }
 
     public void CombineStart()
@@ -106,7 +107,6 @@ public class Boss3_Controller : MonoBehaviour
         transform.position = pos;
         m_HRobot.transform.position = pos;
         m_CombineEffect.transform.position = pos + new Vector3(0, 1, 0);
-        m_ElectricGuid.SetActive(true);
         float timer = 0.0f;
         while (timer < m_CombineAnim.length)
         {
@@ -134,11 +134,10 @@ public class Boss3_Controller : MonoBehaviour
         float timer = 0.0f;
         while (timer < m_ReleaseAnim.length)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * 0.3f;
             m_ReleaseAnim.SampleAnimation(gameObject, timer);
             yield return null;
         }
-        m_ElectricGuid.SetActive(true);
     }
 
     private IEnumerator CombineEffect()

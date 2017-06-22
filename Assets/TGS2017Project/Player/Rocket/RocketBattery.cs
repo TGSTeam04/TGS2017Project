@@ -54,8 +54,8 @@ public class RocketBattery : MonoBehaviour
 
         SetIsKnockBack(m_IsKnockBack);
         SetKnockBackForce(m_KnockBackForce);
-        m_LRocket.SetLayer(m_RocketLayer);
-        m_RRocket.SetLayer(m_RocketLayer);
+        //m_LRocket.SetLayer(m_RocketLayer);
+        //m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
@@ -106,18 +106,20 @@ public class RocketBattery : MonoBehaviour
         m_Anim.SetTrigger("LFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
+        yield return null;
         yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        m_Effect_Chage.SetActive(false);
         m_LRocket.Fire();
     }
     //R発射
     public IEnumerator RAnimatedFire()
-    {
+    {        
         m_Anim.SetTrigger("RFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
+        yield return null;
         yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        m_Effect_Chage.SetActive(false);
         m_RRocket.Fire();
     }
 
@@ -145,6 +147,7 @@ public class RocketBattery : MonoBehaviour
     }
     public void SetIsKnockBack(bool isKnockBack)
     {
+
         m_LRocket.m_IsKnockBack = isKnockBack;
         m_RRocket.m_IsKnockBack = isKnockBack;
     }
