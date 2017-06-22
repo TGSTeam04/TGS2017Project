@@ -10,11 +10,12 @@ public enum TwinRobotMode
 public class TwinRobot : MonoBehaviour
 {
 	[SerializeField] private PlayerController m_Controller;
-	[SerializeField] private GameObject m_Shield;
+    [SerializeField] Damageable m_CoreDamageComp;
+    [SerializeField] private GameObject m_Shield;
 	[SerializeField] private TwinRobotConfig m_Config;
 	[SerializeField] private TwinRobotBaseConfig m_BaseConfig;
 	[SerializeField] private float m_BreakerSizeS;
-	[SerializeField] private float m_BreakerSizeL;
+	[SerializeField] private float m_BreakerSizeL;    
 
 
 	private float m_HP;
@@ -29,10 +30,16 @@ public class TwinRobot : MonoBehaviour
 		m_Renderer = m_Shield.GetComponent<Renderer>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Shield.GetComponent<Damageable>().Del_ReciveDamage = Damage;
-		HP = m_BaseConfig.m_MaxHP;
+        m_CoreDamageComp.Del_ReciveDamage = Damage;
+        HP = m_BaseConfig.m_MaxHP;
 	}
 
-	public void UpdateInput()
+    private void OnEnable()
+    {
+        m_Shield.SetActive(HP != 0);
+    }
+
+    public void UpdateInput()
 	{
 		float axis = Input.GetAxis(m_Config.m_InputModeChange);
 		if (axis >= 0.5f && m_Axis < 0.5f)
@@ -92,6 +99,11 @@ public class TwinRobot : MonoBehaviour
 
 	}
 
+    public void SetShieldActive(bool isActive)
+    {
+        m_Shield.SetActive(isActive && HP != 0);
+    }
+
 	private void OnTriggerEnter(Collider other)
 	{
 		switch (GameManager.Instance.m_PlayMode)
@@ -100,7 +112,7 @@ public class TwinRobot : MonoBehaviour
 				switch (other.tag)
 				{
 					case "Wall":
-						m_Controller.Crushable = false;
+						m_Controller.IsCanCrash = false;
 						break;
 					default:
 						break;
@@ -122,7 +134,7 @@ public class TwinRobot : MonoBehaviour
 				switch (other.tag)
 				{
 					case "Wall":
-						m_Controller.Crushable = false;
+						m_Controller.IsCanCrash = false;
 						break;
 					default:
 						break;
@@ -131,11 +143,6 @@ public class TwinRobot : MonoBehaviour
 			default:
 				break;
 		}
-	}
-
-	public void Active(bool active)
-	{
-		m_Shield.SetActive(active && HP != 0);
 	}
 
 	public float HP

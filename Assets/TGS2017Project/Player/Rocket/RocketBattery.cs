@@ -39,7 +39,8 @@ public class RocketBattery : MonoBehaviour
         if (m_LRocket == null)
         {
             //ロケットインスタンス化
-            GameObject lRocketObj = Instantiate(m_RocketPrefub);
+            GameObject lRocketObj = Instantiate(m_RocketPrefub, transform);
+            lRocketObj.transform.parent = null;
             m_LRocket = lRocketObj.GetComponent<RocketBase>();
             m_LRocket.m_StandTrans = m_LStandTrans;
         }
@@ -47,7 +48,8 @@ public class RocketBattery : MonoBehaviour
         if (m_RRocket == null)
         {
             //ロケットインスタンス化
-            GameObject rRocketObj = Instantiate(m_RocketPrefub);
+            GameObject rRocketObj = Instantiate(m_RocketPrefub, transform);
+            rRocketObj.transform.parent = null;
             m_RRocket = rRocketObj.GetComponent<RocketBase>();
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
@@ -113,7 +115,7 @@ public class RocketBattery : MonoBehaviour
     }
     //R発射
     public IEnumerator RAnimatedFire()
-    {        
+    {
         m_Anim.SetTrigger("RFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);

@@ -205,6 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4105647280975904}
   - component: {fileID: 114101970770740298}
+  - component: {fileID: 114135947248385588}
   m_Layer: 19
   m_Name: Enemy_C Break
   m_TagString: Untagged
@@ -1708,6 +1709,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Power: 200
   m_Radius: 5
+--- !u!114 &114135947248385588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475494298892892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tags: 00000000
 --- !u!114 &114267109088316890
 MonoBehaviour:
   m_ObjectHideFlags: 1

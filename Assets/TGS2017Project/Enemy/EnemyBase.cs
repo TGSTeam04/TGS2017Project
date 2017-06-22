@@ -19,7 +19,7 @@ public class EnemyBase : MonoBehaviour
     public bool m_IsDead;
     public bool m_IsShock;
     public bool m_FreezeVelocity = true;
-    private Rigidbody m_Rigidbody;    
+    private Rigidbody m_Rigidbody;
 
     public GameObject m_LRobot;
     public GameObject m_RRobot;
@@ -119,7 +119,8 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
-        Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+        GameObject fragment = Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+        fragment.transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;

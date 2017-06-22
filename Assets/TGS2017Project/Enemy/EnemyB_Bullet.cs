@@ -47,7 +47,7 @@ public class EnemyB_Bullet : MonoBehaviour
         // プレイヤーに命中
         if (other.gameObject.tag == "Player")
         {
-			Debug.Log(other.gameObject);
+			//Debug.Log(other.gameObject);
 			other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ApplyDamage, this);
 		}
         Destroy(gameObject);

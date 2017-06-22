@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
@@ -11,7 +10,7 @@ public class Boss3_Humanoid : MonoBehaviour
     //分裂時と合体時のコントロールをするクラスの参照
     private Boss3_Controller m_BossController;
 
-    [SerializeField] float m_MaxHP;
+    [SerializeField] float m_MaxHP = 100;
     private float m_HP;
     //移動
     [SerializeField] float m_Speed;
@@ -36,6 +35,7 @@ public class Boss3_Humanoid : MonoBehaviour
     [SerializeField] GameObject m_Explosion;
     [SerializeField] GameObject m_Efect_Numbness;
     [SerializeField] float m_NumbnessInterval = 30.0f;
+    private List<GameObject> m_Numbness = new List<GameObject>();
 
     float m_RemainingNI;
 
@@ -65,16 +65,16 @@ public class Boss3_Humanoid : MonoBehaviour
     {
         while (true)
         {
-            //GameManager gm = GameManager.Instance;
-            //float Ldistance = (gm.m_LRobot.transform.position - transform.position).magnitude;
-            //float Rdistance = (gm.m_RRobot.transform.position - transform.position).magnitude;
-            //GameObject target = gm.m_PlayMode == PlayMode.HumanoidRobot
-            //    ? gm.m_HumanoidRobot
-            //    : Ldistance < Rdistance
-            //            ? gm.m_LRobot
-            //            : gm.m_RRobot;
+            GameManager gm = GameManager.Instance;
+            float Ldistance = (gm.m_LRobot.transform.position - transform.position).magnitude;
+            float Rdistance = (gm.m_RRobot.transform.position - transform.position).magnitude;
+            GameObject target = gm.m_PlayMode == PlayMode.HumanoidRobot
+                ? gm.m_HumanoidRobot
+                : Ldistance < Rdistance
+                        ? gm.m_LRobot
+                        : gm.m_RRobot;
             //Debug.Log("Target Update" + target.ToString());
-            GameObject target = tempTarget;
+            //GameObject target = tempTarget;
             m_BB.GObjValues["target"] = target; //tempTarget;
             yield return new WaitForSeconds(3.0f);
         }
@@ -105,13 +105,19 @@ public class Boss3_Humanoid : MonoBehaviour
     {
         m_HP = Mathf.Max(0, m_HP - damage);
         m_RemainingNI -= damage;
-        if(m_RemainingNI < 0)
+        if (m_RemainingNI < 0)
         {
-            Instantiate(m_Efect_Numbness, transform);
+            GameObject shockEff = Instantiate(m_Efect_Numbness, transform);
+            Vector3 randModiy = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+            shockEff.transform.position = transform.position + randModiy;
+            m_Numbness.Add(shockEff);
+
             m_RemainingNI = m_NumbnessInterval;
         }
         if (m_HP <= 0)
         {
+            foreach (var numbness in m_Numbness)
+                Destroy(numbness);
             Release();
             return;
         }

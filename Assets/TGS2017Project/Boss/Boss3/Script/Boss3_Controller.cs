@@ -1,27 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Boss3_Controller : MonoBehaviour
 {
-    public float m_MaxHp;
-    private float m_Hp;
-
+    public float m_MaxHp; 
     public GameObject m_TwinRobot;
     public Boss3_Humanoid m_HRobot;
-    [HideInInspector] public PlayMode m_State;
-    public float m_ReleaseTime;
-    [HideInInspector] public float m_StateTimer;
+    [SerializeField] float m_ReleaseTime;
+    [SerializeField] AnimationClip m_CombineAnim;
+    [SerializeField] GameObject m_CombineEffect;
+    [SerializeField] Animator m_HAnimator;
+    [SerializeField] AudioClip m_SEKimepo;
+    [SerializeField] AudioSource m_EffectAudioSrc;
+    [SerializeField] AnimationClip m_ReleaseAnim;        
 
-    public AnimationClip m_CombineAnim;
-    public AnimationClip m_ReleaseAnim;
-    //合体、分裂　エフェクト    
-    public GameObject m_CombineEffect;
-
-    [SerializeField] private Animator m_HAnimator;
-    [SerializeField] private AudioClip m_SEKimepo;
-    [SerializeField] private AudioSource m_EffectAudioSrc;
+    private PlayMode m_State;
+    private float m_StateTimer;
+    private float m_Hp;        
 
     //合体完了時イベント        
     //public UnityAction m_CombineEnd;
@@ -54,7 +49,7 @@ public class Boss3_Controller : MonoBehaviour
 
     private void Awake()
     {
-        //GameManager.Instance.m_BossHpRate = 1.0f;
+        GameManager.Instance.m_BossHpRate = 1.0f;
         m_Hp = m_MaxHp;
         m_State = PlayMode.HumanoidRobot;
     }

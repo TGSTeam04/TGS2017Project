@@ -22,6 +22,12 @@ public class Boss3_Twin : MonoBehaviour
             comp.Del_ReciveDamage = Damage;
         }
     }
+
+    private void OnEnable()
+    {
+        m_ShildRender.gameObject.SetActive(m_HP != 0);
+    }
+
     private void Damage(float d, MonoBehaviour s)
     {
         //ダメージ
