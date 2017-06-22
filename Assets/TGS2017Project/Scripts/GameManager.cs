@@ -104,7 +104,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     void Clear()
     {
         m_PlayCamera.GetComponent<PlayCameraController>().enabled = false;
-        m_PlayCamera.GetComponent<Clear>().ClearMove();
+        //m_PlayCamera.GetComponent<Clear>().ClearMove();
     }
 
     IEnumerator GameEnd()
