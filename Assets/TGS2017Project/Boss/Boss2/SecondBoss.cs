@@ -30,6 +30,8 @@ public class SecondBoss : MonoBehaviour
     //public Image m_HitPointBar;
     public List<GameObject> m_Particle;
 
+    public List<GameObject> m_Smoke;
+
     private Collider m_Collision;
 
     //ダメージコンポーネント
@@ -81,6 +83,7 @@ public class SecondBoss : MonoBehaviour
     {
         HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
+        GameManager.s_StageNumber = 2;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -108,7 +111,6 @@ public class SecondBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //if (Input.GetKeyDown(KeyCode.S))
         //{
         //    m_Sound.clip = m_MoveSound;
@@ -203,6 +205,10 @@ public class SecondBoss : MonoBehaviour
                 }
                 else
                 {
+                    foreach (GameObject s in m_Smoke)
+                    {
+                        s.GetComponent<ParticleSystem>().Play();
+                    }
                     foreach (GameObject p in m_Particle)
                     {
                         p.SetActive(false);
@@ -244,6 +250,10 @@ public class SecondBoss : MonoBehaviour
                 {
                     p.SetActive(false);
                 }
+                foreach (GameObject s in m_Smoke)
+                {
+                    s.GetComponent<ParticleSystem>().Stop();
+                }
                 m_Collision.isTrigger = true;
                 break;
             case SecondBossState.Invincible:
@@ -274,8 +284,7 @@ public class SecondBoss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-        GameManager.Instance.m_GameStarter.ChangeScenes(8);
+        GameManager.Instance.m_PlayMode = PlayMode.Clear;
         Destroy(gameObject);
     }
     IEnumerator BattleChange()

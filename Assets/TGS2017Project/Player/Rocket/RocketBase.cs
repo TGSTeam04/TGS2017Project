@@ -144,7 +144,7 @@ public class RocketBase : MonoBehaviour
             float sin = heigth / forwardLen;
             float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
             Debug.Log(deg);
-            m_Rb.rotation = Quaternion.Euler(new Vector3(deg, 0, 0));
+            m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
         }
     }
 

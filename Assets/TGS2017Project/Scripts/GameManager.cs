@@ -9,7 +9,8 @@ public enum PlayMode
     TwinRobot,
     HumanoidRobot,
     Combine,
-    Release
+    Release,
+    Clear
 }
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -47,6 +48,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public float m_PlayTime;
     public float m_BossHpRate = 1.0f;
 
+    public static int s_StageNumber;
+
     // Use this for initialization
     void Start()
     {
@@ -56,6 +59,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_PlayMode = PlayMode.Clear;
+        }
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
 
@@ -68,6 +75,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 break;
             case PlayMode.Combine:
             case PlayMode.Release:
+                break;
+            case PlayMode.Clear:
+                Clear();
                 break;
             default:
                 break;
@@ -91,6 +101,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
+    void Clear()
+    {
+        m_PlayCamera.GetComponent<PlayCameraController>().enabled = false;
+        m_PlayCamera.GetComponent<Clear>().ClearMove();
+    }
+
     IEnumerator GameEnd()
     {
         if (m_IsRun)
@@ -100,6 +116,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_IsRun = true;
         yield return new WaitForSeconds(3);
         m_GameStarter.ChangeScenes(0);
+        if (m_IsGameClear)
+        {
+            m_GameStarter.ChangeScenes(8);
+        }
         m_IsGameClear = false;
         m_IsGameOver = false;
         m_IsRun = false;
