@@ -1,29 +1,22 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Boss3_Controller : MonoBehaviour
 {
-    public float m_MaxHp;
-    private float m_Hp;
-
+    public float m_MaxHp; 
     public GameObject m_TwinRobot;
     public Boss3_Humanoid m_HRobot;
-    [HideInInspector] public PlayMode m_State;
-    public float m_ReleaseTime;
-    [HideInInspector] public float m_StateTimer;
+    [SerializeField] float m_ReleaseTime;
+    [SerializeField] AnimationClip m_CombineAnim;
+    [SerializeField] GameObject m_CombineEffect;
+    [SerializeField] Animator m_HAnimator;
+    [SerializeField] AudioClip m_SEKimepo;
+    [SerializeField] AudioSource m_EffectAudioSrc;
+    [SerializeField] AnimationClip m_ReleaseAnim;        
 
-    public AnimationClip m_CombineAnim;
-    public AnimationClip m_ReleaseAnim;
-    //合体、分裂　エフェクト
-    public GameObject m_ElectricGuid;   //？？
-    public GameObject m_Electric;
-    public GameObject m_CombineEffect;
-
-    [SerializeField] private Animator m_HAnimator;
-    [SerializeField] private AudioClip m_SEKimepo;
-    [SerializeField] private AudioSource m_EffectAudioSrc;
+    private PlayMode m_State;
+    private float m_StateTimer;
+    private float m_Hp;        
 
     //合体完了時イベント        
     //public UnityAction m_CombineEnd;
@@ -62,8 +55,11 @@ public class Boss3_Controller : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            ReleaseStart();
+
         if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
-            return;
+            return;        
 
         m_StateTimer += Time.deltaTime;
         switch (m_State)
@@ -86,7 +82,7 @@ public class Boss3_Controller : MonoBehaviour
             m_HRobot.Dead();
 
         m_State = PlayMode.NoPlay;
-        Debug.Log("Boss3死亡");
+        GameManager.Instance.m_IsGameClear = true;
     }
 
     public void CombineStart()
@@ -106,7 +102,6 @@ public class Boss3_Controller : MonoBehaviour
         transform.position = pos;
         m_HRobot.transform.position = pos;
         m_CombineEffect.transform.position = pos + new Vector3(0, 1, 0);
-        m_ElectricGuid.SetActive(true);
         float timer = 0.0f;
         while (timer < m_CombineAnim.length)
         {
@@ -134,11 +129,10 @@ public class Boss3_Controller : MonoBehaviour
         float timer = 0.0f;
         while (timer < m_ReleaseAnim.length)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * 0.3f;
             m_ReleaseAnim.SampleAnimation(gameObject, timer);
             yield return null;
         }
-        m_ElectricGuid.SetActive(true);
     }
 
     private IEnumerator CombineEffect()

@@ -3732,11 +3732,12 @@ MonoBehaviour:
   m_MoveSpeed: 5
   m_IsDead: 0
   m_IsShock: 0
+  m_FreezeVelocity: 1
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
-  m_BreakType: 0
-  m_Fragment: {fileID: 0}
+  m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
+  m_EnemyType: 1
 --- !u!114 &114780743203656554
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,6 +22,8 @@ public class PlayCameraController : MonoBehaviour
 
 	private PlayMode m_PreMode;
 	private bool m_IsRunning = false;
+	Coroutine m_CombineCor;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -47,10 +49,11 @@ public class PlayCameraController : MonoBehaviour
 			case PlayMode.HumanoidRobot:
 				break;
 			case PlayMode.Combine:
-				if (m_PreMode == PlayMode.TwinRobot) StartCoroutine(Combine());
+				if (m_PreMode == PlayMode.TwinRobot)
+					m_CombineCor = StartCoroutine(Combine());
 				break;
 			case PlayMode.Release:
-				if (m_PreMode != PlayMode.Release) StartCoroutine(Release());
+				if (m_PreMode != PlayMode.Release) StartCoroutine(Release(m_PreMode==PlayMode.Combine));
 				break;
 			default:
 				break;
@@ -67,8 +70,8 @@ public class PlayCameraController : MonoBehaviour
 			case PlayMode.TwinRobot:
 				break;
 			case PlayMode.HumanoidRobot:
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_TPSTarget.position - m_TPSTransform.position), m_RotateSpeed * GameManager.Instance.LevelParameter.m_Scale * Time.fixedDeltaTime);
-				transform.position = Vector3.Lerp(transform.position, m_TPSTransform.position + transform.right * GameManager.Instance.LevelParameter.m_Scale * 1.5f, m_MoveSpeed * GameManager.Instance.LevelParameter.m_Scale * Time.fixedDeltaTime);
+				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(m_TPSTarget.position - m_TPSTransform.position), m_RotateSpeed * Time.fixedDeltaTime);
+				transform.position = Vector3.Lerp(transform.position, m_TPSTransform.position , m_MoveSpeed  * Time.fixedDeltaTime);
 				break;
 			case PlayMode.Combine:
 				break;
@@ -84,24 +87,38 @@ public class PlayCameraController : MonoBehaviour
 		if (m_IsRunning) { yield break; }
 		m_IsRunning = true;
 
-		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime*2)
+		Quaternion LookRobot = Quaternion.LookRotation(m_TPSTarget.position- m_TPSTransform.position);
+
+		float time = 0.3f;
+		for (float f = 0; f < time; f += Time.deltaTime)
 		{
-			m_Camera.fieldOfView = Mathf.Lerp(60, m_MAXFOV, m_FOVCurve.Evaluate(f));
-			transform.position = Vector3.Lerp(m_TopTransform.position, m_TPSTransform.position, m_CombinePositionCurve.Evaluate(f));
-			transform.rotation = Quaternion.Lerp(m_TopTransform.rotation, m_TPSTransform.rotation, m_RotationCurve.Evaluate(f));
+			//m_Camera.fieldOfView = Mathf.Lerp(60, m_MAXFOV, m_FOVCurve.Evaluate(f));
+			transform.position = Vector3.Lerp(m_TopTransform.position, m_TPSTransform.position, m_CombinePositionCurve.Evaluate(f/time));
+			transform.rotation = Quaternion.Lerp(m_TopTransform.rotation, LookRobot, m_RotationCurve.Evaluate(f/time));
 			yield return null;
 		}
 		m_Camera.fieldOfView = 60;
+		yield return new WaitForSeconds(0.3f);
+		time = 1.0f;
+		for (float f = 0; f < time; f += Time.deltaTime)
+		{
+			transform.position = m_TPSTransform.position;
+			transform.rotation = Quaternion.LookRotation(m_TPSTarget.position - m_TPSTransform.position);
+			yield return null;
+		}
+
 		transform.position = m_TPSTransform.position;
 		transform.rotation = m_TPSTransform.rotation;
 
 		m_IsRunning = false;
 	}
 
-	IEnumerator Release()
+	IEnumerator Release(bool combine)
 	{
-		if (m_IsRunning) { yield break; }
+		if (m_IsRunning && !combine) { yield break; }
 		m_IsRunning = true;
+
+		if (m_CombineCor != null) StopCoroutine(m_CombineCor);
 
 		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
 		{

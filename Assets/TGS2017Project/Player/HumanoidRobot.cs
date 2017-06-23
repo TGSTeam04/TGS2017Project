@@ -22,19 +22,24 @@ public class HumanoidRobot : MonoBehaviour
     private float m_Rotate;
 
     private bool m_Charging;
+    private bool m_IsBoost = false;
 
     [SerializeField]
     private RocketBattery m_Battery;
-    //ダメージコンポーネント
-    private Damageable m_Damage;
+
+	[SerializeField] Damageable m_DamageComp;
 
     [SerializeField] private GameObject m_Effect_Damage;
+
+	[SerializeField] private Transform m_TPSTarget;
+	[SerializeField] private float m_PitchMax;
+	[SerializeField] private float m_PitchMin;
+	private float m_Pitch;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_Damage = GetComponent<Damageable>();
-        m_Damage.Del_ReciveDamage = Damage;
+		m_DamageComp.Del_ReciveDamage = Damage;
     }
     public void Damage(float damage, MonoBehaviour src)
     {
@@ -43,8 +48,15 @@ public class HumanoidRobot : MonoBehaviour
         m_Animator.SetTrigger("Damage");
     }
 
-    // Update is called once per frame
-    public void UpdateInput()
+	private void OnEnable()
+	{
+		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
+	}
+
+
+
+	// Update is called once per frame
+	public void UpdateInput()
     {
         if (Input.GetButtonDown(m_BaseConfig.m_InputJump) && IsGround())
         {
@@ -52,11 +64,11 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
         }
 
-        if (Input.GetButtonDown("RotateL") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
+        if (Input.GetButtonDown("ChargeL") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
         {
             m_PlayerController.StartCoroutine(Charge(true));
         }
-        else if (Input.GetButtonDown("RotateR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
+        else if (Input.GetButtonDown("ChargeR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
         {
             m_PlayerController.StartCoroutine(Charge(false));
         }
@@ -67,6 +79,7 @@ public class HumanoidRobot : MonoBehaviour
             m_Animator.SetBool("IsBoost", true);
             m_Speed = m_Config.m_BoostSpeed;
             energy = m_Config.m_BoostUseEnergy;
+
         }
         else
         {
@@ -74,6 +87,7 @@ public class HumanoidRobot : MonoBehaviour
             m_Speed = m_Config.m_NormalSpeed;
             energy = m_Config.m_NormalUseEnergy;
         }
+
         m_Energy -= Time.deltaTime * energy;
     }
     public IEnumerator Charge(bool L)
@@ -115,6 +129,8 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.MovePosition(m_Rigidbody.position + move_ * m_Speed * Time.fixedDeltaTime);
         }
         transform.Rotate(0, Input.GetAxis(m_BaseConfig.m_InputRotation) * m_Rotate * Time.fixedDeltaTime, 0);
+		m_Pitch = Mathf.Clamp(m_Pitch + -Input.GetAxis("VerticalR") * m_Rotate * Time.fixedDeltaTime, m_PitchMin, m_PitchMax);
+		m_TPSTarget.localRotation = Quaternion.Euler(m_Pitch, 0, 0);
         m_Animator.SetFloat("Up", m_Rigidbody.velocity.y);
     }
     void OnCollisionEnter(Collision other)
@@ -129,7 +145,7 @@ public class HumanoidRobot : MonoBehaviour
                 switch (other.gameObject.tag)
                 {
                     case "Enemy":
-                    case "Bullet":                        
+                    case "Bullet":
                         foreach (var contact in other.contacts)
                         {
                             GameObject eff = Instantiate(m_Effect_Damage, transform);

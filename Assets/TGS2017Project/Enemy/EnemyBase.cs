@@ -11,6 +11,11 @@ public enum BreakType
     Shock,
     UnBreak
 }
+public enum EnemyType
+{
+	Short,
+	Long
+}
 
 public class EnemyBase : MonoBehaviour
 {
@@ -18,6 +23,7 @@ public class EnemyBase : MonoBehaviour
     private float m_SpeedRate;
     public bool m_IsDead;
     public bool m_IsShock;
+    public bool m_FreezeVelocity = true;
     private Rigidbody m_Rigidbody;
 
     public GameObject m_LRobot;
@@ -35,6 +41,8 @@ public class EnemyBase : MonoBehaviour
 
     public OnCollideEnter_Del Del_Trigger;
 
+	public EnemyType m_EnemyType;
+
     // Use this for initialization
     void Start()
     {
@@ -46,7 +54,7 @@ public class EnemyBase : MonoBehaviour
         m_RRobot = GameManager.Instance.m_RRobot;
         m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        //NextTarget();
+        //NextTarget();        
     }
 
     // Update is called once per frame
@@ -75,7 +83,8 @@ public class EnemyBase : MonoBehaviour
             default:
                 break;
         }
-        m_Rigidbody.velocity = Vector3.zero;
+        if (m_FreezeVelocity)
+            m_Rigidbody.velocity = Vector3.zero;
     }
 
     private void Move()
@@ -117,13 +126,14 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
-		Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
-		transform.parent = null;
+        GameObject fragment = Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+        fragment.transform.parent = null;
         m_Rigidbody.isKinematic = false;
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         Del_Trigger = null;
         m_IsDead = true;
         gameObject.SetActive(false);
+        m_FreezeVelocity = true;
         EnemyManager.Instance.ReSpawnEnemy(this);
     }
 
@@ -153,9 +163,9 @@ public class EnemyBase : MonoBehaviour
             m_NavMeshAgent.Move(Vector3.Lerp(
                 m_LRobot.transform.position - m_LRobotPos,
                 m_RRobot.transform.position - m_RRobotPos,
-                Vector3.Distance(transform.position, m_LRobot.transform.position) / (
-                Vector3.Distance(transform.position, m_LRobot.transform.position) +
-                Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.3f);
+                Vector3.Distance(transform.position, m_LRobot.transform.position) /
+                (Vector3.Distance(transform.position, m_LRobot.transform.position) +
+                 Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.1f);
         }
     }
     public void OnTriggerExit(Collider other)

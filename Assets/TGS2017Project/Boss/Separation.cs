@@ -33,7 +33,7 @@ public class Separation : MonoBehaviour {
         {
             case PlayMode.TwinRobot:
                 GameObject L = GameManager.Instance.m_LRobot;
-                GameObject R = GameManager.Instance.m_RRobot;    
+                GameObject R = GameManager.Instance.m_RRobot;
                 break;
             case PlayMode.HumanoidRobot:
                 m_Target = GameManager.Instance.m_HumanoidRobot.transform;

@@ -16,8 +16,9 @@ public enum RocketState
 public class RocketBase : MonoBehaviour
 {
     //各コンポーネント
-    private Rigidbody m_Rigidbody;
-    private Collider m_Collider;
+    private Rigidbody m_Rb;
+    private BoxCollider m_BCollider;
+    //private CenterOfMass m_MassCenter;
     private AudioSource m_AudioSrc;
     [SerializeField] private AudioClip m_SEFire;
     [SerializeField] private AudioClip m_SEHit;
@@ -33,21 +34,18 @@ public class RocketBase : MonoBehaviour
     //与えるダメージ
     public float m_ApplyDamage;
     //保持した子エネミーが与えるダメージ
-    public float m_ChildApplyDamage;
+    public float m_ChildApplyDamage = 5;
     //前進速度
     public float m_Speed;
     //戻るときの速度
     public float m_BackSpeed;
     //前進時間
     public float m_AdvanceTime;
-    //発射方向
-    public Vector3 m_AdvanceDire;
     //発射からの経過時間
     public float m_Timer;
     public string m_TargetTag;
     //埋まる時間
     public float m_BuriedTime = 1.0f;
-
     //ノックバック状態か
     public bool m_IsKnockBack;
     //ノックバックの力
@@ -67,7 +65,8 @@ public class RocketBase : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rb = GetComponent<Rigidbody>();
+        m_BCollider = GetComponent<BoxCollider>();
     }
 
     void Update()
@@ -116,31 +115,49 @@ public class RocketBase : MonoBehaviour
             case RocketState.Idle:
                 break;
             case RocketState.Fire:
-                Move(m_AdvanceDire * m_Speed);
+                Move(transform.forward * m_Speed);
                 break;
             case RocketState.Back:
-                Move((m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed);
-                m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
-                if (Vector3.Distance(m_Rigidbody.position, m_StandTrans.position) < m_BackSpeed * Time.fixedDeltaTime)
-                {
-                    m_State = RocketState.Idle;
-                    gameObject.SetActive(false);
-                    m_Battery.CollectRocket();
-                    m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                }
+                Move((m_StandTrans.position - m_Rb.position).normalized * m_BackSpeed);
+                if (Vector3.Distance(m_StandTrans.position, m_Rb.position) <= m_BackSpeed * Time.fixedDeltaTime * 2)
+                    Colected();
                 break;
             case RocketState.Reflected:
-                m_Rigidbody.MovePosition(m_Rigidbody.position + (m_StandTrans.position - m_Rigidbody.position).normalized * m_BackSpeed * Time.fixedDeltaTime);
+                Vector3 velocity = m_Rb.position + (m_StandTrans.position - m_Rb.position).normalized * m_BackSpeed;
+                m_Rb.MovePosition(velocity * Time.fixedDeltaTime);
                 break;
             default:
                 break;
         }
     }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 velocity)
     {
-        m_Rigidbody.MovePosition(m_Rigidbody.position + direction * Time.fixedDeltaTime);
-        m_Rigidbody.MoveRotation(m_Rigidbody.rotation * Quaternion.Euler(new Vector3(360, 0, 0) * Time.fixedDeltaTime));
+        m_Rb.MovePosition(m_Rb.position + velocity * Time.fixedDeltaTime);
+
+        float pich = transform.rotation.eulerAngles.x;
+        float forwardLen = (m_BCollider.size.z / 2 * transform.lossyScale.z) - m_Rb.centerOfMass.z;// * m_Collider.size.z;
+        float borderHigth = forwardLen * Mathf.Sin(pich * Mathf.Deg2Rad);// + transform.lossyScale.y / 2;
+        RaycastHit hitInfo;
+        if (Physics.Raycast(m_Rb.position, Vector3.down * borderHigth * 2, out hitInfo, LayerMask.GetMask("Floor")))
+        {
+            float heigth = (m_Rb.position.y - hitInfo.point.y) - m_BCollider.size.y / 2;
+            if (borderHigth > heigth && heigth > float.Epsilon)
+            {
+                float sin = heigth / forwardLen;
+                float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
+                //Debug.Log(deg);
+                m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
+            }
+        }
+    }
+
+    public void Colected()
+    {
+        m_State = RocketState.Idle;
+        gameObject.SetActive(false);
+        m_Battery.CollectRocket();
+        m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
     public void Fire()
@@ -149,9 +166,9 @@ public class RocketBase : MonoBehaviour
         m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_Battery.transform.rotation;
+        //transform.rotation = Quaternion.Euler(new Vector3(20, 0, 0));
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
-        m_AdvanceDire = transform.forward;
         m_Timer = 0;
     }
 
@@ -160,67 +177,60 @@ public class RocketBase : MonoBehaviour
         get { return m_State == RocketState.Idle; }
     }
 
-    //ChildEnemyを追加するとき（衝突時等）
-    public void AddChildEnemy(EnemyBase enemy)
+    private void OnCollisionStay(Collision collision)
     {
-        enemy.transform.parent = transform;
-        enemy.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        enemy.Del_Trigger = HasEnemyCollide;
-        m_ChildEnemys.Add(enemy);
-    }
-
-    //ChildEnemyを全て破壊
-    public void BreakChildEnemys()
-    {
-        foreach (var enemy in m_ChildEnemys)
-        {
-            enemy.SetBreakForPlayer();
-        }
-        m_ChildEnemys.Clear();
+        //Debug.Log(collision.gameObject);
     }
 
     //Player、Boss3共通処理オーバーライドするときにbaseの関数を呼んでください。
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        //Debug.Log(collision.gameObject);
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         m_AudioSrc.PlayOneShot(m_SEHit);
 
+        //if(collision.gameObject.tag == "Floor") 
+        //衝突エフェクト
         foreach (var col in collision.contacts)
         {
-            Debug.Log(collision.gameObject);
             GameObject EffectHit = Instantiate(m_EffectHitPrefub, transform);
             EffectHit.transform.position = col.point;
             EffectHit.SetActive(true);
+            StartCoroutine(m_Battery.Delay(new WaitForSeconds(0.5f)
+                , () => Destroy(EffectHit.gameObject)));
         }
         if (obj.tag == m_TargetTag)
         {//攻撃対象に当たったら
             foreach (var contact in collision.contacts)
             {
-                CollideTarget(obj, contact.point);
-            }            
+                CollideTarget(obj, collision.contacts[0].point);
+            }
         }
-        else if (enemy != null)
+        else if (enemy != null && m_State == RocketState.Fire)
         {//雑魚と衝突
+         //Debug.Log("エネミーヒット");
             if (m_IsKnockBack)
             {//ノックバック
+             //Debug.Log("ノックバック");
                 Rigidbody rb = enemy.GetComponent<Rigidbody>();
                 rb.constraints = RigidbodyConstraints.None;
-                enemy.Del_Trigger = KnockBackEnemyCollide;
+                rb.isKinematic = false;
+                enemy.Del_Trigger = KnockBackEnemyTrigger;
+                enemy.m_FreezeVelocity = false;
 
                 Vector3 dire = enemy.transform.position - transform.position;
                 rb.AddForce(dire.normalized * m_KnockBackForce, ForceMode.Impulse);
             }
             else
             {//子オブジェクトに追加
+             //Debug.Log("Rocket　Add　Enemy");
                 AddChildEnemy(enemy);
-                //collision.collider.isTrigger = true;
-
-                m_State = RocketState.Fire;
             }
         }
-        else if (obj.tag == "Wall" && m_ChildEnemys.Count == 0)
-        {//壁に埋まる処理
+        if (obj.tag == "Wall")
+        {//壁に埋まる処理                  
+            BreakChildEnemys();
             m_State = RocketState.Buried;
             m_Timer = 0.0f;
             Vector3 center = Vector3.Lerp(transform.position, collision.contacts[0].point, 0.7f);
@@ -239,22 +249,65 @@ public class RocketBase : MonoBehaviour
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
         target.GetComponent<Damageable>().ApplyDamage(damage, this);
         GameObject explosion = Instantiate(m_EffectHitPrefub, transform);
+        explosion.SetActive(true);
+        m_Battery.StartCoroutine(this.Delay(new WaitForSeconds(0.5f)
+            , () => Destroy(explosion.gameObject)));
 
         BreakChildEnemys();
         //Debug.Log("ターゲットダメージ" + damage);
         m_State = RocketState.Back;
     }
 
+    //ChildEnemyを追加するとき（衝突時等）
+    public void AddChildEnemy(EnemyBase enemy)
+    {
+        if (m_ChildEnemys.Contains(enemy))
+            return;
+
+        enemy.GetComponent<Pauser>().OnPause();
+        enemy.transform.parent = transform;
+        enemy.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        enemy.Del_Trigger = HasEnemyTrigger;
+        m_ChildEnemys.Add(enemy);
+    }
+    //ChildEnemyを全て破壊
+    public void BreakChildEnemys()
+    {
+        foreach (var enemy in m_ChildEnemys)
+        {
+            enemy.GetComponent<Pauser>().OnResume();
+            enemy.transform.parent = GameManager.Instance.m_StageManger.transform;
+            BreakEnemy(enemy);
+        }
+        m_ChildEnemys.Clear();
+    }
+    private void BreakEnemy(EnemyBase enemy)
+    {
+        if (m_TargetTag == "Boss")
+            enemy.SetBreakForPlayer();
+        else
+            enemy.SetBreak();
+    }
     //保持しているEnemyが何かにヒットしたとき
-    protected void HasEnemyCollide(Collider other, EnemyBase enemy)
+    protected void HasEnemyTrigger(Collider other, EnemyBase enemy)
     {
         if (other.gameObject == gameObject || other.gameObject.tag == "Panel")
             return;
-        Debug.Log(enemy.ToString() + " hit :" + other.gameObject);
+        //Debug.Log(enemy.ToString() + " hit :" + other.gameObject);
 
         GameObject obj = other.gameObject;
         EnemyBase otherEnemy = other.gameObject.GetComponent<EnemyBase>();
         RocketBase rocket = GetComponent<RocketBase>();
+
+        if (obj.tag == m_TargetTag)
+        {//攻撃対象と衝突
+            CollideTarget(obj, enemy.transform.position);
+            GameObject EffectHit = Instantiate(m_EffectHitPrefub, transform);
+            EffectHit.transform.position = enemy.transform.position;
+            EffectHit.SetActive(true);
+            StartCoroutine(m_Battery.Delay(new WaitForSeconds(0.5f)
+                , () => Destroy(EffectHit.gameObject)));
+        }
 
         if (otherEnemy != null)
         {//雑魚と衝突    子オブジェクトに追加
@@ -266,28 +319,18 @@ public class RocketBase : MonoBehaviour
             BreakChildEnemys();
             m_State = RocketState.Back;
         }
-
-        if (obj.tag == m_TargetTag)
-        {//攻撃対象と衝突
-            CollideTarget(obj, enemy.transform.position);
-        }
     }
-
-    protected virtual void KnockBackEnemyCollide(Collider other, EnemyBase enemy)
+    protected virtual void KnockBackEnemyTrigger(Collider other, EnemyBase enemy)
     {
+        if (other.tag == tag || other.tag == "Floor") return;
+
         if (other.tag == m_TargetTag)
         {//攻撃対象と衝突
             other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ChildApplyDamage, this);
-            Debug.Log("ノックバックEnemy　が　Player　と衝突");
+            Debug.Log("ノックバックEnemy　が　ターゲット　と衝突");
         }
-        if (other.gameObject.tag != gameObject.tag)
-        {
-            enemy.SetBreakForPlayer();
-        }
-    }
 
-    public void SetLayer(string layerName)
-    {
-        gameObject.layer = LayerMask.NameToLayer(layerName);
+        //Enmeyの消滅処理
+        BreakEnemy(enemy);
     }
 }

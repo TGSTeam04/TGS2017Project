@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
 {
     private SubjectBase m_Subject;
-    [SerializeField] private float m_ReSpawnWaitTime = 1.0f;
+    [SerializeField] private Transform m_EnemyParent;
+    [SerializeField] private float m_ReSpawnWaitTime = 1.0f;    
 
     protected override void Awake()
     {
@@ -22,6 +23,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
 
     public void ReSpawnEnemy(EnemyBase enemy)
     {
+        enemy.transform.parent = m_EnemyParent;
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
             ReSpawn, enemy));

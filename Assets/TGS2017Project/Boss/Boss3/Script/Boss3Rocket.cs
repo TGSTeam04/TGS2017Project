@@ -54,4 +54,8 @@ public class Boss3Rocket : RocketBase
             SetLayer("BossBullet");
         }
     }
+    public void SetLayer(string layerName)
+    {
+        gameObject.layer = LayerMask.NameToLayer(layerName);
+    }
 }

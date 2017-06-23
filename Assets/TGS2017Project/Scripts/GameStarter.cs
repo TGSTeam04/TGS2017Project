@@ -16,6 +16,8 @@ public class SceneList
 public class GameStarter : MonoBehaviour {
 
 	[SerializeField]
+	private int m_StartScene = 0;
+	[SerializeField]
 	private List<SceneList> m_SceneListTable = new List<SceneList>();
 
 	private List<string> m_LoadedScenes = new List<string>();
@@ -31,7 +33,7 @@ public class GameStarter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		m_Common = SceneManager.GetActiveScene();
-		ChangeScenes(0);
+		ChangeScenes(m_StartScene);
 	}
 	
 	// Update is called once per frame

@@ -45,11 +45,7 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = true;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            //既に他のタグでポーズされていれば無視
-            if (obj.m_PauseCunt <= 0)
-                obj.OnPause();
-            //カウンタ更新
-            obj.m_PauseCunt++;
+            obj.OnPause();
         }
     }
 
@@ -62,11 +58,7 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = false;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            //カウンタ更新
-            obj.m_PauseCunt--;
-            //他のタグでポーズされていれば無視
-            if (obj.m_PauseCunt <= 0)
-                obj.OnResume();
+            obj.OnResume();
         }
     }
     static public bool IsTagPause(PauseTag tag = PauseTag.Pause) { return s_TargetByTag[tag].m_IsPause; }
@@ -76,7 +68,10 @@ public class Pauser : MonoBehaviour
     private int m_PauseCunt = 0;
 
     //ポーズ中のコンポーネント
-    Behaviour[] pauseBehavs = null;
+    Behaviour[] m_PauseBehavs = null;
+
+    //コリジョン
+    Collider[] m_PauseCols = null;
 
     //ポーズ復帰時に使用するリジットボディとそのパラメータ
     Rigidbody[] rgBodies = null;
@@ -109,22 +104,29 @@ public class Pauser : MonoBehaviour
     }
 
     // ポーズされたとき
-    private void OnPause()
+    public void OnPause()
     {
-        if (pauseBehavs != null)
-        {
+        //カウンタ更新
+        m_PauseCunt++;
+        //初回のみポーズ
+        if (m_PauseCunt != 1)
             return;
-        }
 
-        // 有効なコンポーネントを取得
-        pauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
-        if (pauseBehavs == null)
-            return;
-        foreach (var com in pauseBehavs)
-        {
+        // 有効なコンポーネントを取得、無効化
+        m_PauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
+        //if (pauseBehavs == null)
+        //    return;
+        foreach (var com in m_PauseBehavs)
             com.enabled = false;
-        }
 
+        //有効なコリジョンを取得、無効化
+        m_PauseCols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
+        //if (pauseBehavs == null)
+        //    return;
+        foreach (var com in m_PauseCols)
+            com.enabled = false;
+
+        //リジットボディのデータを保存、スリープ
         rgBodies = Array.FindAll(GetComponentsInChildren<Rigidbody>(), (obj) => { return !obj.IsSleeping(); });
         rgBodyVels = new Vector3[rgBodies.Length];
         rgBodyAVels = new Vector3[rgBodies.Length];
@@ -134,7 +136,7 @@ public class Pauser : MonoBehaviour
             rgBodyAVels[i] = rgBodies[i].angularVelocity;
             rgBodies[i].Sleep();
         }
-
+        //２Dリジットボディ
         rg2dBodies = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return !obj.IsSleeping(); });
         rg2dBodyVels = new Vector2[rg2dBodies.Length];
         rg2dBodyAVels = new float[rg2dBodies.Length];
@@ -147,17 +149,23 @@ public class Pauser : MonoBehaviour
     }
 
     // ポーズ解除されたとき
-    private void OnResume()
+    public void OnResume()
     {
-        if (pauseBehavs == null)
-        {
+        //カウンタ更新
+        m_PauseCunt--;
+        //他のタグでポーズされていれば無視
+        if (m_PauseCunt != 0)
             return;
-        }
 
         // ポーズ前の状態にコンポーネントの有効状態を復元
-        foreach (var com in pauseBehavs)
+        foreach (var com in m_PauseBehavs)
         {
             com.enabled = true;
+        }
+
+        foreach (var col in m_PauseCols)
+        {
+            col.enabled = true;
         }
 
         for (var i = 0; i < rgBodies.Length; ++i)
@@ -174,7 +182,7 @@ public class Pauser : MonoBehaviour
             rg2dBodies[i].angularVelocity = rg2dBodyAVels[i];
         }
 
-        pauseBehavs = null;
+        m_PauseBehavs = null;
 
         rgBodies = null;
         rgBodyVels = null;

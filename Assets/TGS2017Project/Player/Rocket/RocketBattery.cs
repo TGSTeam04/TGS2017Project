@@ -6,25 +6,26 @@ using UnityEngine;
 //詳細パラメータは各ロケット　m_XRocket　のパラメータをいじってください。
 public class RocketBattery : MonoBehaviour
 {
-    [SerializeField] private GameObject m_RocketPrefub;
-    [SerializeField] private Transform m_LStandTrans;
-    [SerializeField] private Transform m_RStandTrans;
-    [SerializeField] private float m_KnockBackForce;
-    [SerializeField] private bool m_IsKnockBack;
-    [SerializeField] private string m_RocketLayer;
-    [SerializeField] private string m_TargetTag;
-    [SerializeField] private AudioClip m_SEColectRocet;
-    [SerializeField] private GameObject m_Effect_Chage;
+    [SerializeField] GameObject m_RocketPrefub;
+    [SerializeField] Transform m_LStandTrans;
+    [SerializeField] Transform m_RStandTrans;
+    [SerializeField] float m_KnockBackForce;
+    [SerializeField] bool m_IsKnockBack;
+    [SerializeField] string m_RocketLayer;
+    [SerializeField] string m_TargetTag;
+    [SerializeField] AudioClip m_SEColectRocet;
+    [SerializeField] GameObject m_Effect_Chage;
+    [SerializeField] Animator m_HumanoidAnim;
+    const float FireRateInAnim = 0.5f;
     private Vector3 m_EffectChagePos = new Vector3(0, 3, 0);
 
     [HideInInspector] public RocketBase m_LRocket;
     [HideInInspector] public RocketBase m_RRocket;
-    private Animator m_Anim;
+
     private AudioSource m_AudioSrc;
 
     private void Awake()
     {
-        m_Anim = GetComponentInChildren<Animator>();
         m_AudioSrc = gameObject.AddComponent<AudioSource>();
         m_AudioSrc.spatialBlend = 1.0f;
         m_AudioSrc.playOnAwake = false;
@@ -39,7 +40,8 @@ public class RocketBattery : MonoBehaviour
         if (m_LRocket == null)
         {
             //ロケットインスタンス化
-            GameObject lRocketObj = Instantiate(m_RocketPrefub);
+            GameObject lRocketObj = Instantiate(m_RocketPrefub, transform);
+            lRocketObj.transform.parent = null;
             m_LRocket = lRocketObj.GetComponent<RocketBase>();
             m_LRocket.m_StandTrans = m_LStandTrans;
         }
@@ -47,15 +49,16 @@ public class RocketBattery : MonoBehaviour
         if (m_RRocket == null)
         {
             //ロケットインスタンス化
-            GameObject rRocketObj = Instantiate(m_RocketPrefub);
+            GameObject rRocketObj = Instantiate(m_RocketPrefub, transform);
+            rRocketObj.transform.parent = null;
             m_RRocket = rRocketObj.GetComponent<RocketBase>();
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
 
         SetIsKnockBack(m_IsKnockBack);
         SetKnockBackForce(m_KnockBackForce);
-        m_LRocket.SetLayer(m_RocketLayer);
-        m_RRocket.SetLayer(m_RocketLayer);
+        //m_LRocket.SetLayer(m_RocketLayer);
+        //m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
@@ -103,21 +106,21 @@ public class RocketBattery : MonoBehaviour
     //L発射
     public IEnumerator LAnimatedFire()
     {
-        m_Anim.SetTrigger("LFire");
+        m_HumanoidAnim.SetTrigger("LFire");
         m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
-        yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        yield return new WaitForAnimation(m_HumanoidAnim, FireRateInAnim);
+        m_Effect_Chage.SetActive(false);
         m_LRocket.Fire();
     }
     //R発射
     public IEnumerator RAnimatedFire()
     {
-        m_Anim.SetTrigger("RFire");
-        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
+        m_HumanoidAnim.SetTrigger("RFire");        
+        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;        
         m_Effect_Chage.SetActive(true);
-        yield return new WaitForAnimation(m_Anim, 0.7f);
-        //m_Effect_Chage.SetActive(false);
+        yield return new WaitForAnimation(m_HumanoidAnim, FireRateInAnim);
+        m_Effect_Chage.SetActive(false);
         m_RRocket.Fire();
     }
 
@@ -145,6 +148,7 @@ public class RocketBattery : MonoBehaviour
     }
     public void SetIsKnockBack(bool isKnockBack)
     {
+
         m_LRocket.m_IsKnockBack = isKnockBack;
         m_RRocket.m_IsKnockBack = isKnockBack;
     }

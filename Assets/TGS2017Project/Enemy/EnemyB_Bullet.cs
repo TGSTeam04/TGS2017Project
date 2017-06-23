@@ -13,8 +13,10 @@ public class EnemyB_Bullet : MonoBehaviour
     [SerializeField]
     private float m_DeleteTimer;    // 消滅タイマー
 
-    // Use this for initialization
-    void Start()
+	[SerializeField] private float m_ApplyDamage = 15.0f;
+
+	// Use this for initialization
+	void Start()
     {
 
     }
@@ -40,25 +42,14 @@ public class EnemyB_Bullet : MonoBehaviour
         }
     }
 
-    // 接触判定
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            //print("Enemy B bullet hit player");
-        }
-        Destroy(gameObject);
-    }
-
     public void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.name);
-
         // プレイヤーに命中
         if (other.gameObject.tag == "Player")
         {
-            //print("Enemy B bullet hit player");
-        }
+			//Debug.Log(other.gameObject);
+			other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ApplyDamage, this);
+		}
         Destroy(gameObject);
     }
 }

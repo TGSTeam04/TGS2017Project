@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
@@ -9,15 +8,17 @@ using UnityEngine.AI;
 public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
-    private Boss3_Controller m_Controller;
+    private Boss3_Controller m_BossController;
 
+    [SerializeField] float m_MaxHP = 100;
+    private float m_HP;
     //移動
-    public float m_Speed;
+    [SerializeField] float m_Speed;
     //ロケットパンチ
-    public float m_RocketSpeed;
-    public float m_RocketRange;
-    public float m_RocketInterval;
-    public float m_NeedMoveDistance;
+    [SerializeField] float m_RocketSpeed;
+    [SerializeField] float m_RocketRange;
+    [SerializeField] float m_RocketInterval;
+    [SerializeField] float m_NeedMoveDistance;
 
     //各コンポーネント    
     private NavMeshAgent m_NavAgent;
@@ -27,17 +28,22 @@ public class Boss3_Humanoid : MonoBehaviour
     private Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
-    BehaviorTree m_BT;
-    BBoard m_BB;
+    private BehaviorTree m_BT;
+    private BBoard m_BB;
 
     //エフェクト
     [SerializeField] GameObject m_Explosion;
+    [SerializeField] GameObject m_Efect_Numbness;
+    [SerializeField] float m_NumbnessInterval = 30.0f;
+    private List<GameObject> m_Numbness = new List<GameObject>();
+
+    float m_RemainingNI;
 
     public GameObject tempTarget;
 
     private void Awake()
     {
-        m_Controller = GetComponentInParent<Boss3_Controller>();
+        m_BossController = GetComponentInParent<Boss3_Controller>();
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Rb = GetComponent<Rigidbody>();
         m_Anim = GetComponentInChildren<Animator>();
@@ -76,6 +82,7 @@ public class Boss3_Humanoid : MonoBehaviour
 
     private void OnEnable()
     {
+        m_HP = m_MaxHP;
         StartCoroutine(Restart());
     }
 
@@ -96,7 +103,25 @@ public class Boss3_Humanoid : MonoBehaviour
     }
     private void Damaged(float damage, MonoBehaviour src)
     {
-        m_Controller.Hp -= damage;
+        m_HP = Mathf.Max(0, m_HP - damage);
+        m_RemainingNI -= damage;
+        if (m_RemainingNI < 0)
+        {
+            GameObject shockEff = Instantiate(m_Efect_Numbness, transform);
+            Vector3 modiy = new Vector3(0, 1.7f, 0)
+                + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));            
+            shockEff.transform.position = transform.position + modiy;
+            m_Numbness.Add(shockEff);
+
+            m_RemainingNI = m_NumbnessInterval;
+        }
+        if (m_HP <= 0)
+        {
+            foreach (var numbness in m_Numbness)
+                Destroy(numbness);
+            Release();
+            return;
+        }
         m_Anim.SetTrigger("Damage");
     }
 
@@ -108,7 +133,7 @@ public class Boss3_Humanoid : MonoBehaviour
     public void Release()
     {
         m_BT.BTReset();
-        m_Controller.ReleaseStart();
+        m_BossController.ReleaseStart();
     }
 
     //ビヘイビアの設定
