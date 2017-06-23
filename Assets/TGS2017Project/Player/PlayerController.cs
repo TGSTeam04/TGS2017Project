@@ -220,7 +220,7 @@ public class PlayerController : MonoBehaviour
 		foreach (var item in collider)
 		{
 			EnemyBase enemy = item.GetComponent<EnemyBase>();
-			if (enemy == null) continue;
+			if (enemy == null || enemys.Contains(enemy)) continue;
 			enemys.Add(enemy);
 		}
 		collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(m_TwinRobotR.BreakerSize, 2, distance), EndRotationR, LayerMask.GetMask(new string[] { "Enemy" }));

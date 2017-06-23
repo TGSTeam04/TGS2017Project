@@ -4406,6 +4406,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1032982814}
+  - component: {fileID: 1032982815}
   m_Layer: 9
   m_Name: TPSTarget
   m_TagString: Untagged
@@ -4427,6 +4428,21 @@ Transform:
   m_Father: {fileID: 1389940281}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1032982815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1032982813}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbde55f725ca2e4bb3177c18e576a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Player: {fileID: 1389940280}
+  m_Speed: 15
+  m_MaxHeight: 5
+  m_MinHeight: 1
 --- !u!1 &1051574152
 GameObject:
   m_ObjectHideFlags: 0

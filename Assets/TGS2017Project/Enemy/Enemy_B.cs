@@ -64,6 +64,8 @@ public class Enemy_B : MonoBehaviour
     private int m_EntryTime;                                // 登場モーション時間
     [SerializeField]
     private ParticleSystem m_FireEffect;                    // 攻撃エフェクト
+    [SerializeField]
+    private GameObject m_FireEffect2;
 
     // SE
     private AudioSource m_Fire;                             // 発砲
@@ -293,8 +295,9 @@ public class Enemy_B : MonoBehaviour
     {
         m_Animator.SetBool("Attack", true);
         m_Fire.Play();      // SEを再生
-        m_FireEffect.transform.rotation = m_Muzzle.transform.rotation;
-        m_FireEffect.Play();
+        //m_FireEffect.transform.rotation = m_Muzzle.transform.rotation;
+        //m_FireEffect.Play();
+        Instantiate(m_FireEffect2, m_Muzzle.position, m_Muzzle.rotation, m_BulletParent);
         Instantiate(m_Bullet, m_Muzzle.position, m_Muzzle.rotation, m_BulletParent);
         m_AttackCount = 0;
     }

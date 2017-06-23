@@ -39687,6 +39687,7 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 392098196}
+  m_FireEffect2: {fileID: 0}
 --- !u!114 &1420203500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44638,6 +44639,7 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 873001976}
+  m_FireEffect2: {fileID: 0}
 --- !u!114 &1501064014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47037,6 +47039,7 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 1467227996}
+  m_FireEffect2: {fileID: 0}
 --- !u!114 &1631405171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49505,6 +49508,7 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 1108038643}
+  m_FireEffect2: {fileID: 0}
 --- !u!114 &1750614724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51979,6 +51983,7 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 445703908}
+  m_FireEffect2: {fileID: 0}
 --- !u!114 &1870642447
 MonoBehaviour:
   m_ObjectHideFlags: 0
