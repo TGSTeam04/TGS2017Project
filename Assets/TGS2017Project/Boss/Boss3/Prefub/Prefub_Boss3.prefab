@@ -791,7 +791,6 @@ GameObject:
   - component: {fileID: 4769664241856384}
   - component: {fileID: 114567452738797416}
   - component: {fileID: 54687054711882340}
-  - component: {fileID: 65816544294983252}
   m_Layer: 18
   m_Name: Boss3Top
   m_TagString: Boss
@@ -7473,18 +7472,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &65816544294983252
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1245768248672316}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1.9, z: 3.3}
-  m_Center: {x: 0, y: 1, z: 1.2}
 --- !u!82 &82490010545475122
 AudioSource:
   m_ObjectHideFlags: 1
@@ -7904,6 +7891,7 @@ MonoBehaviour:
   m_TargetTag: Player
   m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
   m_Effect_Chage: {fileID: 1007793755036706}
+  m_HumanoidAnim: {fileID: 95988550449448482}
   m_LRocket: {fileID: 0}
   m_RRocket: {fileID: 0}
 --- !u!114 &114927179674004674

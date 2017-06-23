@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 	public float m_BoostPower;
 	private float m_BoostSpeed = 0f;
 
-	public GameObject m_ElectricGuid;
+	public GameObject m_KeepEnemyPosWall;
 
 	public int m_Level;
 	public int m_Exp;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 		m_HumanoidRobotRigidbody = m_HRobot.GetComponent<Rigidbody>();
 		m_HRobot.SetActive(false);
 		//m_Battery = m_HRobot.GetComponent<RocketBattery>();
-		m_ElectricGuid.SetActive(false);
+		m_KeepEnemyPosWall.SetActive(false);
 
 		m_Level = 1;
 		m_Exp = 0;
@@ -175,12 +175,11 @@ public class PlayerController : MonoBehaviour
 	}
 
 	public IEnumerator Combine()
-	{
-		Pauser.Pause(PauseTag.Enemy);
+	{		
 		GameManager.Instance.m_PlayMode = PlayMode.Combine;
-		m_TwinRobotL.Active(false);
-		m_TwinRobotR.Active(false);
-		m_ElectricGuid.SetActive(true);
+		m_TwinRobotL.SetShieldActive(false);
+		m_TwinRobotR.SetShieldActive(false);
+		m_KeepEnemyPosWall.SetActive(true);
 		Vector3 StartPositionL = m_LRobotRigidbody.position;
 		Vector3 StartPositionR = m_RRobotRigidbody.position;
 		Vector3 Direction = Vector3.Normalize(StartPositionL - StartPositionR);
@@ -231,12 +230,12 @@ public class PlayerController : MonoBehaviour
 			if (enemy == null || enemys.Contains(enemy)) continue;
 			enemys.Add(enemy);
 		}
-
-		Crushable = true;
+        Pauser.Pause(PauseTag.Enemy);
+        IsCanCrash = true;
 		m_LRobotRigidbody.isKinematic = true;
 		m_RRobotRigidbody.isKinematic = true;
 
-		for (float t = 0;Crushable&& Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2) != EndPositionL; t+=Time.fixedDeltaTime)
+		for (float t = 0;IsCanCrash&& Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2) != EndPositionL; t+=Time.fixedDeltaTime)
 		{
 			m_LRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t)*m_Speed*2));
 			m_RRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionR, EndPositionR, m_CombineDistance.Evaluate(t)*m_Speed*2));
@@ -253,9 +252,9 @@ public class PlayerController : MonoBehaviour
 		v.y = 5.5f;
 		m_TPSPosition.position = v;
 
-		if (!Crushable || enemys.Count == 0)
+		if (!IsCanCrash || enemys.Count == 0)
 		{
-			m_ElectricGuid.SetActive(false);
+			m_KeepEnemyPosWall.SetActive(false);
 			Pauser.Resume(PauseTag.Enemy);
 			yield return StartCoroutine(Release(true));
 			yield break;
@@ -295,7 +294,7 @@ public class PlayerController : MonoBehaviour
 			m_HumanoidRobot.m_Config = m_HumanoidI;
 		}
 
-		m_ElectricGuid.SetActive(false);
+		m_KeepEnemyPosWall.SetActive(false);
 		m_HRobot.SetActive(true);
 		m_LRobot.SetActive(false);
 		m_RRobot.SetActive(false);
@@ -364,8 +363,8 @@ public class PlayerController : MonoBehaviour
 		}
 		m_LRobotRigidbody.position -= vector * (l - preMove);
 		m_RRobotRigidbody.position += vector * (l - preMove);
-		m_TwinRobotL.Active(true);
-		m_TwinRobotR.Active(true);
+		m_TwinRobotL.SetShieldActive(true);
+		m_TwinRobotR.SetShieldActive(true);
 		GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 	}
 
@@ -377,6 +376,6 @@ public class PlayerController : MonoBehaviour
 		m_CombineEffect.SetActive(false);
 	}
 	public float Energy { get { return m_HumanoidRobot.m_Energy; } }
-	public bool Crushable { get; set; }
+	public bool IsCanCrash { get; set; }
 
 }

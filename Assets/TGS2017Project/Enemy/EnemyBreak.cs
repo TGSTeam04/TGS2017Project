@@ -7,7 +7,7 @@ public class EnemyBreak : MonoBehaviour {
 	[SerializeField]
 	float m_Radius = 5;
 
-    float m_Timer = 5;
+    private float m_Timer = 5;
     
 	// Use this for initialization
 	void Start () {
