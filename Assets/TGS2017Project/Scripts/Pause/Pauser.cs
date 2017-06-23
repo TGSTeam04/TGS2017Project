@@ -68,10 +68,10 @@ public class Pauser : MonoBehaviour
     private int m_PauseCunt = 0;
 
     //ポーズ中のコンポーネント
-    Behaviour[] pauseBehavs = null;
+    Behaviour[] m_PauseBehavs = null;
 
     //コリジョン
-    Collider[] cols = null;
+    Collider[] m_PauseCols = null;
 
     //ポーズ復帰時に使用するリジットボディとそのパラメータ
     Rigidbody[] rgBodies = null;
@@ -113,17 +113,17 @@ public class Pauser : MonoBehaviour
             return;
 
         // 有効なコンポーネントを取得、無効化
-        pauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
+        m_PauseBehavs = Array.FindAll(GetComponentsInChildren<Behaviour>(), (obj) => { return obj.enabled; });
         //if (pauseBehavs == null)
         //    return;
-        foreach (var com in pauseBehavs)
+        foreach (var com in m_PauseBehavs)
             com.enabled = false;
 
         //有効なコリジョンを取得、無効化
-        cols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
+        m_PauseCols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
         //if (pauseBehavs == null)
         //    return;
-        foreach (var com in pauseBehavs)
+        foreach (var com in m_PauseCols)
             com.enabled = false;
 
         //リジットボディのデータを保存、スリープ
@@ -158,12 +158,12 @@ public class Pauser : MonoBehaviour
             return;
 
         // ポーズ前の状態にコンポーネントの有効状態を復元
-        foreach (var com in pauseBehavs)
+        foreach (var com in m_PauseBehavs)
         {
             com.enabled = true;
         }
 
-        foreach (var col in cols)
+        foreach (var col in m_PauseCols)
         {
             col.enabled = true;
         }
@@ -182,7 +182,7 @@ public class Pauser : MonoBehaviour
             rg2dBodies[i].angularVelocity = rg2dBodyAVels[i];
         }
 
-        pauseBehavs = null;
+        m_PauseBehavs = null;
 
         rgBodies = null;
         rgBodyVels = null;

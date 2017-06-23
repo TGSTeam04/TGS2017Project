@@ -143,7 +143,7 @@ public class RocketBase : MonoBehaviour
         {
             float sin = heigth / forwardLen;
             float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
-            Debug.Log(deg);
+            //Debug.Log(deg);
             m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
         }
     }
@@ -181,7 +181,7 @@ public class RocketBase : MonoBehaviour
     //Player、Boss3共通処理オーバーライドするときにbaseの関数を呼んでください。
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject);
+        //Debug.Log(collision.gameObject);
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         m_AudioSrc.PlayOneShot(m_SEHit);
