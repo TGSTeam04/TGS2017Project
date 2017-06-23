@@ -22,6 +22,8 @@ public class PlayCameraController : MonoBehaviour
 
 	private PlayMode m_PreMode;
 	private bool m_IsRunning = false;
+	Coroutine m_CombineCor;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -47,10 +49,11 @@ public class PlayCameraController : MonoBehaviour
 			case PlayMode.HumanoidRobot:
 				break;
 			case PlayMode.Combine:
-				if (m_PreMode == PlayMode.TwinRobot) StartCoroutine(Combine());
+				if (m_PreMode == PlayMode.TwinRobot)
+					m_CombineCor = StartCoroutine(Combine());
 				break;
 			case PlayMode.Release:
-				if (m_PreMode != PlayMode.Release) StartCoroutine(Release());
+				if (m_PreMode != PlayMode.Release) StartCoroutine(Release(m_PreMode==PlayMode.Combine));
 				break;
 			default:
 				break;
@@ -110,10 +113,12 @@ public class PlayCameraController : MonoBehaviour
 		m_IsRunning = false;
 	}
 
-	IEnumerator Release()
+	IEnumerator Release(bool combine)
 	{
-		if (m_IsRunning) { yield break; }
+		if (m_IsRunning && !combine) { yield break; }
 		m_IsRunning = true;
+
+		if (m_CombineCor != null) StopCoroutine(m_CombineCor);
 
 		for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
 		{

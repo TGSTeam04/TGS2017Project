@@ -3915,7 +3915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RocketPrefub: {fileID: 1146969715133232, guid: 783305f9952a3bd44abd85e34e7ac670,
+  m_RocketPrefub: {fileID: 1946853532632280, guid: 86b0ff5a1b73f3c4da1391651a9353cc,
     type: 2}
   m_LStandTrans: {fileID: 158433148}
   m_RStandTrans: {fileID: 158433147}
@@ -7298,7 +7298,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b03c164215753247945a27c7d86ee4c, type: 2}
+  - {fileID: 2100000, guid: 02d22a64daa120542b4215115693e884, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7798,7 +7798,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b03c164215753247945a27c7d86ee4c, type: 2}
+  - {fileID: 2100000, guid: 02d22a64daa120542b4215115693e884, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

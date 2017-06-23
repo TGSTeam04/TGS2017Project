@@ -316,7 +316,8 @@ public class PlayerController : MonoBehaviour
 		Vector3 move_ =
 			m_HRobot.transform.right * Input.GetAxis("HorizontalL") +
 			m_HRobot.transform.forward * Input.GetAxis("VerticalL");
-		Vector3 vector = move_.magnitude == 0 ? m_HRobot.transform.right : -move_.normalized;
+		Vector3 vector = move_.magnitude == 0 || isCombine ? m_HRobot.transform.right : -move_.normalized;
+		vector *= vector.x > vector.z ? 1 : -1;
 		if (isCombine == false)
 		{
 			m_LRobotRigidbody.position = m_HRobot.transform.position - (vector * 0.1f);
