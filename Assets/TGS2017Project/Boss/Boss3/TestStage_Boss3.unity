@@ -149,6 +149,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 0}
+  m_EnemyType: 0
 --- !u!23 &61104050
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2661,13 +2662,7 @@ Prefab:
       propertyPath: tempTarget
       value: 
       objectReference: {fileID: 1030254894}
-    - target: {fileID: 65816544294983252, guid: db43a514daa906245b8c0174498e313b,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 65816544294983252, guid: db43a514daa906245b8c0174498e313b, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db43a514daa906245b8c0174498e313b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &839485012
