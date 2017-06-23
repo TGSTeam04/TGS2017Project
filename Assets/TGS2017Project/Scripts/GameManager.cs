@@ -9,8 +9,7 @@ public enum PlayMode
     TwinRobot,
     HumanoidRobot,
     Combine,
-    Release,
-    Clear
+    Release
 }
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -59,10 +58,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            m_PlayMode = PlayMode.Clear;
-        }
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
 
@@ -75,9 +70,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 break;
             case PlayMode.Combine:
             case PlayMode.Release:
-                break;
-            case PlayMode.Clear:
-                Clear();
                 break;
             default:
                 break;
@@ -100,13 +92,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             m_HumanoidRobot = GameObject.Find("HumanoidRobot");
         }
     }
-
-    void Clear()
-    {
-        m_PlayCamera.GetComponent<PlayCameraController>().enabled = false;
-        m_PlayCamera.GetComponent<Clear>().ClearMove();
-    }
-
     IEnumerator GameEnd()
     {
         if (m_IsRun)

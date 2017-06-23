@@ -10,6 +10,9 @@ public class AttackProcess : MonoBehaviour
     public GameObject m_RightPunch;
     public GameObject m_RightSwing;
 
+    public GameObject m_LeftArm;
+    public GameObject m_RightArm;
+
     [SerializeField]
     private int m_StopTime = 3;
     private int m_StopCounter;
@@ -39,6 +42,7 @@ public class AttackProcess : MonoBehaviour
     void LeftPunchEnd()
     {
         s_Chance = true;
+        //m_LeftArm.GetComponent<Separation>().enabled = true;
         m_Sound.Play();
         m_Anim.speed = 0.0f;
         StartCoroutine(Stop());
@@ -67,6 +71,7 @@ public class AttackProcess : MonoBehaviour
     void RightPunchEnd()
     {
         s_Chance = true;
+        //m_RightArm.GetComponent<Separation>().enabled = true;
         m_Sound.Play();
         m_Anim.speed = 0.0f;
         StartCoroutine(Stop());
@@ -103,11 +108,12 @@ public class AttackProcess : MonoBehaviour
     IEnumerator Stop()
     {
         m_StopCounter = m_StopTime;
-        while (m_StopCounter > 0)
+        while(m_StopCounter > 0)
         {
             yield return new WaitForSeconds(1.0f);
             m_StopCounter--;
         }
         s_Chance = false;
+        m_Anim.speed = 1.0f;
     }
 }

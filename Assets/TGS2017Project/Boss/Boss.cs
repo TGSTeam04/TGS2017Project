@@ -224,7 +224,7 @@ public class Boss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.Clear;
+        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
