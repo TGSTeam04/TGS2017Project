@@ -108,8 +108,9 @@ public class Boss3_Humanoid : MonoBehaviour
         if (m_RemainingNI < 0)
         {
             GameObject shockEff = Instantiate(m_Efect_Numbness, transform);
-            Vector3 randModiy = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
-            shockEff.transform.position = transform.position + randModiy;
+            Vector3 modiy = new Vector3(0, 1.7f, 0)
+                + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));            
+            shockEff.transform.position = transform.position + modiy;
             m_Numbness.Add(shockEff);
 
             m_RemainingNI = m_NumbnessInterval;
