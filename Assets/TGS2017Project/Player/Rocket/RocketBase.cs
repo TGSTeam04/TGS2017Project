@@ -135,16 +135,20 @@ public class RocketBase : MonoBehaviour
     {
         m_Rb.MovePosition(m_Rb.position + velocity * Time.fixedDeltaTime);
 
-        float heigth = transform.position.y - m_BCollider.size.y / 2;
         float pich = transform.rotation.eulerAngles.x;
         float forwardLen = (m_BCollider.size.z / 2 * transform.lossyScale.z) - m_Rb.centerOfMass.z;// * m_Collider.size.z;
         float borderHigth = forwardLen * Mathf.Sin(pich * Mathf.Deg2Rad);// + transform.lossyScale.y / 2;
-        if (borderHigth > heigth && heigth > float.Epsilon)
+        RaycastHit hitInfo;
+        if (Physics.Raycast(m_Rb.position, Vector3.down * borderHigth * 2, out hitInfo, LayerMask.GetMask("Floor")))
         {
-            float sin = heigth / forwardLen;
-            float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
-            //Debug.Log(deg);
-            m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
+            float heigth = (m_Rb.position.y - hitInfo.point.y) - m_BCollider.size.y / 2;
+            if (borderHigth > heigth && heigth > float.Epsilon)
+            {
+                float sin = heigth / forwardLen;
+                float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
+                //Debug.Log(deg);
+                m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
+            }
         }
     }
 
