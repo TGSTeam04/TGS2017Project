@@ -678,7 +678,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113246367870152}
-  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
+  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1619,10 +1619,12 @@ MonoBehaviour:
   m_MoveSpeed: 4
   m_IsDead: 0
   m_IsShock: 0
+  m_FreezeVelocity: 1
   m_LRobot: {fileID: 0}
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
+  m_EnemyType: 0
 --- !u!114 &114171646699066568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1660,6 +1662,8 @@ MonoBehaviour:
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 198851747015827520}
+  m_FireEffect2: {fileID: 1649620957800600, guid: 44c7a6b9d3dfa2a4cb3cd9c670294db3,
+    type: 2}
 --- !u!135 &135501948262990656
 SphereCollider:
   m_ObjectHideFlags: 1

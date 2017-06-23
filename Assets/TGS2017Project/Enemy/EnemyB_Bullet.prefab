@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Speed: 15
-  m_DeleteTimer: 60
+  m_DeleteTimer: 15
   m_ApplyDamage: 15
 --- !u!114 &114850014592595210
 MonoBehaviour:
