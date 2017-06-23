@@ -24,6 +24,7 @@ public class RocketLine : MonoBehaviour
 			case PlayMode.HumanoidRobot:
 				m_LineRendererL.enabled = true;
 				m_LineRendererR.enabled = true;
+
 				RaycastHit raycast;
 				if (Physics.Raycast(m_PlayCamera.position, m_PlayCamera.forward, out raycast, m_Distance, m_HitLayer.value))
 				{
@@ -32,17 +33,9 @@ public class RocketLine : MonoBehaviour
 					{
 						m_LineRendererL.SetPositions(new Vector3[] { m_RocketBattery.m_LRocket.m_StandTrans.position, m_HitPosition });
 					}
-					else
-					{
-						m_LineRendererL.enabled = false;
-					}
 					if (m_RocketBattery.RIsCanFire)
 					{
 						m_LineRendererR.SetPositions(new Vector3[] { m_RocketBattery.m_RRocket.m_StandTrans.position, m_HitPosition });
-					}
-					else
-					{
-						m_LineRendererR.enabled = false;
 					}
 					if (Input.GetButtonDown("ChargeL"))
 					{
@@ -73,6 +66,8 @@ public class RocketLine : MonoBehaviour
 					}
 					transform.localRotation = m_HumanoidRobot.rotation;
 				}
+				m_LineRendererL.enabled = m_RocketBattery.LIsCanFire;
+				m_LineRendererR.enabled = m_RocketBattery.RIsCanFire;
 
 				break;
 			case PlayMode.NoPlay:
