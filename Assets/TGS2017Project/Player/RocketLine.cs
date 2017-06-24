@@ -12,6 +12,7 @@ public class RocketLine : MonoBehaviour
 	[SerializeField] float m_Distance;
 	Vector3 m_HitPosition;
 	bool m_FireL = true;
+	[SerializeField] Vector3 m_Offset;
 	void Start()
 	{
 		m_PlayCamera = GameManager.Instance.m_PlayCamera.transform;
@@ -31,11 +32,11 @@ public class RocketLine : MonoBehaviour
 					m_HitPosition = raycast.point;
 					if (m_RocketBattery.LIsCanFire)
 					{
-						m_LineRendererL.SetPositions(new Vector3[] { m_RocketBattery.m_LRocket.m_StandTrans.position, m_HitPosition });
+						m_LineRendererL.SetPositions(new Vector3[] { m_RocketBattery.m_LRocket.m_StandTrans.position + m_Offset, m_HitPosition });
 					}
 					if (m_RocketBattery.RIsCanFire)
 					{
-						m_LineRendererR.SetPositions(new Vector3[] { m_RocketBattery.m_RRocket.m_StandTrans.position, m_HitPosition });
+						m_LineRendererR.SetPositions(new Vector3[] { m_RocketBattery.m_RRocket.m_StandTrans.position + m_Offset, m_HitPosition });
 					}
 					if (Input.GetButtonDown("ChargeL"))
 					{
@@ -47,22 +48,22 @@ public class RocketLine : MonoBehaviour
 					}
 					if (m_FireL)
 					{
-						transform.rotation = Quaternion.LookRotation(m_HitPosition - m_RocketBattery.m_LRocket.m_StandTrans.position);
+						transform.rotation = Quaternion.LookRotation(m_HitPosition - m_RocketBattery.m_LRocket.m_StandTrans.position - m_Offset);
 					}
 					else
 					{
-						transform.rotation = Quaternion.LookRotation(m_HitPosition - m_RocketBattery.m_RRocket.m_StandTrans.position);
+						transform.rotation = Quaternion.LookRotation(m_HitPosition - m_RocketBattery.m_RRocket.m_StandTrans.position - m_Offset);
 					}
 				}
 				else
 				{
 					if (m_RocketBattery.LIsCanFire)
 					{
-						m_LineRendererL.SetPositions(new Vector3[] { m_RocketBattery.m_LRocket.m_StandTrans.position, m_RocketBattery.m_LRocket.m_StandTrans.position + m_HumanoidRobot.forward * m_Distance });
+						m_LineRendererL.SetPositions(new Vector3[] { m_RocketBattery.m_LRocket.m_StandTrans.position + m_Offset, m_RocketBattery.m_LRocket.m_StandTrans.position + m_Offset + m_HumanoidRobot.forward * m_Distance });
 					}
 					if (m_RocketBattery.RIsCanFire)
 					{
-						m_LineRendererR.SetPositions(new Vector3[] { m_RocketBattery.m_RRocket.m_StandTrans.position, m_RocketBattery.m_RRocket.m_StandTrans.position + m_HumanoidRobot.forward * m_Distance });
+						m_LineRendererR.SetPositions(new Vector3[] { m_RocketBattery.m_RRocket.m_StandTrans.position + m_Offset, m_RocketBattery.m_RRocket.m_StandTrans.position + m_Offset + m_HumanoidRobot.forward * m_Distance });
 					}
 					transform.localRotation = m_HumanoidRobot.rotation;
 				}
