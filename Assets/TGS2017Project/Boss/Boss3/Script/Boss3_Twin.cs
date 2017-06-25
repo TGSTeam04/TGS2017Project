@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Boss3_Twin : MonoBehaviour
 {
+    [SerializeField] Boss3_Controller m_BossController;
     [SerializeField] Renderer m_ShildRender;
-    [SerializeField] Gradient m_ShieldColor;
+    [SerializeField] Gradient m_ShieldColor;   
 
-    private Boss3_Controller m_BossController;
+    //エフェクト
+    [SerializeField] GameObject m_Explosion;
     private float HP
     {
         get { return m_BossController.Hp; }
-        set { m_BossController.Hp = value; }
+        set
+        {
+            m_BossController.Hp = value;
+            //シールドに反映
+            m_ShildRender.gameObject.SetActive(HP > 0);
+            m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
+        }
     }
 
     private void Awake()
-    {
-        m_BossController = GetComponentInParent<Boss3_Controller>();
-
+    {       
         Damageable[] damageComps = GetComponentsInChildren<Damageable>();
         foreach (var comp in damageComps)
         {
@@ -34,12 +40,14 @@ public class Boss3_Twin : MonoBehaviour
     {
         //ダメージ
         HP = Mathf.Max(0, HP - d);
-        //シールドに反映
-        m_ShildRender.gameObject.SetActive(HP > 0);
-        m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
     }
     public void Dead()
     {
+        Instantiate(m_Explosion, transform.position, transform.rotation);
+    }
 
+    public void SetShieldActive(bool isActive)
+    {
+        m_ShildRender.gameObject.SetActive(isActive && HP != 0);
     }
 }

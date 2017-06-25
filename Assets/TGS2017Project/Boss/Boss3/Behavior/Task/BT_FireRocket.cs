@@ -14,6 +14,7 @@ public class BT_FireRocket : BTask
     {
         if (m_Battery.IsCanFire)
         {
+            m_Battery.gameObject.transform.LookAt(m_BB.GObjValues["target"].transform.position);
             m_Battery.Fire();            
             Succes();
         }

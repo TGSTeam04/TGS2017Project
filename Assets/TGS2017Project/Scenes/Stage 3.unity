@@ -50709,33 +50709,41 @@ Prefab:
     - target: {fileID: 114713040598017948, guid: db43a514daa906245b8c0174498e313b,
         type: 2}
       propertyPath: m_ReleaseTime
-      value: 999
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114713040598017948, guid: db43a514daa906245b8c0174498e313b,
         type: 2}
       propertyPath: m_MaxHp
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 1831878919805214, guid: db43a514daa906245b8c0174498e313b, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135339774215518864, guid: db43a514daa906245b8c0174498e313b,
+    - target: {fileID: 114566440414372090, guid: db43a514daa906245b8c0174498e313b,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: m_MaxHP
+      value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1193282962889352, guid: db43a514daa906245b8c0174498e313b, type: 2}
+      propertyPath: m_Name
+      value: RocketBattery
+      objectReference: {fileID: 0}
+    - target: {fileID: 114566440414372090, guid: db43a514daa906245b8c0174498e313b,
+        type: 2}
+      propertyPath: m_Battery
+      value: 
+      objectReference: {fileID: 1834733260}
     - target: {fileID: 114567452738797416, guid: db43a514daa906245b8c0174498e313b,
         type: 2}
-      propertyPath: m_MaxHP
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Explosion
+      value: 
+      objectReference: {fileID: 1220756523573468, guid: 2e7f405a3f1fa314f905ea45e614445c,
+        type: 2}
     - target: {fileID: 114100508200585354, guid: db43a514daa906245b8c0174498e313b,
         type: 2}
-      propertyPath: m_MaxHP
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+      propertyPath: m_Explosion
+      value: 
+      objectReference: {fileID: 1220756523573468, guid: 2e7f405a3f1fa314f905ea45e614445c,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 114828457495872340, guid: db43a514daa906245b8c0174498e313b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: db43a514daa906245b8c0174498e313b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1834733254 stripped
@@ -50743,6 +50751,52 @@ GameObject:
   m_PrefabParentObject: {fileID: 1388455412181692, guid: db43a514daa906245b8c0174498e313b,
     type: 2}
   m_PrefabInternal: {fileID: 1834733253}
+--- !u!95 &1834733255 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95988550449448482, guid: db43a514daa906245b8c0174498e313b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1834733253}
+--- !u!1 &1834733256 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1007793755036706, guid: db43a514daa906245b8c0174498e313b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1834733253}
+--- !u!1 &1834733257 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1193282962889352, guid: db43a514daa906245b8c0174498e313b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1834733253}
+--- !u!4 &1834733258 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4670792150155546, guid: db43a514daa906245b8c0174498e313b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1834733253}
+--- !u!4 &1834733259 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4012010918328848, guid: db43a514daa906245b8c0174498e313b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1834733253}
+--- !u!114 &1834733260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1834733257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd55e596a4f68d94f85311a217a02b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RocketPrefub: {fileID: 1022884173409118, guid: 269db99d988fa7e4ba41daa499ac3a41,
+    type: 2}
+  m_LStandTrans: {fileID: 1834733259}
+  m_RStandTrans: {fileID: 1834733258}
+  m_RocketLayer: BossBullet
+  m_SEColectRocet: {fileID: 8300000, guid: 0149e403f06074e4bb52bc3163afdca2, type: 3}
+  m_Effect_Chage: {fileID: 1834733256}
+  m_HumanoidAnim: {fileID: 1834733255}
+  m_LRocket: {fileID: 0}
+  m_RRocket: {fileID: 0}
 --- !u!1 &1836823548
 GameObject:
   m_ObjectHideFlags: 0

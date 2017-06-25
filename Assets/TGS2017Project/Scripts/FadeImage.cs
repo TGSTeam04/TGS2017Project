@@ -13,7 +13,6 @@ public class FadeImage : MonoBehaviour
 
     private Image m_Image;
     private int m_InOutChange;
-    private Coroutine m_Coroutine;
 
     private float m_TargetA;
 
@@ -37,7 +36,7 @@ public class FadeImage : MonoBehaviour
         if (m_TimeRequired == 0)
             m_TimeRequired = 1f;
         if (m_AutoStart)
-            m_Coroutine = StartCoroutine(FadeStart());
+            StartCoroutine(FadeStart());
     }
 
     public void SetAlpha(float a)
@@ -60,10 +59,5 @@ public class FadeImage : MonoBehaviour
 
         m_Image.color = new Color(m_Image.color.r, m_Image.color.g, m_Image.color.b, m_TargetA);
         m_Del_FadeEnd.Invoke();
-    }
-
-    public void ResetAlpha()
-    {
-        float alpha = IsINFade ? 0f : 1f;
     }
 }

@@ -48,6 +48,7 @@ public class Separation : MonoBehaviour {
                 if (!m_Back) m_Target = GameManager.Instance.m_HumanoidRobot.transform;
                 break;
             case PlayMode.NoPlay:
+                return;
             case PlayMode.Combine:
                 break;
             case PlayMode.Release:
