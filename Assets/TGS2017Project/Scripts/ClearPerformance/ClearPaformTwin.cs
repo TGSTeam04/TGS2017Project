@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,13 +13,12 @@ public class ClearPaformTwin : ClearParformance
         return !lRobot.activeSelf;
     }
 
-    protected void Awake()
-    {
-        if (!Redy()) return;
+    protected override void Redy()
+    {        
         GameManager gm = GameManager.Instance;
 
         var lRobot = gm.m_LRobot;
-        var rRobot = gm.m_RRobot;       
+        var rRobot = gm.m_RRobot;
 
         lRobot.transform.parent = m_Twins.transform;
         rRobot.transform.parent = m_Twins.transform;
@@ -36,8 +36,9 @@ public class ClearPaformTwin : ClearParformance
     }
 
     protected override IEnumerator PlayerParform()
-    {       
+    {      
         yield return new WaitForSeconds(1.0f);
+
         m_PerformAnim.Play();
 
         yield return new WaitForSeconds(m_PerformAnim.clip.length);  

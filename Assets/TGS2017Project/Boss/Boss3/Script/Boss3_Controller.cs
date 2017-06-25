@@ -20,9 +20,11 @@ public class Boss3_Controller : MonoBehaviour
     //野沢君のコンバイン、リリースで必要な変数
     private Rigidbody m_LRobotRigidbody;
     private Rigidbody m_RRobotRigidbody;
+    [SerializeField] float m_Speed = 10.0f;
     //[SerializeField] GameObject m_KeepEnemyPosWall;
     [SerializeField] AnimationCurve m_RotationCurve;
     [SerializeField] AnimationCurve m_ReleaseCurve;
+    [SerializeField] AnimationCurve m_CombineDistance;
 
     private PlayMode m_State;
     private float m_StateTimer;
@@ -68,9 +70,6 @@ public class Boss3_Controller : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            ReleaseStart();
-
         if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
             return;
 
@@ -78,11 +77,7 @@ public class Boss3_Controller : MonoBehaviour
         switch (m_State)
         {
             case PlayMode.HumanoidRobot:
-                m_HRobot.BossUpdate();
-                break;
-            case PlayMode.Release:
-                if (m_StateTimer > m_ReleaseTime)
-                    CombineStart();
+                m_HRobot.BossUpdate();                
                 break;
             default:
                 break;
@@ -102,18 +97,18 @@ public class Boss3_Controller : MonoBehaviour
 
     public void CombineStart()
     {
-        StartCoroutine(Combine());
+        if (m_Hp > 0)
+            StartCoroutine(Combine());
     }
     public void ReleaseStart()
     {
-        if (m_Hp > 0)
-            StartCoroutine(Release());
+        StartCoroutine(Release());
     }
 
     private IEnumerator Combine()
     {
-        m_LRobot.SetShieldActive(false);
-        m_RRobot.SetShieldActive(false);
+        if (m_State != PlayMode.Release) yield break;
+        m_State = PlayMode.Combine;
         //m_KeepEnemyPosWall.SetActive(true);
         Vector3 StartPositionL = m_LRobotRigidbody.position;
         Vector3 StartPositionR = m_RRobotRigidbody.position;
@@ -123,8 +118,10 @@ public class Boss3_Controller : MonoBehaviour
         //Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
         m_HRobot.transform.position = CenterPosition;
         m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(-Direction, Vector3.up));
+        Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
+        Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
 
-        //float distaceRate = 1.5f;
+        transform.localRotation = Quaternion.identity;
         m_CombineEffect.transform.position = transform.position + new Vector3(0, 0.5f, 0);
         StartCoroutine(CombineEffect());
 
@@ -142,21 +139,33 @@ public class Boss3_Controller : MonoBehaviour
         m_LRobotRigidbody.rotation = EndRotationL;
         m_RRobotRigidbody.rotation = EndRotationR;
 
-        yield return new WaitForSeconds(0.3f);     
+        for (float t = 0; Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2) != EndPositionL; t += Time.fixedDeltaTime)
+        {
+            m_LRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2));
+            m_RRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionR, EndPositionR, m_CombineDistance.Evaluate(t) * m_Speed * 2));
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield return new WaitForSeconds(0.3f);
 
         m_HRobot.gameObject.SetActive(true);
         m_TwinRobot.SetActive(false);
-        m_State = PlayMode.Combine;
+        m_State = PlayMode.HumanoidRobot;
     }
 
     private IEnumerator Release()
     {
+        if (m_State != PlayMode.HumanoidRobot) yield break;
+
         m_State = PlayMode.Release;
         m_HRobot.gameObject.SetActive(false);
         m_TwinRobot.gameObject.SetActive(true);
 
         Vector3 vector = m_HRobot.transform.right;
         vector *= vector.x > vector.z ? 1 : -1;
+        m_LRobotRigidbody.position = m_HRobot.transform.position - (vector * 0.1f);
+        m_RRobotRigidbody.position = m_HRobot.transform.position + (vector * 0.1f);
 
         Quaternion lRotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
         Quaternion rRotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
@@ -168,7 +177,7 @@ public class Boss3_Controller : MonoBehaviour
         RaycastHit hit;
         int layermask = LayerMask.GetMask(new string[] { "Wall" });
         yield return null;
-        const float m_CombineTimeRequierd = 3;
+        const float m_CombineTimeRequierd = 5;
         for (float f = 0; f < m_CombineTimeRequierd; f += Time.fixedDeltaTime)
         {
             t = m_ReleaseCurve.Evaluate(f / m_CombineTimeRequierd);
@@ -202,10 +211,9 @@ public class Boss3_Controller : MonoBehaviour
         }
         m_LRobotRigidbody.position -= vector * (l - preMove);
         m_RRobotRigidbody.position += vector * (l - preMove);
-        m_TwinRobot.gameObject.SetActive(true);
-
+        Debug.Log("release完了" + "waitTime : " + m_ReleaseTime);
         yield return new WaitForSeconds(m_ReleaseTime);
-        StartCoroutine(Combine());
+        CombineStart();
     }
 
     private IEnumerator CombineEffect()

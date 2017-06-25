@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,10 +15,8 @@ public class ClearParformHumanoid : ClearParformance
         return !Humanoid.activeSelf;
     }
 
-    // Use this for initialization
-    protected void Awake()
+    protected override void Redy()
     {
-        if (!Redy()) return;
         Transform Humanoid = GameManager.Instance.m_HumanoidRobot.transform;
 
         Humanoid.parent = m_ParformAnimRootObj.transform;
@@ -26,7 +25,7 @@ public class ClearParformHumanoid : ClearParformance
 
         m_HumanoidCenter = Humanoid.FindChild("LookPoint");
         m_HAnimator = Humanoid.FindChild("Model").GetComponent<Animator>();
-        //m_HAnim = m_Humanoid.transform.FindChild("Model").GetComponent<Animation>();//m_Humanoid.GetComponentInChildren<Animator>();                
+        //m_HAnim = m_Humanoid.transform.FindChild("Model").GetComponent<Animation>();//m_Humanoid.GetComponentInChildren<Animator>();
     }
 
     private void Start()
