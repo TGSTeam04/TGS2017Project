@@ -8012,13 +8012,33 @@ GameObject:
   m_Component:
   - component: {fileID: 158433145}
   - component: {fileID: 158433146}
+  - component: {fileID: 1840387536}
   m_Layer: 0
-  m_Name: player_union01
+  m_Name: Model
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!111 &1840387536
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1840387535}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 558451e5cdb76334d8d699cdadb0d0ce, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 7046c4a3a35b0ca40b158dde60d3db6e, type: 2}
+  - {fileID: 7400000, guid: 558451e5cdb76334d8d699cdadb0d0ce, type: 2}
+  - {fileID: 7400000, guid: d06cd30f9d2d62f488e77cd59143e027, type: 2}
+  - {fileID: 7400000, guid: ad0f017db2ef1b342a3f3932f28e2b0d, type: 2}
+  - {fileID: 7400000, guid: 0e1448b812fe2784babb690ce075b716, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1877594663
 GameObject:
   m_ObjectHideFlags: 0

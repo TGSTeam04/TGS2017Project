@@ -92,6 +92,8 @@ public class SecondBoss : MonoBehaviour
     private void Damage(float damage, MonoBehaviour src)
     {
         HitPoint -= damage;
+        if (HitPoint < 0)
+            this.Delay(new WaitForSeconds(4.0f), Dead);
     }
 
     // Use this for initialization
@@ -285,6 +287,7 @@ public class SecondBoss : MonoBehaviour
     void Dead()
     {
         GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+        GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }
     IEnumerator BattleChange()

@@ -9,7 +9,7 @@ public class BT_FireRocket : BTask
     public BT_FireRocket(RocketBattery battery)
     {
         m_Battery = battery;
-    }
+    }    
     protected override void OnExecute()
     {
         if (m_Battery.IsCanFire)
@@ -19,12 +19,5 @@ public class BT_FireRocket : BTask
         }
         else
             Failure();
-    }
-
-    private IEnumerator FireRocket(bool isLeft)
-    {
-        m_BB.m_Anim.SetTrigger("LFire");
-        //アニメ反映
-        yield return null;
-    }
+    }    
 }

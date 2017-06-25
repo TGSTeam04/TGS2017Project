@@ -3962,6 +3962,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b457825f6b4544e80c8740d060c239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ClearPerformLoc: {fileID: 0}
+  m_Boss: {fileID: 0}
   m_ActivePanels: []
 --- !u!4 &1017997299
 Transform:

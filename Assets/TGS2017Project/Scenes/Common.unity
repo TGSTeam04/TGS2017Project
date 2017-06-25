@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e245c0794be93f4c914dc3838086f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartScene: 0
+  m_StartScene: 4
   m_SceneListTable:
   - Scene:
     - Title
@@ -392,6 +392,8 @@ MonoBehaviour:
     - GameOver
   - Scene:
     - GameOver
+  - Scene:
+    - ClearPerformance
   m_LoadingSceneName: LoadingDefault
 --- !u!1 &1849378520
 GameObject:
@@ -437,6 +439,7 @@ MonoBehaviour:
   m_IsGameOver: 0
   m_IsGameClear: 0
   m_GameStarter: {fileID: 1022911404}
+  m_IsRun: 0
   m_BreakEnemyTable: {fileID: 11400000, guid: 3b3856ea162c1df4c80dccf990a36a09, type: 2}
   m_LoadingAnimationTime: 0.5
   m_LoadingProgress: 0

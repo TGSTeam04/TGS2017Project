@@ -113,7 +113,6 @@ public class PlayerController : MonoBehaviour
 		m_RotateTwinRoboMode.Add(TwinRobotMode.B, Quaternion.Euler(0, 90, 0));
 
 		m_HumanoidMaterial.color = m_ModeAA;
-
 	}
 
 	void LateUpdate()

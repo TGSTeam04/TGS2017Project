@@ -52,7 +52,7 @@ public class Boss : MonoBehaviour
         get { return s_HitPoint; }
         set
         {
-            s_HitPoint = value;
+            s_HitPoint = Mathf.Max(0, value);
             GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
         }
     }
@@ -69,7 +69,14 @@ public class Boss : MonoBehaviour
     //ダメージコンポーネントのダメージ
     private void Damage(float damage, MonoBehaviour src)
     {
-        HitPoint -= damage;        
+        HitPoint -= damage;
+        if (HitPoint <= 0)
+        {
+            Instantiate(m_LastExplosion, transform.position, transform.rotation);
+            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+            GameManager.Instance.m_IsGameClear = true;
+            StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
+        }
     }
 
     // Use this for initialization
@@ -223,8 +230,7 @@ public class Boss : MonoBehaviour
         //}
     }
     void Dead()
-    {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+    {        
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
@@ -274,22 +280,19 @@ public class Boss : MonoBehaviour
             if (m_LeftArm.activeSelf == false && m_RightArm.activeSelf == false)
             {
                 Instantiate(m_Explosion, transform.position, transform.rotation);
-                s_HitPoint -= 0.25f;
-                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
+                Damage(30.0f, this);// HitPoint -= 0.25f;
                 s_State = BossState.Invincible;
             }
             else
             {
                 Instantiate(m_Explosion, transform.position, transform.rotation);
-                s_HitPoint -= 0.05f;
-                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
+                Damage(30.0f, this);
                 s_State = BossState.Invincible;
             }
 
-            if (s_HitPoint <= 0.0f)
+            if (HitPoint <= 0.0f)
             {
                 s_State = BossState.Paralysis;
-                Instantiate(m_LastExplosion, transform.position, transform.rotation);
                 StartCoroutine(Death());
             }
         }

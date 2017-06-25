@@ -5646,6 +5646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b457825f6b4544e80c8740d060c239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ClearPerformLoc: {fileID: 0}
+  m_Boss: {fileID: 1145712963}
   m_ActivePanels: []
 --- !u!4 &1017997299
 Transform:
@@ -6759,6 +6761,11 @@ MonoBehaviour:
   m_ActivityTime: 10
   m_MoveSpeed: 10
   m_State: 0
+--- !u!1 &1145712963 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1533118408117528, guid: 11677a3bb5d62c948ad57dadea597b8b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1145712958}
 --- !u!1 &1162807696
 GameObject:
   m_ObjectHideFlags: 0

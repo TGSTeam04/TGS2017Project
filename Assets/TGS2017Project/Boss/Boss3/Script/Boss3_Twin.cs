@@ -38,4 +38,8 @@ public class Boss3_Twin : MonoBehaviour
         m_ShildRender.gameObject.SetActive(m_HP > 0);
         m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(m_HP / m_MaxHP));
     }
+    public void Dead()
+    {
+
+    }
 }
