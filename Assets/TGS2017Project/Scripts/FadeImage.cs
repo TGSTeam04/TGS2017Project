@@ -15,14 +15,16 @@ public class FadeImage : MonoBehaviour
     private int m_InOutChange;
     private Coroutine m_Coroutine;
 
+    private float m_TargetA;
+
     public bool IsINFade
     {
         get { return m_IsINFade; }
         set
         {
             m_IsINFade = value;
-            if (m_AutoStart && m_Coroutine == null)
-                StartCoroutine(FadeStart());
+            m_InOutChange = value ? 1 : -1;
+            m_TargetA = IsINFade ? 1f : 0f;
         }
     }
 
@@ -31,23 +33,32 @@ public class FadeImage : MonoBehaviour
     {
         m_Image = GetComponent<Image>();
 
-        m_InOutChange = IsINFade ? 1 : -1;
+        IsINFade = m_IsINFade;
         if (m_TimeRequired == 0)
             m_TimeRequired = 1f;
         if (m_AutoStart)
             m_Coroutine = StartCoroutine(FadeStart());
-    }    
+    }
+
+    public void SetAlpha(float a)
+    {
+        Color defualt = m_Image.color;
+        float alpha = Mathf.Clamp(a, 0, 1);
+        m_Image.color = new Color(defualt.r, defualt.g, defualt.b, alpha);
+    }
 
     public IEnumerator FadeStart()
     {
-        Color defualt = m_Image.color;
-        float alpha = m_Image.color.a; //IsINFade ? 0f : 1f;
-        while (Mathf.Abs(m_Image.color.a - alpha) <= float.Epsilon)
+        float alpha = m_Image.color.a;
+
+        while (Mathf.Abs(m_Image.color.a - m_TargetA) >= float.Epsilon)
         {
-            alpha = Mathf.Clamp(alpha + (Time.deltaTime / m_TimeRequired * m_InOutChange), 0f, 1f);
-            m_Image.color = new Color(defualt.r, defualt.g, defualt.b, alpha);
+            alpha = Mathf.Clamp(m_Image.color.a + (Time.deltaTime / m_TimeRequired * m_InOutChange), 0f, 1f);
+            m_Image.color = new Color(m_Image.color.r, m_Image.color.g, m_Image.color.b, alpha);
             yield return null;
         }
+
+        m_Image.color = new Color(m_Image.color.r, m_Image.color.g, m_Image.color.b, m_TargetA);
         m_Del_FadeEnd.Invoke();
     }
 

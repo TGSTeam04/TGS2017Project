@@ -96,16 +96,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     IEnumerator GameEnd()
     {
+        m_PlayMode = PlayMode.NoPlay;
         if (m_IsRun)
         {
             yield break;
         }
         m_IsRun = true;
-        yield return new WaitForSeconds(3);
-        //m_GameStarter.ChangeScenes(0);
+        yield return new WaitForSeconds(3);        
         if (m_IsGameClear)
         {
-            //m_GameStarter.ChangeScenes(11);
             m_GameStarter.AddScene("ClearPerformance");
         }
         m_IsGameClear = false;

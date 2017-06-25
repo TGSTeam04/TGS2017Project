@@ -86,7 +86,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000174, guid: 4d9ab2db3bde19e4fb67133bc6050a8a,
+  m_LightingDataAsset: {fileID: 112000020, guid: 18ebc514325bc3f4d9c940a4ac01c02f,
     type: 2}
   m_ShadowMaskMode: 2
 --- !u!196 &4
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e245c0794be93f4c914dc3838086f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartScene: 0
+  m_StartScene: 5
   m_SceneListTable:
   - Scene:
     - Title
@@ -392,6 +392,8 @@ MonoBehaviour:
     - GameOver
   - Scene:
     - GameOver
+  - Scene:
+    - ClearPerformance
   m_LoadingSceneName: LoadingDefault
 --- !u!1 &1849378520
 GameObject:

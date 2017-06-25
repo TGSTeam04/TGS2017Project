@@ -22,7 +22,7 @@ public class PlayCameraController : MonoBehaviour
 
     private PlayMode m_PreMode;
     private bool m_IsRunning = false;
-	private Coroutine m_combineCor;
+    private Coroutine m_combineCor;
     // Use this for initialization
     void Start()
     {
@@ -88,13 +88,12 @@ public class PlayCameraController : MonoBehaviour
                 // カメラが壁に遮られた場合
                 if (Physics.Raycast(ray, out hitInfo, distance, LayerMask.GetMask("Wall")))
                 {
-                    Debug.Log("壁に遮られた");
+                    //Debug.Log("壁に遮られた");
                     // カメラの位置を壁に保持
                     var height = transform.position.y - hitInfo.point.y;
                     transform.position = hitInfo.point;
                     transform.Translate(new Vector3(0, height, 0));
                 }
-
                 break;
             case PlayMode.Combine:
                 break;
@@ -140,7 +139,7 @@ public class PlayCameraController : MonoBehaviour
         if (m_IsRunning && !combine) { yield break; }
         m_IsRunning = true;
 
-		if (m_combineCor != null) StopCoroutine(m_combineCor);
+        if (m_combineCor != null) StopCoroutine(m_combineCor);
 
         for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
         {

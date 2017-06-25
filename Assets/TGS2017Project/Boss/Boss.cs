@@ -74,8 +74,8 @@ public class Boss : MonoBehaviour
         {
             s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
-            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-            GameManager.Instance.m_IsGameClear = true;
+            Pauser.Pause(PauseTag.Enemy);     
+            GameManager.Instance.m_IsGameClear = true;    
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
@@ -247,7 +247,6 @@ public class Boss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()

@@ -244,7 +244,8 @@ public class RocketBase : MonoBehaviour
     protected void CollideTarget(GameObject target, Vector3 hitpos)
     {
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
-        target.GetComponent<Damageable>().ApplyDamage(damage, this);
+        Damageable damageComp = target.GetComponent<Damageable>();
+        if(damageComp != null) damageComp.ApplyDamage(damage, this);
         GameObject explosion = Instantiate(m_EffectHitPrefub, transform);
         explosion.SetActive(true);
         m_Battery.StartCoroutine(this.Delay(new WaitForSeconds(0.5f)

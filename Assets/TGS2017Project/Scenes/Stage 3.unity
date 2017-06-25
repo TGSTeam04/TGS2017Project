@@ -21567,7 +21567,7 @@ MonoBehaviour:
   m_Muzzle2: {fileID: 1744947503}
   m_Muzzle3: {fileID: 682696439}
   m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
@@ -27395,7 +27395,7 @@ MonoBehaviour:
   m_Muzzle2: {fileID: 1280656520}
   m_Muzzle3: {fileID: 2010420362}
   m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
@@ -34599,7 +34599,7 @@ MonoBehaviour:
   m_Muzzle2: {fileID: 1020770359}
   m_Muzzle3: {fileID: 210633444}
   m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
@@ -37229,7 +37229,7 @@ MonoBehaviour:
   m_Muzzle2: {fileID: 1762330052}
   m_Muzzle3: {fileID: 646558564}
   m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
@@ -39684,12 +39684,13 @@ MonoBehaviour:
   m_Range: 12
   m_Muzzle: {fileID: 766282620}
   m_Bullet: {fileID: 1620399709760840, guid: c96088aeaa2c27144aaa82fcfd0898f5, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 392098196}
-  m_FireEffect2: {fileID: 0}
+  m_FireEffect2: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!114 &1420203500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44636,12 +44637,13 @@ MonoBehaviour:
   m_Range: 12
   m_Muzzle: {fileID: 834452495}
   m_Bullet: {fileID: 1620399709760840, guid: c96088aeaa2c27144aaa82fcfd0898f5, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 873001976}
-  m_FireEffect2: {fileID: 0}
+  m_FireEffect2: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!114 &1501064014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47036,12 +47038,13 @@ MonoBehaviour:
   m_Range: 12
   m_Muzzle: {fileID: 1384460328}
   m_Bullet: {fileID: 1620399709760840, guid: c96088aeaa2c27144aaa82fcfd0898f5, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 1467227996}
-  m_FireEffect2: {fileID: 0}
+  m_FireEffect2: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!114 &1631405171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49505,12 +49508,13 @@ MonoBehaviour:
   m_Range: 12
   m_Muzzle: {fileID: 1113024723}
   m_Bullet: {fileID: 1620399709760840, guid: c96088aeaa2c27144aaa82fcfd0898f5, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 1108038643}
-  m_FireEffect2: {fileID: 0}
+  m_FireEffect2: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!114 &1750614724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50707,6 +50711,30 @@ Prefab:
       propertyPath: m_ReleaseTime
       value: 999
       objectReference: {fileID: 0}
+    - target: {fileID: 114713040598017948, guid: db43a514daa906245b8c0174498e313b,
+        type: 2}
+      propertyPath: m_MaxHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1831878919805214, guid: db43a514daa906245b8c0174498e313b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135339774215518864, guid: db43a514daa906245b8c0174498e313b,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114567452738797416, guid: db43a514daa906245b8c0174498e313b,
+        type: 2}
+      propertyPath: m_MaxHP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114100508200585354, guid: db43a514daa906245b8c0174498e313b,
+        type: 2}
+      propertyPath: m_MaxHP
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db43a514daa906245b8c0174498e313b, type: 2}
   m_IsPrefabParent: 0
@@ -51426,7 +51454,7 @@ MonoBehaviour:
   m_Muzzle2: {fileID: 1724140308}
   m_Muzzle3: {fileID: 837949666}
   m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
@@ -51990,12 +52018,13 @@ MonoBehaviour:
   m_Range: 12
   m_Muzzle: {fileID: 2099707843}
   m_Bullet: {fileID: 1620399709760840, guid: c96088aeaa2c27144aaa82fcfd0898f5, type: 2}
-  m_BulletParent: {fileID: 0}
+  m_BulletParent: {fileID: 2129794631}
   m_DamageTime: 120
   m_ParalysisTime: 180
   m_EntryTime: 30
   m_FireEffect: {fileID: 445703908}
-  m_FireEffect2: {fileID: 0}
+  m_FireEffect2: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
+    type: 2}
 --- !u!114 &1870642447
 MonoBehaviour:
   m_ObjectHideFlags: 0

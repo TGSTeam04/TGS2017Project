@@ -26,7 +26,7 @@ public class ClearPaformTwin : ClearParformance
 
     private void Start()
     {
-        StartCoroutine(Parform());
+        StartCoroutine(PerformManagement());
     }
 
     // Update is called once per frame
@@ -35,26 +35,11 @@ public class ClearPaformTwin : ClearParformance
         m_Camera.transform.LookAt(m_Twins.transform.position);
     }
 
-    IEnumerator Parform()
-    {
-        GameManager gm = GameManager.Instance;
-        gm.m_PlayCamera.SetActive(false);
-        m_Camera.gameObject.SetActive(true);
-
+    protected override IEnumerator PlayerParform()
+    {       
         yield return new WaitForSeconds(1.0f);
         m_PerformAnim.Play();
 
-        yield return new WaitForSeconds(m_PerformAnim.clip.length);        
-        var async = gm.m_GameStarter.AddScene("Result");
-        //while (async.isDone)
-        //{
-        //    yield return null;
-        //}        
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.Instance.m_PlayCamera.SetActive(true);
-        //Pauser.Resume(PauseTag.Enemy);
+        yield return new WaitForSeconds(m_PerformAnim.clip.length);  
     }
 }
