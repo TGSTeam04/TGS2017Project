@@ -82,7 +82,7 @@ public class PlayCameraController : MonoBehaviour
                 // カメラが壁に遮られた場合
                 if (Physics.Linecast(player_position, camera_position, LayerMask.GetMask("Wall")))
                 {
-                    Debug.Log("壁に遮られた");
+                    //Debug.Log("壁に遮られた");
                     // カメラの移動
                     transform.position = Vector3.Lerp(transform.position, m_TPSTransform.position / 2, m_MoveSpeed * Time.fixedDeltaTime);
                     transform.Translate(new Vector3(0, 0.1f, 0));

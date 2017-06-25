@@ -31,7 +31,7 @@ public class ClearParformHumanoid : ClearParformance
 
     private void Start()
     {
-        StartCoroutine(Parform());
+        StartCoroutine(PerformManagement());
     }
 
     // Update is called once per frame
@@ -40,12 +40,8 @@ public class ClearParformHumanoid : ClearParformance
         m_Camera.transform.LookAt(m_HumanoidCenter);
     }
 
-    IEnumerator Parform()
+    protected override IEnumerator PlayerParform()
     {
-        GameManager gm = GameManager.Instance;
-        gm.m_PlayCamera.SetActive(false);
-        m_Camera.gameObject.SetActive(true);
-
         yield return new WaitForSeconds(1.0f);
         m_HAnimator.Play("Wepon_R");
         yield return new WaitForSeconds(1.0f);
@@ -53,7 +49,5 @@ public class ClearParformHumanoid : ClearParformance
         yield return new WaitForSeconds(m_PerformAnim.clip.length);
         m_HAnimator.Play("Kimepo");
         yield return new WaitForSeconds(3.0f);
-
-        var async = gm.m_GameStarter.AddScene("Result");
     }
 }

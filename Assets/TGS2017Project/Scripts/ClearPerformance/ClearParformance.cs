@@ -19,12 +19,14 @@ public abstract class ClearParformance : MonoBehaviour
 
     // Use this for initialization    
 
+    //共通準備
     protected bool Redy()
     {
         GameManager gm = GameManager.Instance;
         if (CheckNecessary(gm))
         {
-            enabled = false;
+            //自身の演出が必要でなければfalseを返すし、自身を無効化
+            enabled = false;            
             return false;
         }
 
@@ -42,35 +44,55 @@ public abstract class ClearParformance : MonoBehaviour
             m_ParformAnimRootObj.transform.SetPositionAndRotation(loc.position, loc.rotation);
         //パフォーマンスアニメ設定
         m_PerformAnim = m_ParformAnimRootObj.GetComponent<Animation>();
-        m_PerformAnim.clip = m_PerformAnimClip;
-        m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);
+        m_PerformAnim.clip = m_PerformAnimClip;        
         return true;
     }
 
+    //共通演出等を実行し、各演出を管理するコルーチン
     protected IEnumerator PerformManagement()
     {
         GameManager gm = GameManager.Instance;
-        var async = gm.m_GameStarter.AddScene("Fade");
-        while (async.isDone != false)
-        {
-            yield return null;
-        }
         //フェード
+        var async = gm.m_GameStarter.AddScene("FadeScene");
+        while (async.isDone != false) yield return null;
+        //シーンのオブジェクトの作成を待つ（２フレ）
+        yield return null;
+        yield return null;
+
+        //フェードイン
+        bool fadeEnd = false;
+        FadeSceneManager fadeMane = GameObject.Find("FadeSceneManager").GetComponent<FadeSceneManager>();
+        fadeMane.EndEvent.AddListener(() => { fadeEnd = true; });
+        fadeMane.FadeIn();
+
+        while (!fadeEnd) yield return null;
+        
+        /*暗転状態で行いたい処理*/
+        //各オブジェクトの配置を初期化
+        m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);
+        GameManager.Instance.m_PlayCamera.SetActive(false);
+        m_Camera.gameObject.SetActive(true);
+
+        //フェードアウト
+        fadeEnd = false;
+        fadeMane.FadeOut();       
+        while (!fadeEnd) yield return null;
+
+        //演出スタート
+        yield return StartCoroutine(PlayerParform());
+
+        //後処理
+        EndPerform();
     }
 
-    //protected IEnumerator LookBoss()
-    //{
-    //    GameManager gm = GameManager.Instance;
-    //    GameObject playCamera = gm.m_PlayCamera;
-    //    NavMeshAgent agent = playCamera.AddComponent<NavMeshAgent>();
-    //    agent.speed = 30.0f;
-    //    Vector3 bossPos  = gm.m_StageManger.m_Boss.transform.position;
-    //    agent.destination = bossPos;
-    //    while (playCamera)
-    //    {
+    //演出終了後の後処理
+    protected void EndPerform()
+    {
+        var async = GameManager.Instance.m_GameStarter.AddScene("Result");
+    }
 
-    //    }
-    //}
+    //各パフォーマンス
+    protected abstract IEnumerator PlayerParform();
 
     private void OnDestroy()
     {
