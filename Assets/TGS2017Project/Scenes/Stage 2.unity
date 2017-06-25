@@ -58,9 +58,9 @@ LightmapSettings:
     serializedVersion: 8
     m_Resolution: 0.1
     m_BakeResolution: 5
-    m_TextureWidth: 128
+    m_TextureWidth: 512
     m_TextureHeight: 1024
-    m_AO: 0
+    m_AO: 1
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
@@ -87,7 +87,7 @@ LightmapSettings:
     m_PVRFilteringAtrousColorSigma: 1
     m_PVRFilteringAtrousNormalSigma: 1
     m_PVRFilteringAtrousPositionSigma: 1
-  m_LightingDataAsset: {fileID: 112000166, guid: eef7f7e4348fd4e46804062f9400ac39,
+  m_LightingDataAsset: {fileID: 112000174, guid: eef7f7e4348fd4e46804062f9400ac39,
     type: 2}
   m_ShadowMaskMode: 2
 --- !u!196 &4
@@ -6505,7 +6505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ClearPerformLoc: {fileID: 0}
-  m_Boss: {fileID: 874001145}
+  m_Boss: {fileID: 0}
   m_ActivePanels: []
 --- !u!4 &1017997299
 Transform:
