@@ -21,14 +21,16 @@ public class BreakArm : MonoBehaviour
     void Dead()
     {
         Instantiate(m_Explosion, transform.position, transform.rotation);
+        AttackProcess.s_Chance = false;
         this.gameObject.SetActive(false);
     }
     public void OnTriggerEnter(Collider other)
     {        
-        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && AttackProcess.s_Chance)
+        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && AttackProcess.s_Chance && other.name == "Break")
         {
             Boss.HitPoint -= 30.0f;
             Boss.s_State = Boss.BossState.Invincible;
+            AttackProcess.s_Chance = false;
             Dead();
         }
         var damageComp = other.gameObject.GetComponent<Damageable>();
