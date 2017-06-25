@@ -72,6 +72,7 @@ public class Boss : MonoBehaviour
         HitPoint -= damage;
         if (HitPoint <= 0)
         {
+            s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             GameManager.Instance.m_IsGameClear = true;
@@ -84,22 +85,37 @@ public class Boss : MonoBehaviour
     {
         s_State = BossState.Move;
         m_LookCounter = 0;
-        m_Target = GameObject.FindGameObjectWithTag("Player").transform;
         m_Anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (s_HitPoint <= 0.0f)
+        {
+            s_State = BossState.Paralysis;
+            StartCoroutine(Death());
+        }
         //Debug.Log(s_State);
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
         {
             case PlayMode.TwinRobot:
-                m_Target = GameObject.FindGameObjectWithTag("Player").transform;
+                GameObject L = GameManager.Instance.m_LRobot;
+                GameObject R = GameManager.Instance.m_RRobot;
+                float LDistance = Vector3.Distance(transform.position, L.transform.position);
+                float RDistance = Vector3.Distance(transform.position, R.transform.position);
+                if (LDistance <= RDistance)
+                {
+                    m_Target = L.transform;
+                }
+                else
+                {
+                    m_Target = R.transform;
+                }
                 break;
             case PlayMode.HumanoidRobot:
-                m_Target = GameObject.FindGameObjectWithTag("Player").transform;
+                m_Target = GameManager.Instance.m_HumanoidRobot.transform;
                 break;
             case PlayMode.NoPlay:
             case PlayMode.Combine:
@@ -230,7 +246,9 @@ public class Boss : MonoBehaviour
         //}
     }
     void Dead()
-    {        
+    {
+        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+        GameManager.Instance.m_GameStarter.ChangeScenes(8);
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
@@ -264,6 +282,7 @@ public class Boss : MonoBehaviour
     }
     IEnumerator Death()
     {
+        Instantiate(m_LastExplosion, transform.position, transform.rotation);
         yield return new WaitForSeconds(4.0f);
         Dead();
     }
@@ -288,12 +307,6 @@ public class Boss : MonoBehaviour
                 Instantiate(m_Explosion, transform.position, transform.rotation);
                 Damage(30.0f, this);
                 s_State = BossState.Invincible;
-            }
-
-            if (HitPoint <= 0.0f)
-            {
-                s_State = BossState.Paralysis;
-                StartCoroutine(Death());
             }
         }
     }
