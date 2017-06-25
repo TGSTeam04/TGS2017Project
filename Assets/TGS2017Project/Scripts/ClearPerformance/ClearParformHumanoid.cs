@@ -7,7 +7,7 @@ public class ClearParformHumanoid : ClearParformance
     //ロボットの中心位置（カメラの注視点にする）
     private Transform m_HumanoidCenter;
     private Animator m_HAnimator;
-    
+
     public override bool CheckNecessary(GameManager gm)
     {
         GameObject Humanoid = GameManager.Instance.m_HumanoidRobot;
@@ -15,9 +15,9 @@ public class ClearParformHumanoid : ClearParformance
     }
 
     // Use this for initialization
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        if (!Redy()) return;
         Transform Humanoid = GameManager.Instance.m_HumanoidRobot.transform;
 
         Humanoid.parent = m_ParformAnimRootObj.transform;
@@ -54,7 +54,6 @@ public class ClearParformHumanoid : ClearParformance
         m_HAnimator.Play("Kimepo");
         yield return new WaitForSeconds(3.0f);
 
-        GameManager.Instance.StartCoroutine(GameManager.Instance.m_GameStarter.LoadScene(8));
         var async = gm.m_GameStarter.AddScene("Result");
     }
 }

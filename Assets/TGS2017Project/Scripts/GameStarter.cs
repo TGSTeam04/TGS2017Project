@@ -87,7 +87,7 @@ public class GameStarter : MonoBehaviour {
 		StartCoroutine(LoadScene(i));
 	}
 
-	public IEnumerator LoadScene(int i)
+	private IEnumerator LoadScene(int i)
 	{
 		GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
 		if (m_Loading) yield break;

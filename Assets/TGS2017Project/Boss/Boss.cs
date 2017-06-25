@@ -248,7 +248,6 @@ public class Boss : MonoBehaviour
     void Dead()
     {
         GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-        GameManager.Instance.m_GameStarter.ChangeScenes(8);
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()

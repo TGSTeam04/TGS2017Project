@@ -17,20 +17,21 @@ public abstract class ClearParformance : MonoBehaviour
 
     public abstract bool CheckNecessary(GameManager gm);
 
-    // Use this for initialization
-    protected virtual void Awake()
+    // Use this for initialization    
+
+    protected bool Redy()
     {
         GameManager gm = GameManager.Instance;
         if (CheckNecessary(gm))
         {
             enabled = false;
-            return;
-        }        
+            return false;
+        }
 
         //カメラの設定
         m_Camera.transform.parent = m_CameraParent;
         m_Camera.transform.localPosition = Vector3.zero;
-        m_Camera.transform.localRotation = Quaternion.identity;        
+        m_Camera.transform.localRotation = Quaternion.identity;
 
         //エネミー除去
         EnemyManager.Instance.gameObject.SetActive(false);
@@ -42,7 +43,8 @@ public abstract class ClearParformance : MonoBehaviour
         //パフォーマンスアニメ設定
         m_PerformAnim = m_ParformAnimRootObj.GetComponent<Animation>();
         m_PerformAnim.clip = m_PerformAnimClip;
-        m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);        
+        m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);
+        return true;
     }
 
     protected IEnumerator PerformManagement()
@@ -73,7 +75,6 @@ public abstract class ClearParformance : MonoBehaviour
     private void OnDestroy()
     {
         //カメラを元に戻す
-        GameManager gm = GameManager.Instance;
-        gm.m_PlayCamera.SetActive(true);
+        GameManager.Instance.m_PlayCamera.SetActive(true);
     }
 }
