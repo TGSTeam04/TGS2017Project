@@ -22,6 +22,7 @@ public class PlayCameraController : MonoBehaviour
 
     private PlayMode m_PreMode;
     private bool m_IsRunning = false;
+	private Coroutine m_combineCor;
     // Use this for initialization
     void Start()
     {
@@ -47,10 +48,10 @@ public class PlayCameraController : MonoBehaviour
             case PlayMode.HumanoidRobot:
                 break;
             case PlayMode.Combine:
-                if (m_PreMode == PlayMode.TwinRobot) StartCoroutine(Combine());
+                if (m_PreMode == PlayMode.TwinRobot) m_combineCor = StartCoroutine(Combine());
                 break;
             case PlayMode.Release:
-                if (m_PreMode != PlayMode.Release) StartCoroutine(Release());
+                if (m_PreMode != PlayMode.Release) StartCoroutine(Release(m_PreMode == PlayMode.Combine));
                 break;
             default:
                 break;
@@ -121,8 +122,7 @@ public class PlayCameraController : MonoBehaviour
         }
         m_Camera.fieldOfView = 60;
         yield return new WaitForSeconds(0.3f);
-        time = 1.0f;
-        for (float f = 0; f < time; f += Time.deltaTime)
+        while (GameManager.Instance.m_PlayMode == PlayMode.Combine)
         {
             transform.position = m_TPSTransform.position;
             transform.rotation = Quaternion.LookRotation(m_TPSTarget.position - m_TPSTransform.position);
@@ -135,10 +135,12 @@ public class PlayCameraController : MonoBehaviour
         m_IsRunning = false;
     }
 
-    IEnumerator Release()
+    IEnumerator Release(bool combine)
     {
-        if (m_IsRunning) { yield break; }
+        if (m_IsRunning && !combine) { yield break; }
         m_IsRunning = true;
+
+		if (m_combineCor != null) StopCoroutine(m_combineCor);
 
         for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
         {
