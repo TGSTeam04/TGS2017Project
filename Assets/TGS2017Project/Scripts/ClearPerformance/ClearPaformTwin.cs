@@ -12,9 +12,9 @@ public class ClearPaformTwin : ClearParformance
         return !lRobot.activeSelf;
     }
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        if (!Redy()) return;
         GameManager gm = GameManager.Instance;
 
         var lRobot = gm.m_LRobot;

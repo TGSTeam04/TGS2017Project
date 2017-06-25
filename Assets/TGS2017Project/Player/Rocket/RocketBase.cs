@@ -163,7 +163,7 @@ public class RocketBase : MonoBehaviour
         transform.rotation = m_Battery.transform.rotation;
         m_Rb.rotation = transform.rotation;
         //transform.rotation = Quaternion.Euler(new Vector3(20, 0, 0));
-        Debug.Log(transform.rotation.eulerAngles);
+        //Debug.Log(transform.rotation.eulerAngles);
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
         m_Timer = 0;

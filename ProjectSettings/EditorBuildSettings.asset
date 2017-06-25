@@ -53,3 +53,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/Pause.unity
     guid: aa0b6dee4a0c18a4aa26b4eb2d71cd93
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/ClearPerformance.unity
+    guid: cf9c034effe171243b17ca6e04714014
+  - enabled: 1
+    path: Assets/TGS2017Project/FadeScene.unity
+    guid: 00000000000000000000000000000000
