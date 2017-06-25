@@ -9,7 +9,6 @@ public class PlayCameraController : MonoBehaviour
     public Transform m_TopTransform;
     public Transform m_TPSTransform;    // TPSモードでのプレイヤーの位置
     public Transform m_TPSTarget;       // TPSモードでのカメラの注視点
-    private RaycastHit hit;             // 障害物判定用のRaycast
 
     public AnimationCurve m_FOVCurve;
     public AnimationCurve m_CombinePositionCurve;
@@ -23,6 +22,7 @@ public class PlayCameraController : MonoBehaviour
 
     private PlayMode m_PreMode;
     private bool m_IsRunning = false;
+    private Coroutine m_combineCor;
     // Use this for initialization
     void Start()
     {
@@ -48,10 +48,10 @@ public class PlayCameraController : MonoBehaviour
             case PlayMode.HumanoidRobot:
                 break;
             case PlayMode.Combine:
-                if (m_PreMode == PlayMode.TwinRobot) StartCoroutine(Combine());
+                if (m_PreMode == PlayMode.TwinRobot) m_combineCor = StartCoroutine(Combine());
                 break;
             case PlayMode.Release:
-                if (m_PreMode != PlayMode.Release) StartCoroutine(Release());
+                if (m_PreMode != PlayMode.Release) StartCoroutine(Release(m_PreMode == PlayMode.Combine));
                 break;
             default:
                 break;
@@ -74,20 +74,26 @@ public class PlayCameraController : MonoBehaviour
                 // カメラが壁に遮られキャラクターが見えなくなったらカメラを移動させる
                 // 作成者：Ho Siu Ki（何兆祺）
                 Vector3 camera_position = transform.position;       // カメラの位置
-                Vector3 player_position = m_TPSTransform.position;  // プレイヤーの位置
+                Vector3 target_position = m_TPSTarget.position;     // 注視点の位置
+
                 // カメラ、プレイヤーのy軸位置を2として計算
                 camera_position.y = 2;
-                player_position.y = 2;
-
+                target_position.y = 2;
+                // カメラとプレイヤーの距離を取得
+                float distance = Vector3.Distance(camera_position, target_position);
+                // Rayでカメラが壁に遮られるかどうかを判定
+                Ray ray = new Ray(target_position + Vector3.up, camera_position - target_position);
+                Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+                RaycastHit hitInfo;
                 // カメラが壁に遮られた場合
-                if (Physics.Linecast(player_position, camera_position, LayerMask.GetMask("Wall")))
+                if (Physics.Raycast(ray, out hitInfo, distance, LayerMask.GetMask("Wall")))
                 {
                     //Debug.Log("壁に遮られた");
-                    // カメラの移動
-                    transform.position = Vector3.Lerp(transform.position, m_TPSTransform.position / 2, m_MoveSpeed * Time.fixedDeltaTime);
-                    transform.Translate(new Vector3(0, 0.1f, 0));
+                    // カメラの位置を壁に保持
+                    var height = transform.position.y - hitInfo.point.y;
+                    transform.position = hitInfo.point;
+                    transform.Translate(new Vector3(0, height, 0));
                 }
-
                 break;
             case PlayMode.Combine:
                 break;
@@ -115,8 +121,7 @@ public class PlayCameraController : MonoBehaviour
         }
         m_Camera.fieldOfView = 60;
         yield return new WaitForSeconds(0.3f);
-        time = 1.0f;
-        for (float f = 0; f < time; f += Time.deltaTime)
+        while (GameManager.Instance.m_PlayMode == PlayMode.Combine)
         {
             transform.position = m_TPSTransform.position;
             transform.rotation = Quaternion.LookRotation(m_TPSTarget.position - m_TPSTransform.position);
@@ -129,10 +134,12 @@ public class PlayCameraController : MonoBehaviour
         m_IsRunning = false;
     }
 
-    IEnumerator Release()
+    IEnumerator Release(bool combine)
     {
-        if (m_IsRunning) { yield break; }
+        if (m_IsRunning && !combine) { yield break; }
         m_IsRunning = true;
+
+        if (m_combineCor != null) StopCoroutine(m_combineCor);
 
         for (float f = 0; f < GameManager.Instance.m_CombineTime; f += Time.deltaTime)
         {

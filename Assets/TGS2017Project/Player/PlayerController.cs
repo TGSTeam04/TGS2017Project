@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
 		m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(-Direction, Vector3.up));
 
 		float distaceRate = 1.5f;
-		m_TPSPosition.parent.rotation = Quaternion.identity;
+		m_TPSPosition.parent.localRotation = Quaternion.identity;
 		Vector3 v = m_TPSPosition.position;
 		v.y =  5.5f + distaceRate*Vector3.Distance(CenterPosition, StartPositionL);
 		m_TPSPosition.position = v;

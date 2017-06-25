@@ -51,6 +51,7 @@ public class HumanoidRobot : MonoBehaviour
 	private void OnEnable()
 	{
 		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
+		m_Animator.SetTrigger("Combined");
 	}
 
 
@@ -64,11 +65,11 @@ public class HumanoidRobot : MonoBehaviour
             m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
         }
 
-        if (Input.GetButtonDown("ChargeL") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
+        if ((Input.GetButtonDown("ChargeL") || Input.GetAxis("ChargeL")>0.5f) && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.LIsCanFire)
         {
             m_PlayerController.StartCoroutine(Charge(true));
         }
-        else if (Input.GetButtonDown("ChargeR") && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
+        else if ((Input.GetButtonDown("ChargeR") || Input.GetAxis("ChargeR") > 0.5f) && m_Energy >= m_Config.m_ChargeUseEnergy && !m_Charging && m_Battery.RIsCanFire)
         {
             m_PlayerController.StartCoroutine(Charge(false));
         }
