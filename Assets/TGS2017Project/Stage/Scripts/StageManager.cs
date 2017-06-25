@@ -11,6 +11,8 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
+    public Transform m_ClearPerformLoc;
+    public GameObject m_Boss;
     public ObserverBase m_Observer;
     private int m_killNum;
 
@@ -38,8 +40,6 @@ public class StageManager : MonoBehaviour
             //    StageLevel++;
         }
     }
-
-
 
     private void Awake()
     {

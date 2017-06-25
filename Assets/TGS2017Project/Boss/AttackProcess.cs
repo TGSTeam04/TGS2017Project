@@ -12,10 +12,17 @@ public class AttackProcess : MonoBehaviour
 
     public GameObject m_LeftArm;
     public GameObject m_RightArm;
+    public GameObject m_LeftArmPrefab;
+    public GameObject m_RightArmPrefab;
+
+    Transform m_Target;
+    Vector3 m_TargetPosition;
+    Transform m_Origin;
+    [SerializeField]
+    private float m_ArmSpeed;
 
     [SerializeField]
-    private int m_StopTime = 3;
-    private int m_StopCounter;
+    private float m_SeparationTime = 10.0f;
 
     public static bool s_Chance = false;
 
@@ -33,7 +40,7 @@ public class AttackProcess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //print(m_StopCounter);
+
     }
     void LeftPunchStart()
     {
@@ -42,10 +49,10 @@ public class AttackProcess : MonoBehaviour
     void LeftPunchEnd()
     {
         s_Chance = true;
-        //m_LeftArm.GetComponent<Separation>().enabled = true;
-        m_Sound.Play();
+        m_LeftArmPrefab.SetActive(true);
+        m_LeftArm.SetActive(false);
         m_Anim.speed = 0.0f;
-        StartCoroutine(Stop());
+        m_Sound.Play();
         m_LeftPunch.SetActive(false);
     }
     void LeftPunchStateEnd()
@@ -71,10 +78,10 @@ public class AttackProcess : MonoBehaviour
     void RightPunchEnd()
     {
         s_Chance = true;
-        //m_RightArm.GetComponent<Separation>().enabled = true;
-        m_Sound.Play();
+        m_RightArmPrefab.SetActive(true);
+        m_RightArm.SetActive(false);
         m_Anim.speed = 0.0f;
-        StartCoroutine(Stop());
+        m_Sound.Play();
         m_RightPunch.SetActive(false);
     }
     void RightPunchStateEnd()
@@ -104,16 +111,5 @@ public class AttackProcess : MonoBehaviour
     void StateEnd()
     {
         m_Anim.SetBool("BodyAttack", false);
-    }
-    IEnumerator Stop()
-    {
-        m_StopCounter = m_StopTime;
-        while(m_StopCounter > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            m_StopCounter--;
-        }
-        s_Chance = false;
-        m_Anim.speed = 1.0f;
     }
 }

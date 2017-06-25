@@ -1006,9 +1006,9 @@ GameObject:
   - component: {fileID: 23448897379228862}
   - component: {fileID: 208374154020071988}
   - component: {fileID: 114685264076468176}
-  m_Layer: 11
+  m_Layer: 18
   m_Name: Shield
-  m_TagString: Player
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2671,9 +2671,9 @@ GameObject:
   - component: {fileID: 23898782592654496}
   - component: {fileID: 208962463045426930}
   - component: {fileID: 114768756833472736}
-  m_Layer: 11
+  m_Layer: 18
   m_Name: Shield
-  m_TagString: Player
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4382,8 +4382,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388455412181692}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 0, z: -3.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.68833125, y: 0, z: -0.83708847}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4349695548461862}
@@ -7851,6 +7851,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxHp: 500
   m_TwinRobot: {fileID: 1831878919805214}
+  m_LRobot: {fileID: 114567452738797416}
+  m_RRobot: {fileID: 114100508200585354}
   m_HRobot: {fileID: 114566440414372090}
   m_ReleaseTime: 3
   m_CombineAnim: {fileID: 7400000, guid: baace44365813484d8b461930445a2a2, type: 2}

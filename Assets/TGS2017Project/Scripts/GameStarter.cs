@@ -87,7 +87,7 @@ public class GameStarter : MonoBehaviour {
 		StartCoroutine(LoadScene(i));
 	}
 
-	IEnumerator LoadScene(int i)
+	public IEnumerator LoadScene(int i)
 	{
 		GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
 		if (m_Loading) yield break;
@@ -135,5 +135,9 @@ public class GameStarter : MonoBehaviour {
 		yield return new WaitUntil(() => m_Async.isDone);
 		GameManager.Instance.m_LoadingProgress = 0;
 		m_Loading = false;
-	}
+	}   
+    public AsyncOperation AddScene(string name)
+    {
+        return SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+    }
 }

@@ -628,7 +628,6 @@ MonoBehaviour:
   m_Speed: 0
   m_BackSpeed: 0
   m_AdvanceTime: 0
-  m_Timer: 0
   m_TargetTag: Boss
   m_BuriedTime: 1
   m_IsKnockBack: 0

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114148805586186218}
   - component: {fileID: 82605323756621444}
   - component: {fileID: 135933115087197758}
+  - component: {fileID: 114961896167431374}
   m_Layer: 17
   m_Name: BossBullet
   m_TagString: BossBullet
@@ -137,6 +138,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyDamage: 50
   m_Speed: 50
+--- !u!114 &114961896167431374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425387227998530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d43c82637a0f84f97ff951313253ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Tags: 0000000001000000
 --- !u!135 &135933115087197758
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -5,6 +5,8 @@ public class Boss3_Controller : MonoBehaviour
 {
     public float m_MaxHp; 
     public GameObject m_TwinRobot;
+    public Boss3_Twin m_LRobot;
+    public Boss3_Twin m_RRobot;
     public Boss3_Humanoid m_HRobot;
     [SerializeField] float m_ReleaseTime;
     [SerializeField] AnimationClip m_CombineAnim;
@@ -80,6 +82,8 @@ public class Boss3_Controller : MonoBehaviour
     {
         if (m_State == PlayMode.HumanoidRobot)
             m_HRobot.Dead();
+        else
+            m_LRobot.Dead(); m_RRobot.Dead();
 
         m_State = PlayMode.NoPlay;
         GameManager.Instance.m_IsGameClear = true;

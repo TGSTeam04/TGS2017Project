@@ -151,7 +151,7 @@ public class TwinRobot : MonoBehaviour
 		set
 		{
 			m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);
-			if (!m_Shield.activeSelf && m_HP <= 0)
+			if (!m_Shield.activeSelf && m_HP <= 0 && GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
 			{
 				GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
 				GameManager.Instance.m_GameStarter.ChangeScenes(9);

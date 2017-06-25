@@ -92,12 +92,14 @@ public class SecondBoss : MonoBehaviour
     private void Damage(float damage, MonoBehaviour src)
     {
         HitPoint -= damage;
+        if (HitPoint < 0)
+            this.Delay(new WaitForSeconds(4.0f), Dead);
     }
 
     // Use this for initialization
     void Start()
     {
-        m_Target = GameObject.FindGameObjectWithTag("Player");
+        m_Target = GameManager.Instance.m_LRobot;
         m_Sound = GetComponent<AudioSource>();
         m_Anim = GetComponentInChildren<Animator>();
         s_State = SecondBossState.Ready;
@@ -125,14 +127,24 @@ public class SecondBoss : MonoBehaviour
 
         //m_HitPointBar.fillAmount = s_HitPoint;
 
-
         switch (GameManager.Instance.m_PlayMode)
         {
             case PlayMode.TwinRobot:
-                m_Target = GameObject.FindGameObjectWithTag("Player");
+                GameObject L = GameManager.Instance.m_LRobot;
+                GameObject R = GameManager.Instance.m_RRobot;
+                float LDistance = Vector3.Distance(transform.position, L.transform.position);
+                float RDistance = Vector3.Distance(transform.position, R.transform.position);
+                if (LDistance <= RDistance)
+                {
+                    m_Target = L;
+                }
+                else
+                {
+                    m_Target = R;
+                }
                 break;
             case PlayMode.HumanoidRobot:
-                m_Target = GameObject.FindGameObjectWithTag("Player");
+                m_Target = GameManager.Instance.m_HumanoidRobot;
                 break;
             case PlayMode.NoPlay:
             case PlayMode.Combine:
@@ -285,6 +297,7 @@ public class SecondBoss : MonoBehaviour
     void Dead()
     {
         GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+        GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }
     IEnumerator BattleChange()
