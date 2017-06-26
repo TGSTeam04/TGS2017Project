@@ -59,3 +59,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/FadeScene.unity
     guid: c1e5e0b96d23c4940800b89c7a3174a6
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/PlayerTest.unity
+    guid: ed554abd471f74948bed5cd19743288b
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Tutorial.unity
+    guid: 81ebee2bcb3b70d45895fb0f025fcf38
