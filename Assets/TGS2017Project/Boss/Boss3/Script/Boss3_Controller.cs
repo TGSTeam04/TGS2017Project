@@ -112,21 +112,21 @@ public class Boss3_Controller : MonoBehaviour
     {
         if (m_State != PlayMode.Release) yield break;
         m_State = PlayMode.Combine;
-        //m_KeepEnemyPosWall.SetActive(true);
+        //スタート位置を保存
         Vector3 StartPositionL = m_LRobot.transform.position;
         Vector3 StartPositionR = m_RRobot.transform.position;
+
+        //エンド時の情報を保存
         Vector3 Direction = Vector3.Normalize(StartPositionL - StartPositionR);
         Vector3 CenterPosition = Vector3.Lerp(StartPositionL, StartPositionR, 0.5f);
-        //Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
-        //Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
         m_HRobot.transform.position = CenterPosition;
         m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(-Direction, Vector3.up));
         Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
         Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
-
         m_HRobot.transform.localRotation = Quaternion.identity;
         m_CombineEffect.transform.position = m_HRobot.transform.position + new Vector3(0, 0.5f, 0);
 
+        /*スタートとエンドの情報を元に補間に関する処理*/
         //お互い方を向く
         float time = 0.3f;
         Quaternion StartRotationL = m_LRobotRigidbody.rotation;
@@ -142,14 +142,35 @@ public class Boss3_Controller : MonoBehaviour
         m_LRobotRigidbody.rotation = EndRotationL;
         m_RRobotRigidbody.rotation = EndRotationR;
 
+        /*破壊するエネミー保存*/
+        List<EnemyBase> enemys = new List<EnemyBase>();
+        float distance = Vector3.Distance(StartPositionR, StartPositionL);
+        Collider[] collider = Physics.OverlapBox(CenterPosition, new Vector3(2, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
+        foreach (var item in collider)
+        {
+            EnemyBase enemy = item.GetComponent<EnemyBase>();
+            if (enemy == null || enemys.Contains(enemy)) continue;
+            enemys.Add(enemy);
+        }       
+
         StartCoroutine(CombineEffect());
         //目的位置まで移動   
+        m_LRobotRigidbody.isKinematic = true;
+        m_RRobotRigidbody.isKinematic = true;
         for (float t = 0; t < 1; t += Time.fixedDeltaTime / m_CombineTimeRequired)
         {
             m_LRobotRigidbody.position = Vector3.Lerp(StartPositionL, EndPositionL, m_CombineCurve.Evaluate(t));
             m_RRobotRigidbody.position = Vector3.Lerp(StartPositionR, EndPositionR, m_CombineCurve.Evaluate(t));
 
             yield return new WaitForFixedUpdate();
+        }
+        m_LRobotRigidbody.isKinematic = false;
+        m_RRobotRigidbody.isKinematic = false;
+
+        //対象のエネミーを破壊
+        foreach (var enemy in enemys)
+        {
+            enemy.SetBreak();
         }
 
         m_HRobot.gameObject.SetActive(true);
