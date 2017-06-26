@@ -4383,8 +4383,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1388455412181692}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7, y: 0, z: -3.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.68833125, y: 0, z: -0.83708847}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4349695548461862}
@@ -7802,7 +7802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Battery: {fileID: 114791169665377708}
-  m_MaxHP: 1
+  m_MaxHP: 150
   m_Speed: 10
   m_RocketSpeed: 10
   m_RocketRange: 32.05
@@ -7886,14 +7886,13 @@ MonoBehaviour:
   m_LRobot: {fileID: 114100508200585354}
   m_RRobot: {fileID: 114567452738797416}
   m_HRobot: {fileID: 114566440414372090}
-  m_ReleaseTime: 10
+  m_ReleaseTime: 4
   m_CombineAnim: {fileID: 7400000, guid: baace44365813484d8b461930445a2a2, type: 2}
   m_CombineEffect: {fileID: 1481073263284446}
   m_HAnimator: {fileID: 95988550449448482}
   m_SEKimepo: {fileID: 8300000, guid: 21c2f681b1930214492f8c6c468a4234, type: 3}
   m_EffectAudioSrc: {fileID: 82711780265803598}
   m_ReleaseAnim: {fileID: 7400000, guid: 5434a36098072124e8954d8ae5fa6f22, type: 2}
-  m_Speed: 10
   m_RotationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7942,24 +7941,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  m_CombineDistance:
+  m_CombineCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 5
-      value: 15
-      inSlope: 0.70212823
-      outSlope: 0.70212823
-      tangentMode: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &114791169665377708
 MonoBehaviour:
   m_ObjectHideFlags: 1
