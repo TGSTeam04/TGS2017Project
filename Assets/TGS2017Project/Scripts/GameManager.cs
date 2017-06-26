@@ -57,10 +57,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-            m_IsGameClear = true;
-        
+    {        
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
 

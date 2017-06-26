@@ -20,11 +20,11 @@ public class Boss3_Controller : MonoBehaviour
     //野沢君のコンバイン、リリースで必要な変数
     private Rigidbody m_LRobotRigidbody;
     private Rigidbody m_RRobotRigidbody;
-    [SerializeField] float m_Speed = 10.0f;
+    private float m_CombineTimeRequired = 0.5f;
     //[SerializeField] GameObject m_KeepEnemyPosWall;
     [SerializeField] AnimationCurve m_RotationCurve;
     [SerializeField] AnimationCurve m_ReleaseCurve;
-    [SerializeField] AnimationCurve m_CombineDistance;
+    [SerializeField] AnimationCurve m_CombineCurve;
 
     private PlayMode m_State;
     private float m_StateTimer;
@@ -61,7 +61,7 @@ public class Boss3_Controller : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.m_BossHpRate = 1.0f;
+        //GameManager.Instance.m_BossHpRate = 1.0f;
         m_Hp = m_MaxHp;
         m_State = PlayMode.HumanoidRobot;
 
@@ -70,6 +70,9 @@ public class Boss3_Controller : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            ReleaseStart();
+
         if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
             return;
 
@@ -77,7 +80,7 @@ public class Boss3_Controller : MonoBehaviour
         switch (m_State)
         {
             case PlayMode.HumanoidRobot:
-                m_HRobot.BossUpdate();                
+                m_HRobot.BossUpdate();
                 break;
             default:
                 break;
@@ -110,8 +113,8 @@ public class Boss3_Controller : MonoBehaviour
         if (m_State != PlayMode.Release) yield break;
         m_State = PlayMode.Combine;
         //m_KeepEnemyPosWall.SetActive(true);
-        Vector3 StartPositionL = m_LRobotRigidbody.position;
-        Vector3 StartPositionR = m_RRobotRigidbody.position;
+        Vector3 StartPositionL = m_LRobot.transform.position;
+        Vector3 StartPositionR = m_RRobot.transform.position;
         Vector3 Direction = Vector3.Normalize(StartPositionL - StartPositionR);
         Vector3 CenterPosition = Vector3.Lerp(StartPositionL, StartPositionR, 0.5f);
         //Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
@@ -121,10 +124,10 @@ public class Boss3_Controller : MonoBehaviour
         Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
         Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
 
-        transform.localRotation = Quaternion.identity;
-        m_CombineEffect.transform.position = transform.position + new Vector3(0, 0.5f, 0);
-        StartCoroutine(CombineEffect());
+        m_HRobot.transform.localRotation = Quaternion.identity;
+        m_CombineEffect.transform.position = m_HRobot.transform.position + new Vector3(0, 0.5f, 0);
 
+        //お互い方を向く
         float time = 0.3f;
         Quaternion StartRotationL = m_LRobotRigidbody.rotation;
         Quaternion StartRotationR = m_RRobotRigidbody.rotation;
@@ -139,15 +142,15 @@ public class Boss3_Controller : MonoBehaviour
         m_LRobotRigidbody.rotation = EndRotationL;
         m_RRobotRigidbody.rotation = EndRotationR;
 
-        for (float t = 0; Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2) != EndPositionL; t += Time.fixedDeltaTime)
+        StartCoroutine(CombineEffect());
+        //目的位置まで移動   
+        for (float t = 0; t < 1; t += Time.fixedDeltaTime / m_CombineTimeRequired)
         {
-            m_LRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2));
-            m_RRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionR, EndPositionR, m_CombineDistance.Evaluate(t) * m_Speed * 2));
+            m_LRobotRigidbody.position = Vector3.Lerp(StartPositionL, EndPositionL, m_CombineCurve.Evaluate(t));
+            m_RRobotRigidbody.position = Vector3.Lerp(StartPositionR, EndPositionR, m_CombineCurve.Evaluate(t));
 
             yield return new WaitForFixedUpdate();
         }
-
-        yield return new WaitForSeconds(0.3f);
 
         m_HRobot.gameObject.SetActive(true);
         m_TwinRobot.SetActive(false);
@@ -159,13 +162,13 @@ public class Boss3_Controller : MonoBehaviour
         if (m_State != PlayMode.HumanoidRobot) yield break;
 
         m_State = PlayMode.Release;
+
+        Vector3 direction = m_HRobot.transform.right;
+        m_LRobot.transform.position = m_HRobot.transform.position - (direction * 1f);
+        m_RRobot.transform.position = m_HRobot.transform.position + (direction * 1f);
+
         m_HRobot.gameObject.SetActive(false);
         m_TwinRobot.gameObject.SetActive(true);
-
-        Vector3 vector = m_HRobot.transform.right;
-        vector *= vector.x > vector.z ? 1 : -1;
-        m_LRobotRigidbody.position = m_HRobot.transform.position - (vector * 0.1f);
-        m_RRobotRigidbody.position = m_HRobot.transform.position + (vector * 0.1f);
 
         Quaternion lRotation = Quaternion.LookRotation(m_RRobotRigidbody.position - m_LRobotRigidbody.position);
         Quaternion rRotation = Quaternion.LookRotation(m_LRobotRigidbody.position - m_RRobotRigidbody.position);
@@ -177,31 +180,31 @@ public class Boss3_Controller : MonoBehaviour
         RaycastHit hit;
         int layermask = LayerMask.GetMask(new string[] { "Wall" });
         yield return null;
-        const float m_CombineTimeRequierd = 5;
+        const float m_CombineTimeRequierd = 1;
         for (float f = 0; f < m_CombineTimeRequierd; f += Time.fixedDeltaTime)
         {
             t = m_ReleaseCurve.Evaluate(f / m_CombineTimeRequierd);
             move = Mathf.Lerp(0.5f, l, t) - preMove;
             if (!Physics.CheckSphere(m_LRobotRigidbody.position, radius, layermask))
             {
-                if (Physics.SphereCast(m_LRobotRigidbody.position, radius, -vector, out hit, move, layermask))
+                if (Physics.SphereCast(m_LRobotRigidbody.position, radius, -direction, out hit, move, layermask))
                 {
-                    m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * hit.distance);
+                    m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - direction * hit.distance);
                 }
                 else
                 {
-                    m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - vector * move);
+                    m_LRobotRigidbody.MovePosition(m_LRobotRigidbody.position - direction * move);
                 }
             }
             if (!Physics.CheckSphere(m_RRobotRigidbody.position, radius, layermask))
             {
-                if (Physics.SphereCast(m_RRobotRigidbody.position, radius, vector, out hit, move, layermask))
+                if (Physics.SphereCast(m_RRobotRigidbody.position, radius, direction, out hit, move, layermask))
                 {
-                    m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * hit.distance);
+                    m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + direction * hit.distance);
                 }
                 else
                 {
-                    m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + vector * move);
+                    m_RRobotRigidbody.MovePosition(m_RRobotRigidbody.position + direction * move);
                 }
             }
             preMove += move;
@@ -209,15 +212,15 @@ public class Boss3_Controller : MonoBehaviour
             m_RRobotRigidbody.MoveRotation(Quaternion.SlerpUnclamped(rRotation, lRotation, t * 4));
             yield return new WaitForFixedUpdate();
         }
-        m_LRobotRigidbody.position -= vector * (l - preMove);
-        m_RRobotRigidbody.position += vector * (l - preMove);
-        Debug.Log("release完了" + "waitTime : " + m_ReleaseTime);
+        m_LRobotRigidbody.position -= direction * (l - preMove);
+        m_RRobotRigidbody.position += direction * (l - preMove);
         yield return new WaitForSeconds(m_ReleaseTime);
         CombineStart();
     }
 
     private IEnumerator CombineEffect()
     {
+        yield return new WaitForSeconds(m_CombineTimeRequired - 0.1f);
         m_CombineEffect.SetActive(true);
         yield return new WaitForSeconds(1);
         m_CombineEffect.SetActive(false);
