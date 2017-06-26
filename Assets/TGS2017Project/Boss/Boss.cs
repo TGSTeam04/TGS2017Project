@@ -74,7 +74,7 @@ public class Boss : MonoBehaviour
         {
             s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
-            Pauser.Pause(PauseTag.Enemy);     
+            Pauser.Pause(PauseTag.Enemy);
             GameManager.Instance.m_IsGameClear = true;    
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
@@ -91,11 +91,6 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (s_HitPoint <= 0.0f)
-        {
-            s_State = BossState.Paralysis;
-            StartCoroutine(Death());
-        }
         //Debug.Log(s_State);
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
@@ -297,7 +292,7 @@ public class Boss : MonoBehaviour
             if (m_LeftArm.activeSelf == false && m_RightArm.activeSelf == false)
             {
                 Instantiate(m_Explosion, transform.position, transform.rotation);
-                Damage(30.0f, this);// HitPoint -= 0.25f;
+                Damage(30.0f, this);
                 s_State = BossState.Invincible;
             }
             else

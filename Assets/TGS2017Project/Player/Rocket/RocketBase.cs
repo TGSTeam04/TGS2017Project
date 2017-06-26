@@ -181,8 +181,7 @@ public class RocketBase : MonoBehaviour
 
     //Player、Boss3共通処理オーバーライドするときにbaseの関数を呼んでください。
     protected virtual void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log(collision.gameObject);
+    {        
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         m_AudioSrc.PlayOneShot(m_SEHit);

@@ -517,13 +517,12 @@ MonoBehaviour:
   m_State: 0
   m_Battery: {fileID: 0}
   m_StandTrans: {fileID: 0}
-  m_ApplyDamage: 10
+  m_ApplyDamage: 40
   m_ChildApplyDamage: 30
   m_Speed: 20
   m_BackSpeed: 40
   m_AdvanceTime: 1
-  m_Timer: 0
-  m_TargetTag: Boss
+  m_TargetTag: Player
   m_BuriedTime: 1
   m_IsKnockBack: 1
   m_KnockBackForce: 3

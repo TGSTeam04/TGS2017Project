@@ -20,7 +20,7 @@ public abstract class ClearParformance : MonoBehaviour
     // Use this for initialization    
 
     //共通準備
-    protected bool Redy()
+    protected bool CommonRedy()
     {
         GameManager gm = GameManager.Instance;
         if (CheckNecessary(gm))
@@ -48,6 +48,8 @@ public abstract class ClearParformance : MonoBehaviour
         return true;
     }
 
+    protected abstract void Redy();
+
     //共通演出等を実行し、各演出を管理するコルーチン
     protected IEnumerator PerformManagement()
     {
@@ -66,9 +68,11 @@ public abstract class ClearParformance : MonoBehaviour
         fadeMane.FadeIn();
 
         while (!fadeEnd) yield return null;
-        
+
         /*暗転状態で行いたい処理*/
         //各オブジェクトの配置を初期化
+        if (!CommonRedy()) yield break;
+        Redy();
         m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);
         GameManager.Instance.m_PlayCamera.SetActive(false);
         m_Camera.gameObject.SetActive(true);

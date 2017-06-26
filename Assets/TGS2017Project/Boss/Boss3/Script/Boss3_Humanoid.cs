@@ -9,6 +9,7 @@ public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
     private Boss3_Controller m_BossController;
+    [SerializeField] RocketBattery m_Battery;
 
     [SerializeField] float m_MaxHP = 100;
     private float m_HP;
@@ -18,13 +19,12 @@ public class Boss3_Humanoid : MonoBehaviour
     [SerializeField] float m_RocketSpeed;
     [SerializeField] float m_RocketRange;
     [SerializeField] float m_RocketInterval;
-    [SerializeField] float m_NeedMoveDistance;
+    [SerializeField] float m_NeedMoveDistance;    
 
     //各コンポーネント    
     private NavMeshAgent m_NavAgent;
     private Rigidbody m_Rb;
-    private Animator m_Anim;
-    private RocketBattery m_Battery;
+    private Animator m_Anim;    
     private Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
@@ -47,7 +47,6 @@ public class Boss3_Humanoid : MonoBehaviour
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Rb = GetComponent<Rigidbody>();
         m_Anim = GetComponentInChildren<Animator>();
-        m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
         m_DamageComp.Del_ReciveDamage = Damaged;
 
@@ -151,7 +150,7 @@ public class Boss3_Humanoid : MonoBehaviour
         m_BT.SetRootNode(par_Look_Other);
 
         /*ロケットパンチ*/
-        BT_FireRocket BTT_Rocket = new BT_FireRocket(GetComponent<RocketBattery>());
+        BT_FireRocket BTT_Rocket = new BT_FireRocket(m_Battery);
         BDecorator dec_RocektRnage = new BD_CloserThen("target", m_RocketRange);
         BTT_Rocket.AddDecorator(dec_RocektRnage);
         BTT_Rocket.AddDecorator(new BD_CoolTime(m_RocketInterval));
