@@ -6,7 +6,8 @@ public class Boss3_Twin : MonoBehaviour
 {
     [SerializeField] Boss3_Controller m_BossController;
     [SerializeField] Renderer m_ShildRender;
-    [SerializeField] Gradient m_ShieldColor;   
+    [SerializeField] Renderer m_OtherShildRender;
+    [SerializeField] Gradient m_ShieldColor;
 
     //エフェクト
     [SerializeField] GameObject m_Explosion;
@@ -15,15 +16,16 @@ public class Boss3_Twin : MonoBehaviour
         get { return m_BossController.Hp; }
         set
         {
-            m_BossController.Hp = value;
+            m_BossController.Hp = Mathf.Max(0, value);
             //シールドに反映
             m_ShildRender.gameObject.SetActive(HP > 0);
             m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
+            m_OtherShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
         }
     }
 
     private void Awake()
-    {       
+    {
         Damageable[] damageComps = GetComponentsInChildren<Damageable>();
         foreach (var comp in damageComps)
         {

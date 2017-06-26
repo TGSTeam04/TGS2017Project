@@ -61,6 +61,7 @@ public class RocketBase : MonoBehaviour
         m_AudioSrc = gameObject.AddComponent<AudioSource>();
         m_Rb = GetComponent<Rigidbody>();
         m_BCollider = GetComponent<BoxCollider>();
+
         m_AudioSrc.spatialBlend = 1.0f;
         m_IsKnockBack = true;
     }
@@ -324,7 +325,6 @@ public class RocketBase : MonoBehaviour
         if (other.tag == m_TargetTag)
         {//攻撃対象と衝突
             other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ChildApplyDamage, this);
-            Debug.Log("ノックバックEnemy　が　ターゲット　と衝突");
         }
 
         //Enmeyの消滅処理
