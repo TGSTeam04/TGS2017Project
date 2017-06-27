@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class LoadingController : MonoBehaviour {
@@ -19,6 +20,8 @@ public class LoadingController : MonoBehaviour {
 	private float m_Time;
 	[SerializeField]
 	private float m_T;
+	[SerializeField]
+	private Image m_ProgressBer;
 
 	// Use this for initialization
 	void Start () {
@@ -48,7 +51,7 @@ public class LoadingController : MonoBehaviour {
 			default:
 				break;
 		}
-
+		m_ProgressBer.fillAmount = GameManager.Instance.m_LoadingProgress;
 	}
 
 	IEnumerator In()

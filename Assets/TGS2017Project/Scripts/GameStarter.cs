@@ -34,6 +34,8 @@ public class GameStarter : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
         m_Common = SceneManager.GetActiveScene();
         ChangeScenes(m_StartScene);
     }
