@@ -97,8 +97,7 @@ public class SecondBoss : MonoBehaviour
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
             Pauser.Pause(PauseTag.Enemy);
             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-            GameManager.Instance.m_IsGameClear = true;
-            this.Delay(new WaitForSeconds(4.0f), Dead);
+            StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
 
@@ -296,7 +295,6 @@ public class SecondBoss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
         GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }

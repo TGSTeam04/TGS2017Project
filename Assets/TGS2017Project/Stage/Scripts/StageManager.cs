@@ -15,6 +15,7 @@ public class StageManager : MonoBehaviour
     public GameObject m_Boss;
     public ObserverBase m_Observer;
     private int m_killNum;
+    [SerializeField] GameObject m_BGM;
 
     //[SerializeField]//ボスが出てくるStageLevel
     //private int m_MaxStageLevel;
@@ -90,6 +91,11 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    public void StageClear()
+    {
+        m_BGM.GetComponent<AudioSource>().enabled = false;
+    }
+
     private void OnDestroy()
     {
         //全てのサブジェクトとのBindを切る
@@ -101,16 +107,5 @@ public class StageManager : MonoBehaviour
     public int StageLevel
     {
         get; set;
-        //get { return m_stageLevel; }
-        //set
-        //{
-        //    m_stageLevel = value;
-        //    m_Observer.NotifyToSubjects("StageLevelUp", m_stageLevel);
-        //    if (m_stageLevel >= m_MaxStageLevel)
-        //    {
-        //        m_Observer.NotifyToSubjects("BossCommingLevel");
-        //    }
-        //    m_ActivePanels.AddRange(m_StagePanels[m_stageLevel]);
-        //}
     }
 }

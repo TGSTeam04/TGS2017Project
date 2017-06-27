@@ -25,6 +25,7 @@ public class ClearParformHumanoid : ClearParformance
 
         m_HumanoidCenter = Humanoid.FindChild("LookPoint");
         m_HAnimator = Humanoid.FindChild("Model").GetComponent<Animator>();
+        m_HAnimator.Play("WalkBlendTree");
         //m_HAnim = m_Humanoid.transform.FindChild("Model").GetComponent<Animation>();//m_Humanoid.GetComponentInChildren<Animator>();
     }
 
