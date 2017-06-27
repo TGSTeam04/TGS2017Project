@@ -108,7 +108,7 @@ public class Boss3_Humanoid : MonoBehaviour
         {
             GameObject shockEff = Instantiate(m_Efect_Numbness, transform);
             Vector3 modiy = new Vector3(0, 1.7f, 0)
-                + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));            
+                + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 1f), Random.Range(-0.2f, 0.2f));            
             shockEff.transform.position = transform.position + modiy;
             m_Numbness.Add(shockEff);
 

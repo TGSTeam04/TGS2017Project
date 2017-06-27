@@ -21,7 +21,7 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private int m_Interval = 10;
     [SerializeField]
-    private int m_LookFrequency = 3;
+    private int m_LookFrequency = 2;
 
     private int m_AttackCounter;
     private int m_LookCounter;
@@ -75,7 +75,7 @@ public class Boss : MonoBehaviour
             s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
             Pauser.Pause(PauseTag.Enemy);
-            GameManager.Instance.m_IsGameClear = true;    
+            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
@@ -136,7 +136,7 @@ public class Boss : MonoBehaviour
                 if (!AttackProcess.s_Chance)
                 {
                     m_Anim.speed = 1.0f;
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
                     }
@@ -149,7 +149,7 @@ public class Boss : MonoBehaviour
             case BossState.Attack:
                 if (!AttackProcess.s_Chance) m_Anim.speed = 1.0f;
                 Attack();
-                if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                 {
                     s_State = BossState.Move;
                 }
@@ -163,7 +163,7 @@ public class Boss : MonoBehaviour
                 }
                 if (angle < 15)
                 {
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         s_State = BossState.Move;
                     }
@@ -185,7 +185,7 @@ public class Boss : MonoBehaviour
                 }
                 if (angle < 15)
                 {
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         s_State = BossState.Move;
                     }
@@ -242,6 +242,7 @@ public class Boss : MonoBehaviour
     }
     void Dead()
     {
+        GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
@@ -278,29 +279,5 @@ public class Boss : MonoBehaviour
         Instantiate(m_LastExplosion, transform.position, transform.rotation);
         yield return new WaitForSeconds(4.0f);
         Dead();
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        //if (other.name == "Beam")
-        //{
-        //    m_SearchArea.SetActive(false);
-        //    s_State = BossState.Paralysis;
-        //    StartCoroutine(Recovery());
-        //}
-        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && s_State != BossState.Invincible)
-        {
-            if (m_LeftArm.activeSelf == false && m_RightArm.activeSelf == false)
-            {
-                Instantiate(m_Explosion, transform.position, transform.rotation);
-                Damage(30.0f, this);
-                s_State = BossState.Invincible;
-            }
-            else
-            {
-                Instantiate(m_Explosion, transform.position, transform.rotation);
-                Damage(30.0f, this);
-                s_State = BossState.Invincible;
-            }
-        }
     }
 }

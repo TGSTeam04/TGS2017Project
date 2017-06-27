@@ -102,6 +102,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         yield return new WaitForSeconds(3);        
         if (m_IsGameClear)
         {
+            m_StageManger.StageClear();
             m_GameStarter.AddScene("ClearPerformance");
         }
         m_IsGameClear = false;

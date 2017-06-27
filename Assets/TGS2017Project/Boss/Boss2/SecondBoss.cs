@@ -97,8 +97,7 @@ public class SecondBoss : MonoBehaviour
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
             Pauser.Pause(PauseTag.Enemy);
             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-            GameManager.Instance.m_IsGameClear = true;
-            this.Delay(new WaitForSeconds(4.0f), Dead);
+            StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
 
@@ -124,7 +123,12 @@ public class SecondBoss : MonoBehaviour
         //    m_Sound.clip = m_MoveSound;
         //    m_Sound.Play();
         //}
-
+        if (HitPoint <= 0)
+        {
+            s_State = SecondBossState.Paralysis;
+            m_Sound.Stop();
+            StartCoroutine(Death());
+        }
         if (m_Velocity.magnitude < m_MoveSpeed)
         {
             m_Velocity += transform.forward * m_Accel * Time.deltaTime;
@@ -272,7 +276,6 @@ public class SecondBoss : MonoBehaviour
                 {
                     s.GetComponent<ParticleSystem>().Stop();
                 }
-                m_Collision.isTrigger = true;
                 break;
             case SecondBossState.Invincible:
                 m_Anim.speed = 1.0f;
@@ -296,7 +299,6 @@ public class SecondBoss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
         GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }
@@ -335,6 +337,7 @@ public class SecondBoss : MonoBehaviour
     }
     IEnumerator Death()
     {
+        Instantiate(m_LastExplosion, transform.position, transform.rotation);
         yield return new WaitForSeconds(4.0f);
         Dead();
     }

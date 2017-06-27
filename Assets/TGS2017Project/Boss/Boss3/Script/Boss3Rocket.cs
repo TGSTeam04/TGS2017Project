@@ -32,17 +32,17 @@ public class Boss3Rocket : RocketBase
     {
         base.OnCollisionEnter(collision);
 
-        if (collision.gameObject.tag == "PlayerBullet" && m_State != RocketState.Buried)
+        if (collision.gameObject.tag == "PlayerBullet" && State != RocketState.Buried)
         {
             //反射
             SetLayer("PlayerBullet");
-            m_State = RocketState.Reflected;
+            State = RocketState.Reflected;
         }
         else if (collision.gameObject == m_Battery.gameObject) 
         {
             collision.gameObject.GetComponent<Damageable>().ApplyDamage(m_ReflectDamage, this);
             SetLayer("BossBullet");
-            m_State = RocketState.Idle;
+            State = RocketState.Idle;
             gameObject.SetActive(false);
             m_StandTrans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 

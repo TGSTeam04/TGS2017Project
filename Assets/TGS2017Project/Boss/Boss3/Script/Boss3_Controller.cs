@@ -61,8 +61,8 @@ public class Boss3_Controller : MonoBehaviour
 
     private void Awake()
     {
-        //GameManager.Instance.m_BossHpRate = 1.0f;
-        m_Hp = m_MaxHp;
+        GameManager.s_StageNumber = 3;
+        Hp = m_MaxHp;
         m_State = PlayMode.HumanoidRobot;
 
         m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();

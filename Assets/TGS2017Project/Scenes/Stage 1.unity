@@ -247,7 +247,7 @@ Transform:
   - {fileID: 1614095621}
   - {fileID: 1530456747}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &62489383
 GameObject:
@@ -3226,6 +3226,11 @@ Prefab:
       propertyPath: m_Destinations.Array.data[2]
       value: 
       objectReference: {fileID: 804119732}
+    - target: {fileID: 114257214634954820, guid: d9a0107f4533dd7448d279578b8aa5df,
+        type: 2}
+      propertyPath: m_BulletParent
+      value: 
+      objectReference: {fileID: 2129794631}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9a0107f4533dd7448d279578b8aa5df, type: 2}
   m_IsPrefabParent: 0
@@ -5648,6 +5653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ClearPerformLoc: {fileID: 0}
   m_Boss: {fileID: 1145712963}
+  m_BGM: {fileID: 1936755998}
   m_ActivePanels: []
 --- !u!4 &1017997299
 Transform:
@@ -8366,7 +8372,7 @@ Transform:
   - {fileID: 1683619603}
   - {fileID: 1973209102}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1443126952
 GameObject:
@@ -11123,7 +11129,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896719207
 GameObject:
@@ -11243,7 +11249,7 @@ GameObject:
   - component: {fileID: 1936756000}
   - component: {fileID: 1936755999}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11316,7 +11322,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -11340,7 +11346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1939659960
 GameObject:
@@ -12215,12 +12221,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2129794630}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1911543605}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130460000
 GameObject:
