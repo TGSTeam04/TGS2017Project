@@ -9,6 +9,9 @@ public class UIPlayerStatus : MonoBehaviour
     private PlayerController m_Player;
     public GameObject m_Black;
 
+    public AudioClip m_AudioClip;
+    AudioSource m_Audio;
+
     public Image m_BossHP;
 
     [SerializeField]
@@ -23,6 +26,7 @@ public class UIPlayerStatus : MonoBehaviour
     void Start()
     {
         m_Player = GameManager.Instance.m_PlayerController;
+        m_Audio = GetComponent<AudioSource>();
         StartCoroutine(countdown());
     }
 
@@ -42,9 +46,12 @@ public class UIPlayerStatus : MonoBehaviour
         m_ImageB.SetActive(false);
         yield return new WaitForSeconds(GameManager.Instance.m_LoadingAnimationTime);
         yield return new WaitForSeconds(1);
+        m_Audio.Play();
         m_ImageA.SetActive(true);
         yield return new WaitForSeconds(1);
         m_ImageA.SetActive(false);
+        m_Audio.clip = m_AudioClip;
+        m_Audio.Play();
         m_ImageB.SetActive(true);
         yield return new WaitForSeconds(1);
         m_Black.SetActive(false);

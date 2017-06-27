@@ -416,7 +416,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4822691405610324}
-  - component: {fileID: 114209751704462744}
   - component: {fileID: 54149888640085448}
   - component: {fileID: 114892014742185960}
   - component: {fileID: 114136627014699040}
@@ -1155,7 +1154,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4567931521369386}
-  - component: {fileID: 114846187742177356}
   - component: {fileID: 54617785571596816}
   - component: {fileID: 114674595532891386}
   - component: {fileID: 114393932096098024}
@@ -9395,18 +9393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Tags: 0000000001000000
---- !u!114 &114209751704462744
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118137556215998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1441785c67d7f4c40b7d8871a1fbea4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114251708463455026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9421,7 +9407,7 @@ MonoBehaviour:
   m_MoveSpeed: 10
   m_RotateSpeed: 30
   m_Interval: 10
-  m_LookFrequency: 3
+  m_LookFrequency: 2
   m_LeftArm: {fileID: 1696278470834410}
   m_RightArm: {fileID: 1990528125335848}
   m_Core: {fileID: 4072991686434584}
@@ -9484,12 +9470,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2f2893d00770947bdace0ccc8ac2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 10
-  m_ActivityTime: 10
-  m_ApplyDamage: 5
+  m_MoveSpeed: 7
+  m_ActivityTime: 5
+  m_ApplyDamage: 70
   m_IsLeft: 1
   m_IsRight: 0
   m_Arm: {fileID: 1696278470834410}
+  m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114747537913620134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9501,18 +9488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03965ae3bdc61bb459c82c98a65a5e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114846187742177356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1368212221918780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1441785c67d7f4c40b7d8871a1fbea4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114892014742185960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9524,12 +9499,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2f2893d00770947bdace0ccc8ac2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveSpeed: 10
-  m_ActivityTime: 10
-  m_ApplyDamage: 5
+  m_MoveSpeed: 7
+  m_ActivityTime: 5
+  m_ApplyDamage: 70
   m_IsLeft: 0
   m_IsRight: 1
   m_Arm: {fileID: 1990528125335848}
+  m_Explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
 --- !u!114 &114920639042236780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9598,7 +9574,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1088513646812686}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 4
@@ -9611,7 +9587,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328107221639284}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 4

@@ -6,6 +6,8 @@ public class AudioPlayer : MonoBehaviour {
 
     AudioSource m_Audio;
 
+    bool m_IsPlay = false;
+
 	// Use this for initialization
 	void Start () {
         m_Audio = GetComponent<AudioSource>();
@@ -18,5 +20,13 @@ public class AudioPlayer : MonoBehaviour {
     public void PlaySE()
     {
         m_Audio.Play();
+    }
+    public void PlaySE2()
+    {
+        if (m_IsPlay != true)
+        {
+            m_Audio.Play();
+        }
+        m_IsPlay = true;
     }
 }
