@@ -9,10 +9,7 @@ public class RocketBattery : MonoBehaviour
     [SerializeField] GameObject m_RocketPrefub;
     [SerializeField] Transform m_LStandTrans;
     [SerializeField] Transform m_RStandTrans;
-    [SerializeField] float m_KnockBackForce;
-    [SerializeField] bool m_IsKnockBack;
     [SerializeField] string m_RocketLayer;
-    [SerializeField] string m_TargetTag;
     [SerializeField] AudioClip m_SEColectRocet;
     [SerializeField] GameObject m_Effect_Chage;
     [SerializeField] Animator m_HumanoidAnim;
@@ -55,15 +52,10 @@ public class RocketBattery : MonoBehaviour
             m_RRocket.m_StandTrans = m_RStandTrans;
         }
 
-        SetIsKnockBack(m_IsKnockBack);
-        SetKnockBackForce(m_KnockBackForce);
-        //m_LRocket.SetLayer(m_RocketLayer);
-        //m_RRocket.SetLayer(m_RocketLayer);
         m_RRocket.gameObject.SetActive(false);
         m_LRocket.gameObject.SetActive(false);
         m_LRocket.m_Battery = this;
         m_RRocket.m_Battery = this;
-
         m_EffectChagePos = m_Effect_Chage.transform.localPosition;
     }
 
@@ -116,8 +108,8 @@ public class RocketBattery : MonoBehaviour
     //R発射
     public IEnumerator RAnimatedFire()
     {
-        m_HumanoidAnim.SetTrigger("RFire");        
-        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;        
+        m_HumanoidAnim.SetTrigger("RFire");
+        m_Effect_Chage.transform.position = transform.position + m_EffectChagePos;
         m_Effect_Chage.SetActive(true);
         yield return new WaitForAnimation(m_HumanoidAnim, FireRateInAnim);
         m_Effect_Chage.SetActive(false);

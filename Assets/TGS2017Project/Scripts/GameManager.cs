@@ -32,7 +32,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public GameStarter m_GameStarter;
 
-    bool m_IsRun;
+    public bool m_IsRun;
 
     [SerializeField]
     public BreakEnemyTable m_BreakEnemyTable;
@@ -52,12 +52,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // Use this for initialization
     void Start()
     {
-        Update();
+        Update();        
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
 
@@ -74,7 +74,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             default:
                 break;
         }
-
         if (m_IsGameClear || m_IsGameOver)
         {
             StartCoroutine(GameEnd());
@@ -94,16 +93,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     IEnumerator GameEnd()
     {
+        m_PlayMode = PlayMode.NoPlay;
         if (m_IsRun)
         {
             yield break;
         }
         m_IsRun = true;
-        yield return new WaitForSeconds(3);
-        m_GameStarter.ChangeScenes(0);
+        yield return new WaitForSeconds(3);        
         if (m_IsGameClear)
         {
-            m_GameStarter.ChangeScenes(8);
+            m_GameStarter.AddScene("ClearPerformance");
         }
         m_IsGameClear = false;
         m_IsGameOver = false;

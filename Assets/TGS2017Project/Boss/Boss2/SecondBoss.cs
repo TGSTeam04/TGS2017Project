@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SecondBoss : MonoBehaviour
 {
-
     public enum SecondBossState
     {
         Ready,          // 登場
@@ -92,6 +91,15 @@ public class SecondBoss : MonoBehaviour
     private void Damage(float damage, MonoBehaviour src)
     {
         HitPoint -= damage;
+        if (HitPoint < 0)
+        {
+            s_State = SecondBossState.Paralysis;
+            Instantiate(m_LastExplosion, transform.position, transform.rotation);
+            Pauser.Pause(PauseTag.Enemy);
+            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+            GameManager.Instance.m_IsGameClear = true;
+            this.Delay(new WaitForSeconds(4.0f), Dead);
+        }
     }
 
     // Use this for initialization
@@ -286,7 +294,6 @@ public class SecondBoss : MonoBehaviour
                 {
                     s_State = SecondBossState.Ready;
                 }
-                
                 break;
         }
 
@@ -294,7 +301,7 @@ public class SecondBoss : MonoBehaviour
     void Dead()
     {
         GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-        GameManager.Instance.m_GameStarter.ChangeScenes(8);
+        GameManager.Instance.m_IsGameClear = true;
         Destroy(gameObject);
     }
     IEnumerator BattleChange()

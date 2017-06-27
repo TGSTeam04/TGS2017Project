@@ -52,7 +52,7 @@ public class Boss : MonoBehaviour
         get { return s_HitPoint; }
         set
         {
-            s_HitPoint = value;
+            s_HitPoint = Mathf.Max(0, value);
             GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
         }
     }
@@ -69,7 +69,15 @@ public class Boss : MonoBehaviour
     //ダメージコンポーネントのダメージ
     private void Damage(float damage, MonoBehaviour src)
     {
-        HitPoint -= damage;        
+        HitPoint -= damage;
+        if (HitPoint <= 0)
+        {
+            s_State = BossState.Paralysis;
+            Instantiate(m_LastExplosion, transform.position, transform.rotation);
+            Pauser.Pause(PauseTag.Enemy);
+            GameManager.Instance.m_IsGameClear = true;    
+            StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
+        }
     }
 
     // Use this for initialization
@@ -83,11 +91,6 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (s_HitPoint <= 0.0f)
-        {
-            s_State = BossState.Paralysis;
-            StartCoroutine(Death());
-        }
         //Debug.Log(s_State);
         //m_HitPointBar.fillAmount = s_Hitpoint;
         switch (GameManager.Instance.m_PlayMode)
@@ -239,8 +242,6 @@ public class Boss : MonoBehaviour
     }
     void Dead()
     {
-        GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
-        GameManager.Instance.m_GameStarter.ChangeScenes(8);
         Destroy(gameObject);
     }
     IEnumerator AttackInterval()
@@ -277,18 +278,5 @@ public class Boss : MonoBehaviour
         Instantiate(m_LastExplosion, transform.position, transform.rotation);
         yield return new WaitForSeconds(4.0f);
         Dead();
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        //if (other.name == "Beam")
-        //{
-        //    m_SearchArea.SetActive(false);
-        //    s_State = BossState.Paralysis;
-        //    StartCoroutine(Recovery());
-        //}
-        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && s_State != BossState.Invincible)
-        { 
-
-        }
     }
 }

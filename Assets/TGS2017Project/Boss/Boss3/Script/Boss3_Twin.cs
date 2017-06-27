@@ -3,19 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss3_Twin : MonoBehaviour
-{    
-    [SerializeField] float m_MaxHP = 100f;
+{
+    [SerializeField] Boss3_Controller m_BossController;
     [SerializeField] Renderer m_ShildRender;
+    [SerializeField] Renderer m_OtherShildRender;
     [SerializeField] Gradient m_ShieldColor;
 
-    private Boss3_Controller m_BossController;
-    private float m_HP;
+    //エフェクト
+    [SerializeField] GameObject m_Explosion;
+    private float HP
+    {
+        get { return m_BossController.Hp; }
+        set
+        {
+            m_BossController.Hp = Mathf.Max(0, value);
+            //シールドに反映
+            m_ShildRender.gameObject.SetActive(HP > 0);
+            m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
+            m_OtherShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
+        }
+    }
 
     private void Awake()
     {
-        m_BossController = GetComponentInParent<Boss3_Controller>();
-
-        m_HP = m_MaxHP;
         Damageable[] damageComps = GetComponentsInChildren<Damageable>();
         foreach (var comp in damageComps)
         {
@@ -25,17 +35,21 @@ public class Boss3_Twin : MonoBehaviour
 
     private void OnEnable()
     {
-        m_ShildRender.gameObject.SetActive(m_HP != 0);
+        m_ShildRender.gameObject.SetActive(HP != 0);
     }
 
     private void Damage(float d, MonoBehaviour s)
     {
         //ダメージ
-        m_HP = Mathf.Max(0, m_HP - d);
-        if (m_HP < 0 && !m_ShildRender.gameObject.activeSelf)
-            GetComponentInParent<Boss3_Controller>().Dead();
-        //シールドに反映
-        m_ShildRender.gameObject.SetActive(m_HP > 0);
-        m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(m_HP / m_MaxHP));
+        HP = Mathf.Max(0, HP - d);
+    }
+    public void Dead()
+    {
+        Instantiate(m_Explosion, transform.position, transform.rotation);
+    }
+
+    public void SetShieldActive(bool isActive)
+    {
+        m_ShildRender.gameObject.SetActive(isActive && HP != 0);
     }
 }

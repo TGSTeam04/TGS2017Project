@@ -37,7 +37,7 @@ public class Pauser : MonoBehaviour
         { PauseTag.Enemy , new PauseManageParam() }
     };
     // ポーズ
-    static public void Pause(PauseTag tag = PauseTag.Pause)
+    static public void Pause(PauseTag tag = PauseTag.Pause, bool IncludeCollider = true)
     {
         //対象タグが既にポーズ中ならリターン
         if (s_TargetByTag[tag].m_IsPause) return;
@@ -45,12 +45,19 @@ public class Pauser : MonoBehaviour
         s_TargetByTag[tag].m_IsPause = true;
         foreach (var obj in s_TargetByTag[tag].m_Targets)
         {
-            obj.OnPause();
+            obj.OnPause();            
+        }
+        if (IncludeCollider)
+        {
+            foreach (var obj in s_TargetByTag[tag].m_Targets)
+            {
+                obj.DisableCollider();
+            }
         }
     }
 
     // ポーズ解除
-    static public void Resume(PauseTag tag = PauseTag.Pause)
+    static public void Resume(PauseTag tag = PauseTag.Pause, bool IncludeCollider = true)
     {
         //対象タグがポーズされていなければリターン
         if (!s_TargetByTag[tag].m_IsPause) return;
@@ -60,12 +67,21 @@ public class Pauser : MonoBehaviour
         {
             obj.OnResume();
         }
+
+        if (IncludeCollider)
+        {
+            foreach (var obj in s_TargetByTag[tag].m_Targets)
+            {
+                obj.DisableCollider();
+            }
+        }
     }
     static public bool IsTagPause(PauseTag tag = PauseTag.Pause) { return s_TargetByTag[tag].m_IsPause; }
 
     //ポーズタグ
     public List<PauseTag> m_Tags = new List<PauseTag>() { PauseTag.Pause };
     private int m_PauseCunt = 0;
+    private int m_ColliderPauseCunt = 0;
 
     //ポーズ中のコンポーネント
     Behaviour[] m_PauseBehavs = null;
@@ -103,6 +119,35 @@ public class Pauser : MonoBehaviour
         }
     }
 
+    public void DisableCollider()
+    {
+        //カウンタ更新
+        m_ColliderPauseCunt++;
+        //初回のみ無効化
+        if (m_ColliderPauseCunt != 1)
+            return;
+
+        //有効なコリジョンを取得、無効化
+        m_PauseCols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
+        //if (pauseBehavs == null)
+        //    return;
+        foreach (var com in m_PauseCols)
+            com.enabled = false;
+    }
+    public void EnableCollider()
+    {
+        //カウンタ更新
+        m_ColliderPauseCunt--;
+        //他のタグでポーズされていれば無視
+        if (m_ColliderPauseCunt != 0)
+            return;
+
+        foreach (var col in m_PauseCols)
+        {
+            col.enabled = true;
+        }
+    }
+
     // ポーズされたとき
     public void OnPause()
     {
@@ -117,13 +162,6 @@ public class Pauser : MonoBehaviour
         //if (pauseBehavs == null)
         //    return;
         foreach (var com in m_PauseBehavs)
-            com.enabled = false;
-
-        //有効なコリジョンを取得、無効化
-        m_PauseCols = Array.FindAll(GetComponentsInChildren<Collider>(), (obj) => { return obj.enabled; });
-        //if (pauseBehavs == null)
-        //    return;
-        foreach (var com in m_PauseCols)
             com.enabled = false;
 
         //リジットボディのデータを保存、スリープ
@@ -161,11 +199,6 @@ public class Pauser : MonoBehaviour
         foreach (var com in m_PauseBehavs)
         {
             com.enabled = true;
-        }
-
-        foreach (var col in m_PauseCols)
-        {
-            col.enabled = true;
         }
 
         for (var i = 0; i < rgBodies.Length; ++i)

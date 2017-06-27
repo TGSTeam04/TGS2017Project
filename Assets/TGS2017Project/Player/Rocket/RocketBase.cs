@@ -41,8 +41,7 @@ public class RocketBase : MonoBehaviour
     public float m_BackSpeed;
     //前進時間
     public float m_AdvanceTime;
-    //発射からの経過時間
-    public float m_Timer;
+    //ターゲットのタグ
     public string m_TargetTag;
     //埋まる時間
     public float m_BuriedTime = 1.0f;
@@ -53,20 +52,18 @@ public class RocketBase : MonoBehaviour
 
     //衝突した雑魚リスト
     public List<EnemyBase> m_ChildEnemys;
+    //ステートの経過時間
+    private float m_Timer;
 
     private void Awake()
     {
         m_ChildEnemys = new List<EnemyBase>();
         m_AudioSrc = gameObject.AddComponent<AudioSource>();
-        m_AudioSrc.spatialBlend = 1.0f;
-        m_IsKnockBack = true;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
         m_Rb = GetComponent<Rigidbody>();
         m_BCollider = GetComponent<BoxCollider>();
+
+        m_AudioSrc.spatialBlend = 1.0f;
+        m_IsKnockBack = true;
     }
 
     void Update()
@@ -135,18 +132,17 @@ public class RocketBase : MonoBehaviour
     {
         m_Rb.MovePosition(m_Rb.position + velocity * Time.fixedDeltaTime);
 
-        float pich = transform.rotation.eulerAngles.x;
-        float forwardLen = (m_BCollider.size.z / 2 * transform.lossyScale.z) - m_Rb.centerOfMass.z;// * m_Collider.size.z;
-        float borderHigth = forwardLen * Mathf.Sin(pich * Mathf.Deg2Rad);// + transform.lossyScale.y / 2;
+        float pich = m_Rb.rotation.eulerAngles.x;
+        float forwardLen = (m_BCollider.size.z / 2 * transform.lossyScale.z) - m_Rb.centerOfMass.z;
+        float borderHigth = forwardLen * Mathf.Sin(pich * Mathf.Deg2Rad);
         RaycastHit hitInfo;
-        if (Physics.Raycast(m_Rb.position, Vector3.down * borderHigth * 2, out hitInfo, LayerMask.GetMask("Floor")))
+        if (Physics.Raycast(m_Rb.position, Vector3.down, out hitInfo, borderHigth * 2, LayerMask.GetMask("Floor")))
         {
             float heigth = (m_Rb.position.y - hitInfo.point.y) - m_BCollider.size.y / 2;
             if (borderHigth > heigth && heigth > float.Epsilon)
             {
                 float sin = heigth / forwardLen;
-                float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;
-                //Debug.Log(deg);
+                float deg = Mathf.Asin(sin) * Mathf.Rad2Deg;                
                 m_Rb.rotation = Quaternion.Euler(new Vector3(deg, m_Rb.rotation.eulerAngles.y, m_Rb.rotation.eulerAngles.z));
             }
         }
@@ -166,7 +162,9 @@ public class RocketBase : MonoBehaviour
         m_StandTrans.localScale *= 0.0f;
         transform.position = m_StandTrans.position;
         transform.rotation = m_Battery.transform.rotation;
+        m_Rb.rotation = transform.rotation;
         //transform.rotation = Quaternion.Euler(new Vector3(20, 0, 0));
+        //Debug.Log(transform.rotation.eulerAngles);
         m_State = RocketState.Fire;
         m_AudioSrc.PlayOneShot(m_SEFire);
         m_Timer = 0;
@@ -184,8 +182,7 @@ public class RocketBase : MonoBehaviour
 
     //Player、Boss3共通処理オーバーライドするときにbaseの関数を呼んでください。
     protected virtual void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log(collision.gameObject);
+    {        
         GameObject obj = collision.gameObject;
         EnemyBase enemy = obj.GetComponent<EnemyBase>();
         m_AudioSrc.PlayOneShot(m_SEHit);
@@ -247,7 +244,8 @@ public class RocketBase : MonoBehaviour
     protected void CollideTarget(GameObject target, Vector3 hitpos)
     {
         float damage = m_ApplyDamage + m_ChildEnemys.Count * m_ChildApplyDamage;
-        target.GetComponent<Damageable>().ApplyDamage(damage, this);
+        Damageable damageComp = target.GetComponent<Damageable>();
+        if(damageComp != null) damageComp.ApplyDamage(damage, this);
         GameObject explosion = Instantiate(m_EffectHitPrefub, transform);
         explosion.SetActive(true);
         m_Battery.StartCoroutine(this.Delay(new WaitForSeconds(0.5f)
@@ -327,7 +325,6 @@ public class RocketBase : MonoBehaviour
         if (other.tag == m_TargetTag)
         {//攻撃対象と衝突
             other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ChildApplyDamage, this);
-            Debug.Log("ノックバックEnemy　が　ターゲット　と衝突");
         }
 
         //Enmeyの消滅処理
