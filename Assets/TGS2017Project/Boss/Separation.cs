@@ -15,16 +15,26 @@ public class Separation : MonoBehaviour {
     public GameObject m_Arm;
 
     bool m_Back = false;
+    bool m_IsPlay = false;
 
-	// Use this for initialization
-	void Start () {
+    public GameObject m_Explosion;
+
+    // Use this for initialization
+    void Start () {
         transform.position = m_Arm.transform.position;
         transform.rotation = m_Arm.transform.rotation;
-        StartCoroutine(GoHome());
+        if (m_IsPlay == false)
+        {
+            StartCoroutine(GoHome());
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (m_IsPlay == false)
+        {
+            StartCoroutine(GoHome());
+        }
         switch (GameManager.Instance.m_PlayMode)
         {
             case PlayMode.TwinRobot:
@@ -70,20 +80,31 @@ public class Separation : MonoBehaviour {
             transform.rotation = m_Arm.transform.rotation;
             AttackProcess.s_Chance = false;
             m_Back = false;
+            m_IsPlay = false;
             gameObject.SetActive(false);
         }
     }
     IEnumerator GoHome()
     {
+        m_IsPlay = true;
         yield return new WaitForSeconds(m_ActivityTime);
         m_Back = true;
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && m_Back == false)
+        if (other.gameObject.tag == "Player" && m_Back == false && GameManager.Instance.m_PlayMode != PlayMode.Combine)
         {
-            other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ApplyDamage, this);
+            var damageComp = other.gameObject.GetComponent<Damageable>();
+            if (damageComp != null)
+                damageComp.ApplyDamage(m_ApplyDamage, this);
             m_Back = true;
+        }
+        if (other.gameObject.tag == "Player" && GameManager.Instance.m_PlayMode == PlayMode.Combine)
+        {
+            Boss.HitPoint -= 20.0f;
+            Instantiate(m_Explosion, transform.position, transform.rotation);
+            AttackProcess.s_Chance = false;
+            gameObject.SetActive(false);
         }
     }
 }

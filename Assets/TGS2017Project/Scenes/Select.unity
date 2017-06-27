@@ -287,7 +287,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1227913321}
-        m_MethodName: PlaySE
+        m_MethodName: PlaySE2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 956567856}
   - component: {fileID: 956567855}
   m_Layer: 0
-  m_Name: Image (2)
+  m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,7 +616,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367608583}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1318,8 +1318,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2043945326}
-  - {fileID: 1449435132}
   - {fileID: 956567854}
+  - {fileID: 1449435132}
   m_Father: {fileID: 297202005}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1341,8 +1341,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Stars:
   - {fileID: 2043945325}
-  - {fileID: 1449435131}
   - {fileID: 956567853}
+  - {fileID: 1449435131}
   m_Number: 1
 --- !u!1 &1449435131
 GameObject:
@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 1449435134}
   - component: {fileID: 1449435133}
   m_Layer: 0
-  m_Name: Image (1)
+  m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,7 +1372,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367608583}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1534,7 +1534,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1227913321}
-        m_MethodName: PlaySE
+        m_MethodName: PlaySE2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1715,7 +1715,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1227913321}
-        m_MethodName: PlaySE
+        m_MethodName: PlaySE2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

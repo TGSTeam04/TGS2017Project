@@ -21,7 +21,7 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private int m_Interval = 10;
     [SerializeField]
-    private int m_LookFrequency = 3;
+    private int m_LookFrequency = 2;
 
     private int m_AttackCounter;
     private int m_LookCounter;
@@ -133,7 +133,7 @@ public class Boss : MonoBehaviour
                 if (!AttackProcess.s_Chance)
                 {
                     m_Anim.speed = 1.0f;
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
                     }
@@ -146,7 +146,7 @@ public class Boss : MonoBehaviour
             case BossState.Attack:
                 if (!AttackProcess.s_Chance) m_Anim.speed = 1.0f;
                 Attack();
-                if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                 {
                     s_State = BossState.Move;
                 }
@@ -160,7 +160,7 @@ public class Boss : MonoBehaviour
                 }
                 if (angle < 15)
                 {
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         s_State = BossState.Move;
                     }
@@ -182,7 +182,7 @@ public class Boss : MonoBehaviour
                 }
                 if (angle < 15)
                 {
-                    if (Vector3.Distance(transform.position, m_TargetPosition) > 10)
+                    if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
                         s_State = BossState.Move;
                     }
@@ -287,21 +287,7 @@ public class Boss : MonoBehaviour
         //    StartCoroutine(Recovery());
         //}
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && s_State != BossState.Invincible)
-        {
-            if (m_LeftArm.activeSelf == false && m_RightArm.activeSelf == false)
-            {
-                Instantiate(m_Explosion, transform.position, transform.rotation);
-                s_HitPoint -= 0.25f;
-                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
-                s_State = BossState.Invincible;
-            }
-            else
-            {
-                Instantiate(m_Explosion, transform.position, transform.rotation);
-                s_HitPoint -= 0.05f;
-                GameManager.Instance.m_BossHpRate = s_HitPoint;//(s_HitPoint / m_MaxHp);
-                s_State = BossState.Invincible;
-            }
+        { 
 
         }
     }

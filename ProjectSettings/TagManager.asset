@@ -15,6 +15,7 @@ TagManager:
   - Floor
   - BossBullet
   - PlayerBullet
+  - Break
   layers:
   - Default
   - TransparentFX

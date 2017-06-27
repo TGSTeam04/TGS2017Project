@@ -28,7 +28,7 @@ public class BreakArm : MonoBehaviour
     {        
         if (GameManager.Instance.m_PlayMode == PlayMode.Combine && AttackProcess.s_Chance && other.name == "Break")
         {
-            Boss.HitPoint -= 30.0f;
+            Boss.HitPoint -= 10.0f;
             Boss.s_State = Boss.BossState.Invincible;
             AttackProcess.s_Chance = false;
             Dead();
