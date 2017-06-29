@@ -15,7 +15,7 @@ MonoBehaviour:
   m_BoostSpeed: 25
   m_NormalRotate: 185
   m_ChargeRotate: 45
-  m_JumpPower: 20
+  m_JumpPower: 2000
   m_NormalUseEnergy: 1
   m_BoostUseEnergy: 1
   m_ChargeUseEnergy: 3
