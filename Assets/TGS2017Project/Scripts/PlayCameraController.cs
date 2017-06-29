@@ -91,9 +91,10 @@ public class PlayCameraController : MonoBehaviour
                     //Debug.Log("壁に遮られた");
                     // カメラの位置を壁に保持
                     var height = transform.position.y - hitInfo.point.y;
-                    transform.position = hitInfo.point;
-                    transform.Translate(new Vector3(0, height, 0));
-                }
+                    //transform.position = hitInfo.point;
+                    //transform.Translate(new Vector3(0, height, 0));
+					transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + height, hitInfo.point.z);
+				}
                 break;
             case PlayMode.Combine:
                 break;

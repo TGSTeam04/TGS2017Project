@@ -90,12 +90,13 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.m_IsGameOver = false;
         GameManager.Instance.m_PlayScore = 0;
         GameManager.Instance.m_PlayTime = 0;
-        //GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
-    }
+		GameManager.Instance.m_PlayerController = this;
+		//GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
+	}
 
 
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
     {
         m_LRobotRigidbody = m_LRobot.GetComponent<Rigidbody>();
         m_RRobotRigidbody = m_RRobot.GetComponent<Rigidbody>();
@@ -107,7 +108,6 @@ public class PlayerController : MonoBehaviour
         m_Level = 1;
         m_Exp = 0;
         GameManager.Instance.m_CombineTime = m_CombineTime;
-        GameManager.Instance.m_PlayerController = this;
         //		GameManager.Instance.m_StageManger.m_Observer.BindSubject(m_Subject);
         m_RotateTwinRoboMode.Add(TwinRobotMode.A, Quaternion.Euler(0, 0, 0));
         m_RotateTwinRoboMode.Add(TwinRobotMode.B, Quaternion.Euler(0, 90, 0));
@@ -194,7 +194,6 @@ public class PlayerController : MonoBehaviour
         v.y = 5.5f + distaceRate * Vector3.Distance(CenterPosition, StartPositionL);
         m_TPSPosition.position = v;
         m_CombineEffect.transform.position = m_Electric.transform.position + new Vector3(0, 0.5f, 0);
-        StartCoroutine(CombineEffect());
 
         float time = 0.3f;
         Quaternion StartRotationL = m_LRobotRigidbody.rotation;
@@ -273,8 +272,9 @@ public class PlayerController : MonoBehaviour
             yield return StartCoroutine(Release(true));
             yield break;
         }
+		StartCoroutine(CombineEffect());
 
-        foreach (var item in enemys)
+		foreach (var item in enemys)
         {
             item.SetBreakForPlayer();
         }
@@ -391,7 +391,6 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator CombineEffect()
     {
-        yield return new WaitForSeconds(2f);
         m_CombineEffect.SetActive(true);
         yield return new WaitForSeconds(1);
         m_CombineEffect.SetActive(false);

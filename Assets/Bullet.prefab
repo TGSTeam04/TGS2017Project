@@ -301,7 +301,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114074879868999816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,7 +316,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114250847439769658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,7 +331,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114289327620873984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +346,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114296388941469514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,7 +361,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114514277961260200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114842631388659828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!114 &114917503028405680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,7 +406,7 @@ MonoBehaviour:
   MaxLength: 4
   StartSize: 1
   AnimationSpd: 0.1
-  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 1}
+  BeamColor: {r: 1, g: 0.30882353, b: 0.30882353, a: 0.503}
 --- !u!120 &120052063500915858
 LineRenderer:
   m_ObjectHideFlags: 1

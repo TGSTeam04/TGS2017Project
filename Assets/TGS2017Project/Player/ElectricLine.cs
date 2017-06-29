@@ -58,15 +58,15 @@ public class ElectricLine : MonoBehaviour {
 					m_LineRenderer.enabled = false;
 					return;
 				}
-				//				m_LineRenderer.enabled = true;
-				if (m_Combine)
-				{
-					m_LineRenderer.enabled = true;
-				}
-				else
-				{
-					m_LineRenderer.enabled = !m_LineRenderer.enabled;
-				}
+				m_LineRenderer.enabled = true;
+				//if (m_Combine)
+				//{
+				//	m_LineRenderer.enabled = true;
+				//}
+				//else
+				//{
+				//	m_LineRenderer.enabled = !m_LineRenderer.enabled;
+				//}
 				for (int i = 0; i < m_LineRenderer.positionCount; i++)
 				{
 					m_LineRenderer.SetPosition(i, Vector3.Lerp(m_LRobot.position + m_LRobot.right * m_OffsetX, m_RRobot.position + m_RRobot.right * -m_OffsetX, (float)i / (m_LineRenderer.positionCount - 1)) + m_Positions[i]);
