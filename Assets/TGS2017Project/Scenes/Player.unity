@@ -486,7 +486,7 @@ MonoBehaviour:
   m_LRobot: {fileID: 601825197}
   m_RRobot: {fileID: 1568074905}
   m_UpdateTime: 0.05
-  m_Noise: 0.4
+  m_Noise: 0.6
   m_OffsetX: 0
   m_Combine: 1
   m_Scale: 0.5
@@ -7110,7 +7110,7 @@ MonoBehaviour:
   m_LRobot: {fileID: 1639896463}
   m_RRobot: {fileID: 458666862}
   m_UpdateTime: 0.05
-  m_Noise: 0.5
+  m_Noise: 0.7
   m_OffsetX: 0
   m_Combine: 1
   m_Scale: 0.5
@@ -7584,7 +7584,7 @@ MonoBehaviour:
   m_LRobot: {fileID: 705929766}
   m_RRobot: {fileID: 1013446364}
   m_UpdateTime: 0.05
-  m_Noise: 0.4
+  m_Noise: 0.6
   m_OffsetX: 0
   m_Combine: 1
   m_Scale: 0.5
@@ -7905,16 +7905,6 @@ Prefab:
     - target: {fileID: 4329678450575750, guid: 34ce13d9fbdf68f419eaebc12e5aff63, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198658133844420718, guid: 34ce13d9fbdf68f419eaebc12e5aff63,
-        type: 2}
-      propertyPath: randomSeed
-      value: -1264293974
-      objectReference: {fileID: 0}
-    - target: {fileID: 198092513852331980, guid: 34ce13d9fbdf68f419eaebc12e5aff63,
-        type: 2}
-      propertyPath: randomSeed
-      value: -227340447
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34ce13d9fbdf68f419eaebc12e5aff63, type: 2}

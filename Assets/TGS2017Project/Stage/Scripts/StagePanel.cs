@@ -31,7 +31,8 @@ public class StagePanel : MonoBehaviour
     void Start()
     {
         StageManager stageManager = GameManager.Instance.m_StageManger;
-        stageManager.m_ActivePanels.Add(this);
+		if (stageManager == null) return;
+		stageManager.m_ActivePanels.Add(this);
         /*ステージレベル仕様がなくなった為　コメントアウト*/
         //ステージマネージャーにパネルを登録
         //stageManager.m_StagePanels[m_UseStageLevel].Add(this);
