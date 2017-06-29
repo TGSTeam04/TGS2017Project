@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Energy: {fileID: 990027267}
   m_Black: {fileID: 1965395177}
-  m_AudioClip: {fileID: 8300000, guid: feaa4f50e4e53bd4da64c3011505b358, type: 3}
+  m_AudioClip: {fileID: 8300000, guid: cdf00b6338191a14893867e68d3817b9, type: 3}
   m_BossHP: {fileID: 189011471}
   m_ImageA: {fileID: 257257650}
   m_ImageB: {fileID: 1005054453}
@@ -1427,7 +1427,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0c3836957cc4dfe44b514cff1ef438bd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8b40da8fe13e9564d8cae6f4b7cbf974, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

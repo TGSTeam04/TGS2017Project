@@ -19,10 +19,13 @@ public class Separation : MonoBehaviour {
 
     public GameObject m_Explosion;
 
+    AudioSource m_Audio;
+
     // Use this for initialization
     void Start () {
         transform.position = m_Arm.transform.position;
         transform.rotation = m_Arm.transform.rotation;
+        m_Audio = GetComponent<AudioSource>();
         if (m_IsPlay == false)
         {
             StartCoroutine(GoHome());
@@ -91,21 +94,22 @@ public class Separation : MonoBehaviour {
         yield return new WaitForSeconds(m_ActivityTime);
         m_Back = true;
     }
-    public void OnTriggerEnter(Collider other)
+    public void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player" && m_Back == false && GameManager.Instance.m_PlayMode != PlayMode.Combine)
         {
+            m_Audio.Play();
             var damageComp = other.gameObject.GetComponent<Damageable>();
             if (damageComp != null)
                 damageComp.ApplyDamage(m_ApplyDamage, this);
             m_Back = true;
         }
-        if (other.gameObject.tag == "Player" && GameManager.Instance.m_PlayMode == PlayMode.Combine)
-        {
-            Boss.HitPoint -= 20.0f;
-            Instantiate(m_Explosion, transform.position, transform.rotation);
-            AttackProcess.s_Chance = false;
-            gameObject.SetActive(false);
-        }
+    }
+    public void Death()
+    {
+        Boss.HitPoint -= 40.0f;
+        Instantiate(m_Explosion, transform.position, transform.rotation);
+        AttackProcess.s_Chance = false;
+        gameObject.SetActive(false);
     }
 }

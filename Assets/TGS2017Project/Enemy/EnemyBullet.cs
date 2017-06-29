@@ -8,10 +8,12 @@ public class EnemyBullet : MonoBehaviour
 	private float m_Speed;      // 弾速
 	[SerializeField] private float m_ApplyDamage = 10.0f;
 
+    float m_DeadCount = 10;
+
 	// Use this for initialization
 	void Start()
 	{
-
+        StartCoroutine(Death());
 	}
 
 	// Update is called once per frame
@@ -32,7 +34,12 @@ public class EnemyBullet : MonoBehaviour
 		{
 			//Debug.Log(other.gameObject);
 			other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ApplyDamage, this);
+            Destroy(gameObject);
 		}
-		Destroy(gameObject);
 	}
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(m_DeadCount);
+        Destroy(gameObject);
+    }
 }
