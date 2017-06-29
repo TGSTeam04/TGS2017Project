@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 4351920988463100}
   - component: {fileID: 33860432950827408}
   - component: {fileID: 23436974047667286}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4297110705059290}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4662514035320286}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable4_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4258428250947562}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4558290825648012}
   - component: {fileID: 33908143766790342}
   - component: {fileID: 23872111699245990}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_weaponjoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4619032985134308}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,8 +288,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4720419186453146}
-  - component: {fileID: 136535441755572858}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint1
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -337,7 +336,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4936204086486828}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable5_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +353,7 @@ GameObject:
   - component: {fileID: 4629473319377522}
   - component: {fileID: 33244272149878906}
   - component: {fileID: 23899928783224398}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +400,7 @@ GameObject:
   - component: {fileID: 4066466478534698}
   - component: {fileID: 33139759152873274}
   - component: {fileID: 23484471674283512}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +418,9 @@ GameObject:
   - component: {fileID: 54149888640085448}
   - component: {fileID: 114892014742185960}
   - component: {fileID: 114136627014699040}
-  m_Layer: 18
+  - component: {fileID: 82384921505277460}
+  - component: {fileID: 136301529024844426}
+  m_Layer: 21
   m_Name: RArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +437,7 @@ GameObject:
   - component: {fileID: 4310703610524086}
   - component: {fileID: 33912153129121582}
   - component: {fileID: 23759106990822204}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +516,7 @@ GameObject:
   - component: {fileID: 4824369697239102}
   - component: {fileID: 33645281415277588}
   - component: {fileID: 23942253056735134}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +531,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4315493697955486}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +546,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4582335240043582}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +578,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4233368224256660}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +738,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4601802062148778}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +755,7 @@ GameObject:
   - component: {fileID: 4459529838622934}
   - component: {fileID: 33194451400334734}
   - component: {fileID: 23330247260647908}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,7 +900,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4237225278074592}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +930,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4226463441008258}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +962,7 @@ GameObject:
   - component: {fileID: 4567900055852450}
   - component: {fileID: 33827119293693964}
   - component: {fileID: 23624441184429118}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1009,7 @@ GameObject:
   - component: {fileID: 4503389110093914}
   - component: {fileID: 33815872908304232}
   - component: {fileID: 23273123351445240}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,8 +1041,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327823311689684}
-  - component: {fileID: 136605080704510794}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint1
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 4070666259857730}
   - component: {fileID: 33224637970921012}
   - component: {fileID: 23226640229582200}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4385456814299474}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable5_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1157,7 +1157,9 @@ GameObject:
   - component: {fileID: 54617785571596816}
   - component: {fileID: 114674595532891386}
   - component: {fileID: 114393932096098024}
-  m_Layer: 18
+  - component: {fileID: 82340712379084186}
+  - component: {fileID: 136892880847969130}
+  m_Layer: 21
   m_Name: LArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1172,7 +1174,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4010797997503624}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1187,7 +1189,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4587183469260432}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1239,7 @@ GameObject:
   - component: {fileID: 4863847810165596}
   - component: {fileID: 33317020024944254}
   - component: {fileID: 23001078610024604}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1332,7 +1334,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4018604931419842}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable4_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1381,7 +1383,7 @@ GameObject:
   - component: {fileID: 4704864432403506}
   - component: {fileID: 33530929307370582}
   - component: {fileID: 23932687873204924}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1507,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4739578782571146}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1554,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4724107915456710}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1567,7 +1569,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4243387504501466}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_vernier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1584,7 +1586,7 @@ GameObject:
   - component: {fileID: 4556636014079076}
   - component: {fileID: 33372094862390944}
   - component: {fileID: 23258161862084650}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1616,7 +1618,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4916230448708056}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1797,7 +1799,7 @@ GameObject:
   - component: {fileID: 4316304313361450}
   - component: {fileID: 33470900796992906}
   - component: {fileID: 23900075884126986}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1814,7 +1816,7 @@ GameObject:
   - component: {fileID: 4289288470416334}
   - component: {fileID: 33681107516588588}
   - component: {fileID: 23814010087506566}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1867,7 @@ GameObject:
   - component: {fileID: 4736116593511024}
   - component: {fileID: 33527012691372066}
   - component: {fileID: 23181711424404256}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_weaponjoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1884,7 @@ GameObject:
   - component: {fileID: 4092313565654920}
   - component: {fileID: 33528907632694566}
   - component: {fileID: 23104437686156974}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1912,7 +1914,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4836414046063418}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,7 +1946,7 @@ GameObject:
   - component: {fileID: 4099113282776118}
   - component: {fileID: 33846102915785938}
   - component: {fileID: 23871856001057974}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +1976,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4402183412136492}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable6_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1989,7 +1991,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4670764637839108}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2006,7 +2008,7 @@ GameObject:
   - component: {fileID: 4158101745511180}
   - component: {fileID: 33733918009433168}
   - component: {fileID: 23638015942331580}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2036,7 +2038,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4979861832676350}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_vernier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,7 +2087,7 @@ GameObject:
   - component: {fileID: 4497199859332612}
   - component: {fileID: 199366572664179576}
   - component: {fileID: 198675318302288492}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: Boost_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2149,7 +2151,7 @@ GameObject:
   - component: {fileID: 4564667061572454}
   - component: {fileID: 33226244847633830}
   - component: {fileID: 23958334114161546}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2164,7 +2166,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4134520110821928}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2196,7 +2198,7 @@ GameObject:
   - component: {fileID: 4653555541013692}
   - component: {fileID: 33745960750844726}
   - component: {fileID: 23015172494420118}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_railgun3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2244,7 +2246,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4371435740406804}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2323,7 @@ GameObject:
   - component: {fileID: 4354265040927348}
   - component: {fileID: 33917871235868732}
   - component: {fileID: 23304297832473036}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2353,7 +2355,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4617747269872778}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_vernier3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2445,7 +2447,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4728715915564024}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2462,7 +2464,7 @@ GameObject:
   - component: {fileID: 4560138384661490}
   - component: {fileID: 199206140408815926}
   - component: {fileID: 198816939365063406}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2477,7 +2479,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4564322458231384}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable6_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2508,7 +2510,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4982574034541462}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2538,7 +2540,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4786800199275888}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable6_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2553,7 +2555,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4306613471205454}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2632,7 +2634,7 @@ GameObject:
   - component: {fileID: 4454870172805468}
   - component: {fileID: 33218834330858830}
   - component: {fileID: 23015510979261394}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_weaponjoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2647,7 +2649,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4685188591460688}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2724,7 +2726,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327393586420660}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2786,7 +2788,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4062890678090740}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2803,7 +2805,7 @@ GameObject:
   - component: {fileID: 4148755206085936}
   - component: {fileID: 199061318831560910}
   - component: {fileID: 198729740178092808}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2818,7 +2820,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4931463407916322}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_weaponjoint6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2884,7 +2886,7 @@ GameObject:
   - component: {fileID: 4467120230509216}
   - component: {fileID: 33839877003029578}
   - component: {fileID: 23619213820813050}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2931,7 +2933,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4628698813254952}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2961,7 +2963,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4716839868613912}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2993,7 +2995,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4915328851621528}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3044,7 +3046,7 @@ GameObject:
   - component: {fileID: 4456947576067388}
   - component: {fileID: 33591552049451998}
   - component: {fileID: 23985074683753968}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_L_weaponjoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3076,7 +3078,7 @@ GameObject:
   - component: {fileID: 4366925476159100}
   - component: {fileID: 33829202877764578}
   - component: {fileID: 23036969521949620}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: poly_R_railgun4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3107,7 +3109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4212271815818112}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_weaponjoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3171,7 +3173,7 @@ GameObject:
   - component: {fileID: 4696943362872782}
   - component: {fileID: 199775715407326824}
   - component: {fileID: 198468494067022922}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: Boost_start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3186,7 +3188,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4147598972889376}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_vernier2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3201,7 +3203,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4141441220901798}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable6_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3263,7 +3265,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4010350357665038}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3311,7 +3313,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4744520310098124}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: R_railgun_movable5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3343,7 +3345,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4175930293067266}
-  m_Layer: 18
+  m_Layer: 21
   m_Name: L_railgun_movable3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4319,7 +4321,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1533118408117528}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.5, z: 18}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4072991686434584}
@@ -6361,7 +6363,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6457,7 +6459,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -6490,7 +6492,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6778,7 +6780,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6938,7 +6940,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7066,7 +7068,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7131,7 +7133,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7228,7 +7230,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7261,7 +7263,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7582,7 +7584,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7774,7 +7776,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7806,7 +7808,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -7904,7 +7906,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8101,7 +8103,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8261,7 +8263,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -8358,7 +8360,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8390,7 +8392,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8486,7 +8488,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8550,7 +8552,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   - {fileID: 2100000, guid: 416e2d883367bde488b152913fe92e20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -8583,7 +8585,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8648,7 +8650,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8712,7 +8714,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2945bf6a434fa204db28bd79049300d7, type: 2}
+  - {fileID: 2100000, guid: 70611e8874ed1a64aa92a22fb13aab06, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9298,7 +9300,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!54 &54396484056942244
 Rigidbody:
@@ -9343,7 +9345,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &65048383932381108
 BoxCollider:
@@ -9381,6 +9383,166 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 75, y: 4, z: 35}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82340712379084186
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368212221918780}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5bf5db58267e1694891252dc51891a6f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!82 &82384921505277460
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118137556215998}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5bf5db58267e1694891252dc51891a6f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!82 &82481014474121438
 AudioSource:
   m_ObjectHideFlags: 1
@@ -9716,6 +9878,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136301529024844426
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118137556215998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 4.5
+  m_Height: 30
+  m_Direction: 2
+  m_Center: {x: 0, y: -0, z: 2}
 --- !u!136 &136500355959139732
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -9729,32 +9904,6 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 1
   m_Center: {x: 0.8, y: -0.55, z: 0}
---- !u!136 &136535441755572858
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1088513646812686}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: 0.8, y: -0.55, z: 0}
---- !u!136 &136605080704510794
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1328107221639284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: -0.8, y: -0.55, z: 0}
 --- !u!136 &136858155895230254
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -9768,6 +9917,19 @@ CapsuleCollider:
   m_Height: 33
   m_Direction: 1
   m_Center: {x: 0, y: -5, z: 0}
+--- !u!136 &136892880847969130
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368212221918780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 4.5
+  m_Height: 30
+  m_Direction: 2
+  m_Center: {x: 0, y: -0, z: 2}
 --- !u!136 &136944916199423240
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -9836,7 +9998,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1526463495
+  randomSeed: 335119886
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -18788,7 +18950,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1212684284
+  randomSeed: 2018620500
   InitialModule:
     serializedVersion: 3
     enabled: 1

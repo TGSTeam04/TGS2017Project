@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         List<EnemyBase> enemys = new List<EnemyBase>();
+        List<Separation> arms = new List<Separation>();
         float distance = Vector3.Distance(CenterPosition, StartPositionL);
         Vector3 offset = Direction * distance / 2;
         Collider[] collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(m_TwinRobotL.BreakerSize, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
@@ -227,6 +228,20 @@ public class PlayerController : MonoBehaviour
             EnemyBase enemy = item.GetComponent<EnemyBase>();
             if (enemy == null || enemys.Contains(enemy)) continue;
             enemys.Add(enemy);
+        }
+        collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(m_TwinRobotL.BreakerSize, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "BossArm" }));
+        foreach (var item in collider)
+        {
+            Separation arm = item.GetComponent<Separation>();
+            if (arm == null || arms.Contains(arm)) continue;
+            arms.Add(arm);
+        }
+        collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(m_TwinRobotR.BreakerSize, 2, distance), EndRotationR, LayerMask.GetMask(new string[] { "BossArm" }));
+        foreach (var item in collider)
+        {
+            Separation arm = item.GetComponent<Separation>();
+            if (arm == null || arms.Contains(arm)) continue;
+            arms.Add(arm);
         }
         Pauser.Pause(PauseTag.Enemy, false);
         IsCanCrash = true;
@@ -262,6 +277,10 @@ public class PlayerController : MonoBehaviour
 		foreach (var item in enemys)
         {
             item.SetBreakForPlayer();
+        }
+        foreach (var item in arms)
+        {
+            item.Death();
         }
 
         float add = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[enemys.Count - 1];
