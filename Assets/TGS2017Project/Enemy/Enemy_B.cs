@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,8 +27,8 @@ public class Enemy_B : MonoBehaviour
 
     private Transform m_Target = null;                      // 追従目標
     [SerializeField]
-    private int m_ChangeTargetInterval;                     // 追従目標の変更間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_ChangeTargetCount = 0;                    // 目標変更カウンター
+    private float m_ChangeTargetInterval;                   // 追従目標の変更間隔（フレーム数を入力、60フレーム=1秒）
+    private float m_ChangeTargetCount = 0;                  // 目標変更カウンター
     [SerializeField]
     private float m_RotateSpeed;                            // 回転速度
 
@@ -42,8 +42,8 @@ public class Enemy_B : MonoBehaviour
     private Transform m_EyePoint;                           // 自身の目の位置
 
     [SerializeField]
-    private int m_AttackInterval;                           // 攻撃間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_AttackCount = 120;                        // 攻撃カウンター
+    private float m_AttackInterval;                         // 攻撃間隔（フレーム数を入力、60フレーム=1秒）
+    private float m_AttackCount = 120;                      // 攻撃カウンター
     [SerializeField]
     private float m_Range;                                  // 射程距離
     [SerializeField]
@@ -53,15 +53,15 @@ public class Enemy_B : MonoBehaviour
     public Transform m_BulletParent;
 
     [SerializeField]
-    private int m_DamageTime;                               // のけぞり時間
-    private int m_DamageTimeCounter;                        // のけぞりカウンター
+    private float m_DamageTime;                             // のけぞり時間
+    private float m_DamageTimeCounter;                      // のけぞりカウンター
 
     [SerializeField]
-    private int m_ParalysisTime;                            // 麻痺時間（フレーム数を入力、60フレーム=1秒）
-    private int m_ParalysisCount;                           // 麻痺時間カウンター
+    private float m_ParalysisTime;                          // 麻痺時間（フレーム数を入力、60フレーム=1秒）
+    private float m_ParalysisCount;                         // 麻痺時間カウンター
 
     [SerializeField]
-    private int m_EntryTime;                                // 登場モーション時間
+    private float m_EntryTime;                              // 登場モーション時間
     [SerializeField]
     private ParticleSystem m_FireEffect;                    // 攻撃エフェクト
     [SerializeField]
@@ -95,7 +95,7 @@ public class Enemy_B : MonoBehaviour
             // 登場モーション
             if (m_State == EnemyB_State.Entry)
             {
-                --m_EntryTime;
+                m_EntryTime -= Time.deltaTime;
 
                 // 通常状態に移行
                 if (m_EntryTime <= 0)
@@ -128,16 +128,16 @@ public class Enemy_B : MonoBehaviour
                 }
 
                 // 攻撃カウンター
-                ++m_AttackCount;
+                m_AttackCount += Time.deltaTime;
 
                 // 目標変更カウンター
-                ++m_ChangeTargetCount;
+                m_ChangeTargetCount += Time.deltaTime;
             }
             // 被弾した場合
             else if (m_State == EnemyB_State.Damage)
             {
                 // のけぞり時間を加算
-                ++m_DamageTimeCounter;
+                m_DamageTimeCounter += Time.deltaTime;
                 if (m_DamageTimeCounter >= m_DamageTime)
                 {
                     m_State = EnemyB_State.Normal;
@@ -148,7 +148,7 @@ public class Enemy_B : MonoBehaviour
             else
             {
                 // 麻痺時間を加算
-                ++m_ParalysisCount;
+                m_ParalysisCount += Time.deltaTime;
                 if (m_ParalysisCount >= m_ParalysisTime)
                 {
                     m_State = EnemyB_State.Normal;
@@ -318,7 +318,7 @@ public class Enemy_B : MonoBehaviour
     }
 
     // Gizomsを描画（デバッグ用）
-    public void OnDrawGizmos()
+    public void OnDrawGizmosSelected()
     {
         // 見える視野角を描画
         if (m_EyePoint != null)

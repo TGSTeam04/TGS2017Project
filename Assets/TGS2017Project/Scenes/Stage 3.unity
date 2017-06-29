@@ -298,7 +298,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 7279525}
-  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
+  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1171,7 +1171,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 73707829}
-  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
+  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19448,7 +19448,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 503628633}
-  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
+  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -34153,7 +34153,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
-  m_EnemyType: 0
+  m_EnemyType: 1
 --- !u!195 &836899737
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -34289,7 +34289,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 846030324}
-  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
+  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -40115,7 +40115,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
-  m_EnemyType: 0
+  m_EnemyType: 1
 --- !u!195 &968241953
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -47352,7 +47352,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
-  m_EnemyType: 0
+  m_EnemyType: 1
 --- !u!195 &1153756943
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -52988,7 +52988,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
-  m_EnemyType: 0
+  m_EnemyType: 1
 --- !u!195 &1299337936
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -57821,7 +57821,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1380571815}
-  m_LocalRotation: {x: -0.60017747, y: 0.60017747, z: -0.37388098, w: -0.37388098}
+  m_LocalRotation: {x: -0.6001775, y: 0.6001775, z: -0.373881, w: -0.373881}
   m_LocalPosition: {x: 0.0012414654, y: 0.504716, z: 0.1398309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -58513,7 +58513,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
-  m_EnemyType: 1
+  m_EnemyType: 0
 --- !u!195 &1420203501
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -63519,7 +63519,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
-  m_EnemyType: 1
+  m_EnemyType: 0
 --- !u!195 &1501064015
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -66049,7 +66049,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
-  m_EnemyType: 1
+  m_EnemyType: 0
 --- !u!195 &1631405172
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -68833,7 +68833,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
-  m_EnemyType: 1
+  m_EnemyType: 0
 --- !u!195 &1750614725
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -70908,7 +70908,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1475494298892892, guid: 7bd2c223b3eeac84e93cf3f7fbb265f4, type: 2}
-  m_EnemyType: 0
+  m_EnemyType: 1
 --- !u!195 &1858794224
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -71475,7 +71475,7 @@ MonoBehaviour:
   m_RRobot: {fileID: 0}
   m_HumanoidRobot: {fileID: 0}
   m_Fragment: {fileID: 1714732733896090, guid: 2192ecce40637a547a4a552e9874ea32, type: 2}
-  m_EnemyType: 1
+  m_EnemyType: 0
 --- !u!195 &1870642448
 NavMeshAgent:
   m_ObjectHideFlags: 0

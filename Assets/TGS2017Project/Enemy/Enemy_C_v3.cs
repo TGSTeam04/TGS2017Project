@@ -32,11 +32,11 @@ public class Enemy_C_v3 : MonoBehaviour
     private Transform[] m_Destinations;                     // 移動ポイント
     private int m_DestinationIndex = -1;                    // 移動ポイントインデックス
     [SerializeField]
-    private int m_ChangePositionInterval;                   // 移動間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_ChangePositionCount = 0;                  // 移動タイマー
+    private float m_ChangePositionInterval;                 // 移動間隔（フレーム数を入力、60フレーム=1秒）
+    private float m_ChangePositionCount = 0;                // 移動タイマー
 
-    private int m_ChangeTargetInterval;                     // 追従目標の変更間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_ChangeTargetCount = 0;                    // 目標変更タイマー
+    private float m_ChangeTargetInterval;                   // 追従目標の変更間隔（フレーム数を入力、60フレーム=1秒）
+    private float m_ChangeTargetCount = 0;                  // 目標変更タイマー
     [SerializeField]
     private float m_RotateSpeed;                            // 回転速度
 
@@ -50,8 +50,8 @@ public class Enemy_C_v3 : MonoBehaviour
     private Transform m_EyePoint;                           // 自身の目の位置
 
     [SerializeField]
-    private int m_AttackInterval;                           // 攻撃間隔（フレーム数を入力、60フレーム=1秒）
-    private int m_AttackCount = 120;                        // 攻撃タイマー
+    private float m_AttackInterval;                         // 攻撃間隔（フレーム数を入力、60フレーム=1秒）
+    private float m_AttackCount = 120;                      // 攻撃タイマー
     [SerializeField]
     private float m_MinDistance;                            // 目標との最短距離
 
@@ -67,15 +67,15 @@ public class Enemy_C_v3 : MonoBehaviour
     public Transform m_BulletParent;
 
     [SerializeField]
-    private int m_DamageTime;                               // のけぞり時間
-    private int m_DamageTimeCounter;                        // のけぞりタイマー
+    private float m_DamageTime;                             // のけぞり時間
+    private float m_DamageTimeCounter;                      // のけぞりタイマー
 
     [SerializeField]
-    private int m_ParalysisTime;                            // 麻痺時間（フレーム数を入力、60フレーム=1秒）
-    private int m_ParalysisCount;                           // 麻痺時間タイマー
+    private float m_ParalysisTime;                          // 麻痺時間（フレーム数を入力、60フレーム=1秒）
+    private float m_ParalysisCount;                         // 麻痺時間タイマー
 
     [SerializeField]
-    private int m_EntryTime;                                // 登場モーション時間
+    private float m_EntryTime;                              // 登場モーション時間
 
     // SE
     private AudioSource m_Fire;                             // 発砲
@@ -107,7 +107,7 @@ public class Enemy_C_v3 : MonoBehaviour
             // 登場
             if (m_State == EnemyC_State_v3.Entry)
             {
-                --m_EntryTime;
+                m_EntryTime -= Time.deltaTime;
 
                 // 攻撃状態に移行
                 if (m_EntryTime <= 0)
@@ -141,10 +141,10 @@ public class Enemy_C_v3 : MonoBehaviour
                 }
 
                 // 攻撃カウンター
-                ++m_AttackCount;
+                m_AttackCount += Time.deltaTime;
 
                 // 目標変更カウンター
-                ++m_ChangeTargetCount;
+                m_ChangeTargetCount += Time.deltaTime;
             }
             // 移動状態
             else if (m_State == EnemyC_State_v3.Move)
@@ -161,7 +161,7 @@ public class Enemy_C_v3 : MonoBehaviour
             else if (m_State == EnemyC_State_v3.Damage)
             {
                 // のけぞり時間を加算
-                ++m_DamageTimeCounter;
+                m_DamageTimeCounter += Time.deltaTime;
                 if (m_DamageTimeCounter >= m_DamageTime)
                 {
                     // 被弾前の状態に戻る
@@ -179,7 +179,7 @@ public class Enemy_C_v3 : MonoBehaviour
             else
             {
                 // 麻痺時間を加算
-                ++m_ParalysisCount;
+                m_ParalysisCount += Time.deltaTime;
                 if (m_ParalysisCount >= m_ParalysisTime)
                 {
                     // 麻痺前の状態に戻る
@@ -194,7 +194,7 @@ public class Enemy_C_v3 : MonoBehaviour
                 }
             }
             // 移動タイマーを加算
-            ++m_ChangePositionCount;
+            m_ChangePositionCount += Time.deltaTime;
         }
     }
 
@@ -385,7 +385,7 @@ public class Enemy_C_v3 : MonoBehaviour
     }
 
     // Gizomsを描画（デバッグ用）
-    public void OnDrawGizmos()
+    public void OnDrawGizmosSelected()
     {
         // 見える視野角を描画
         if (m_EyePoint != null)
