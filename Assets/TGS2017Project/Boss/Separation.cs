@@ -118,7 +118,7 @@ public class Separation : MonoBehaviour {
     }
     public void Death()
     {
-        Boss.HitPoint -= 40.0f;
+        Boss.HitPoint -= 25.0f;
         Instantiate(m_Explosion, transform.position, transform.rotation);
         AttackProcess.s_Chance = false;
         gameObject.SetActive(false);
