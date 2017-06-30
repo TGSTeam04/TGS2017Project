@@ -3713,7 +3713,7 @@ MonoBehaviour:
   m_Muzzle1: {fileID: 4980022499156940}
   m_Muzzle2: {fileID: 4644448842640280}
   m_Muzzle3: {fileID: 4290135946826826}
-  m_Bullet: {fileID: 1232027840241046, guid: bade626296d7ada4d9a94f159d3c4261, type: 2}
+  m_Bullet: {fileID: 1582294600980434, guid: 67262db57a88865478cde9632c905172, type: 2}
   m_BulletParent: {fileID: 0}
   m_DamageTime: 2
   m_ParalysisTime: 3

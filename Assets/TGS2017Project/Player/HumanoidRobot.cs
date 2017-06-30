@@ -22,7 +22,7 @@ public class HumanoidRobot : MonoBehaviour
     private float m_Rotate;
 
     private bool m_Charging;
-    private bool m_IsBoost = false;
+    public bool m_IsBoost = false;
 
     [SerializeField]
     private RocketBattery m_Battery;
@@ -59,7 +59,8 @@ public class HumanoidRobot : MonoBehaviour
 	// Update is called once per frame
 	public void UpdateInput()
     {
-        if (Input.GetButtonDown(m_BaseConfig.m_InputJump) && IsGround())
+		m_IsBoost = false;
+		if (Input.GetButtonDown(m_BaseConfig.m_InputJump) && IsGround())
         {
             m_Animator.SetTrigger("Jump");
             m_Rigidbody.AddForce(Vector3.up * m_Config.m_JumpPower, ForceMode.Impulse);
@@ -80,7 +81,7 @@ public class HumanoidRobot : MonoBehaviour
             m_Animator.SetBool("IsBoost", true);
             m_Speed = m_Config.m_BoostSpeed;
             energy = m_Config.m_BoostUseEnergy;
-
+			m_IsBoost = true;
         }
         else
         {
