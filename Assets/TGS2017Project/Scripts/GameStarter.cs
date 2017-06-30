@@ -150,4 +150,9 @@ public class GameStarter : MonoBehaviour
         m_LoadedScenes.Add(name);
         return SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
     }
+    public AsyncOperation RemoveScene(string name)
+    {
+        m_LoadedScenes.Remove(name);
+        return SceneManager.UnloadSceneAsync(name);
+    }
 }

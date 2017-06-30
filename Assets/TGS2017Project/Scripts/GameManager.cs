@@ -103,6 +103,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (m_IsGameClear)
         {
             m_StageManger.StageClear();
+            m_GameStarter.RemoveScene("GameUI");
             m_GameStarter.AddScene("ClearPerformance");
         }
         m_IsGameClear = false;
