@@ -137,7 +137,7 @@ public class HumanoidRobot : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        return;
+//        return;
         switch (GameManager.Instance.m_PlayMode)
         {
             case PlayMode.NoPlay:

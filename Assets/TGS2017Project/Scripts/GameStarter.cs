@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 [System.SerializableAttribute]
@@ -36,7 +37,8 @@ public class GameStarter : MonoBehaviour
     {
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
-        m_Common = SceneManager.GetActiveScene();
+		//Screen.lockCursor = false;
+		m_Common = SceneManager.GetActiveScene();
 		SceneManager.LoadScene("Title", LoadSceneMode.Additive);
 		m_LoadedScenes.Add("Title");
         //ChangeScenes(m_StartScene);
@@ -45,47 +47,52 @@ public class GameStarter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            ChangeScenes(0);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangeScenes(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeScenes(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangeScenes(3);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            ChangeScenes(4);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangeScenes(5);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            ChangeScenes(6);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            ChangeScenes(7);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            ChangeScenes(8);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            ChangeScenes(9);
-        }
-    }
+		if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+		{
+			//Debug.Log("Reselecting first input");
+			EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+		}
+			//if (Input.GetKeyDown(KeyCode.Alpha0))
+			//{
+			//    ChangeScenes(0);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha1))
+			//{
+			//    ChangeScenes(1);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha2))
+			//{
+			//    ChangeScenes(2);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha3))
+			//{
+			//    ChangeScenes(3);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha4))
+			//{
+			//    ChangeScenes(4);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha5))
+			//{
+			//    ChangeScenes(5);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha6))
+			//{
+			//    ChangeScenes(6);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha7))
+			//{
+			//    ChangeScenes(7);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha8))
+			//{
+			//    ChangeScenes(8);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Alpha9))
+			//{
+			//    ChangeScenes(9);
+			//}
+		}
 
     public void ChangeScenes(int i)
     {
