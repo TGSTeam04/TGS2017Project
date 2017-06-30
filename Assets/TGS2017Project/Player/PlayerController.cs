@@ -8,6 +8,13 @@ public enum TwinRoboMode
     B
 }
 
+public enum HumanoidMode
+{
+	Normal,
+	Speed,
+	Power
+}
+
 public class PlayerController : MonoBehaviour
 {
     private Dictionary<TwinRobotMode, Quaternion> m_RotateTwinRoboMode = new Dictionary<TwinRobotMode, Quaternion>();
@@ -66,9 +73,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private HumanoidConfig m_HumanoidN;
     [SerializeField]
-    private HumanoidConfig m_HumanoidT;
+    public HumanoidConfig m_HumanoidT;
     [SerializeField]
-    private HumanoidConfig m_HumanoidI;
+    public HumanoidConfig m_HumanoidI;
 
     [SerializeField]
     private Material m_HumanoidMaterial;
@@ -81,6 +88,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private AnimationCurve m_RotationCurve;
+
+	public HumanoidMode m_HMode;
+
+	public bool m_CanRelease;
 
 
     private void Awake()
@@ -113,6 +124,7 @@ public class PlayerController : MonoBehaviour
         m_RotateTwinRoboMode.Add(TwinRobotMode.B, Quaternion.Euler(0, 90, 0));
 
         m_HumanoidMaterial.color = m_ModeAA;
+		m_CanRelease = true;
     }
 
     void LateUpdate()
@@ -129,7 +141,7 @@ public class PlayerController : MonoBehaviour
                 m_TwinRobotR.UpdateInput();
                 break;
             case PlayMode.HumanoidRobot:
-                if (m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
+                if (m_CanRelease && m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
                 {
                     StartCoroutine(Release(false));
                     break;
@@ -300,19 +312,22 @@ public class PlayerController : MonoBehaviour
         {
             m_HumanoidMaterial.color = m_ModeAB;
             m_HumanoidRobot.m_Config = m_HumanoidT;
+			m_HMode = HumanoidMode.Speed;
         }
         else if (breakTypeS)
         {
             m_HumanoidMaterial.color = m_ModeAA;
             m_HumanoidRobot.m_Config = m_HumanoidN;
-        }
-        else
+			m_HMode = HumanoidMode.Normal;
+		}
+		else
         {
             m_HumanoidMaterial.color = m_ModeBB;
             m_HumanoidRobot.m_Config = m_HumanoidI;
-        }
+			m_HMode = HumanoidMode.Power;
+		}
 
-        m_KeepEnemyPosWall.SetActive(false);
+		m_KeepEnemyPosWall.SetActive(false);
         m_HRobot.SetActive(true);
         m_LRobot.SetActive(false);
         m_RRobot.SetActive(false);

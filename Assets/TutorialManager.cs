@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class TutorialManager : MonoBehaviour {
+public class TutorialManager : MonoBehaviour
+{
 	[SerializeField]
 	private PlayerController m_PlayerController;
 	[SerializeField]
@@ -21,6 +22,7 @@ public class TutorialManager : MonoBehaviour {
 	private float m_Distance;
 	[SerializeField]
 	private int m_TutorialCount;
+	[SerializeField]
 	private int m_TutorialNumber;
 
 	[SerializeField]
@@ -30,17 +32,41 @@ public class TutorialManager : MonoBehaviour {
 	[SerializeField]
 	private Text m_TutorialText;
 
+	[SerializeField]
+	private Transform m_Enemy1;
+	[SerializeField]
+	private Transform m_Enemy2;
+	[SerializeField]
+	private Transform m_Enemy3;
+	[SerializeField]
+	private Transform m_Enemy4;
+	[SerializeField]
+	private Transform m_Enemy5;
+
 	private string[][] m_Text = {
 		new string[] { "訓練所へようこそ" , "あなた達には\n最終試験に向けての" , "操作確認を\n行ってもらいます" , "ナーサティア、ダフネを\n操作して目的地に\n向かってください"},
-		new string[] { "2" },
-		new string[] { "3" },
-		new string[] { "4" },
-		new string[] { "5" },
-		new string[] { "6" },
-		new string[] { "7" },
-		new string[] { "8" },};
+		new string[] { ""},
+		new string[] { "敵を挟んで合体し\nアシュヴィンになってください"},
+		new string[] { "アシュヴィンでいられる時間は\n挟んだ敵の数で決まります","エネルギー残量はこちらのゲージで確認できます" },
+//		new string[] { "ブースト移動を利用して\n目的地に\n向かってください"},
+//		new string[] { "ブースト移動を使用することで\n速く移動できますが\nエネルギーを消費します"},
+//		new string[] { "ジャンプをしてください"},
+//		new string[] { "ジャンプをすることで\n避けられる攻撃があります"},
+		new string[] { "ロケットを発射してください" },
+		new string[] { "ロケットを発射すると\n一定量のエネルギーを消費します" },
+		new string[] { "ロケットを敵に当ててください" },
+		new string[] { "ロケットを当てた敵が\n壁か他の敵に当たると撃破出来ます" },
+		new string[] { "緊急回避をしてください" },
+		new string[] { "攻撃などを回避して\n反撃できるかもしれません"},
+		new string[] { "こちらの敵を\n似たい同時に挟んで\nウプヴァスフォーム\nになってください"},
+		new string[] { "ウプヴァスフォームは\n移動速度が速く\n速い敵から逃げるのに最適です"},
+		new string[] { "蜘蛛型の敵だけを挟んで\nアヴァーフォーム\nになってください"},
+		new string[] { "アヴァーフォームは移動速度が\n遅い代わりに高い攻撃力を\n持っています"},
+		new string[] { "こちらに表示されているUIは\nバリアの残量を表しています","ゲージがない状態で攻撃を\n受けてしまうと","機体が破壊され任務失敗となります\n注意してください"},
+		new string[] { "以上で訓練終了です\nお疲れさまでした"}};
 	// Use this for initialization
-	IEnumerator Start () {
+	IEnumerator Start()
+	{
 		m_PlayerController = GameManager.Instance.m_PlayerController;
 		m_RobotL = m_PlayerController.m_LRobot.transform;
 		m_RobotR = m_PlayerController.m_RRobot.transform;
@@ -48,8 +74,9 @@ public class TutorialManager : MonoBehaviour {
 		while (m_TutorialNumber < m_TutorialCount)
 		{
 			TutorialStart();
-			if(m_TutorialNumber > 0)
+			if (m_TutorialNumber > 0)
 			{
+				yield return new WaitForSeconds(0.5f);
 				// フェード
 				for (float t = 0; t < 0.5f; t += Time.deltaTime)
 				{
@@ -64,9 +91,9 @@ public class TutorialManager : MonoBehaviour {
 			}
 
 			//テキスト表示
-			for (int i = 0; i < m_Text[m_TutorialNumber].Length; i++)
+			for (int i = 0; i < m_Text[m_TutorialNumber*2].Length; i++)
 			{
-				yield return StartCoroutine(textset(i));
+				yield return StartCoroutine(textset(m_TutorialNumber*2,i));
 			}
 
 
@@ -83,9 +110,16 @@ public class TutorialManager : MonoBehaviour {
 				yield return null;
 			}
 			m_CompleteImage.fillAmount = 1;
+
+			//テキスト表示
+			for (int i = 0; i < m_Text[m_TutorialNumber*2+1].Length; i++)
+			{
+				yield return StartCoroutine(textset(m_TutorialNumber*2+1,i));
+			}
+
 			yield return new WaitForSeconds(1);
 
-//			m_TutorialNumber++;
+			m_TutorialNumber++;
 			if (m_TutorialNumber < m_TutorialCount)
 			{
 				//フェード
@@ -113,6 +147,33 @@ public class TutorialManager : MonoBehaviour {
 				GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
 				m_FadeImage.color = Color.clear;
 				return;
+			case 1:
+				m_TargetL.gameObject.SetActive(false);
+				m_TargetR.gameObject.SetActive(false);
+				m_Enemy1.gameObject.SetActive(true);
+				return;
+			case 2:
+				m_PlayerController.m_CanRelease = false;
+				return;
+			case 3:
+				m_Enemy2.gameObject.SetActive(true);
+				return;
+			case 4:
+				m_PlayerController.m_CanRelease = true;
+				return;
+			case 5:
+				m_Enemy3.gameObject.SetActive(true);
+				m_Enemy4.gameObject.SetActive(true);
+				return;
+			case 6:
+				m_Enemy3.gameObject.SetActive(false);
+				m_Enemy4.gameObject.SetActive(false);
+				m_Enemy5.gameObject.SetActive(true);
+				StartCoroutine(m_PlayerController.Release(false));
+				return;
+			case 7:
+				StartCoroutine(m_PlayerController.Release(false));
+				return;
 			default:
 				return;
 		}
@@ -126,22 +187,68 @@ public class TutorialManager : MonoBehaviour {
 				return
 					m_Distance >= Vector3.Distance(m_RobotL.position, m_TargetL.position) &&
 					m_Distance >= Vector3.Distance(m_RobotR.position, m_TargetR.position);
+			case 1:
+				return
+					m_PlayerController.m_HRobot.activeSelf;
+			case 2:
+				return
+					!m_PlayerController.m_Battery.LIsCanFire ||
+					!m_PlayerController.m_Battery.RIsCanFire;
+			case 3:
+				return
+					!m_Enemy2.gameObject.activeSelf;
+			case 4:
+				return
+					!m_PlayerController.m_HRobot.activeSelf;
+			case 5:
+				return
+					m_PlayerController.m_HumanoidRobot.m_Config == m_PlayerController.m_HumanoidT;
+			case 6:
+				return
+					m_PlayerController.m_HRobot.activeSelf;
+			case 7:
+				return true;
 			default:
 				return false;
 		}
 	}
 
-	IEnumerator textset(int i)
+	IEnumerator textset(int i,int j)
 	{
 		var textSending = m_TutorialText.GetComponent<TextSending>();
-		m_TutorialText.text = m_Text[m_TutorialNumber][i];
-		textSending.SetRate(0.1f);
+		m_TutorialText.text = m_Text[i][j];
 		textSending.Initialize();
 		while (!textSending.IsEnd())
 		{
+			textSending.SetRate(Time.deltaTime * 30);
 			m_TutorialText.SetAllDirty();
 			yield return null;
 		}
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(2);
+	}
+
+	private void Update()
+	{
+		if(m_PlayerController.m_HumanoidRobot != null)
+		{
+			m_PlayerController.m_HumanoidRobot.m_Energy = 100;
+		}
+		if (m_TutorialNumber == 5 && m_PlayerController.enabled)
+		{
+			if(m_PlayerController.m_HRobot.activeSelf && m_PlayerController.m_HumanoidRobot.m_Config != m_PlayerController.m_HumanoidT)
+			{
+				StartCoroutine(m_PlayerController.Release(false));
+			}
+			if (!m_Enemy3.gameObject.activeSelf)
+			{
+				m_Enemy3.GetComponent<EnemyBase>().m_IsDead = false;
+				m_Enemy3.gameObject.SetActive(true);
+			}
+			if (!m_Enemy4.gameObject.activeSelf)
+			{
+				m_Enemy4.GetComponent<EnemyBase>().m_IsDead = false;
+				m_Enemy4.gameObject.SetActive(true);
+			}
+		}
 	}
 }

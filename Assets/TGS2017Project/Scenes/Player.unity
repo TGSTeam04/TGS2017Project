@@ -916,6 +916,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  m_HMode: 0
+  m_CanRelease: 0
 --- !u!4 &180186487
 Transform:
   m_ObjectHideFlags: 0

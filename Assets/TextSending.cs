@@ -58,11 +58,11 @@ public class TextSending : BaseMeshEffect {
 			output.Add(uiVertex);
 		}
 
-		_alpha += _Rate;
+		_alpha += Mathf.Min(_Rate,1.0f);
 		if(_alpha >= 1f)
 		{
 			_charaCount++;
-			_alpha = 0f;
+			_alpha -= 1f;
 		}
 
 		vh.Clear();
