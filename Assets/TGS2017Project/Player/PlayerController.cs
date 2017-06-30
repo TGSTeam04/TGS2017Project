@@ -265,6 +265,11 @@ public class PlayerController : MonoBehaviour
         v.y = 5.5f;
         m_TPSPosition.position = v;
 
+        foreach (var item in arms)
+        {
+            item.Death();
+        }
+
         if (!IsCanCrash || enemys.Count == 0)
         {
             m_KeepEnemyPosWall.SetActive(false);
@@ -277,10 +282,6 @@ public class PlayerController : MonoBehaviour
 		foreach (var item in enemys)
         {
             item.SetBreakForPlayer();
-        }
-        foreach (var item in arms)
-        {
-            item.Death();
         }
 
         float add = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[enemys.Count - 1];
