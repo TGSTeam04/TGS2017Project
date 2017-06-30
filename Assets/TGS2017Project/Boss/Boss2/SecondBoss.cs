@@ -91,7 +91,7 @@ public class SecondBoss : MonoBehaviour
     private void Damage(float damage, MonoBehaviour src)
     {
         HitPoint -= damage;
-        if (HitPoint < 0)
+        if (HitPoint <= 0)
         {
             s_State = SecondBossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);

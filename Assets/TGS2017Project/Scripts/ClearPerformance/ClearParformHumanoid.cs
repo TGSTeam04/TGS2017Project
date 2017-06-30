@@ -18,13 +18,16 @@ public class ClearParformHumanoid : ClearParformance
     protected override void Redy()
     {
         Transform Humanoid = GameManager.Instance.m_HumanoidRobot.transform;
-
+        
         Humanoid.parent = m_ParformAnimRootObj.transform;
         Humanoid.localPosition = Vector3.zero;
         Humanoid.localRotation = Quaternion.identity;
 
         m_HumanoidCenter = Humanoid.FindChild("LookPoint");
         m_HAnimator = Humanoid.FindChild("Model").GetComponent<Animator>();
+        m_HAnimator.SetBool("IsBoost", false);
+        m_HAnimator.SetFloat("Forward", 0.0f);
+        m_HAnimator.SetFloat("Right", 0.0f);
         m_HAnimator.Play("WalkBlendTree");
         //m_HAnim = m_Humanoid.transform.FindChild("Model").GetComponent<Animation>();//m_Humanoid.GetComponentInChildren<Animator>();
     }

@@ -118,7 +118,9 @@ public class Separation : MonoBehaviour {
     }
     public void Death()
     {
-        Boss.HitPoint -= 25.0f;
+        if (Boss.HitPoint > 25.0f) Boss.HitPoint -= 25.0f;
+        else Boss.HitPoint = 5f;
+        GameManager.Instance.m_PlayScore += 5;
         Instantiate(m_Explosion, transform.position, transform.rotation);
         AttackProcess.s_Chance = false;
         gameObject.SetActive(false);

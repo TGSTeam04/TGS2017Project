@@ -11,7 +11,7 @@ public class Star : MonoBehaviour {
     [SerializeField] private float m_Width = 5;
     [SerializeField] private float m_Height = 5;
     [SerializeField] private float m_Reduced = 3f;
-    [SerializeField] private float m_MaxAlpha = 0.8f;
+    [SerializeField] private float m_MaxAlpha = 1f;
     private float m_Alpha = 0.0f;
 
 
