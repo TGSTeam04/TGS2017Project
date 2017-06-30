@@ -11,8 +11,8 @@ public class ResultController : MonoBehaviour {
 	public float m_Time;
 	public int m_Score;
 
-    public float m_NormaTime;
-    public int m_NormaScore;
+    private float m_NormaTime;
+    private int m_NormaScore;
 
     private bool m_TimeNormaClear;
     private bool m_ScoreNormaClear;
@@ -35,7 +35,22 @@ public class ResultController : MonoBehaviour {
 	{
         m_Audio = GetComponent<AudioSource>();
         m_Time = GameManager.Instance.m_PlayTime;
-        m_Score = GameManager.Instance.m_PlayScore;
+        m_Score = GameManager.Instance.m_PlayScore * 10;
+        if (GameManager.s_StageNumber == 1)
+        {
+            m_NormaTime = 40;
+            m_NormaScore = 100;
+        }
+        if (GameManager.s_StageNumber == 2)
+        {
+            m_NormaTime = 30;
+            m_NormaScore = 150;
+        }
+        if (GameManager.s_StageNumber == 3)
+        {
+            m_NormaTime = 200;
+            m_NormaScore = 300;
+        }
         yield return new WaitForSeconds(1);
         m_Audio.Play();
         yield return null;
@@ -89,7 +104,7 @@ public class ResultController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         if (m_Lank == 1)
         {
-            Instantiate(m_Star, m_StarTrans[0].position, m_StarTrans[0].rotation, m_StarTrans[0]);
+            Instantiate(m_Star, m_StarTrans[5].position, m_StarTrans[5].rotation, m_StarTrans[5]);
             yield return new WaitForSeconds(1.5f);
             if (m_Audio.clip != m_Clip)
             {
@@ -101,7 +116,6 @@ public class ResultController : MonoBehaviour {
         if (m_Lank == 2)
         {
             Instantiate(m_Star, m_StarTrans[3].position, m_StarTrans[3].rotation, m_StarTrans[3]);
-            yield return new WaitForSeconds(0.5f);
             Instantiate(m_Star, m_StarTrans[4].position, m_StarTrans[4].rotation, m_StarTrans[4]);
             yield return new WaitForSeconds(1.5f);
             if (m_Audio.clip != m_Clip)
@@ -114,9 +128,7 @@ public class ResultController : MonoBehaviour {
         if (m_Lank == 3)
         {
             Instantiate(m_Star, m_StarTrans[1].position, m_StarTrans[1].rotation, m_StarTrans[1]);
-            yield return new WaitForSeconds(0.5f);
             Instantiate(m_Star, m_StarTrans[2].position, m_StarTrans[2].rotation, m_StarTrans[2]);
-            yield return new WaitForSeconds(0.7f);
             Instantiate(m_Star, m_StarTrans[0].position, m_StarTrans[0].rotation, m_StarTrans[0]);
             yield return new WaitForSeconds(1.5f);
             if (m_Audio.clip != m_Clip)

@@ -48,7 +48,7 @@ public class UIPlayerStatus : MonoBehaviour
         yield return new WaitForSeconds(1);
         m_Audio.Play();
         m_ImageA.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         m_ImageA.SetActive(false);
         m_Audio.clip = m_AudioClip;
         m_Audio.Play();
