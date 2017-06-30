@@ -105,9 +105,20 @@ public class Separation : MonoBehaviour {
             m_Back = true;
         }
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && m_Back == false && GameManager.Instance.m_PlayMode != PlayMode.Combine)
+        {
+            m_Audio.Play();
+            var damageComp = other.gameObject.GetComponent<Damageable>();
+            if (damageComp != null)
+                damageComp.ApplyDamage(m_ApplyDamage, this);
+            m_Back = true;
+        }
+    }
     public void Death()
     {
-        Boss.HitPoint -= 40.0f;
+        Boss.HitPoint -= 25.0f;
         Instantiate(m_Explosion, transform.position, transform.rotation);
         AttackProcess.s_Chance = false;
         gameObject.SetActive(false);
