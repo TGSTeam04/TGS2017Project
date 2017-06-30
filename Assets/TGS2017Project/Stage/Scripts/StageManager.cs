@@ -67,20 +67,24 @@ public class StageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
         {
-            bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
-            if (!isPause)
+            if (Input.GetButtonDown("Pause"))
             {
-                SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
-                Pauser.Pause();
-            }
-            else
-            {
-                SceneManager.UnloadSceneAsync("Pause");
-                Pauser.Resume();
+                bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
+                if (!isPause)
+                {
+                    SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+                    Pauser.Pause();
+                }
+                else
+                {
+                    SceneManager.UnloadSceneAsync("Pause");
+                    Pauser.Resume();
+                }
             }
         }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             bool isPause = Pauser.s_TargetByTag[PauseTag.Enemy].m_IsPause;

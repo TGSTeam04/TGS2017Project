@@ -108,10 +108,13 @@ public class Pauser : MonoBehaviour
     Rigidbody[] rgBodies = null;
     Vector3[] rgBodyVels = null;
     Vector3[] rgBodyAVels = null;
+    RigidbodyConstraints[] rgConstraints;
     //2D
     Rigidbody2D[] rg2dBodies = null;
     Vector2[] rg2dBodyVels = null;
     float[] rg2dBodyAVels = null;
+    RigidbodyConstraints2D[] rg2dConstraints;
+
 
     public bool IsPause { get { return PauseCunt > 0; } }
 
@@ -186,22 +189,26 @@ public class Pauser : MonoBehaviour
         rgBodies = Array.FindAll(GetComponentsInChildren<Rigidbody>(), (obj) => { return !obj.IsSleeping(); });
         rgBodyVels = new Vector3[rgBodies.Length];
         rgBodyAVels = new Vector3[rgBodies.Length];
+        rgConstraints = new RigidbodyConstraints[rgBodies.Length];
         for (var i = 0; i < rgBodies.Length; ++i)
         {
             rgBodyVels[i] = rgBodies[i].velocity;
             rgBodyAVels[i] = rgBodies[i].angularVelocity;
-            rgBodies[i].isKinematic = true;
+            rgConstraints[i] = rgBodies[i].constraints;
+            rgBodies[i].constraints = RigidbodyConstraints.FreezePositionY;
             rgBodies[i].Sleep();
         }
         //２Dリジットボディ
         rg2dBodies = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return !obj.IsSleeping(); });
         rg2dBodyVels = new Vector2[rg2dBodies.Length];
         rg2dBodyAVels = new float[rg2dBodies.Length];
+        rg2dConstraints = new RigidbodyConstraints2D[rg2dBodies.Length];
         for (var i = 0; i < rg2dBodies.Length; ++i)
         {
             rg2dBodyVels[i] = rg2dBodies[i].velocity;
             rg2dBodyAVels[i] = rg2dBodies[i].angularVelocity;
-            rg2dBodies[i].isKinematic = true;
+            rg2dConstraints[i] = rg2dBodies[i].constraints;
+            rg2dBodies[i].constraints = RigidbodyConstraints2D.FreezePositionY;
             rg2dBodies[i].Sleep();
         }
     }
@@ -225,20 +232,25 @@ public class Pauser : MonoBehaviour
             }
         }
 
-        for (var i = 0; i < rgBodies.Length; ++i)
+        if (rgBodies != null)
         {
-            rgBodies[i].WakeUp();
-            rgBodies[i].isKinematic = false;
-            rgBodies[i].velocity = rgBodyVels[i];
-            rgBodies[i].angularVelocity = rgBodyAVels[i];
+            for (var i = 0; i < rgBodies.Length; ++i)
+            {
+                rgBodies[i].WakeUp();
+                rgBodies[i].constraints = rgConstraints[i];
+                rgBodies[i].velocity = rgBodyVels[i];
+                rgBodies[i].angularVelocity = rgBodyAVels[i];
+            }
         }
-
-        for (var i = 0; i < rg2dBodies.Length; ++i)
+        if (rg2dBodies != null)
         {
-            rg2dBodies[i].WakeUp();
-            rg2dBodies[i].isKinematic = false;
-            rg2dBodies[i].velocity = rg2dBodyVels[i];
-            rg2dBodies[i].angularVelocity = rg2dBodyAVels[i];
+            for (var i = 0; i < rg2dBodies.Length; ++i)
+            {
+                rg2dBodies[i].WakeUp();
+                rg2dBodies[i].constraints = rg2dConstraints[i];
+                rg2dBodies[i].velocity = rg2dBodyVels[i];
+                rg2dBodies[i].angularVelocity = rg2dBodyAVels[i];
+            }
         }
 
         m_PauseBehavs = null;

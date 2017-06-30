@@ -76,6 +76,8 @@ public abstract class ClearParformance : MonoBehaviour
         m_PerformAnim.clip.SampleAnimation(m_ParformAnimRootObj, 0.0f);
         GameManager.Instance.m_PlayCamera.SetActive(false);
         m_Camera.gameObject.SetActive(true);
+        Pauser.Resume();
+        yield return null;
 
         //フェードアウト
         fadeEnd = false;
