@@ -12,25 +12,25 @@ public class BParallel : BComposite
         {
             //BState state = child.m_State;
             //if (state != BState.Success && state != BState.Failure)
-                child.TryExecute();
+            child.TryExecute();
         }
     }
-    public override void ChildSuccess()
-    {
-        //m_SucceseNum++;
-        //if (m_SucceseNum >= m_Child.Count)
-        //    Succes();
-    }
-    public override void ChildFailure()
-    {
-        //m_FailureNum++;
-        //if (m_FailureNum >= m_Child.Count)
-        //    Failure();
-    }
-    public override void Initialize()
-    {
-        base.Initialize();
-        //m_SucceseNum = 0;
-        //m_FailureNum = 0;
-    }
+    //public override void ChildSuccess()
+    //{
+    //    //m_SucceseNum++;
+    //    //if (m_SucceseNum >= m_Child.Count)
+    //    //    Succes();
+    //}
+    //public override void ChildFailure()
+    //{
+    //    //m_FailureNum++;
+    //    //if (m_FailureNum >= m_Child.Count)
+    //    //    Failure();
+    //}
+    //public override void Initialize()
+    //{
+    //    base.Initialize();
+    //    //m_SucceseNum = 0;
+    //    //m_FailureNum = 0;
+    //}
 }

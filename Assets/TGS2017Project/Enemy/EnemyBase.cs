@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public delegate void OnCollideEnter_Del(Collision collsion, EnemyBase enemy);
+public delegate void OnCollideEnter_Del(Collider other, EnemyBase enemy);
 
 public enum BreakType
 {
     Normal,
     Shock,
     UnBreak
+}
+public enum EnemyType
+{
+	Short,
+	Long,
+	Normal
 }
 
 public class EnemyBase : MonoBehaviour
@@ -18,6 +24,7 @@ public class EnemyBase : MonoBehaviour
     private float m_SpeedRate;
     public bool m_IsDead;
     public bool m_IsShock;
+    public bool m_FreezeVelocity = true;
     private Rigidbody m_Rigidbody;
 
     public GameObject m_LRobot;
@@ -29,28 +36,13 @@ public class EnemyBase : MonoBehaviour
 
     private Vector3 m_Target;
 
-    public BreakType m_BreakType;
-
     public GameObject m_Fragment;
 
     private NavMeshAgent m_NavMeshAgent;
 
-    public OnCollideEnter_Del Del_CollideEnter;
+    public OnCollideEnter_Del Del_Trigger;
 
-    public bool IsBreakable
-    {
-        get
-        {
-            switch (m_BreakType)
-            {
-                case BreakType.Normal:
-                    return true;
-                case BreakType.Shock:
-                    return m_IsShock;
-            }
-            return false;
-        }
-    }
+	public EnemyType m_EnemyType;
 
     // Use this for initialization
     void Start()
@@ -63,7 +55,7 @@ public class EnemyBase : MonoBehaviour
         m_RRobot = GameManager.Instance.m_RRobot;
         m_HumanoidRobot = GameManager.Instance.m_HumanoidRobot;
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        //NextTarget();
+        //NextTarget();        
     }
 
     // Update is called once per frame
@@ -92,7 +84,8 @@ public class EnemyBase : MonoBehaviour
             default:
                 break;
         }
-        m_Rigidbody.velocity = Vector3.zero;
+        if (m_FreezeVelocity)
+            m_Rigidbody.velocity = Vector3.zero;
     }
 
     private void Move()
@@ -134,23 +127,34 @@ public class EnemyBase : MonoBehaviour
 
     public void SetBreak()
     {
-        EnemyManager.Instance.ReSpawnEnemy(this);
+        GameObject fragment = Instantiate(m_Fragment, transform.position, transform.rotation, transform.parent);
+        fragment.transform.parent = null;
+        m_Rigidbody.isKinematic = false;
+        m_Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        Del_Trigger = null;
         m_IsDead = true;
+        gameObject.SetActive(false);
+        m_FreezeVelocity = true;
+        EnemyManager.Instance.ReSpawnEnemy(this);
+    }
+
+    public void SetBreakForPlayer()
+    {
+        GameManager.Instance.m_PlayScore++;
+        SetBreak();
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.m_PlayMode == PlayMode.Combine && other.name == "Break" && m_IsDead)
-        {
-            gameObject.SetActive(false);
-            //m_Fragment.SetActive(true);
-        }
         if (GameManager.Instance.m_PlayMode == PlayMode.TwinRobot && other.tag == "Guid")
         {
             m_SpeedRate = 0.5f;
             m_LRobotPos = m_LRobot.transform.position;
             m_RRobotPos = m_RRobot.transform.position;
         }
+
+        if (Del_Trigger != null)
+            Del_Trigger.Invoke(other, this);
     }
     public void OnTriggerStay(Collider other)
     {
@@ -160,9 +164,9 @@ public class EnemyBase : MonoBehaviour
             m_NavMeshAgent.Move(Vector3.Lerp(
                 m_LRobot.transform.position - m_LRobotPos,
                 m_RRobot.transform.position - m_RRobotPos,
-                Vector3.Distance(transform.position, m_LRobot.transform.position) / (
-                Vector3.Distance(transform.position, m_LRobot.transform.position) +
-                Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.3f);
+                Vector3.Distance(transform.position, m_LRobot.transform.position) /
+                (Vector3.Distance(transform.position, m_LRobot.transform.position) +
+                 Vector3.Distance(transform.position, m_RRobot.transform.position))) * 0.1f);
         }
     }
     public void OnTriggerExit(Collider other)
@@ -172,9 +176,9 @@ public class EnemyBase : MonoBehaviour
             m_SpeedRate = 1.0f;
         }
     }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (Del_CollideEnter != null)
-            Del_CollideEnter.Invoke(collision, this);
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Wall")
+    //        Debug.Log("Enemy OnCollisionEnter");        
+    //}
 }

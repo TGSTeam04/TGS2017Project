@@ -12,8 +12,10 @@ TagManager:
   - Boss
   - Wall
   - Earth Clouds
+  - Floor
   - BossBullet
   - PlayerBullet
+  - Break
   layers:
   - Default
   - TransparentFX
@@ -33,10 +35,10 @@ TagManager:
   - Arm
   - PlayerBullet
   - BossBullet
-  - Boss3
-  - 
-  - 
-  - 
+  - Boss
+  - EnemyBreak
+  - BossShield
+  - BossArm
   - 
   - 
   - 

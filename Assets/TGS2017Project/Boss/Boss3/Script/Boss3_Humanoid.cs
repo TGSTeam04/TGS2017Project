@@ -1,62 +1,98 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
 [SelectionBase]
 public class Boss3_Humanoid : MonoBehaviour
 {
+    //分裂時と合体時のコントロールをするクラスの参照
+    private Boss3_Controller m_BossController;
+    [SerializeField] RocketBattery m_Battery;
 
-    public float m_MaxHp;
-    [HideInInspector] public float m_Hp;
-    public float m_Speed;
-
+    [SerializeField] float m_MaxHP = 100;
+    private float m_HP;
+    //移動
+    [SerializeField] float m_Speed;
     //ロケットパンチ
-    public float m_RocketSpeed;
-    public float m_RocketRange;
-    public float m_RocketInterval;
-    public float m_NeedMoveDistance;
+    [SerializeField] float m_RocketSpeed;
+    [SerializeField] float m_RocketRange;
+    [SerializeField] float m_RocketInterval;
+    [SerializeField] float m_NeedMoveDistance;    
 
-    //各コンポーネント
-    public NavMeshAgent m_NavAgent;
-    public Rigidbody m_Rb;
-    public Animator m_Anim;
-    public RocketBattery m_Battery;
-    public Damageable m_DamageComp;
+    //各コンポーネント    
+    private NavMeshAgent m_NavAgent;
+    private Rigidbody m_Rb;
+    private Animator m_Anim;    
+    private Damageable m_DamageComp;
 
     //ビヘイビアと付随する値
-    BehaviorTree m_BT;
-    BBoard m_BB;
-    public GameObject m_Target;
-    public GameObject m_Temp;
+    private BehaviorTree m_BT;
+    private BBoard m_BB;
+
+    //エフェクト
+    [SerializeField] GameObject m_Explosion;
+    [SerializeField] GameObject m_Efect_Numbness;
+    [SerializeField] float m_NumbnessInterval = 30.0f;
+    private List<GameObject> m_Numbness = new List<GameObject>();
+
+    float m_RemainingNI;
+
+    public GameObject tempTarget;
 
     private void Awake()
     {
-        m_Hp = m_MaxHp;
-
+        m_BossController = GetComponentInParent<Boss3_Controller>();
         m_NavAgent = GetComponent<NavMeshAgent>();
         m_Rb = GetComponent<Rigidbody>();
         m_Anim = GetComponentInChildren<Animator>();
-        m_Battery = GetComponent<RocketBattery>();
         m_DamageComp = GetComponent<Damageable>();
-        m_DamageComp.Event_Damaged = Damaged;
+        m_DamageComp.Del_ReciveDamage = Damaged;
+
+        m_BT = GetComponent<BehaviorTree>();
+        m_BB = GetComponent<BBoard>();
     }
     // Use this for initialization
     void Start()
     {
+        StartCoroutine(UpdateTarget());
         //ビヘイビアツリーのセットアップ
         SetUpBT();
     }
-    // Update is called once per frame
-    void Update()
+    private IEnumerator UpdateTarget()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        while (true)
         {
-            m_DamageComp.ApplyDamage(5, this);
+            GameManager gm = GameManager.Instance;
+            float Ldistance = (gm.m_LRobot.transform.position - transform.position).magnitude;
+            float Rdistance = (gm.m_RRobot.transform.position - transform.position).magnitude;
+            GameObject target = gm.m_PlayMode == PlayMode.HumanoidRobot
+                ? gm.m_HumanoidRobot
+                : Ldistance < Rdistance
+                        ? gm.m_LRobot
+                        : gm.m_RRobot;
+            //Debug.Log("Target Update" + target.ToString());
+            //GameObject target = tempTarget;
+            m_BB.GObjValues["target"] = target; //tempTarget;
+            yield return new WaitForSeconds(3.0f);
         }
+    }
 
+    private void OnEnable()
+    {
+        m_HP = m_MaxHP;
+        StartCoroutine(Restart());
+    }
+
+    private IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(1.0f);
+        m_BT.IsStop = false;
+    }
+    // Update is called once per frame
+    public void BossUpdate()
+    {
         m_BT.BUpdate();
 
         //アニメーションの値をセット
@@ -66,13 +102,37 @@ public class Boss3_Humanoid : MonoBehaviour
     }
     private void Damaged(float damage, MonoBehaviour src)
     {
-        m_Hp -= damage;
-        if (m_Hp < 0)
+        m_HP = Mathf.Max(0, m_HP - damage);
+        m_RemainingNI -= damage;
+        if (m_RemainingNI < 0)
         {
-            Debug.Log("Boss3死亡");
-            m_BT.IsStop = true;
+            GameObject shockEff = Instantiate(m_Efect_Numbness, transform);
+            Vector3 modiy = new Vector3(0, 1.7f, 0)
+                + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 1f), Random.Range(-0.2f, 0.2f));            
+            shockEff.transform.position = transform.position + modiy;
+            m_Numbness.Add(shockEff);
+
+            m_RemainingNI = m_NumbnessInterval;
+        }
+        if (m_HP <= 0)
+        {
+            foreach (var numbness in m_Numbness)
+                Destroy(numbness);
+            Release();
+            return;
         }
         m_Anim.SetTrigger("Damage");
+    }
+
+    public void Dead()
+    {
+        Instantiate(m_Explosion, transform.position, transform.rotation);
+    }
+
+    public void Release()
+    {
+        m_BT.BTReset();
+        m_BossController.ReleaseStart();
     }
 
     //ビヘイビアの設定
@@ -82,7 +142,6 @@ public class Boss3_Humanoid : MonoBehaviour
         m_BT = GetComponent<BehaviorTree>();
         m_BT.Init();
         m_BT.SetBoard(m_BB);
-        m_BB.GObjValues["target"] = m_Target;
 
         BParallel par_Look_Other = new BParallel();
         //LookAtPlayer
@@ -91,18 +150,17 @@ public class Boss3_Humanoid : MonoBehaviour
         m_BT.SetRootNode(par_Look_Other);
 
         /*ロケットパンチ*/
-        BT_FireRocket BTT_Rocket = new BT_FireRocket(GetComponent<RocketBattery>());
+        BT_FireRocket BTT_Rocket = new BT_FireRocket(m_Battery);
         BDecorator dec_RocektRnage = new BD_CloserThen("target", m_RocketRange);
         BTT_Rocket.AddDecorator(dec_RocektRnage);
         BTT_Rocket.AddDecorator(new BD_CoolTime(m_RocketInterval));
 
-        //接近        
+        //接近
         BSequence seq = new BSequence();
         BT_MoveTo moveToRange = new BT_MoveTo("target", m_Speed);
         moveToRange.m_StopDistance = m_RocketRange;
         moveToRange.m_IsCanCancelMove = false;
-        moveToRange.AddDecorator(new BD_CloserThen("target", m_NeedMoveDistance).Invert());
-        m_BB.GObjValues["temp"] = m_Temp;
+        //moveToRange.AddDecorator(new BD_CloserThen("target", m_NeedMoveDistance).Invert());
 
         seq.AddNode(moveToRange);
 

@@ -6,37 +6,39 @@ public class BehaviorTree : MonoBehaviour
 {
     private BRoot m_VirtualRoot;
     public BBoard m_BB;
-    public bool m_IsStop;
-    public bool IsStop {
+    private bool m_IsStop;
+    public bool IsStop
+    {
         get { return m_IsStop; }
         set
         {
             m_IsStop = value;
-            m_VirtualRoot.Reset();
+            if (!value)
+                m_VirtualRoot.Initialize();
         }
     }
-    //public BehaviorTree()
-    //{
-    //    m_VirtualRoot = new BRoot();
-    //    m_VirtualRoot.m_BB = m_Board;
-    //    m_VirtualRoot.m_BT = this;
-    //    IsStop = false;
-    //}
-    //public BehaviorTree(BBoard board)
-    //{
-    //    m_VirtualRoot = new BRoot();
-    //    m_Board = board;
-    //    m_VirtualRoot.m_BB = m_Board;
-    //    m_VirtualRoot.m_BT = this;
-    //    IsStop = false;
-    //}
+    private void OnEnable()
+    {
+        if (m_VirtualRoot != null)
+            m_VirtualRoot.Initialize();
+    }
+    private void OnDisable()
+    {
+        IsStop = true;
+    }
+
     public void Init()
-    {        
+    {
         m_VirtualRoot = new BRoot();
         m_VirtualRoot.m_BB = m_BB;
         m_VirtualRoot.m_BT = this;
         IsStop = false;
     }
+    public void BTReset()
+    {
+        m_VirtualRoot.Reset();
+    }
+
     public void SetBoard(BBoard board)
     {
         m_BB = board;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 製作者：大格
@@ -10,8 +11,11 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    public Transform m_ClearPerformLoc;
+    public GameObject m_Boss;
     public ObserverBase m_Observer;
     private int m_killNum;
+    [SerializeField] GameObject m_BGM;
 
     //[SerializeField]//ボスが出てくるStageLevel
     //private int m_MaxStageLevel;
@@ -38,8 +42,6 @@ public class StageManager : MonoBehaviour
         }
     }
 
-
-
     private void Awake()
     {
         m_Observer = new ObserverBase();
@@ -59,11 +61,43 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         //m_Observer.NotifyToSubjects("")
+        SceneManager.SetActiveScene(gameObject.scene);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
+        {
+            if (Input.GetButtonDown("Pause"))
+            {
+                bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
+                if (!isPause)
+                {
+                    SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
+                    Pauser.Pause();
+                }
+                else
+                {
+                    SceneManager.UnloadSceneAsync("Pause");
+                    Pauser.Resume();
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            bool isPause = Pauser.s_TargetByTag[PauseTag.Enemy].m_IsPause;
+            if (!isPause)
+                Pauser.Pause(PauseTag.Enemy);
+            else
+                Pauser.Resume(PauseTag.Enemy);
+        }
+    }
+
+    public void StageClear()
+    {
+        m_BGM.GetComponent<AudioSource>().enabled = false;
     }
 
     private void OnDestroy()
@@ -77,16 +111,5 @@ public class StageManager : MonoBehaviour
     public int StageLevel
     {
         get; set;
-        //get { return m_stageLevel; }
-        //set
-        //{
-        //    m_stageLevel = value;
-        //    m_Observer.NotifyToSubjects("StageLevelUp", m_stageLevel);
-        //    if (m_stageLevel >= m_MaxStageLevel)
-        //    {
-        //        m_Observer.NotifyToSubjects("BossCommingLevel");
-        //    }
-        //    m_ActivePanels.AddRange(m_StagePanels[m_stageLevel]);
-        //}
     }
 }

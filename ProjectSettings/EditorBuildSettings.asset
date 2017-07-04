@@ -9,8 +9,20 @@ EditorBuildSettings:
     path: Assets/TGS2017Project/Scenes/Common.unity
     guid: c5d2b927a1381c54994c9fbd9a1c6d90
   - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Title.unity
+    guid: c93cf42173195f64da4367e13f5b0864
+  - enabled: 1
     path: Assets/TGS2017Project/Stage/Test/TestStage.unity
     guid: 642fc200a7e4b6a45a7c61f7760fc989
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Stage 1.unity
+    guid: 0835bc21ba075ad4698a9b2703314fd1
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Stage 2.unity
+    guid: 9922e702d2a6ff140a2a93bc8d1bdfed
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Stage 3.unity
+    guid: 2208eab231bbaf648af4245c3a0f28f2
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/Player.unity
     guid: f02feb36e5051224d9374183b6e58a54
@@ -20,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/Loading.unity
     guid: b84a29a8560f615418f838e95982fc2a
-  - enabled: 1
-    path: Assets/TGS2017Project/Scenes/Title.unity
-    guid: c93cf42173195f64da4367e13f5b0864
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/Option.unity
     guid: 361f8806d46f6f542ab75ef44a02f902
@@ -37,16 +46,22 @@ EditorBuildSettings:
     guid: ebad509f7b1756648908b3588510be7e
   - enabled: 1
     path: Assets/TGS2017Project/Scenes/GameOver.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Loading.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Title.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Option.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Credit.unity
-    guid: 00000000000000000000000000000000
+    guid: 48775b78d87c8004f857313c6ed1278d
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Result.unity
+    guid: c780c456deb5bf24b8d4a1c9a73d1d63
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Pause.unity
+    guid: aa0b6dee4a0c18a4aa26b4eb2d71cd93
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/ClearPerformance.unity
+    guid: cf9c034effe171243b17ca6e04714014
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/FadeScene.unity
+    guid: c1e5e0b96d23c4940800b89c7a3174a6
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/PlayerTest.unity
+    guid: ed554abd471f74948bed5cd19743288b
+  - enabled: 1
+    path: Assets/TGS2017Project/Scenes/Tutorial.unity
+    guid: 81ebee2bcb3b70d45895fb0f025fcf38

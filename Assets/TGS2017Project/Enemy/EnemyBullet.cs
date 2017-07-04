@@ -4,46 +4,42 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    [SerializeField]
-    private float m_Speed;      // 弾速
+	[SerializeField]
+	private float m_Speed;      // 弾速
+	[SerializeField] private float m_ApplyDamage = 10.0f;
 
-    // Use this for initialization
-    void Start()
-    {
+    float m_DeadCount = 10;
 
-    }
+	// Use this for initialization
+	void Start()
+	{
+        StartCoroutine(Death());
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		transform.Translate(Vector3.forward * m_Speed * Time.deltaTime);
+	}
 
-    void FixedUpdate()
-    {
-
-    }
-
-    // 接触判定
-    void OnCollisionEnter(Collision other)
-    {
-		if (other.gameObject.tag == "Player")
-		{
-			print("Hit player");
-		}
-		Destroy(gameObject);
+	void FixedUpdate()
+	{
 
 	}
 
 	public void OnTriggerEnter(Collider other)
+	{
+		// プレイヤーに命中
+		if (other.gameObject.tag == "Player")
+		{
+			//Debug.Log(other.gameObject);
+			other.gameObject.GetComponent<Damageable>().ApplyDamage(m_ApplyDamage, this);
+            Destroy(gameObject);
+		}
+	}
+    IEnumerator Death()
     {
-        Debug.Log(other.name);
-
-        // プレイヤーに命中
-        if (other.gameObject.tag == "Player")
-        {
-            print("Hit player");
-        }
+        yield return new WaitForSeconds(m_DeadCount);
         Destroy(gameObject);
     }
 }

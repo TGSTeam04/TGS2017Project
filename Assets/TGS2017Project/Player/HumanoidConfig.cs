@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class HumanoidConfig : MonoBehaviour {
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+[CreateAssetMenu(menuName = "MyGame/Create HumanoidConfig", fileName = "HumanoidConfig")]
+public class HumanoidConfig : ScriptableObject {
+	public float m_NormalSpeed;
+	public float m_BoostSpeed;
+	public float m_NormalRotate;
+	public float m_ChargeRotate;
+	public float m_JumpPower;
+	public float m_NormalUseEnergy;
+	public float m_BoostUseEnergy;
+	public float m_ChargeUseEnergy;
+	public bool m_IsKnockBack;
 }

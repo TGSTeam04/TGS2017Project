@@ -6,10 +6,9 @@ using UnityEngine.AI;
 public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
 {
     private SubjectBase m_Subject;
-    //[SerializeField]
-    //private float[] m_ScaleByStageLeve = { 1, 2, 5, 8, 10 };
-    [SerializeField]
-    private float m_ReSpawnWaitTime = 1.0f;
+    [SerializeField] private Transform m_EnemyParent;
+    [SerializeField] private float m_ReSpawnWaitTime = 1.0f;    
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,23 +20,20 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
     {
         m_Subject.BindObserver(GameManager.Instance.m_StageManger.m_Observer);
     }
-    private void OnReciveFromStageManager(string handle, object pram)
-    {
-    }
 
     public void ReSpawnEnemy(EnemyBase enemy)
     {
+        enemy.transform.parent = m_EnemyParent;
+		if (m_ReSpawnWaitTime == 0) return;
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
             ReSpawn, enemy));
-        enemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        enemy.Del_CollideEnter = null;
     }
 
-    void ReSpawn(EnemyBase enemy)
+    private void ReSpawn(EnemyBase enemy)
     {
         StageManager stageManager = GameManager.Instance.m_StageManger;
-        
+
         //アクティブなパネルのうちランダムなものを取得
         List<StagePanel> panels = stageManager.m_ActivePanels;
         StagePanel panel = panels[Random.Range(0, panels.Count)];
@@ -52,5 +48,10 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
         enemy.GetComponent<EnemyBase>().m_IsDead = false;
         //enemy.transform.localScale = Vector3.one * 0.4f;// * scale;
         enemy.gameObject.SetActive(true);
+    }
+
+
+    private void OnReciveFromStageManager(string handle, object pram)
+    {
     }
 }

@@ -16,7 +16,7 @@ public class ObjectsLinker : MonoBehaviour {
 	private PlayCameraController m_Camera;
 	// Use this for initialization
 	void Awake () {
-		m_Camera = GameManager.Instance.m_PlayCamera.GetComponent<PlayCameraController>();
+        m_Camera = GameManager.Instance.m_PlayCamera.GetComponent<PlayCameraController>();
 		if (m_TopTransform != null) m_Camera.m_TopTransform = m_TopTransform;
 		if (m_TPSTarget != null) m_Camera.m_TPSTarget = m_TPSTarget;
 		if (m_TPSTransform != null) m_Camera.m_TPSTransform = m_TPSTransform;

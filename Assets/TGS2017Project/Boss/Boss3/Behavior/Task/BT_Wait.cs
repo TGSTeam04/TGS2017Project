@@ -9,14 +9,14 @@ public class BT_Wait : BTask
     public BT_Wait(float waitTime)
     {
         m_WaitTime = waitTime;
-        Reset();
+        OnReset();
     }
     protected override void FirstExecute()
     {
         if (m_RemainigTime < 0)
             Succes();
     }
-    public override void Initialize()
+    public override void StateChanged()
     {
         m_RemainigTime = m_WaitTime;
     }
