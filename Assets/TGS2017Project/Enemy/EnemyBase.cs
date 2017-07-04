@@ -14,7 +14,8 @@ public enum BreakType
 public enum EnemyType
 {
 	Short,
-	Long
+	Long,
+	Normal
 }
 
 public class EnemyBase : MonoBehaviour

@@ -24,6 +24,7 @@ public class EnemyManager : SingletonMonoBehaviour<EnemyManager>
     public void ReSpawnEnemy(EnemyBase enemy)
     {
         enemy.transform.parent = m_EnemyParent;
+		if (m_ReSpawnWaitTime == 0) return;
         StartCoroutine(this.Delay<EnemyBase>(
             new WaitForSeconds(m_ReSpawnWaitTime),
             ReSpawn, enemy));
