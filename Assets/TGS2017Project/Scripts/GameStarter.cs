@@ -39,9 +39,10 @@ public class GameStarter : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 		//Screen.lockCursor = false;
 		m_Common = SceneManager.GetActiveScene();
-		SceneManager.LoadScene("Title", LoadSceneMode.Additive);
-		m_LoadedScenes.Add("Title");
-        //ChangeScenes(m_StartScene);
+
+		//SceneManager.LoadScene("Title", LoadSceneMode.Additive);
+		//m_LoadedScenes.Add("Title");
+        ChangeScenes(m_StartScene);
     }
 
     // Update is called once per frame

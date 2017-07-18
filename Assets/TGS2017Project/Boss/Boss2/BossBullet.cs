@@ -21,24 +21,14 @@ public class BossBullet : MonoBehaviour
         m_Sound = GetComponent<AudioSource>();
         switch (GameManager.Instance.m_PlayMode)
         {
-            case PlayMode.TwinRobot:
-                GameObject L = GameManager.Instance.m_LRobot;
-                GameObject R = GameManager.Instance.m_RRobot;
-                float LDistance = Vector3.Distance(transform.position, L.transform.position);
-                float RDistance = Vector3.Distance(transform.position, R.transform.position);
-                if (LDistance <= RDistance)
-                {
-                    m_TargetPosition = L.transform.position;
-                }
-                else
-                {
-                    m_TargetPosition = R.transform.position;
-                }
-                break;
-            case PlayMode.HumanoidRobot:
-                m_TargetPosition = GameManager.Instance.m_HumanoidRobot.transform.position;
-                break;
-            default:
+			// プレイヤー分離時
+			case PlayMode.TwinRobot:
+			// プレイヤー合体時
+			case PlayMode.HumanoidRobot:
+				// プレイヤーに追従
+				m_TargetPosition = PlayerManager.Instance.NearPlayer(transform.position).position;
+				break;
+			default:
                 return;
         }
     }

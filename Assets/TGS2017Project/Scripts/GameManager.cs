@@ -45,9 +45,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public int m_PlayScore;
     public float m_PlayTime;
-    public float m_BossHpRate = 1.0f;
+	public float m_BossHpRate = 1.0f;
+	public float m_BossHpRate1 = 0.0f;
+	public float m_BossHpRate2 = 0.0f;
+	public float m_BossHpRate3 = 0.0f;
 
-    public static int s_StageNumber;
+	public static int s_StageNumber;
 
     // Use this for initialization
     void Start()
@@ -109,5 +112,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_IsGameClear = false;
         m_IsGameOver = false;
         m_IsRun = false;
-    }
+		m_BossHpRate1 = 0;
+		m_BossHpRate2 = 0;
+		m_BossHpRate3 = 0;
+	}
+
 }

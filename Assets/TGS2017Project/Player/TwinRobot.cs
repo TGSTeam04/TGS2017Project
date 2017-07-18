@@ -164,7 +164,7 @@ public class TwinRobot : MonoBehaviour
                 Instantiate(m_Explosion, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(transform.position));
                 StartCoroutine(this.Delay(new WaitForSeconds(5.0f), () =>
                 {
-                    GameManager.Instance.m_GameStarter.ChangeScenes(9);
+                    GameManager.Instance.m_GameStarter.AddScene("GameOver");
                 }));
             }
             ShieldUpdate();
@@ -186,4 +186,9 @@ public class TwinRobot : MonoBehaviour
         m_Shield.SetActive(HP != 0);
         m_Renderer.material.SetColor("_BaseColor", m_BaseConfig.m_ShieldColor.Evaluate(HP / m_BaseConfig.m_MaxHP));
     }
+
+	public float Distance(Vector3 position)
+	{
+		return Vector3.Distance(position, m_Rigidbody.position);
+	}
 }

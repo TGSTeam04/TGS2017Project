@@ -56,12 +56,15 @@ public class Boss3_Controller : MonoBehaviour
                 Dead();
             }
             GameManager.Instance.m_BossHpRate = m_Hp / m_MaxHp;
-        }
-    }
+			GameManager.Instance.m_BossHpRate3 = m_Hp / m_MaxHp;
+		}
+	}
 
     private void Awake()
     {
-        GameManager.s_StageNumber = 3;
+		GameManager.Instance.m_BossHpRate = 1.0f;
+		GameManager.Instance.m_BossHpRate3 = 1.0f;
+		GameManager.s_StageNumber = 3;
         Hp = m_MaxHp;
         m_State = PlayMode.HumanoidRobot;
 

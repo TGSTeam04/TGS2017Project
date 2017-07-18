@@ -15,6 +15,10 @@ public enum HumanoidMode
 	Power
 }
 
+/// <summary>
+/// プレイヤーの制御
+/// 製作者：野澤翔太
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     private Dictionary<TwinRobotMode, Quaternion> m_RotateTwinRoboMode = new Dictionary<TwinRobotMode, Quaternion>();
@@ -132,7 +136,7 @@ public class PlayerController : MonoBehaviour
         switch (GameManager.Instance.m_PlayMode)
         {
             case PlayMode.TwinRobot:
-                if (Input.GetButton("CombineL") && Input.GetButton("CombineR"))
+                if ((Input.GetButton("CombineL") && Input.GetButtonDown("CombineR")) || (Input.GetButtonDown("CombineL") && Input.GetButton("CombineR")))
                 {
                     StartCoroutine(Combine());
                     break;
@@ -141,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 m_TwinRobotR.UpdateInput();
                 break;
             case PlayMode.HumanoidRobot:
-                if (m_CanRelease && m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
+                if (m_CanRelease && m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButtonDown("CombineR")) || (Input.GetButtonDown("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
                 {
                     StartCoroutine(Release(false));
                     break;
@@ -191,20 +195,19 @@ public class PlayerController : MonoBehaviour
         m_TwinRobotL.SetShieldActive(false);
         m_TwinRobotR.SetShieldActive(false);
         m_KeepEnemyPosWall.SetActive(true);
+
         Vector3 StartPositionL = m_LRobotRigidbody.position;
         Vector3 StartPositionR = m_RRobotRigidbody.position;
         Vector3 Direction = Vector3.Normalize(StartPositionL - StartPositionR);
         Vector3 CenterPosition = Vector3.Lerp(StartPositionL, StartPositionR, 0.5f);
-        Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
+		float Distance = Vector3.Distance(CenterPosition, StartPositionL);
+		Vector3 EndPositionL = CenterPosition + Direction * 1.0f;
         Vector3 EndPositionR = CenterPosition - Direction * 1.0f;
         m_HRobot.transform.position = CenterPosition;
         m_HRobot.transform.LookAt(CenterPosition + Vector3.Cross(-Direction, Vector3.up));
 
-        float distaceRate = 1.5f;
         m_TPSPosition.parent.localRotation = Quaternion.identity;
-        Vector3 v = m_TPSPosition.position;
-        v.y = 5.5f + distaceRate * Vector3.Distance(CenterPosition, StartPositionL);
-        m_TPSPosition.position = v;
+		TPSPositionSet(Distance);
         m_CombineEffect.transform.position = m_Electric.transform.position + new Vector3(0, 0.5f, 0);
 
         float time = 0.3f;
@@ -225,36 +228,22 @@ public class PlayerController : MonoBehaviour
 
         List<EnemyBase> enemys = new List<EnemyBase>();
         List<Separation> arms = new List<Separation>();
-        float distance = Vector3.Distance(CenterPosition, StartPositionL);
-        Vector3 offset = Direction * distance / 2;
-        Collider[] collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(m_TwinRobotL.BreakerSize, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "Enemy" }));
+		Collider[] collider = Physics.OverlapBox(CenterPosition, new Vector3(m_TwinRobotL.BreakerSize, 2, Distance * 2), EndRotationL, LayerMask.GetMask(new string[] { "Enemy","BossArm" }));
         foreach (var item in collider)
         {
-            EnemyBase enemy = item.GetComponent<EnemyBase>();
-            if (enemy == null || enemys.Contains(enemy)) continue;
-            enemys.Add(enemy);
-        }
-        collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(m_TwinRobotR.BreakerSize, 2, distance), EndRotationR, LayerMask.GetMask(new string[] { "Enemy" }));
-        foreach (var item in collider)
-        {
-            EnemyBase enemy = item.GetComponent<EnemyBase>();
-            if (enemy == null || enemys.Contains(enemy)) continue;
-            enemys.Add(enemy);
-        }
-        collider = Physics.OverlapBox(CenterPosition - offset, new Vector3(m_TwinRobotL.BreakerSize, 2, distance), EndRotationL, LayerMask.GetMask(new string[] { "BossArm" }));
-        foreach (var item in collider)
-        {
-            Separation arm = item.GetComponent<Separation>();
-            if (arm == null || arms.Contains(arm)) continue;
-            arms.Add(arm);
-        }
-        collider = Physics.OverlapBox(CenterPosition + offset, new Vector3(m_TwinRobotR.BreakerSize, 2, distance), EndRotationR, LayerMask.GetMask(new string[] { "BossArm" }));
-        foreach (var item in collider)
-        {
-            Separation arm = item.GetComponent<Separation>();
-            if (arm == null || arms.Contains(arm)) continue;
-            arms.Add(arm);
-        }
+			if (item.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+				EnemyBase enemy = item.GetComponent<EnemyBase>();
+				if (enemy == null || enemys.Contains(enemy)) continue;
+				enemys.Add(enemy);
+			}
+			else
+			{
+				Separation arm = item.GetComponent<Separation>();
+				if (arm == null || arms.Contains(arm)) continue;
+				arms.Add(arm);
+			}
+		}
+
         Pauser.Pause(PauseTag.Enemy, false);
         IsCanCrash = true;
         m_LRobotRigidbody.isKinematic = true;
@@ -264,23 +253,14 @@ public class PlayerController : MonoBehaviour
         {
             m_LRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionL, EndPositionL, m_CombineDistance.Evaluate(t) * m_Speed * 2));
             m_RRobotRigidbody.MovePosition(Vector3.MoveTowards(StartPositionR, EndPositionR, m_CombineDistance.Evaluate(t) * m_Speed * 2));
-
-            v = m_TPSPosition.position;
-            v.y = 5.5f + distaceRate * Vector3.Distance(CenterPosition, m_LRobotRigidbody.position);
-            m_TPSPosition.position = v;
-
+			TPSPositionSet(Vector3.Distance(CenterPosition, m_LRobotRigidbody.position));
             yield return new WaitForFixedUpdate();
         }
         m_LRobotRigidbody.isKinematic = false;
         m_RRobotRigidbody.isKinematic = false;
-        v = m_TPSPosition.position;
-        v.y = 5.5f;
-        m_TPSPosition.position = v;
+		TPSPositionSet(0);
 
-        foreach (var item in arms)
-        {
-            item.Death();
-        }
+		arms.ForEach(x => x.Death());
 
         if (!IsCanCrash || enemys.Count == 0)
         {
@@ -289,44 +269,14 @@ public class PlayerController : MonoBehaviour
             yield return StartCoroutine(Release(true));
             yield break;
         }
+
 		StartCoroutine(CombineEffect());
 
-		foreach (var item in enemys)
-        {
-            item.SetBreakForPlayer();
-        }
+		enemys.ForEach(x => x.SetBreakForPlayer());
 
-        float add = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[enemys.Count - 1];
-        //GameManager.Instance.m_PlayScore += (int)add;
-        m_TwinRobotL.HP += add;
-        m_TwinRobotR.HP += add;
-        m_HumanoidRobot.m_Energy = add;
+		AddEnergy(enemys.Count);
 
-        bool breakTypeS = false;
-        bool breakTypeL = false;
-        foreach (var item in enemys)
-        {
-            if (item.m_EnemyType == EnemyType.Short) breakTypeS = true;
-            if (item.m_EnemyType == EnemyType.Long) breakTypeL = true;
-        }
-        if (breakTypeS && breakTypeL)
-        {
-            m_HumanoidMaterial.color = m_ModeAB;
-            m_HumanoidRobot.m_Config = m_HumanoidT;
-			m_HMode = HumanoidMode.Speed;
-        }
-        else if (breakTypeS)
-        {
-            m_HumanoidMaterial.color = m_ModeAA;
-            m_HumanoidRobot.m_Config = m_HumanoidN;
-			m_HMode = HumanoidMode.Normal;
-		}
-		else
-        {
-            m_HumanoidMaterial.color = m_ModeBB;
-            m_HumanoidRobot.m_Config = m_HumanoidI;
-			m_HMode = HumanoidMode.Power;
-		}
+		ModeSet(enemys);
 
 		m_KeepEnemyPosWall.SetActive(false);
         m_HRobot.SetActive(true);
@@ -414,4 +364,47 @@ public class PlayerController : MonoBehaviour
     public float Energy { get { return m_HumanoidRobot.m_Energy; } }
     public bool IsCanCrash { get; set; }
 
+	private void ModeSet(List<EnemyBase> enemys)
+	{
+		bool breakTypeS = false;
+		bool breakTypeL = false;
+		foreach (var item in enemys)
+		{
+			if (item.m_EnemyType == EnemyType.Short) breakTypeS = true;
+			if (item.m_EnemyType == EnemyType.Long) breakTypeL = true;
+		}
+		if (breakTypeS && breakTypeL)
+		{
+			m_HumanoidMaterial.color = m_ModeAB;
+			m_HumanoidRobot.m_Config = m_HumanoidT;
+			m_HMode = HumanoidMode.Speed;
+		}
+		else if (breakTypeS)
+		{
+			m_HumanoidMaterial.color = m_ModeAA;
+			m_HumanoidRobot.m_Config = m_HumanoidN;
+			m_HMode = HumanoidMode.Normal;
+		}
+		else
+		{
+			m_HumanoidMaterial.color = m_ModeBB;
+			m_HumanoidRobot.m_Config = m_HumanoidI;
+			m_HMode = HumanoidMode.Power;
+		}
+	}
+
+	private void AddEnergy(int enemy)
+	{
+		float add = GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[enemy - 1];
+		m_TwinRobotL.HP += add;
+		m_TwinRobotR.HP += add;
+		m_HumanoidRobot.m_Energy = add;
+	}
+
+	private void TPSPositionSet(float distance)
+	{
+		Vector3 v = m_TPSPosition.position;
+		v.y = 5.5f + 1.5f * distance;
+		m_TPSPosition.position = v;
+	}
 }

@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e245c0794be93f4c914dc3838086f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartScene: 0
+  m_StartScene: 4
   m_SceneListTable:
   - Scene:
     - Title
@@ -397,6 +397,10 @@ MonoBehaviour:
   - Scene:
     - Player
     - Tutorial
+  - Scene:
+    - Player
+    - Stage 4
+    - GameUI
   m_LoadingSceneName: LoadingDefault
 --- !u!1 &1849378520
 GameObject:
@@ -449,6 +453,9 @@ MonoBehaviour:
   m_PlayScore: 0
   m_PlayTime: 0
   m_BossHpRate: 0
+  m_BossHpRate1: 0
+  m_BossHpRate2: 1
+  m_BossHpRate3: 1
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0

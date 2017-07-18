@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricLine : MonoBehaviour {
+/// <summary>
+/// 電撃線の制御
+/// 製作者：野澤翔太
+/// </summary>
+public class ElectricLine : MonoBehaviour
+{
+	public LineRenderer m_LineRenderer;
 
 	public Transform m_LRobot;
 	public Transform m_RRobot;
-
-	private LineRenderer m_LineRenderer;
 
 	public float m_UpdateTime = 0.2f;
 
 	public float m_Noise;
 
-	public float m_OffsetX;
+	public float m_PositionCount;
 
-	private Vector3[] m_Positions;
+	public float m_OffsetX;
 
 	public bool m_Combine;
 
@@ -23,27 +27,51 @@ public class ElectricLine : MonoBehaviour {
 
 	public int m_Row;
 
-	private int m_index;
-	private Vector2[] offsets;
 
-	public float m_PositionCount;
+	private Vector3[] m_Noises;
 
+	IEnumerator Start()
+	{
+		m_LineRenderer.material.mainTextureScale = new Vector2(m_Scale, 1.0f / m_Row);
 
-	// Use this for initialization
-	void Start () {
-		m_LineRenderer = GetComponent<LineRenderer>();
-		m_index = 0;
-		offsets = new Vector2[m_Row];
+		Vector2[] textureOffsets = new Vector2[m_Row];
 		for (int i = 0; i < m_Row; i++)
 		{
-			offsets[i] = new Vector2(0,(float)i/m_Row);
+			textureOffsets[i] = new Vector2(0, (float)i / m_Row);
 		}
-		m_LineRenderer.material.mainTextureScale = new Vector2(m_Scale, 1.0f / m_Row);
-		StartCoroutine(UpdateLine());
+
+		Vector3[] randomPositions = new Vector3[10];
+		for (int i = 0; i < randomPositions.Length; i++)
+		{
+			randomPositions[i] = Random.onUnitSphere;
+		}
+
+		int index = 0;
+		WaitForSeconds wait = new WaitForSeconds(m_UpdateTime);
+		while (true)
+		{
+			int i = m_LineRenderer.positionCount;
+			m_LineRenderer.positionCount = (int)(Vector3.Distance(m_LRobot.position, m_RRobot.position) * m_PositionCount) + 2;
+			for (; i < m_LineRenderer.positionCount; i++)
+			{
+				m_LineRenderer.SetPosition(i, m_RRobot.position);
+			}
+
+			index++;
+			if (index >= m_Row) index = 0;
+			m_LineRenderer.material.mainTextureOffset = textureOffsets[index];
+
+			m_Noises = new Vector3[m_LineRenderer.positionCount];
+			for (i = 0; i < m_LineRenderer.positionCount; i++)
+			{
+				m_Noises[i] = randomPositions[i * (int)Time.time % 10] * m_Noise;
+			}
+			yield return wait;
+		}
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 		switch (GameManager.Instance.m_PlayMode)
 		{
 			case PlayMode.NoPlay:
@@ -51,53 +79,32 @@ public class ElectricLine : MonoBehaviour {
 				m_LineRenderer.enabled = false;
 				break;
 			case PlayMode.TwinRobot:
-			case PlayMode.Combine:
 			case PlayMode.Release:
-				if(m_Combine&&GameManager.Instance.m_PlayMode!= PlayMode.Combine)
+				if (m_Combine)
 				{
 					m_LineRenderer.enabled = false;
 					return;
 				}
-				m_LineRenderer.enabled = true;
-				//if (m_Combine)
-				//{
-				//	m_LineRenderer.enabled = true;
-				//}
-				//else
-				//{
-				//	m_LineRenderer.enabled = !m_LineRenderer.enabled;
-				//}
-				for (int i = 0; i < m_LineRenderer.positionCount; i++)
-				{
-					m_LineRenderer.SetPosition(i, Vector3.Lerp(m_LRobot.position + m_LRobot.right * m_OffsetX, m_RRobot.position + m_RRobot.right * -m_OffsetX, (float)i / (m_LineRenderer.positionCount - 1)) + m_Positions[i]);
-				}
-
+				LineMove();
+				break;
+			case PlayMode.Combine:
+				LineMove();
 				break;
 			default:
 				break;
 		}
 	}
 
-	private IEnumerator UpdateLine()
+	private void LineMove()
 	{
-		while (true)
+		m_LineRenderer.enabled = true;
+
+		Vector3 offset = Vector3.Cross(Vector3.Normalize(m_LRobot.position - m_RRobot.position), Vector3.up) * m_OffsetX;
+		Vector3 A = m_LRobot.position + offset;
+		Vector3 B = m_RRobot.position + offset;
+		for (int i = 0; i < m_LineRenderer.positionCount; i++)
 		{
-			int positions = m_LineRenderer.positionCount;
-			m_LineRenderer.positionCount = (int)(Vector3.Distance(m_LRobot.position, m_RRobot.position)*m_PositionCount)+2;
-			for (int i = positions; i < m_LineRenderer.positionCount; i++)
-			{
-				m_LineRenderer.SetPosition(i, m_RRobot.position);
-			}
-			//m_LineRenderer.GetComponent<Renderer>().material.mainTextureScale = new Vector2(m_LineRenderer.positionCount, 1);
-			m_index++;
-			if (m_index >= m_Row) m_index = 0;
-			m_LineRenderer.material.mainTextureOffset = offsets[m_index];
-			m_Positions = new Vector3[m_LineRenderer.positionCount];
-			for (int i = 0; i < m_LineRenderer.positionCount; i++)
-			{
-				m_Positions[i] = Random.onUnitSphere * m_Noise;
-			}
-			yield return new WaitForSeconds(m_UpdateTime);
+			m_LineRenderer.SetPosition(i, Vector3.Lerp(A, B, (float)i / (m_LineRenderer.positionCount - 1)) + m_Noises[i]);
 		}
 	}
 }

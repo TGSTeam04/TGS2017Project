@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class TextSending : BaseMeshEffect {
 	private const int OneSpriteVertex = 6;
 	private bool _isEnd = false;
-	private float _alpha = 0f;
+	private float _Time = 0f;
 	private int _charaCount = 0;
 	private Text _text;
-	private float _Rate = 0.1f;
+	private float _Rate = 1f;
+	private float _Delay = 1f;
 	public Text Text
 	{
 		get { return _text ?? (_text = GetComponent<Text>()); }
@@ -22,50 +23,51 @@ public class TextSending : BaseMeshEffect {
 	{
 		_Rate = f;
 	}
+	public void SetDelay(float f)
+	{
+		_Delay = f;
+	}
+	public void SetSkip(bool b)
+	{
+		if(b)_Time = _input.Count / OneSpriteVertex * _Delay;
+	}
 	public void Initialize()
 	{
 		_charaCount = 0;
 		_isEnd = false;
+		_Time = 0;
 	}
 
 	private List<UIVertex> _input = new List<UIVertex>();
 	private List<UIVertex> _output = new List<UIVertex>();
 	public override void ModifyMesh(VertexHelper vh)
 	{
-		var input = _input;
 		_output.Clear();
-		var output = _output;
-		var text = Text;
+		vh.GetUIVertexStream(_input);
 
-		vh.GetUIVertexStream(input);
-		var vertexTop = _charaCount * OneSpriteVertex;
-
-		if(vertexTop >= input.Count)
+		if(_Time >= _input.Count / OneSpriteVertex *_Delay + 1)
 		{
 			_isEnd = true;
 			return;
 		}
 
-		for (int i = 0; i < vertexTop; i++)
+		for (int i = 0; i*OneSpriteVertex<_input.Count; i++)
 		{
-			output.Add(input[i]);
+			for (int j = 0; j < OneSpriteVertex; j++)
+			{
+				_output.Add(Effect(_input[i * OneSpriteVertex + j], Mathf.Clamp01(_Time - i * _Delay)));
+			}
 		}
 
-		for (int i = vertexTop; i < vertexTop+OneSpriteVertex; i++)
-		{
-			var uiVertex = input[i];
-			uiVertex.color.a = (byte)(255f * _alpha);
-			output.Add(uiVertex);
-		}
-
-		_alpha += Mathf.Min(_Rate,1.0f);
-		if(_alpha >= 1f)
-		{
-			_charaCount++;
-			_alpha -= 1f;
-		}
+		_Time += _Rate * Time.deltaTime;
 
 		vh.Clear();
-		vh.AddUIVertexTriangleStream(output);
+		vh.AddUIVertexTriangleStream(_output);
+	}
+
+	private UIVertex Effect(UIVertex uiVertex, float t)
+	{
+		uiVertex.color.a = (byte)(255f * (t == 0 ? 0 : 1));
+		return uiVertex;
 	}
 }

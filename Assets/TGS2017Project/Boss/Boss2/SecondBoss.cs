@@ -70,8 +70,9 @@ public class SecondBoss : MonoBehaviour
         {
             s_HitPoint = value;
             GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
-        }
-    }
+			GameManager.Instance.m_BossHpRate2 = (HitPoint / s_MaxHp);
+		}
+	}
 
     /***    okaku  ***/
     //加速度
@@ -82,7 +83,8 @@ public class SecondBoss : MonoBehaviour
     {
         HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
-        GameManager.s_StageNumber = 2;
+		GameManager.Instance.m_BossHpRate2 = 1.0f;
+		GameManager.s_StageNumber = 2;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -135,33 +137,20 @@ public class SecondBoss : MonoBehaviour
         }
         m_Velocity *= 0.95f;
 
-        //m_HitPointBar.fillAmount = s_HitPoint;
-
-        switch (GameManager.Instance.m_PlayMode)
-        {
-            case PlayMode.TwinRobot:
-                GameObject L = GameManager.Instance.m_LRobot;
-                GameObject R = GameManager.Instance.m_RRobot;
-                float LDistance = Vector3.Distance(transform.position, L.transform.position);
-                float RDistance = Vector3.Distance(transform.position, R.transform.position);
-                if (LDistance <= RDistance)
-                {
-                    m_Target = L;
-                }
-                else
-                {
-                    m_Target = R;
-                }
-                break;
-            case PlayMode.HumanoidRobot:
-                m_Target = GameManager.Instance.m_HumanoidRobot;
-                break;
-            case PlayMode.NoPlay:
-            case PlayMode.Combine:
-            case PlayMode.Release:
-            default:
-                return;
-        }
+		//m_HitPointBar.fillAmount = s_HitPoint;
+		switch (GameManager.Instance.m_PlayMode)
+		{
+			// プレイヤー分離時
+			case PlayMode.TwinRobot:
+			// プレイヤー合体時
+			case PlayMode.HumanoidRobot:
+				// プレイヤーに追従
+				m_Target = PlayerManager.Instance.NearPlayer(transform.position).gameObject;
+				break;
+			// デフォルト状態（何もしない）
+			default:
+				return;
+		}
 
         m_TargetPosition = m_Target.transform.position;
         m_TargetPosition.y = transform.position.y;

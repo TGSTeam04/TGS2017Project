@@ -54,14 +54,16 @@ public class Boss : MonoBehaviour
         {
             s_HitPoint = Mathf.Max(0, value);
             GameManager.Instance.m_BossHpRate = (HitPoint / s_MaxHp);
-        }
-    }
+			GameManager.Instance.m_BossHpRate1 = (HitPoint / s_MaxHp);
+		}
+	}
 
     private void Awake()
     {
         s_HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
-        GameManager.s_StageNumber = 1;
+		GameManager.Instance.m_BossHpRate1 = 1.0f;
+		GameManager.s_StageNumber = 1;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
@@ -99,34 +101,22 @@ public class Boss : MonoBehaviour
             GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
-        //Debug.Log(s_State);
-        //m_HitPointBar.fillAmount = s_Hitpoint;
-        switch (GameManager.Instance.m_PlayMode)
-        {
-            case PlayMode.TwinRobot:
-                GameObject L = GameManager.Instance.m_LRobot;
-                GameObject R = GameManager.Instance.m_RRobot;
-                float LDistance = Vector3.Distance(transform.position, L.transform.position);
-                float RDistance = Vector3.Distance(transform.position, R.transform.position);
-                if (LDistance <= RDistance)
-                {
-                    m_Target = L.transform;
-                }
-                else
-                {
-                    m_Target = R.transform;
-                }
-                break;
-            case PlayMode.HumanoidRobot:
-                m_Target = GameManager.Instance.m_HumanoidRobot.transform;
-                break;
-            case PlayMode.NoPlay:
-            case PlayMode.Combine:
-            case PlayMode.Release:
-            default:
-                return;
-        }
-        if (m_LookCounter <= 0)
+		//Debug.Log(s_State);
+		//m_HitPointBar.fillAmount = s_Hitpoint;
+		switch (GameManager.Instance.m_PlayMode)
+		{
+			// プレイヤー分離時
+			case PlayMode.TwinRobot:
+			// プレイヤー合体時
+			case PlayMode.HumanoidRobot:
+				// プレイヤーに追従
+				m_Target = PlayerManager.Instance.NearPlayer(transform.position);
+				break;
+			// デフォルト状態（何もしない）
+			default:
+				return;
+		}
+		if (m_LookCounter <= 0)
         {
             StartCoroutine(Look());
         }

@@ -13,8 +13,11 @@ public class UIPlayerStatus : MonoBehaviour
     AudioSource m_Audio;
 
     public Image m_BossHP;
+	public Image m_BossHP1;
+	public Image m_BossHP2;
+	public Image m_BossHP3;
 
-    [SerializeField]
+	[SerializeField]
     private GameObject m_ImageA;
     [SerializeField]
     private GameObject m_ImageB;
@@ -38,8 +41,11 @@ public class UIPlayerStatus : MonoBehaviour
         m_RShield.fillAmount = m_Player.m_TwinRobotR.HP / MaxShield;
         m_Energy.fillAmount = m_Player.Energy / GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[4];
         m_BossHP.fillAmount = GameManager.Instance.m_BossHpRate;
-    }
-    IEnumerator countdown()
+		m_BossHP1.fillAmount = GameManager.Instance.m_BossHpRate1;
+		m_BossHP2.fillAmount = GameManager.Instance.m_BossHpRate2;
+		m_BossHP3.fillAmount = GameManager.Instance.m_BossHpRate3;
+	}
+	IEnumerator countdown()
     {
         m_Black.SetActive(true);
         m_ImageA.SetActive(false);
