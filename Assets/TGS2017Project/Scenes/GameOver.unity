@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Image: {fileID: 1140249572}
+  m_Image1: {fileID: 653263985}
 --- !u!4 &1671235643
 Transform:
   m_ObjectHideFlags: 0

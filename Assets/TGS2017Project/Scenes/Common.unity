@@ -183,7 +183,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e245c0794be93f4c914dc3838086f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartScene: 4
+  m_StartScene: 13
   m_SceneListTable:
   - Scene:
     - Title
@@ -454,8 +454,8 @@ MonoBehaviour:
   m_PlayTime: 0
   m_BossHpRate: 0
   m_BossHpRate1: 0
-  m_BossHpRate2: 1
-  m_BossHpRate3: 1
+  m_BossHpRate2: 0
+  m_BossHpRate3: 0
 --- !u!4 &1849378522
 Transform:
   m_ObjectHideFlags: 0
