@@ -157,7 +157,7 @@ public class TwinRobot : MonoBehaviour
         set
         {
             m_HP = Mathf.Clamp(value, 0, m_BaseConfig.m_MaxHP);
-            if (!m_Shield.activeSelf && m_HP <= 0 && GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
+            if (!m_Shield.activeSelf && m_HP <= 0 && GameManager.Instance.m_PlayMode == PlayMode.TwinRobot)
             {
                 GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
                 Instantiate(m_Explosion, transform.position + Vector3.up * 1.5f, transform.rotation);

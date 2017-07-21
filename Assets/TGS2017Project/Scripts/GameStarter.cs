@@ -69,10 +69,10 @@ public class GameStarter : MonoBehaviour
 			//{
 			//    ChangeScenes(3);
 			//}
-			//if (Input.GetKeyDown(KeyCode.Alpha4))
-			//{
-			//    ChangeScenes(4);
-			//}
+			if (Input.GetKeyDown(KeyCode.Alpha4))
+			{
+			    ChangeScenes(13);
+			}
 			//if (Input.GetKeyDown(KeyCode.Alpha5))
 			//{
 			//    ChangeScenes(5);

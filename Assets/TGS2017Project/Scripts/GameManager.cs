@@ -77,7 +77,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             default:
                 break;
         }
-        if (m_IsGameClear || m_IsGameOver)
+        if (m_IsGameClear || (m_IsGameOver&&m_BossHpRate1<=0&&m_BossHpRate2<=0&&m_BossHpRate3<=0))
         {
             StartCoroutine(GameEnd());
         }
