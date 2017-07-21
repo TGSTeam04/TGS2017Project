@@ -50,6 +50,7 @@ public class SelectMotion : MonoBehaviour {
             {
                 transform.localPosition = m_Position;
                 transform.localRotation = m_Rotation;
+                enabled = false;
             }
         }
 

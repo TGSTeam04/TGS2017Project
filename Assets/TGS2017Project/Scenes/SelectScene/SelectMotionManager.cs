@@ -14,6 +14,8 @@ public class SelectMotionManager : MonoBehaviour {
     public List<GameObject> m_StageLogoParts;
     public List<GameObject> m_TitleBack;
 
+    public List<GameObject> m_AllParts;
+
     public List<RectTransform> m_TutorialTrans;
     public List<RectTransform> m_StageLogoTrans;
     public List<RectTransform> m_Stage1Trans;
@@ -35,17 +37,13 @@ public class SelectMotionManager : MonoBehaviour {
         {
             m_Stars.Add(Instantiate(m_Star, transform.position + new Vector3(Random.Range(-210.0f, 210.0f), Random.Range(350.0f, 500.0f)), transform.rotation, transform));
         }
-        for (int i = 0; i < ResultController.s_FirstStageLank; i++)
+        for (int i = 0; i < m_PartsList.Count; i++)
         {
-            m_Stars[i].GetComponent<SelectMotion>().ChangeSprite();
+            m_AllParts.Add(m_PartsList[i]);
         }
-        for (int i = 0; i < ResultController.s_SecondStageLank; i++)
+        for (int i = 0; i < m_Stars.Count; i++)
         {
-            m_Stars[i + 3].GetComponent<SelectMotion>().ChangeSprite();
-        }
-        for (int i = 0; i < ResultController.s_ThirdStageLank; i++)
-        {
-            m_Stars[i + 6].GetComponent<SelectMotion>().ChangeSprite();
+            m_AllParts.Add(m_Stars[i]);
         }
     }
 	
@@ -66,6 +64,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void TutorialSelect()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         foreach (GameObject parts in m_Stars)
         {
             parts.GetComponent<SelectMotion>().StarPosition();
@@ -96,6 +98,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void Select1()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         foreach (GameObject parts in m_Stars)
         {
             parts.GetComponent<SelectMotion>().StarPosition();
@@ -136,6 +142,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void Select2()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         foreach (GameObject parts in m_Stars)
         {
             parts.GetComponent<SelectMotion>().StarPosition();
@@ -180,6 +190,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void Select3()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         foreach (GameObject parts in m_Stars)
         {
             parts.GetComponent<SelectMotion>().StarPosition();
@@ -227,6 +241,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void SelectTitle()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         m_SelectedTitleBack = true;
         foreach (GameObject parts in m_StageLogoParts)
         {
@@ -243,6 +261,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     public void DeSelectTitle()
     {
+        foreach (GameObject parts in m_AllParts)
+        {
+            parts.GetComponent<SelectMotion>().enabled = true;
+        }
         foreach (GameObject parts in m_TitleBack)
         {
             parts.GetComponent<SelectMotion>().NormalColor();
@@ -257,6 +279,10 @@ public class SelectMotionManager : MonoBehaviour {
     }
     IEnumerator SparkAndRebuilding()
     {
+        for (int i = 37; i < 74; i++)
+        {
+            m_PartsList[i].GetComponent<SelectMotion>().enabled = true;
+        }
         AllDiffusion(m_StageLogoParts);
         for (int i = 0; i < m_StageLogoTrans.Count; i++)
         {
@@ -277,5 +303,9 @@ public class SelectMotionManager : MonoBehaviour {
                 }
             }
         }
+        //for (int i = 37; i < 74; i++)
+        //{
+        //    m_PartsList[i].GetComponent<SelectMotion>().enabled = false;
+        //}
     }
 }
