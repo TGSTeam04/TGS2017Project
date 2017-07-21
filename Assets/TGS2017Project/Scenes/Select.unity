@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -630,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -813,6 +815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -1201,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -1351,6 +1355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -1607,6 +1612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -2306,6 +2312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -3037,6 +3044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -3484,6 +3492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -3568,6 +3577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -3619,6 +3629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -4017,6 +4028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -4425,6 +4437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -4562,6 +4575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -4854,6 +4868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -5559,6 +5574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -5696,6 +5712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -5747,6 +5764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -6089,6 +6107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -6239,6 +6258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -6430,6 +6450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -6754,6 +6775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -7210,6 +7232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -7261,6 +7284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -7345,6 +7369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -7719,6 +7744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -7856,6 +7882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -8268,6 +8295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -8494,6 +8522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -8763,6 +8792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -9374,6 +9404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -9425,6 +9456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -9904,6 +9936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -10021,6 +10054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -10072,6 +10106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 1
   m_IsStop: 0
   m_IsRed: 0
@@ -10995,6 +11030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -11508,6 +11544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0
@@ -11810,6 +11847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 0}
+  m_Sprite: {fileID: 0}
   m_Diffusion: 0
   m_IsStop: 0
   m_IsRed: 0

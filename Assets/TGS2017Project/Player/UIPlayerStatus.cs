@@ -25,16 +25,31 @@ public class UIPlayerStatus : MonoBehaviour
     [SerializeField] private Image m_RShield;
 	[SerializeField] private TwinRobotBaseConfig m_TwinRobotBaseConfig;
 
-    // Use this for initialization
-    void Start()
+	public GameObject m_BossBer;
+	public GameObject m_BossBer1;
+	public GameObject m_BossBer2;
+	public GameObject m_BossBer3;
+
+	// Use this for initialization
+	void Start()
     {
         m_Player = GameManager.Instance.m_PlayerController;
         m_Audio = GetComponent<AudioSource>();
         StartCoroutine(countdown());
-    }
+		if (GameManager.Instance.m_BossHpRate1>0 && GameManager.Instance.m_BossHpRate2>0&& GameManager.Instance.m_BossHpRate3>0)
+		{
+			m_BossBer.SetActive(false);
+		}
+		else
+		{
+			m_BossBer1.SetActive(false);
+			m_BossBer2.SetActive(false);
+			m_BossBer3.SetActive(false);
+		}
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         float MaxShield = m_TwinRobotBaseConfig.m_MaxHP;
         m_LShield.fillAmount = m_Player.m_TwinRobotL.HP / MaxShield;
