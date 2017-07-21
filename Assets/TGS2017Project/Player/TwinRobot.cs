@@ -9,13 +9,20 @@ public enum TwinRobotMode
 }
 public class TwinRobot : MonoBehaviour
 {
-    [SerializeField] private PlayerController m_Controller;
-    [SerializeField] Damageable m_CoreDamageComp;
-    [SerializeField] private GameObject m_Shield;
-    [SerializeField] private TwinRobotConfig m_Config;
-    [SerializeField] private TwinRobotBaseConfig m_BaseConfig;
-    [SerializeField] private float m_BreakerSizeS;
-    [SerializeField] private float m_BreakerSizeL;
+    [SerializeField]
+    private PlayerController m_Controller;
+    [SerializeField]
+    Damageable m_CoreDamageComp;
+    [SerializeField]
+    private GameObject m_Shield;
+    [SerializeField]
+    private TwinRobotConfig m_Config;
+    [SerializeField]
+    private TwinRobotBaseConfig m_BaseConfig;
+    [SerializeField]
+    private float m_BreakerSizeS;
+    [SerializeField]
+    private float m_BreakerSizeL;
 
 
     private float m_HP;
@@ -25,8 +32,19 @@ public class TwinRobot : MonoBehaviour
     private float m_Axis;
 
 
-    //爆発エフェクト
-    [SerializeField] GameObject m_Explosion;
+    [SerializeField]
+    GameObject m_Explosion;     // 爆発エフェクト
+
+    /// <summary>
+    /// 破片1、破片2、子オブジェクトの関数を追加（2017-07-21）
+    /// 製作者：Ho Siu Ki（何兆祺）
+    /// </summary>
+    [SerializeField]
+    GameObject m_Fragment1;     // 破片1
+    [SerializeField]
+    GameObject m_Fragment2;     // 破片2
+    [SerializeField]
+    private GameObject m_Child; // 子オブジェクト（自機のモデル）
 
     void Awake()
     {
@@ -160,8 +178,52 @@ public class TwinRobot : MonoBehaviour
             if (!m_Shield.activeSelf && m_HP <= 0 && GameManager.Instance.m_PlayMode != PlayMode.NoPlay)
             {
                 GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+                /// <summary>
+                /// 爆発時、破片が飛び出す演出を追加（2017-07-21）
+                /// 製作者：Ho Siu Ki（何兆祺）
+                /// </summary>
                 Instantiate(m_Explosion, transform.position + Vector3.up * 1.5f, transform.rotation);
-                Instantiate(m_Explosion, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(transform.position));
+
+                StartCoroutine(this.Delay(new WaitForSeconds(0.5f), () =>
+                {
+                    Instantiate(m_Explosion, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(transform.position));
+                }));
+
+                StartCoroutine(this.Delay(new WaitForSeconds(0.9f), () =>
+                {
+                    Instantiate(m_Fragment1, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 157.0f, 0.0f));
+                }));
+
+                StartCoroutine(this.Delay(new WaitForSeconds(1.4f), () =>
+                {
+                    Instantiate(m_Fragment1, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 243.0f, 0.0f));
+                }));
+
+                StartCoroutine(this.Delay(new WaitForSeconds(1.9f), () =>
+                {
+                    Instantiate(m_Fragment1, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 195.0f, 0.0f));
+                }));
+                StartCoroutine(this.Delay(new WaitForSeconds(2.4f), () =>
+                {
+                    Instantiate(m_Fragment1, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 37.0f, 0.0f));
+                }));
+                StartCoroutine(this.Delay(new WaitForSeconds(2.9f), () =>
+                {
+                    Instantiate(m_Fragment2, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 100.0f, 0.0f));
+                }));
+                StartCoroutine(this.Delay(new WaitForSeconds(3.2f), () =>
+                {
+                    Instantiate(m_Fragment2, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 100.0f, 0.0f));
+                }));
+                StartCoroutine(this.Delay(new WaitForSeconds(3.5f), () =>
+                {
+                    // 自機のモデルを消す
+                    m_Child.SetActive(false);
+                    Instantiate(m_Fragment2, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 100.0f, 0.0f));
+                    Instantiate(m_Fragment2, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 200.0f, 0.0f));
+                    Instantiate(m_Fragment2, transform.position + Vector3.up * 1.5f + Vector3.forward * 1.5f, transform.rotation * Quaternion.Euler(0.0f, 300.0f, 0.0f));
+                }));
+
                 StartCoroutine(this.Delay(new WaitForSeconds(5.0f), () =>
                 {
                     GameManager.Instance.m_GameStarter.AddScene("GameOver");
@@ -187,8 +249,8 @@ public class TwinRobot : MonoBehaviour
         m_Renderer.material.SetColor("_BaseColor", m_BaseConfig.m_ShieldColor.Evaluate(HP / m_BaseConfig.m_MaxHP));
     }
 
-	public float Distance(Vector3 position)
-	{
-		return Vector3.Distance(position, m_Rigidbody.position);
-	}
+    public float Distance(Vector3 position)
+    {
+        return Vector3.Distance(position, m_Rigidbody.position);
+    }
 }
