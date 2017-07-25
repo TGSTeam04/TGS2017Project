@@ -49,6 +49,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public static int s_StageNumber;
 
+    private float m_EndCount = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -60,6 +62,19 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {        
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
+        if (Input.GetButtonDown("Back") && Input.GetButtonDown("Home"))
+        {
+            Application.Quit();
+        }
+        if (!Input.anyKey)
+        {
+            m_EndCount += Time.deltaTime;
+            if (m_EndCount > 120) Application.Quit();
+        }
+        else
+        {
+            m_EndCount = 0;
+        }
 
         switch (m_PlayMode)
         {

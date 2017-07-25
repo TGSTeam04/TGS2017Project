@@ -45,7 +45,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
         {
             m_BlackHexagonParts.Add(Instantiate(m_BlackHexagon, transform.position, transform.rotation, transform));
         }
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 12; i++)
         {
             m_Stars.Add(Instantiate(m_Star, transform.position, transform.rotation, transform));
         }
@@ -286,6 +286,11 @@ public class SelectSceneMotionManager : MonoBehaviour {
         for (int i = 0; i < m_Stage1_Hexagon_Pos.Count; i++)
         {
             m_BlackHexagonParts[i].GetComponent<Parts>().m_Position = m_Stage1_Hexagon_Pos[i].localPosition;
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            m_Stars[i + 9].GetComponent<Parts>().m_Position = m_Star_Pos[i].localPosition;
+            m_Stars[i + 9].GetComponent<Parts>().m_Rotation = m_Star_Pos[i].localRotation;
         }
         for (int i = 0; i < m_EX_Stage_Logo_Pos.Count; i++)
         {
