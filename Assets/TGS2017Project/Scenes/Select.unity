@@ -6282,6 +6282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsLeft: 0
+  m_Title: {fileID: 1966913958}
 --- !u!1 &1127607827
 GameObject:
   m_ObjectHideFlags: 0
@@ -11502,8 +11503,8 @@ MonoBehaviour:
     m_Mode: 4
     m_SelectOnUp: {fileID: 1476370456}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1966913961}
+    m_SelectOnRight: {fileID: 1966913961}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 0.71323526, g: 0.71323526, b: 0.71323526, a: 1}
@@ -11781,6 +11782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsLeft: 1
+  m_Title: {fileID: 1966913958}
 --- !u!1 &2022509264
 GameObject:
   m_ObjectHideFlags: 0

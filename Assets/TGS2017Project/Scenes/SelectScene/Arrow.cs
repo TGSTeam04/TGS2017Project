@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Arrow : MonoBehaviour {
 
     [SerializeField]
     private bool m_IsLeft;
+
+    [SerializeField]
+    private GameObject m_Title;
+
+    private Vector3 m_Scale;
+
+    
 
 	// Use this for initialization
 	void Start () {
@@ -15,27 +23,35 @@ public class Arrow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (m_IsLeft)
-        {
-            if (Input.GetAxis("Horizontal") < -0.1f)
+        transform.localScale = Vector3.Lerp(transform.localScale, m_Scale, 20.0f * Time.deltaTime);
+        if (EventSystem.current.currentSelectedGameObject != m_Title)
+        {// タイトルボタンを選択していなければ
+            if (m_IsLeft)
             {
-                transform.localScale = new Vector3(2, 2, 1);
+                if (Input.GetAxis("Horizontal") < -0.1f)
+                {
+                    m_Scale = new Vector3(2, 2, 1);
+                }
+                else
+                {
+                    m_Scale = new Vector3(1, 1, 1);
+                }
             }
             else
             {
-                transform.localScale = new Vector3(1, 1, 1);
+                if (Input.GetAxis("Horizontal") > 0.1f)
+                {
+                    m_Scale = new Vector3(2, 2, 1);
+                }
+                else
+                {
+                    m_Scale = new Vector3(1, 1, 1);
+                }
             }
         }
         else
         {
-            if (Input.GetAxis("Horizontal") > 0.1f)
-            {
-                transform.localScale = new Vector3(2, 2, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
+            m_Scale = new Vector3(1, 1, 1);
         }
 	}
 }
