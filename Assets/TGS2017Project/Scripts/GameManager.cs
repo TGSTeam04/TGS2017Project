@@ -64,7 +64,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {        
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
-
         switch (m_PlayMode)
         {
             case PlayMode.NoPlay:

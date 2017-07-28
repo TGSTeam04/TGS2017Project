@@ -32,6 +32,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
 
     private bool m_SelectedTutorial;
     private bool m_SelectedTitleBack;
+    private bool m_SelectedEX;
     private bool num = false;
 
     // Use this for initialization
@@ -44,7 +45,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
         {
             m_BlackHexagonParts.Add(Instantiate(m_BlackHexagon, transform.position, transform.rotation, transform));
         }
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 12; i++)
         {
             m_Stars.Add(Instantiate(m_Star, transform.position, transform.rotation, transform));
         }
@@ -278,13 +279,18 @@ public class SelectSceneMotionManager : MonoBehaviour {
             item.GetComponent<Parts>().m_Position = new Vector3(Random.Range(-210.0f, 210.0f), Random.Range(650.0f, 700.0f));
             item.GetComponent<Parts>().m_Rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3600.0f, 3600.0f)));
         }
-        for (int i = 0; i < 2; i++)
+        foreach (GameObject item in m_ExtraLogoParts)
         {
-            m_ExtraLogoParts[i].GetComponentInChildren<Image>().color = Color.yellow;
+            item.GetComponentInChildren<Image>().color = Color.yellow;
         }
         for (int i = 0; i < m_Stage1_Hexagon_Pos.Count; i++)
         {
             m_BlackHexagonParts[i].GetComponent<Parts>().m_Position = m_Stage1_Hexagon_Pos[i].localPosition;
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            m_Stars[i + 9].GetComponent<Parts>().m_Position = m_Star_Pos[i].localPosition;
+            m_Stars[i + 9].GetComponent<Parts>().m_Rotation = m_Star_Pos[i].localRotation;
         }
         for (int i = 0; i < m_EX_Stage_Logo_Pos.Count; i++)
         {
@@ -296,6 +302,11 @@ public class SelectSceneMotionManager : MonoBehaviour {
             item.GetComponentInChildren<Image>().color = Color.white;
         }
         AllDiffusion();
+        m_SelectedEX = true;
+    }
+    public void DeselectedExtra()
+    {
+        m_SelectedEX = false;
     }
     public void SelectedTitleBack()
     {
@@ -397,7 +408,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
             if (i < 5) m_StageLogoParts[i].GetComponentInChildren<Image>().color = Color.white;
         }
         yield return new WaitForSeconds(0.4f);
-        if (!m_SelectedTutorial)
+        if (!m_SelectedTutorial && !m_SelectedEX)
         {
             for (int i = 0; i < m_Stage_Logo_Pos.Count; i++)
             {
