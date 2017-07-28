@@ -107,6 +107,9 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.m_PlayTime = 0;
 		GameManager.Instance.m_PlayerController = this;
 		//GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
+		GameManager.Instance.m_BossHpRate1 = 0;
+		GameManager.Instance.m_BossHpRate2 = 0;
+		GameManager.Instance.m_BossHpRate3 = 0;
 	}
 
 

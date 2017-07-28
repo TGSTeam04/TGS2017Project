@@ -97,8 +97,8 @@ public class SecondBoss : MonoBehaviour
         {
             s_State = SecondBossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
-            Pauser.Pause(PauseTag.Enemy);
-            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+            //Pauser.Pause(PauseTag.Enemy);
+            //GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
@@ -115,7 +115,7 @@ public class SecondBoss : MonoBehaviour
         {
             p.SetActive(false);
         }
-    }
+	}
 
     // Update is called once per frame
     void Update()

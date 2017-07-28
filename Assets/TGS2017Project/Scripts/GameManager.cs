@@ -55,7 +55,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     // Use this for initialization
     void Start()
     {
-        Update();        
+        Update();
+				
     }
 
     // Update is called once per frame
@@ -70,14 +71,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 break;
             case PlayMode.TwinRobot:
             case PlayMode.HumanoidRobot:
-                break;
+				break;
             case PlayMode.Combine:
             case PlayMode.Release:
                 break;
             default:
                 break;
         }
-        if (m_IsGameClear || (m_IsGameOver&&m_BossHpRate1<=0&&m_BossHpRate2<=0&&m_BossHpRate3<=0))
+        if (m_IsGameOver || (m_IsGameClear&&m_BossHpRate1<=0&&m_BossHpRate2<=0&&m_BossHpRate3<=0))
         {
             StartCoroutine(GameEnd());
         }
@@ -112,9 +113,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_IsGameClear = false;
         m_IsGameOver = false;
         m_IsRun = false;
-		m_BossHpRate1 = 0;
-		m_BossHpRate2 = 0;
-		m_BossHpRate3 = 0;
 	}
 
 }

@@ -76,8 +76,8 @@ public class Boss : MonoBehaviour
         {
             s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
-            Pauser.Pause(PauseTag.Enemy);
-            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+            //Pauser.Pause(PauseTag.Enemy);
+            //GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
     }
@@ -97,8 +97,8 @@ public class Boss : MonoBehaviour
         {
             s_State = BossState.Paralysis;
             Instantiate(m_LastExplosion, transform.position, transform.rotation);
-            Pauser.Pause(PauseTag.Enemy);
-            GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
+            //Pauser.Pause(PauseTag.Enemy);
+            //GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
         }
 		//Debug.Log(s_State);
