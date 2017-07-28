@@ -39,6 +39,7 @@ public class GameStarter : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 		//Screen.lockCursor = false;
 		m_Common = SceneManager.GetActiveScene();
+
 		SceneManager.LoadScene("Title", LoadSceneMode.Additive);
 		m_LoadedScenes.Add("Title");
         //ChangeScenes(m_StartScene);
@@ -68,10 +69,10 @@ public class GameStarter : MonoBehaviour
 			//{
 			//    ChangeScenes(3);
 			//}
-			//if (Input.GetKeyDown(KeyCode.Alpha4))
-			//{
-			//    ChangeScenes(4);
-			//}
+			if (Input.GetKeyDown(KeyCode.Alpha4))
+			{
+			    ChangeScenes(13);
+			}
 			//if (Input.GetKeyDown(KeyCode.Alpha5))
 			//{
 			//    ChangeScenes(5);

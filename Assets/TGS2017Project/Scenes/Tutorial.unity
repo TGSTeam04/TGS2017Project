@@ -967,12 +967,19 @@ MonoBehaviour:
   m_Black: {fileID: 1339996373}
   m_AudioClip: {fileID: 0}
   m_BossHP: {fileID: 52547987}
+  m_BossHP1: {fileID: 0}
+  m_BossHP2: {fileID: 0}
+  m_BossHP3: {fileID: 0}
   m_ImageA: {fileID: 763612983}
   m_ImageB: {fileID: 2116757553}
   m_LShield: {fileID: 1178010809}
   m_RShield: {fileID: 1754491841}
   m_TwinRobotBaseConfig: {fileID: 11400000, guid: d5585180c14585d42a56d7475ec701a7,
     type: 2}
+  m_BossBer: {fileID: 0}
+  m_BossBer1: {fileID: 0}
+  m_BossBer2: {fileID: 0}
+  m_BossBer3: {fileID: 0}
 --- !u!4 &41706072
 Transform:
   m_ObjectHideFlags: 0
@@ -9913,8 +9920,8 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_Camera: {fileID: 1923201980}
+  m_PlaneDistance: 110.75
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -22844,9 +22851,9 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1923201979}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -22862,10 +22869,10 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: 2
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 0

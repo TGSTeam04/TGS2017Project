@@ -28,8 +28,9 @@ public class ResultController : MonoBehaviour {
     public static int s_FirstStageLank;
     public static int s_SecondStageLank;
     public static int s_ThirdStageLank;
+	public static int s_ExStageLank;
 
-    AudioSource m_Audio;
+	AudioSource m_Audio;
 
 	IEnumerator Start()
 	{
@@ -43,15 +44,20 @@ public class ResultController : MonoBehaviour {
         }
         if (GameManager.s_StageNumber == 2)
         {
-            m_NormaTime = 30;
-            m_NormaScore = 150;
+            m_NormaTime = 50;
+            m_NormaScore = 130;
         }
         if (GameManager.s_StageNumber == 3)
         {
-            m_NormaTime = 200;
+            m_NormaTime = 300;
             m_NormaScore = 300;
         }
-        yield return new WaitForSeconds(1);
+		if (GameManager.s_StageNumber == 4)
+		{
+			m_NormaTime = 470;
+			m_NormaScore = 400;
+		}
+		yield return new WaitForSeconds(1);
         m_Audio.Play();
         yield return null;
         for (float t = 0; t < 1.0f ; t += Time.deltaTime)
@@ -100,8 +106,13 @@ public class ResultController : MonoBehaviour {
             if (s_ThirdStageLank < m_Lank)
                 s_ThirdStageLank = m_Lank;
         }
+		if (GameManager.s_StageNumber == 4)
+		{
+			if (s_ExStageLank < m_Lank)
+				s_ExStageLank = m_Lank;
+		}
 
-        yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(1);
         if (m_Lank == 1)
         {
             Instantiate(m_Star, m_StarTrans[5].position, m_StarTrans[5].rotation, m_StarTrans[5]);

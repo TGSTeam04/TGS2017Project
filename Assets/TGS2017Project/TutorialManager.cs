@@ -122,7 +122,6 @@ public class TutorialManager : MonoBehaviour
 
 			if(m_TutorialNumber != 9)
 			{
-				m_PlayerController.enabled = true;
 				m_Controller.gameObject.SetActive(true);
 
 			}
@@ -130,7 +129,6 @@ public class TutorialManager : MonoBehaviour
 			yield return new WaitUntil(() => Complete());
 			if (m_TutorialNumber != 9)
 			{
-				m_PlayerController.enabled = false;
 				m_Controller.gameObject.SetActive(false);
 
 			}
@@ -150,10 +148,9 @@ public class TutorialManager : MonoBehaviour
 				yield return StartCoroutine(textset(m_TutorialNumber*2+1,i));
 			}
 
-			yield return new WaitForSeconds(1);
+			//yield return new WaitForSeconds(1);
 
-			m_TutorialNumber++;
-			if (m_TutorialNumber < m_TutorialCount)
+			if (m_TutorialNumber+1 < m_TutorialCount)
 			{
 				//フェード
 				for (float t = 0; t < 0.5f; t += Time.deltaTime)
@@ -163,6 +160,7 @@ public class TutorialManager : MonoBehaviour
 				}
 				m_FadeImage.color = Color.black;
 			}
+			m_TutorialNumber++;
 		}
 
 		GameManager.Instance.m_GameStarter.ChangeScenes(7);
@@ -170,7 +168,6 @@ public class TutorialManager : MonoBehaviour
 
 	private void TutorialStart()
 	{
-		m_PlayerController.enabled = false;
 		m_Controller.gameObject.SetActive(false);
 		m_CompleteImage.fillAmount = 0;
 		m_FadeImage.color = Color.black;
@@ -179,6 +176,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			case 0:
 				GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
+				m_PlayerController.m_CanRelease = false;
 				m_FadeImage.color = Color.clear;
 				m_Controller.sprite = m_ControllerTop;
 				m_ControllerActive.sprite = m_ControllerActiveMove;
@@ -204,7 +202,6 @@ public class TutorialManager : MonoBehaviour
 				m_TargetBoost.gameObject.SetActive(false);
 				return;
 			case 4:
-				m_PlayerController.m_CanRelease = false;
 				m_Controller.sprite = m_ControllerActiveL;
 				m_ControllerActive.sprite = m_ControllerActiveR;
 				return;
@@ -219,6 +216,7 @@ public class TutorialManager : MonoBehaviour
 				m_ControllerActive.sprite = m_ControllerActiveCombine;
 				return;
 			case 7:
+				m_PlayerController.m_CanRelease = false;
 				m_Enemy3.gameObject.SetActive(true);
 				m_Enemy4.gameObject.SetActive(true);
 				m_Controller.sprite = m_ControllerFront;
@@ -290,6 +288,7 @@ public class TutorialManager : MonoBehaviour
 		var textSending = m_TutorialText.GetComponent<TextSending>();
 		m_TutorialText.text = m_Text[i][j];
 		textSending.Initialize();
+		textSending.SetRate(10);
 
 		if (i == 3 && j == 1)
 		{
@@ -297,11 +296,20 @@ public class TutorialManager : MonoBehaviour
 		}
 		while (!textSending.IsEnd())
 		{
-			textSending.SetRate(Time.deltaTime * 10 * (Input.GetButton("Boost")?300:1));
+			textSending.SetSkip(Input.GetKeyDown(KeyCode.Space));
 			m_TutorialText.SetAllDirty();
 			yield return null;
 		}
-		yield return new WaitForSeconds(2);
+
+		float endTime = Time.time + 2;
+
+		while (true)
+		{
+			float diff = endTime - Time.time;
+			if (diff <= 0 || Input.GetKeyDown(KeyCode.Space)) { break; }
+			yield return null;
+		}
+		yield return null;
 	}
 
 	private void Update()
@@ -314,7 +322,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			m_IsBoosted = true;
 		}
-		if (m_TutorialNumber == 7 && m_PlayerController.enabled)
+		if (m_TutorialNumber == 7)
 		{
 			if(m_PlayerController.m_HRobot.activeSelf && m_PlayerController.m_HumanoidRobot.m_Config != m_PlayerController.m_HumanoidT)
 			{

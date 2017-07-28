@@ -45,14 +45,18 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public int m_PlayScore;
     public float m_PlayTime;
-    public float m_BossHpRate = 1.0f;
+	public float m_BossHpRate = 1.0f;
+	public float m_BossHpRate1 = 0.0f;
+	public float m_BossHpRate2 = 0.0f;
+	public float m_BossHpRate3 = 0.0f;
 
-    public static int s_StageNumber;
+	public static int s_StageNumber;
 
     // Use this for initialization
     void Start()
     {
-        Update();        
+        Update();
+				
     }
 
     // Update is called once per frame
@@ -60,21 +64,20 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {        
         if (m_PlayMode != PlayMode.NoPlay)
             m_PlayTime += Time.deltaTime;
-
         switch (m_PlayMode)
         {
             case PlayMode.NoPlay:
                 break;
             case PlayMode.TwinRobot:
             case PlayMode.HumanoidRobot:
-                break;
+				break;
             case PlayMode.Combine:
             case PlayMode.Release:
                 break;
             default:
                 break;
         }
-        if (m_IsGameClear || m_IsGameOver)
+        if (m_IsGameOver || (m_IsGameClear&&m_BossHpRate1<=0&&m_BossHpRate2<=0&&m_BossHpRate3<=0))
         {
             StartCoroutine(GameEnd());
         }
@@ -109,5 +112,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         m_IsGameClear = false;
         m_IsGameOver = false;
         m_IsRun = false;
-    }
+	}
+
 }

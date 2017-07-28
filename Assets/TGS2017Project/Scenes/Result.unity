@@ -282,8 +282,6 @@ MonoBehaviour:
   m_ScoreText: {fileID: 2048290954}
   m_Time: 123
   m_Score: 456
-  m_NormaTime: 120
-  m_NormaScore: 0
   m_Star: {fileID: 114769643883799912, guid: d089734a929f3ed478af5854dae73438, type: 2}
   m_StarTrans:
   - {fileID: 1147114003}
