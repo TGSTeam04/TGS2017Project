@@ -127,7 +127,7 @@ public class SecondBoss : MonoBehaviour
         if (HitPoint <= 0)
         {
             s_State = SecondBossState.Paralysis;
-            m_Sound.Stop();
+            //m_Sound.Stop();
             StartCoroutine(Death());
         }
         if (m_Velocity.magnitude < m_MoveSpeed)

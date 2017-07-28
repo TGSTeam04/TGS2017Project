@@ -9,7 +9,7 @@ public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
     private Boss3_Controller m_BossController;
-    [SerializeField] RocketBattery m_Battery;
+    public RocketBattery m_Battery;
 
     [SerializeField] float m_MaxHP = 100;
     private float m_HP;

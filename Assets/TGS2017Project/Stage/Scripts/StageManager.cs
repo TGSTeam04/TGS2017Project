@@ -17,15 +17,6 @@ public class StageManager : MonoBehaviour
     private int m_killNum;
     [SerializeField] GameObject m_BGM;
 
-    //[SerializeField]//ボスが出てくるStageLevel
-    //private int m_MaxStageLevel;
-    //[SerializeField]//次のレベルに進むまでのKill数
-    //private int[] m_ChangeLevelKillNum;
-    //private int m_stageLevel;
-
-    //ステージパネル
-    //[HideInInspector]
-    //public List<List<StagePanel>> m_StagePanels;
     [HideInInspector]
     public List<StagePanel> m_ActivePanels;
 
@@ -37,8 +28,6 @@ public class StageManager : MonoBehaviour
         set
         {
             m_killNum = value;
-            //if (value > m_ChangeLevelKillNum[StageLevel] && StageLevel < m_MaxStageLevel)
-            //    StageLevel++;
         }
     }
 
@@ -47,20 +36,11 @@ public class StageManager : MonoBehaviour
         m_Observer = new ObserverBase();
         m_ActivePanels = new List<StagePanel>();
         m_Observer.ObserverName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "Manager";
-
-        //ステージレベル仕様削除
-        //m_stageLevel = 0;
-        //m_StagePanels = new List<List<StagePanel>>();
-        //for (int i = 0; i < m_MaxStageLevel; i++)
-        //{
-        //    m_StagePanels.Add(new List<StagePanel>());
-        //}
     }
 
     // Use this for initialization
     void Start()
     {
-        //m_Observer.NotifyToSubjects("")
         SceneManager.SetActiveScene(gameObject.scene);
     }
 
