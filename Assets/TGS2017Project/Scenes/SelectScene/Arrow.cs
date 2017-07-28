@@ -28,7 +28,7 @@ public class Arrow : MonoBehaviour {
         {// タイトルボタンを選択していなければ
             if (m_IsLeft)
             {
-                if (Input.GetAxis("Horizontal") < -0.1f)
+                if (Input.GetAxis("HorizontalL") < -0.1f)
                 {
                     m_Scale = new Vector3(2, 2, 1);
                 }
@@ -39,7 +39,7 @@ public class Arrow : MonoBehaviour {
             }
             else
             {
-                if (Input.GetAxis("Horizontal") > 0.1f)
+                if (Input.GetAxis("HorizontalL") > 0.1f)
                 {
                     m_Scale = new Vector3(2, 2, 1);
                 }
