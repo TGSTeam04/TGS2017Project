@@ -144,7 +144,11 @@ public class SelectSceneMotionManager : MonoBehaviour {
         {
             m_Stars[i + 6].GetComponentInChildren<Image>().sprite = m_Sprite;
         }
-    }
+		for (int i = 0; i < ResultController.s_ExStageLank; i++)
+		{
+			m_Stars[i + 9].GetComponentInChildren<Image>().sprite = m_Sprite;
+		}
+	}
 
     public void SelectedTutorial() // Tutorialボタンが選ばれた時の処理
     {
@@ -172,6 +176,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
     }
     public void SelectedStage1() // Stage1ボタンが選ばれた時の処理
     {
+		GameManager.s_StageNumber = 1;
         foreach (GameObject item in m_TutorialLogoParts)
         {
             item.GetComponentInChildren<Image>().color = Color.white;
@@ -207,7 +212,8 @@ public class SelectSceneMotionManager : MonoBehaviour {
     }
     public void SelectedStage2() // Stage2ボタンが選ばれた時の処理
     {
-        for (int i = 0; i < 5; i++)
+		GameManager.s_StageNumber = 2;
+		for (int i = 0; i < 5; i++)
         {
             m_StageLogoParts[i].GetComponentInChildren<Image>().color = Color.yellow;
         }
@@ -238,7 +244,8 @@ public class SelectSceneMotionManager : MonoBehaviour {
     }
     public void SelectedStage3() // Stage3ボタンが選ばれた時の処理
     {
-        for (int i = 0; i < 5; i++)
+		GameManager.s_StageNumber = 3;
+		for (int i = 0; i < 5; i++)
         {
             m_StageLogoParts[i].GetComponentInChildren<Image>().color = Color.yellow;
         }
@@ -270,7 +277,8 @@ public class SelectSceneMotionManager : MonoBehaviour {
     }
     public void SelectedExtra() // Extra
     {
-        foreach (GameObject item in m_TutorialLogoParts)
+		GameManager.s_StageNumber = 4;
+		foreach (GameObject item in m_TutorialLogoParts)
         {
             item.GetComponentInChildren<Image>().color = Color.white;
         }

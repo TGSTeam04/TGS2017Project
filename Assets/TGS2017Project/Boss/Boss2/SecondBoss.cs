@@ -84,7 +84,6 @@ public class SecondBoss : MonoBehaviour
         HitPoint = s_MaxHp;
         GameManager.Instance.m_BossHpRate = 1.0f;
 		GameManager.Instance.m_BossHpRate2 = 1.0f;
-		GameManager.s_StageNumber = 2;
         m_Damage = GetComponent<Damageable>();
         m_Damage.Del_ReciveDamage = Damage;
     }
