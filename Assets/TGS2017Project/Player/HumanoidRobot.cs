@@ -43,6 +43,9 @@ public class HumanoidRobot : MonoBehaviour
     }
     public void Damage(float damage, MonoBehaviour src)
     {
+		if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
+			return;
+
         //ApplyDamageされたときの処理
         m_Energy -= damage;
         m_Animator.SetTrigger("Damage");

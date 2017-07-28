@@ -80,7 +80,10 @@ public class TwinRobot : MonoBehaviour
 
     public void Damage(float damage, MonoBehaviour src)
     {
-        HP -= damage;
+		if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
+			return;
+
+		HP -= damage;
     }
     public void Move()
     {

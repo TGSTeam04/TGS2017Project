@@ -567,7 +567,7 @@ MonoBehaviour:
   m_State: 0
   m_Battery: {fileID: 0}
   m_StandTrans: {fileID: 0}
-  m_ApplyDamage: 781.44
+  m_ApplyDamage: 10
   m_ChildApplyDamage: 30
   m_Speed: 20
   m_BackSpeed: 40
