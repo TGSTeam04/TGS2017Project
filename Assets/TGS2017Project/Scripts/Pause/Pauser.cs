@@ -115,8 +115,10 @@ public class Pauser : MonoBehaviour
     float[] rg2dBodyAVels = null;
     RigidbodyConstraints2D[] rg2dConstraints;
 
+	float[] rgBodyDrag = null;
+	float[] rgBodyAnglarDrag = null;
 
-    public bool IsPause { get { return PauseCunt > 0; } }
+	public bool IsPause { get { return PauseCunt > 0; } }
 
     // 初期化
     void Start()
@@ -190,16 +192,22 @@ public class Pauser : MonoBehaviour
         rgBodyVels = new Vector3[rgBodies.Length];
         rgBodyAVels = new Vector3[rgBodies.Length];
         rgConstraints = new RigidbodyConstraints[rgBodies.Length];
-        for (var i = 0; i < rgBodies.Length; ++i)
+		rgBodyDrag = new float[rgBodies.Length];
+		rgBodyAnglarDrag = new float[rgBodies.Length];
+		for (var i = 0; i < rgBodies.Length; ++i)
         {
             rgBodyVels[i] = rgBodies[i].velocity;
             rgBodyAVels[i] = rgBodies[i].angularVelocity;
             rgConstraints[i] = rgBodies[i].constraints;
-            rgBodies[i].constraints = RigidbodyConstraints.FreezePositionY;
+			rgBodyDrag[i] = rgBodies[i].drag;
+			rgBodyAnglarDrag[i] = rgBodies[i].angularDrag;
+			rgBodies[i].constraints = RigidbodyConstraints.FreezePositionY;
             rgBodies[i].Sleep();
-        }
-        //２Dリジットボディ
-        rg2dBodies = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return !obj.IsSleeping(); });
+			rgBodies[i].drag = float.PositiveInfinity;
+			rgBodies[i].angularDrag = float.PositiveInfinity;
+		}
+		//２Dリジットボディ
+		rg2dBodies = Array.FindAll(GetComponentsInChildren<Rigidbody2D>(), (obj) => { return !obj.IsSleeping(); });
         rg2dBodyVels = new Vector2[rg2dBodies.Length];
         rg2dBodyAVels = new float[rg2dBodies.Length];
         rg2dConstraints = new RigidbodyConstraints2D[rg2dBodies.Length];
@@ -240,8 +248,10 @@ public class Pauser : MonoBehaviour
                 rgBodies[i].constraints = rgConstraints[i];
                 rgBodies[i].velocity = rgBodyVels[i];
                 rgBodies[i].angularVelocity = rgBodyAVels[i];
-            }
-        }
+				rgBodies[i].drag = rgBodyDrag[i];
+				rgBodies[i].angularDrag = rgBodyAnglarDrag[i];
+			}
+		}
         if (rg2dBodies != null)
         {
             for (var i = 0; i < rg2dBodies.Length; ++i)
@@ -258,8 +268,10 @@ public class Pauser : MonoBehaviour
         rgBodies = null;
         rgBodyVels = null;
         rgBodyAVels = null;
+		rgBodyDrag = null;
+		rgBodyAnglarDrag = null;
 
-        rg2dBodies = null;
+		rg2dBodies = null;
         rg2dBodyVels = null;
         rg2dBodyAVels = null;
     }

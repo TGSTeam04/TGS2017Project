@@ -15,8 +15,7 @@ public class HumanoidRobot : MonoBehaviour
 
     public float m_Energy;
 
-    [SerializeField]
-    private Animator m_Animator;
+    public Animator m_Animator;
 
     private float m_Speed;
     private float m_Rotate;
@@ -54,7 +53,6 @@ public class HumanoidRobot : MonoBehaviour
 	private void OnEnable()
 	{
 		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
-		m_Animator.SetTrigger("Combined");
 	}
 
 
