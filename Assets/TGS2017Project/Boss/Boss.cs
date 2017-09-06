@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class Boss : MonoBehaviour
     //ダメージコンポーネント
     private Damageable m_Damage;
 
+    CharacterController m_Controller;
     Transform m_Target;
     Vector3 m_TargetPosition;
     Animator m_Anim;
@@ -86,6 +88,7 @@ public class Boss : MonoBehaviour
     {
         s_State = BossState.Move;
         m_LookCounter = 0;
+        m_Controller = GetComponent<CharacterController>();
         m_Anim = GetComponent<Animator>();
     }
 
@@ -135,7 +138,9 @@ public class Boss : MonoBehaviour
                     m_Anim.speed = 1.0f;
                     if (Vector3.Distance(transform.position, m_TargetPosition) > 7)
                     {
-                        transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
+                        //m_Rigidbody.MovePosition(transform.forward * m_MoveSpeed);
+                        //transform.Translate(Vector3.forward * m_MoveSpeed * Time.deltaTime);
+                        m_Controller.Move(transform.forward * m_MoveSpeed * Time.deltaTime);
                     }
                     else
                     {
