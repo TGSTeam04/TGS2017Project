@@ -54,14 +54,14 @@ public class StageManager : MonoBehaviour
                 bool isPause = Pauser.s_TargetByTag[PauseTag.Pause].m_IsPause;
                 if (!isPause)
                 {
-                    SceneManager.LoadSceneAsync("Pause", LoadSceneMode.Additive);
-                    Pauser.Pause();
+					Pauser.Pause();
+					GameManager.Instance.m_GameStarter.AddScene("Pause");
                 }
-                else
-                {
-                    SceneManager.UnloadSceneAsync("Pause");
-                    Pauser.Resume();
-                }
+     //           else
+     //           {
+					//Pauser.Resume();
+					//GameManager.Instance.m_GameStarter.RemoveScene("Pause");
+     //           }
             }
         }
 

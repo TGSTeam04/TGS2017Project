@@ -26,7 +26,7 @@ public class HumanoidRobot : MonoBehaviour
     [SerializeField]
     private RocketBattery m_Battery;
 
-	[SerializeField] Damageable m_DamageComp;
+	[SerializeField] Damageable[] m_DamageComps;
 
     [SerializeField] private GameObject m_Effect_Damage;
 
@@ -38,7 +38,11 @@ public class HumanoidRobot : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-		m_DamageComp.Del_ReciveDamage = Damage;
+		foreach (var damageComp in m_DamageComps)
+		{
+			damageComp.Del_ReciveDamage = Damage;
+		}
+		
     }
     public void Damage(float damage, MonoBehaviour src)
     {
@@ -53,6 +57,7 @@ public class HumanoidRobot : MonoBehaviour
 	private void OnEnable()
 	{
 		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
+		m_Battery.SetApplyDamage(m_Config.m_RocketPower);
 	}
 
 

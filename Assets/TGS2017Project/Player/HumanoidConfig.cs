@@ -12,4 +12,5 @@ public class HumanoidConfig : ScriptableObject {
 	public float m_BoostUseEnergy;
 	public float m_ChargeUseEnergy;
 	public bool m_IsKnockBack;
+	public float m_RocketPower;
 }
