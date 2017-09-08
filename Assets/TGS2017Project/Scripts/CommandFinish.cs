@@ -14,10 +14,11 @@ public class CommandFinish : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Back") && Input.GetButtonDown("Home"))
+        if (Input.GetButton("Back") && Input.GetButton("Home"))
         {
             Application.Quit();
         }
+
         if (!Input.anyKey)
         {
             m_EndCount += Time.deltaTime;
