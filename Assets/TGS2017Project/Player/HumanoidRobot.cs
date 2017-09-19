@@ -15,8 +15,7 @@ public class HumanoidRobot : MonoBehaviour
 
     public float m_Energy;
 
-    [SerializeField]
-    private Animator m_Animator;
+    public Animator m_Animator;
 
     private float m_Speed;
     private float m_Rotate;
@@ -27,7 +26,7 @@ public class HumanoidRobot : MonoBehaviour
     [SerializeField]
     private RocketBattery m_Battery;
 
-	[SerializeField] Damageable m_DamageComp;
+	[SerializeField] Damageable[] m_DamageComps;
 
     [SerializeField] private GameObject m_Effect_Damage;
 
@@ -39,10 +38,17 @@ public class HumanoidRobot : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-		m_DamageComp.Del_ReciveDamage = Damage;
+		foreach (var damageComp in m_DamageComps)
+		{
+			damageComp.Del_ReciveDamage = Damage;
+		}
+		
     }
     public void Damage(float damage, MonoBehaviour src)
     {
+		if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
+			return;
+
         //ApplyDamageされたときの処理
         m_Energy -= damage;
         m_Animator.SetTrigger("Damage");
@@ -51,7 +57,7 @@ public class HumanoidRobot : MonoBehaviour
 	private void OnEnable()
 	{
 		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
-		m_Animator.SetTrigger("Combined");
+		m_Battery.SetApplyDamage(m_Config.m_RocketPower);
 	}
 
 

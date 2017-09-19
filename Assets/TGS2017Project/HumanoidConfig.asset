@@ -20,3 +20,4 @@ MonoBehaviour:
   m_BoostUseEnergy: 2
   m_ChargeUseEnergy: 5
   m_IsKnockBack: 1
+  m_RocketPower: 10

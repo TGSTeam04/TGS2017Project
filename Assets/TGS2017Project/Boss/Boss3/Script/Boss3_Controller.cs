@@ -53,7 +53,7 @@ public class Boss3_Controller : MonoBehaviour
             //Debug.Log("残りHP" + value);
             if (Hp <= 0)
             {
-                Dead();
+                StartCoroutine(Dead());
             }
             GameManager.Instance.m_BossHpRate = m_Hp / m_MaxHp;
 			GameManager.Instance.m_BossHpRate3 = m_Hp / m_MaxHp;
@@ -89,16 +89,22 @@ public class Boss3_Controller : MonoBehaviour
         }
     }
 
-    public void Dead()
+	IEnumerator Dead()
     {
         if (m_State == PlayMode.HumanoidRobot)
             m_HRobot.Dead();
         else
             m_LRobot.Dead(); m_RRobot.Dead();
 
-        m_State = PlayMode.NoPlay;
-        GameManager.Instance.m_IsGameClear = true;
-    }
+		m_HRobot.m_Battery.m_LRocket.gameObject.SetActive(false);
+		m_HRobot.m_Battery.m_RRocket.gameObject.SetActive(false);
+
+		yield return new WaitForSeconds(4.0f);
+
+		m_State = PlayMode.NoPlay;
+		GameManager.Instance.m_IsGameClear = true;
+		Destroy(gameObject);
+	}
 
     public void CombineStart()
     {

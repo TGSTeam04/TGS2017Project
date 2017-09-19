@@ -6,6 +6,15 @@ using UnityEngine.EventSystems;
 
 public class SelectSceneMotionManager : MonoBehaviour {
 
+    public enum StageNumber
+    {
+        Tutorial,
+        Stage1,
+        Stage2,
+        Stage3,
+        ExtraStage
+    }
+
     public GameObject m_Hexagon;
     public GameObject m_BlackHexagon;
     public GameObject m_Star;
@@ -35,8 +44,38 @@ public class SelectSceneMotionManager : MonoBehaviour {
     private bool m_SelectedEX;
     private bool num = false;
 
+    public EventSystem m_EventSystem;
+    public static StageNumber s_Num = StageNumber.Tutorial;
+    public static GameObject s_FirstSelect;
+    public GameObject m_Tutorial;
+    public GameObject m_Stage1;
+    public GameObject m_Stage2;
+    public GameObject m_Stage3;
+    public GameObject m_ExtraStage;
+
     // Use this for initialization
     void Start () {
+        if (s_Num == StageNumber.Tutorial)
+        {
+            m_EventSystem.firstSelectedGameObject = m_Tutorial;
+        }
+        else if (s_Num == StageNumber.Stage1)
+        {
+            m_EventSystem.firstSelectedGameObject = m_Stage1;
+        }
+        else if (s_Num == StageNumber.Stage2)
+        {
+            m_EventSystem.firstSelectedGameObject = m_Stage2;
+        }
+        else if (s_Num == StageNumber.Stage3)
+        {
+            m_EventSystem.firstSelectedGameObject = m_Stage3;
+        }
+        else if (s_Num == StageNumber.ExtraStage)
+        {
+            m_EventSystem.firstSelectedGameObject = m_ExtraStage;
+        }
+
         for (int i = 0; i < 74; i++)
         {
             m_HexagonParts.Add(Instantiate(m_Hexagon, transform.position, transform.rotation, transform));
@@ -93,7 +132,7 @@ public class SelectSceneMotionManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach (GameObject item in m_AllParts)
+        foreach (GameObject item in m_AllParts)
         {
             if (Vector3.Distance(item.transform.localPosition, item.GetComponent<Parts>().m_Position) > 0.1f || Mathf.Abs(Quaternion.Angle(item.transform.localRotation, item.GetComponent<Parts>().m_Rotation)) > 0.1f)
             {
@@ -173,6 +212,9 @@ public class SelectSceneMotionManager : MonoBehaviour {
             m_TutorialLogoParts[i].GetComponent<Parts>().m_Position = m_Tutorial_Logo_Pos[i].localPosition;
         }
         m_SelectedTutorial = true;
+        //GameManager.Instance.m_FirstSelectObject = m_Tutorial;
+        //s_FirstSelect = m_Tutorial;
+        s_Num = StageNumber.Tutorial;
     }
     public void SelectedStage1() // Stage1ボタンが選ばれた時の処理
     {
@@ -209,6 +251,9 @@ public class SelectSceneMotionManager : MonoBehaviour {
         }
         StartCoroutine(SparkAndReBuildings());
         m_StageLogoParts[5].GetComponent<Parts>().m_Position = m_Stage_Logo_Pos[5].localPosition;
+        //GameManager.Instance.m_FirstSelectObject = m_Stage1;
+        //s_FirstSelect = m_Stage1;
+        s_Num = StageNumber.Stage1;
     }
     public void SelectedStage2() // Stage2ボタンが選ばれた時の処理
     {
@@ -241,6 +286,9 @@ public class SelectSceneMotionManager : MonoBehaviour {
         }
         StartCoroutine(SparkAndReBuildings());
         m_StageLogoParts[6].GetComponent<Parts>().m_Position = m_Stage_Logo_Pos[5].localPosition;
+        //GameManager.Instance.m_FirstSelectObject = m_Stage2;
+        //s_FirstSelect = m_Stage2;
+        s_Num = StageNumber.Stage2;
     }
     public void SelectedStage3() // Stage3ボタンが選ばれた時の処理
     {
@@ -274,6 +322,9 @@ public class SelectSceneMotionManager : MonoBehaviour {
         }
         StartCoroutine(SparkAndReBuildings());
         m_StageLogoParts[7].GetComponent<Parts>().m_Position = m_Stage_Logo_Pos[5].localPosition;
+        //GameManager.Instance.m_FirstSelectObject = m_Stage3;
+        //s_FirstSelect = m_Stage3;
+        s_Num = StageNumber.Stage3;
     }
     public void SelectedExtra() // Extra
     {
@@ -311,6 +362,9 @@ public class SelectSceneMotionManager : MonoBehaviour {
         }
         AllDiffusion();
         m_SelectedEX = true;
+        //GameManager.Instance.m_FirstSelectObject = m_ExtraStage;
+        //s_FirstSelect = m_ExtraStage;
+        s_Num = StageNumber.ExtraStage;
     }
     public void DeselectedExtra()
     {

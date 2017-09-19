@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
 
 	public bool m_CanRelease;
 
+	private IEnumerator m_Coroutine;
 
     private void Awake()
     {
@@ -141,7 +142,8 @@ public class PlayerController : MonoBehaviour
             case PlayMode.TwinRobot:
                 if ((Input.GetButton("CombineL") && Input.GetButtonDown("CombineR")) || (Input.GetButtonDown("CombineL") && Input.GetButton("CombineR")))
                 {
-                    StartCoroutine(Combine());
+					m_Coroutine = Combine();
+                    StartCoroutine(m_Coroutine);
                     break;
                 }
                 m_TwinRobotL.UpdateInput();
@@ -150,7 +152,8 @@ public class PlayerController : MonoBehaviour
             case PlayMode.HumanoidRobot:
                 if (m_CanRelease && m_Battery.LIsCanFire && m_Battery.RIsCanFire && ((Input.GetButton("CombineL") && Input.GetButtonDown("CombineR")) || (Input.GetButtonDown("CombineL") && Input.GetButton("CombineR")) || m_HumanoidRobot.m_Energy <= 0))
                 {
-                    StartCoroutine(Release(false));
+					m_Coroutine = Release(false);
+					StartCoroutine(m_Coroutine);
                     break;
                 }
                 m_HumanoidRobot.UpdateInput();
@@ -288,8 +291,12 @@ public class PlayerController : MonoBehaviour
         m_Electric.SetActive(false);
         GameManager.Instance.m_PlayMode = PlayMode.HumanoidRobot;
 
-        Pauser.Resume(PauseTag.Enemy, false);
-    }
+		m_HumanoidRobot.m_Animator.SetTrigger("Combined");
+
+
+		Pauser.Resume(PauseTag.Enemy, false);
+		m_Coroutine = null;
+	}
     public IEnumerator Release(bool isCombine)
     {
         m_HumanoidRobot.m_Energy = 0;
@@ -356,9 +363,10 @@ public class PlayerController : MonoBehaviour
         m_TwinRobotL.SetShieldActive(true);
         m_TwinRobotR.SetShieldActive(true);
         GameManager.Instance.m_PlayMode = PlayMode.TwinRobot;
-    }
+		m_Coroutine = null;
+	}
 
-    private IEnumerator CombineEffect()
+	private IEnumerator CombineEffect()
     {
         m_CombineEffect.SetActive(true);
         yield return new WaitForSeconds(1);
@@ -409,5 +417,17 @@ public class PlayerController : MonoBehaviour
 		Vector3 v = m_TPSPosition.position;
 		v.y = 5.5f + 1.5f * distance;
 		m_TPSPosition.position = v;
+	}
+
+	private void OnDisable()
+	{
+		if (m_Coroutine == null) return;
+		StopCoroutine(m_Coroutine);
+	}
+
+	private void OnEnable()
+	{
+		if (m_Coroutine == null) return;
+		StartCoroutine(m_Coroutine);
 	}
 }

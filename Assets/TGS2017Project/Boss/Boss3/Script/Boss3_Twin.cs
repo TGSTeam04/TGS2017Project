@@ -16,12 +16,14 @@ public class Boss3_Twin : MonoBehaviour
         get { return m_BossController.Hp; }
         set
         {
-            m_BossController.Hp = Mathf.Max(0, value);
-            //シールドに反映
-            m_ShildRender.gameObject.SetActive(HP > 0);
-            m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
-            m_OtherShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(HP / m_BossController.m_MaxHp));
-        }
+			float newHp = Mathf.Max(0, value);			
+            //シールドに反映            
+            m_ShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(newHp / m_BossController.m_MaxHp));
+            m_OtherShildRender.material.SetColor("_BaseColor", m_ShieldColor.Evaluate(newHp / m_BossController.m_MaxHp));
+			m_ShildRender.gameObject.SetActive(newHp > 0);
+
+			m_BossController.Hp = newHp;
+		}
     }
 
     private void Awake()

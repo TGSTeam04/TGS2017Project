@@ -95,7 +95,7 @@ public class SecondBoss : MonoBehaviour
         if (HitPoint <= 0)
         {
             s_State = SecondBossState.Paralysis;
-            Instantiate(m_LastExplosion, transform.position, transform.rotation);
+            //Instantiate(m_LastExplosion, transform.position, transform.rotation);
             //Pauser.Pause(PauseTag.Enemy);
             //GameManager.Instance.m_PlayMode = PlayMode.NoPlay;
             StartCoroutine(this.Delay(new WaitForSeconds(4.0f), Dead));
@@ -127,7 +127,7 @@ public class SecondBoss : MonoBehaviour
         if (HitPoint <= 0)
         {
             s_State = SecondBossState.Paralysis;
-            m_Sound.Stop();
+            //m_Sound.Stop();
             StartCoroutine(Death());
         }
         if (m_Velocity.magnitude < m_MoveSpeed)
