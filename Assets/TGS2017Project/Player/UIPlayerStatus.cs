@@ -13,8 +13,11 @@ public class UIPlayerStatus : MonoBehaviour
     AudioSource m_Audio;
 
     public Image m_BossHP;
+	public Image m_BossHP1;
+	public Image m_BossHP2;
+	public Image m_BossHP3;
 
-    [SerializeField]
+	[SerializeField]
     private GameObject m_ImageA;
     [SerializeField]
     private GameObject m_ImageB;
@@ -22,24 +25,42 @@ public class UIPlayerStatus : MonoBehaviour
     [SerializeField] private Image m_RShield;
 	[SerializeField] private TwinRobotBaseConfig m_TwinRobotBaseConfig;
 
-    // Use this for initialization
-    void Start()
+	public GameObject m_BossBer;
+	public GameObject m_BossBer1;
+	public GameObject m_BossBer2;
+	public GameObject m_BossBer3;
+
+	// Use this for initialization
+	void Start()
     {
         m_Player = GameManager.Instance.m_PlayerController;
         m_Audio = GetComponent<AudioSource>();
         StartCoroutine(countdown());
-    }
+		if (GameManager.Instance.m_BossHpRate1>0 && GameManager.Instance.m_BossHpRate2>0&& GameManager.Instance.m_BossHpRate3>0)
+		{
+			m_BossBer.SetActive(false);
+		}
+		else
+		{
+			m_BossBer1.SetActive(false);
+			m_BossBer2.SetActive(false);
+			m_BossBer3.SetActive(false);
+		}
+	}
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         float MaxShield = m_TwinRobotBaseConfig.m_MaxHP;
         m_LShield.fillAmount = m_Player.m_TwinRobotL.HP / MaxShield;
         m_RShield.fillAmount = m_Player.m_TwinRobotR.HP / MaxShield;
         m_Energy.fillAmount = m_Player.Energy / GameManager.Instance.m_BreakEnemyTable.m_AddEnergy[4];
         m_BossHP.fillAmount = GameManager.Instance.m_BossHpRate;
-    }
-    IEnumerator countdown()
+		m_BossHP1.fillAmount = GameManager.Instance.m_BossHpRate1;
+		m_BossHP2.fillAmount = GameManager.Instance.m_BossHpRate2;
+		m_BossHP3.fillAmount = GameManager.Instance.m_BossHpRate3;
+	}
+	IEnumerator countdown()
     {
         m_Black.SetActive(true);
         m_ImageA.SetActive(false);

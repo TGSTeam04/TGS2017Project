@@ -1944,6 +1944,9 @@ MonoBehaviour:
   m_BreakerSizeS: 1.5
   m_BreakerSizeL: 2
   m_Explosion: {fileID: 0}
+  m_Fragment1: {fileID: 0}
+  m_Fragment2: {fileID: 0}
+  m_Child: {fileID: 0}
 --- !u!54 &620052444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2068,7 +2071,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &677763364 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 400004, guid: 6771f3d9ecf337c41a2dd975f9c99c11, type: 3}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 677763363}
 --- !u!1001 &689743097
 Prefab:
@@ -4784,6 +4787,9 @@ MonoBehaviour:
   m_BreakerSizeS: 1.5
   m_BreakerSizeL: 2
   m_Explosion: {fileID: 0}
+  m_Fragment1: {fileID: 0}
+  m_Fragment2: {fileID: 0}
+  m_Child: {fileID: 0}
 --- !u!54 &1396265203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5730,6 +5736,7 @@ MonoBehaviour:
   m_Config: {fileID: 11400000, guid: abaf1de16e9b756478f8202244268696, type: 2}
   m_Energy: 0
   m_Animator: {fileID: 1216165839}
+  m_IsBoost: 0
   m_Battery: {fileID: 0}
   m_DamageComp: {fileID: 243248510}
   m_Effect_Damage: {fileID: 1253852634596230, guid: b899c5f80111302428b269fcd24cacbd,
@@ -7443,7 +7450,7 @@ Prefab:
   m_IsPrefabParent: 0
 --- !u!4 &2064181555 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 400004, guid: 64436361a2a3a3a4a9b89efbaf7cf9f9, type: 3}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 2064181554}
 --- !u!1 &2075788614
 GameObject:

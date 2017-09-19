@@ -38,37 +38,23 @@ public class Separation : MonoBehaviour {
         {
             StartCoroutine(GoHome());
         }
-        switch (GameManager.Instance.m_PlayMode)
-        {
-            case PlayMode.TwinRobot:
-                if (!m_Back)
-                {
-                    GameObject L = GameManager.Instance.m_LRobot;
-                    GameObject R = GameManager.Instance.m_RRobot;
-                    float LDistance = Vector3.Distance(transform.position, L.transform.position);
-                    float RDistance = Vector3.Distance(transform.position, R.transform.position);
-                    if (LDistance <= RDistance)
-                    {
-                        m_Target = L.transform;
-                    }
-                    else
-                    {
-                        m_Target = R.transform;
-                    }
-                }
-                break;
-            case PlayMode.HumanoidRobot:
-                if (!m_Back) m_Target = GameManager.Instance.m_HumanoidRobot.transform;
-                break;
-            case PlayMode.NoPlay:
-                return;
-            case PlayMode.Combine:
-                break;
-            case PlayMode.Release:
-            default:
-                return;
-        }
-        if (m_Back)
+		if (!m_Back)
+		{
+			switch (GameManager.Instance.m_PlayMode)
+			{
+				// プレイヤー分離時
+				case PlayMode.TwinRobot:
+				// プレイヤー合体時
+				case PlayMode.HumanoidRobot:
+					// プレイヤーに追従
+					m_Target = PlayerManager.Instance.NearPlayer(transform.position);
+					break;
+				// デフォルト状態（何もしない）
+				default:
+					return;
+			}
+		}
+		else
         {
             m_Target = m_Arm.transform;
         }

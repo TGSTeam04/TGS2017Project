@@ -15,8 +15,7 @@ public class HumanoidRobot : MonoBehaviour
 
     public float m_Energy;
 
-    [SerializeField]
-    private Animator m_Animator;
+    public Animator m_Animator;
 
     private float m_Speed;
     private float m_Rotate;
@@ -27,7 +26,7 @@ public class HumanoidRobot : MonoBehaviour
     [SerializeField]
     private RocketBattery m_Battery;
 
-	[SerializeField] Damageable m_DamageComp;
+	[SerializeField] Damageable[] m_DamageComps;
 
     [SerializeField] private GameObject m_Effect_Damage;
 
@@ -39,10 +38,17 @@ public class HumanoidRobot : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-		m_DamageComp.Del_ReciveDamage = Damage;
+		foreach (var damageComp in m_DamageComps)
+		{
+			damageComp.Del_ReciveDamage = Damage;
+		}
+		
     }
     public void Damage(float damage, MonoBehaviour src)
     {
+		if (GameManager.Instance.m_PlayMode == PlayMode.NoPlay)
+			return;
+
         //ApplyDamageされたときの処理
         m_Energy -= damage;
         m_Animator.SetTrigger("Damage");
@@ -51,7 +57,7 @@ public class HumanoidRobot : MonoBehaviour
 	private void OnEnable()
 	{
 		m_Battery.SetIsKnockBack(m_Config.m_IsKnockBack);
-		m_Animator.SetTrigger("Combined");
+		m_Battery.SetApplyDamage(m_Config.m_RocketPower);
 	}
 
 
@@ -89,8 +95,8 @@ public class HumanoidRobot : MonoBehaviour
             m_Speed = m_Config.m_NormalSpeed;
             energy = m_Config.m_NormalUseEnergy;
         }
-
-        m_Energy -= Time.deltaTime * energy;
+		m_Animator.SetBool("Granded", IsGround());
+		m_Energy -= Time.deltaTime * energy;
     }
     public IEnumerator Charge(bool L)
     {
@@ -115,7 +121,7 @@ public class HumanoidRobot : MonoBehaviour
 
     public bool IsGround()
     {
-        return Physics.CheckSphere(m_Rigidbody.position + Vector3.up * 0.7f, 0.72f, ~LayerMask.GetMask(new string[] { "Player" }));
+        return Physics.CheckSphere(m_Rigidbody.position + Vector3.up * 0.7f, 0.72f, LayerMask.GetMask(new string[] { "Floor" }));
     }
 
     public void Move()
@@ -156,7 +162,7 @@ public class HumanoidRobot : MonoBehaviour
                         }
                         break;
                     case "Floor":
-                        m_Animator.SetTrigger("Granded");
+                        //m_Animator.SetBool("Granded",true);
                         break;
                     default:
                         break;

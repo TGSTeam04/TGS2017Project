@@ -18,5 +18,6 @@ MonoBehaviour:
   m_JumpPower: 2000
   m_NormalUseEnergy: 1
   m_BoostUseEnergy: 2
-  m_ChargeUseEnergy: 8
+  m_ChargeUseEnergy: 7
   m_IsKnockBack: 0
+  m_RocketPower: 20

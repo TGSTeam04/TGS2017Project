@@ -9,7 +9,7 @@ public class Boss3_Humanoid : MonoBehaviour
 {
     //分裂時と合体時のコントロールをするクラスの参照
     private Boss3_Controller m_BossController;
-    [SerializeField] RocketBattery m_Battery;
+    public RocketBattery m_Battery;
 
     [SerializeField] float m_MaxHP = 100;
     private float m_HP;
@@ -64,14 +64,7 @@ public class Boss3_Humanoid : MonoBehaviour
     {
         while (true)
         {
-            GameManager gm = GameManager.Instance;
-            float Ldistance = (gm.m_LRobot.transform.position - transform.position).magnitude;
-            float Rdistance = (gm.m_RRobot.transform.position - transform.position).magnitude;
-            GameObject target = gm.m_PlayMode == PlayMode.HumanoidRobot
-                ? gm.m_HumanoidRobot
-                : Ldistance < Rdistance
-                        ? gm.m_LRobot
-                        : gm.m_RRobot;
+			GameObject target = PlayerManager.Instance.NearPlayer(transform.position).gameObject;
             //Debug.Log("Target Update" + target.ToString());
             //GameObject target = tempTarget;
             m_BB.GObjValues["target"] = target; //tempTarget;

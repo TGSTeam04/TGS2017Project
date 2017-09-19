@@ -140,8 +140,12 @@ public class RocketBattery : MonoBehaviour
     }
     public void SetIsKnockBack(bool isKnockBack)
     {
-
         m_LRocket.m_IsKnockBack = isKnockBack;
         m_RRocket.m_IsKnockBack = isKnockBack;
     }
+	public void SetApplyDamage(float amount)
+	{
+		m_LRocket.m_ApplyDamage = amount;
+		m_RRocket.m_ApplyDamage = amount;
+	}
 }

@@ -249,16 +249,17 @@ public class RocketBase : MonoBehaviour
         if (obj.tag == "Wall")
         {//壁に埋まる処理                  
             BreakChildEnemys();
-            State = RocketState.Buried;
+			//変更
+			State = RocketState.Back;
             m_Timer = 0.0f;
-            Vector3 center = Vector3.Lerp(transform.position, collision.contacts[0].point, 0.7f);
-            float distance = (transform.position - center).magnitude;
-            Vector3 destination = transform.position + transform.forward * distance;
-            StartCoroutine(this.UpdateWhileMethodBool(() =>
-            {
-                transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * 10.0f);
-                return m_Timer < m_BuriedTime;
-            }));
+            //Vector3 center = Vector3.Lerp(transform.position, collision.contacts[0].point, 0.7f);
+            //float distance = (transform.position - center).magnitude;
+            //Vector3 destination = transform.position + transform.forward * distance;
+            //StartCoroutine(this.UpdateWhileMethodBool(() =>
+            //{
+            //    transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * 10.0f);
+            //    return m_Timer < m_BuriedTime;
+            //}));
         }
     }
 
@@ -275,7 +276,7 @@ public class RocketBase : MonoBehaviour
         //target.GetComponent<Rigidbody>().AddForce(transform.forward * 99999, ForceMode.Impulse);
 
         BreakChildEnemys();
-        //Debug.Log("ターゲットダメージ" + damage);
+        Debug.Log("ターゲットダメージ" + damage);
         State = RocketState.Back;
     }
 
