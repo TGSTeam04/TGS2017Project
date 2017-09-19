@@ -904,6 +904,12 @@ MonoBehaviour:
   - {fileID: 2145392888}
   - {fileID: 593944410}
   m_Sprite: {fileID: 21300000, guid: 683fcedea7619564c96c91331e956e0e, type: 3}
+  m_EventSystem: {fileID: 553787646}
+  m_Tutorial: {fileID: 811498222}
+  m_Stage1: {fileID: 449681634}
+  m_Stage2: {fileID: 1846313146}
+  m_Stage3: {fileID: 1476370452}
+  m_ExtraStage: {fileID: 575526150}
 --- !u!1 &145112412
 GameObject:
   m_ObjectHideFlags: 0
